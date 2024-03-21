@@ -3,22 +3,28 @@ package day02;
 import java.util.Scanner;
 
 public class Solution {
+    private static Scanner in = new Scanner(System.in);
+    private static final double ONE_HUNDRED = 100;
     public static void main(String[] args) {
+        double mealCost = in.nextDouble();
+        int tipPercent = in.nextInt();
+        int taxPercent = in.nextInt();
 
+        double tipCost = getValueFromPercent(mealCost, tipPercent);
+        double taxCost = getValueFromPercent(mealCost, taxPercent);
 
-        Scanner in = new Scanner(System.in);
+        long totalCost = solve(mealCost, tipCost, taxCost);
 
-        double meal_cost = in.nextDouble();
-        int tip_percent = in.nextInt();
-        int tax_percent = in.nextInt();
-
-        double tip_cost = meal_cost * (tip_percent / 100);
-        double tax_cost = meal_cost * (tax_percent / 100);
-
-        long total_cost = Math.round(meal_cost + tip_cost + tax_cost);
-
-        System.out.println("The total meal cost is " + total_cost +" dollars.");
+        System.out.println(totalCost);
 
         in.close();
+    }
+
+    private static long solve(double mealCost, double tipCost, double taxCost) {
+        return Math.round(mealCost + tipCost + taxCost);
+    }
+
+    static double getValueFromPercent(double value, double percent) {
+        return value * (percent / ONE_HUNDRED);
     }
 }
