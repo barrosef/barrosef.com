@@ -3,8 +3,10 @@ package day02;
 import java.util.Scanner;
 
 /**
- * The Solution class calculates the total cost of a meal,
- * given the meal cost, tip percentage, and tax percentage.
+ * The Solution class implements a solution for the Day 02 challenge
+ * from the 30 Days of Code tutorial on HackerRank, using Java 15+.
+ * It calculates the total cost of a meal, given the meal cost,
+ * tip percentage, and tax percentage.
  */
 public class Solution {
 
