@@ -2,6 +2,7 @@
 title: "Sobre"
 translationKey: "about"
 description: "Quem é Ed Barros e do que trata este site."
+aliases: ["/pt/sobre/"]
 ---
 
 Ed Barros atua na interseção entre engenharia e liderança, construindo os

@@ -5,7 +5,7 @@ cd "$(dirname "$0")/.."
 PASS=0; FAIL=0
 
 make_fixture() { # $1=dir
-  mkdir -p "$1/en/writing" "$1/pt/artigos"
+  mkdir -p "$1/en/writing" "$1/pt-br/artigos"
 }
 write_post() { # $1=path $2=key $3=draft
   printf -- '---\ntitle: "T"\ndate: 2026-08-18\ndraft: %s\ntranslationKey: "%s"\n---\nbody\n' "$3" "$2" > "$1"
@@ -22,7 +22,7 @@ FX=$(mktemp -d)
 # 1. Complete mirror passes
 make_fixture "$FX/complete"
 write_post "$FX/complete/en/writing/a.md" "a" false
-write_post "$FX/complete/pt/artigos/a.md" "a" false
+write_post "$FX/complete/pt-br/artigos/a.md" "a" false
 check "complete mirror passes" 0 "$FX/complete"
 
 # 2. Missing PT pair fails
@@ -32,7 +32,7 @@ check "missing PT pair fails" 1 "$FX/missing-pt"
 
 # 3. Missing EN pair fails
 make_fixture "$FX/missing-en"
-write_post "$FX/missing-en/pt/artigos/a.md" "a" false
+write_post "$FX/missing-en/pt-br/artigos/a.md" "a" false
 check "missing EN pair fails" 1 "$FX/missing-en"
 
 # 4. Draft without pair passes (drafts exempt)
@@ -49,7 +49,7 @@ check "missing translationKey fails" 1 "$FX/nokey"
 make_fixture "$FX/dupe"
 write_post "$FX/dupe/en/writing/a.md" "a" false
 write_post "$FX/dupe/en/writing/b.md" "a" false
-write_post "$FX/dupe/pt/artigos/a.md" "a" false
+write_post "$FX/dupe/pt-br/artigos/a.md" "a" false
 check "duplicate key in one language fails" 1 "$FX/dupe"
 
 rm -rf "$FX"

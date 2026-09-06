@@ -92,20 +92,20 @@ enableRobotsTXT = true
       url = "/contact/"
       weight = 30
 
-  [languages.pt]
+  [languages.pt-br]
     languageName = "Português"
-    languageCode = "pt-br"
-    contentDir = "content/pt"
+    languageCode = "pt-BR"
+    contentDir = "content/pt-br"
     weight = 2
-    [[languages.pt.menus.main]]
+    [[languages.pt-br.menus.main]]
       name = "Artigos"
-      url = "/pt/artigos/"
+      url = "/pt-br/artigos/"
       weight = 10
-    [[languages.pt.menus.main]]
+    [[languages.pt-br.menus.main]]
       name = "Sobre"
-      url = "/pt/sobre/"
+      url = "/pt-br/sobre/"
       weight = 20
-    [[languages.pt.menus.main]]
+    [[languages.pt-br.menus.main]]
       name = "Contato"
-      url = "/pt/contato/"
+      url = "/pt-br/contato/"
       weight = 30

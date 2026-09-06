@@ -6,6 +6,7 @@ translationKey: "hello-world"
 categories: ["Tecnologia"]
 tags: ["meta"]
 description: "Por que este blog existe: tecnologia, churrasco, jiu-jitsu e liberdade — em dois idiomas."
+aliases: ["/pt/artigos/hello-world/"]
 ---
 
 Bem-vindo. Este blog cobre quatro coisas que me importam: tecnologia,
