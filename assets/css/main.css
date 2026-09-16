@@ -785,3 +785,28 @@ p { margin: 0 0 18px 0; }
   .ladder-step { grid-template-columns: 28px 1fr; grid-template-areas: "n name" "n code" "n who"; }
   .ladder-who { text-align: left; }
 }
+
+/* The path: numbered steps down a single rail, the human's step marked. */
+.path { margin: 0 0 28px; position: relative; padding-left: 4px; }
+.path::before {
+  content: ""; position: absolute; left: 17px; top: 14px; bottom: 14px;
+  border-left: 1px solid #c9d3e0;
+}
+.path-step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  grid-template-areas: "n name" "n who";
+  column-gap: 14px;
+  padding: 8px 0;
+}
+.path-n {
+  grid-area: n; align-self: start;
+  width: 28px; height: 28px; line-height: 26px; text-align: center;
+  border: 1px solid #c9d3e0; border-radius: 50%; background: var(--surface);
+  font-family: var(--font-mono); font-size: 12px; color: var(--muted-dark);
+}
+.path-name { grid-area: name; font-weight: 600; font-size: 15.5px; line-height: 28px; }
+.path-who { grid-area: who; font-size: 14px; color: var(--muted-dark); }
+.path-step-human .path-n { background: var(--link-dark); border-color: var(--link-dark); color: #fff; }
+.path-step-human .path-name { color: var(--link-dark); }
