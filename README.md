@@ -14,6 +14,14 @@ by `.github/workflows/deploy.yml` on push to `main`.
 
 Run `make test` to exercise the translation checker's own test suite.
 
+## The owner's facts
+
+`data/career.yaml` is the one source for the about page, the homepage hero and
+metrics, and the footer email. Every prose field is `{ en, pt-br }`. Roles and
+projects are separate lists; a project carries problem / approach / outcome and
+the `components` that draw its architecture strip. The phone number is
+deliberately not in it.
+
 ## Configuration knobs (`hugo.toml`)
 
 - `params.analytics.ga4` — GA4 measurement ID (loads only after cookie consent).

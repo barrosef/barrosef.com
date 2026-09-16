@@ -25,22 +25,8 @@ enableRobotsTXT = true
   description = "Technology leadership — writing on engineering, systems and liberty."
   comments = true
 
-  # Owner's professional facts. EVERY homepage block that uses these renders
-  # only when its value is non-empty, so blanks are invisible, never brackets.
-  [params.profile]
-    positioning = ""      # hero headline; falls back to the default in home.html
-    summary = ""          # one sentence under the headline
-    currentRole = ""
-    company = ""
-    location = ""
-    priorRoles = ""
-    email = ""
-    linkedin = "https://www.linkedin.com/in/barrosef/"
-
-  # Track record. Empty list hides the whole band.
-  # [[params.profile.metrics]]
-  #   value = "12"
-  #   label = "years leading engineering teams"
+  # The owner's professional facts live in data/career.yaml (one bilingual
+  # source for the homepage, the about page and the footer).
 
   [params.analytics]
     ga4 = ""

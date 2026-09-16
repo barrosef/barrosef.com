@@ -1,0 +1,202 @@
+{{- define "main" }}
+{{- $lang := .Site.Language.Lang }}
+{{- $c := .Site.Data.career }}
+{{- $p := $c.profile }}
+{{- $months := split (i18n "monthsShort") "," }}
+
+{{- /* The ruler maps each role onto 2003 → today. Dates are "YYYY-MM"; a
+       month becomes a fraction of a year so a role that starts in December
+       is placed in December, not January. */}}
+{{- $span := sub (add (float now.Year) (div (float (sub now.Month 1)) 12.0)) (float $p.since) }}
+
+<section class="identity">
+  <div class="wrap identity-grid">
+    <img class="identity-photo" src="{{ $p.photo }}" width="140" height="140" alt="{{ $p.name }}">
+    <div class="identity-text">
+      <h1 class="identity-name">{{ $p.name }}</h1>
+      <p class="identity-headline">{{ index $p.headline $lang }}</p>
+      <p class="identity-positioning">{{ index $p.positioning $lang }}</p>
+      <ul class="identity-contact">
+        <li>{{ index $p.location $lang }}</li>
+        <li><a href="mailto:{{ $p.email }}">{{ $p.email }}</a></li>
+        <li><a href="{{ $p.linkedin }}">LinkedIn</a></li>
+        <li><a href="{{ $p.github }}">GitHub</a></li>
+      </ul>
+      <ul class="identity-sectors" aria-label="{{ i18n "sectorsLabel" }}">
+        {{- range $p.sectors }}<li>{{ index . $lang }}</li>{{ end }}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="about-surface">
+  <div class="wrap about-grid">
+
+    <nav class="rail" aria-label="{{ .Title }}">
+      <a href="#profile">{{ i18n "aboutProfile" }}</a>
+      <a href="#experience">{{ i18n "aboutExperience" }}</a>
+      <a href="#projects">{{ i18n "aboutProjects" }}</a>
+      <a href="#skills">{{ i18n "aboutSkills" }}</a>
+      <a href="#education">{{ i18n "aboutEducation" }}</a>
+    </nav>
+
+    <div class="about-body">
+
+      <section id="profile" class="about-section">
+        <h2>{{ i18n "aboutProfile" }}</h2>
+        {{- range $p.summary }}
+        <p>{{ index . $lang }}</p>
+        {{- end }}
+      </section>
+
+      <section id="experience" class="about-section">
+        <h2>{{ i18n "aboutExperience" }}</h2>
+
+        <figure class="ruler" aria-label="{{ i18n "rulerLabel" }}">
+          <div class="ruler-track">
+            {{- range $i, $r := $c.roles }}
+            {{- $st := time.AsTime (printf "%s-01" $r.start) }}
+            {{- $from := sub (add (float $st.Year) (div (float (sub (int $st.Month) 1)) 12.0)) (float $p.since) }}
+            {{- $to := $span }}
+            {{- with $r.end }}{{ $et := time.AsTime (printf "%s-01" .) }}{{ $to = sub (add (float $et.Year) (div (float (int $et.Month)) 12.0)) (float $p.since) }}{{ end }}
+            <a class="ruler-seg{{ if not $r.end }} ruler-seg-now{{ end }}" href="#role-{{ $i }}"
+               style="left:{{ printf "%.2f" (mul 100 (div $from $span)) }}%;width:{{ printf "%.2f" (mul 100 (div (sub $to $from) $span)) }}%"
+               title="{{ $r.company }}"><span class="ruler-label">{{ $r.short | default $r.company }}</span></a>
+            {{- end }}
+          </div>
+          <div class="ruler-ticks">
+            {{- range $y := seq $p.since 5 now.Year }}
+            <span style="left:{{ printf "%.2f" (mul 100 (div (float (sub $y $p.since)) $span)) }}%">{{ $y }}</span>
+            {{- end }}
+          </div>
+          <figcaption class="ruler-caption">{{ $p.years }} {{ i18n "yearsInField" }}</figcaption>
+        </figure>
+
+        <ol class="roles">
+          {{- range $i, $r := $c.roles }}
+          {{- $st := time.AsTime (printf "%s-01" $r.start) }}
+          <li class="role" id="role-{{ $i }}">
+            <div class="role-when">
+              <time datetime="{{ $r.start }}">{{ index $months (sub (int $st.Month) 1) }} {{ $st.Year }}</time>
+              <span class="role-dash">–</span>
+              {{ with $r.end }}{{ $et := time.AsTime (printf "%s-01" .) }}<time datetime="{{ . }}">{{ index $months (sub (int $et.Month) 1) }} {{ $et.Year }}</time>{{ else }}<span class="role-now">{{ i18n "present" }}</span>{{ end }}
+            </div>
+            <div class="role-body">
+              <h3 class="role-title">{{ index $r.title $lang }}</h3>
+              <p class="role-company">{{ $r.company }}{{ with $r.companyGloss }}{{ with index . $lang }} <span class="role-gloss">({{ . }})</span>{{ end }}{{ end }}</p>
+              <p class="role-sector">{{ index $r.sector $lang }}{{ with $r.note }} · {{ index . $lang }}{{ end }}</p>
+              <ul class="role-highlights">
+                {{- range $r.highlights }}<li>{{ index . $lang }}</li>{{ end }}
+              </ul>
+              <ul class="chips">
+                {{- range $r.stack }}<li>{{ . }}</li>{{ end }}
+              </ul>
+            </div>
+          </li>
+          {{- end }}
+        </ol>
+      </section>
+
+      <section id="projects" class="about-section">
+        <h2>{{ i18n "aboutProjects" }}</h2>
+        {{- range $c.projects }}
+        <article class="project" id="project-{{ .slug }}">
+          <div class="project-arch" aria-hidden="true">
+            {{- range .components }}
+            <div class="arch-block{{ if .apart }} arch-apart{{ end }}"><span class="arch-name">{{ .name }}</span><span class="arch-kind">{{ .kind }}</span></div>
+            {{- end }}
+          </div>
+          <div class="project-text">
+            <h3 class="project-title">{{ .title }} <span class="project-period">{{ .period }}</span></h3>
+            <p class="project-tagline">{{ index .tagline $lang }}</p>
+            <dl class="project-facts">
+              <dt>{{ i18n "projectProblem" }}</dt><dd>{{ index .problem $lang }}</dd>
+              <dt>{{ i18n "projectApproach" }}</dt><dd>{{ index .approach $lang }}</dd>
+              <dt>{{ i18n "projectOutcome" }}</dt><dd>{{ index .outcome $lang }} <span class="project-status">{{ index .status $lang }}.</span></dd>
+            </dl>
+            <ul class="chips">
+              {{- range .stack }}<li>{{ . }}</li>{{ end }}
+            </ul>
+            <p class="project-links">
+              {{- range .links }}<a href="{{ .url }}">{{ i18n "sourceOnGitHub" }} <span class="project-link-path">{{ .label }}</span></a>{{ end }}
+            </p>
+          </div>
+        </article>
+        {{- end }}
+      </section>
+
+      <section id="skills" class="about-section">
+        <h2>{{ i18n "aboutSkills" }}</h2>
+        <dl class="skills">
+          {{- range $c.skills }}
+          <dt>{{ index .group $lang }}</dt>
+          <dd><ul class="chips">{{ range .items }}<li>{{ . }}</li>{{ end }}</ul></dd>
+          {{- end }}
+        </dl>
+      </section>
+
+      <section id="education" class="about-section">
+        <h2>{{ i18n "aboutEducation" }}</h2>
+        <dl class="credentials">
+          {{- range $c.credentials.education }}
+          <dt>{{ index .degree $lang }}</dt>
+          <dd>{{ .school }} · {{ .period }}</dd>
+          {{- end }}
+          <dt>{{ i18n "certifications" }}</dt>
+          <dd>{{ delimit $c.credentials.certifications " · " }}</dd>
+        </dl>
+      </section>
+
+      {{- with .Content }}
+      <section class="about-section about-personal">
+        {{ . }}
+      </section>
+      {{- end }}
+
+    </div>
+  </div>
+</div>
+
+<section class="about-closing">
+  <div class="wrap">
+    <p class="about-closing-text">{{ i18n "aboutClosing" }}</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="{{ i18n "contactURL" }}">{{ i18n "getInTouch" }}</a>
+      <a class="btn btn-ghost" href="{{ $p.linkedin }}">LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Scroll-spy for the section rail. Progressive enhancement: without it the
+  // rail is plain anchor links.
+  (function () {
+    var links = document.querySelectorAll(".rail a");
+    if (!links.length || !("IntersectionObserver" in window)) return;
+    var byId = {};
+    links.forEach(function (a) { byId[a.getAttribute("href").slice(1)] = a; });
+    // The active section is the last one whose top has crossed the upper
+    // third of the viewport; the first is active until any has.
+    var ids = Object.keys(byId), current = links[0];
+    current.classList.add("rail-on");
+    function update() {
+      var line = window.innerHeight * 0.34, next = links[0];
+      ids.forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top <= line) next = byId[id];
+      });
+      if (next !== current) {
+        current.classList.remove("rail-on");
+        current = next;
+        current.classList.add("rail-on");
+      }
+    }
+    var io = new IntersectionObserver(update, { threshold: [0, 0.25, 0.5, 0.75, 1] });
+    ids.forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) io.observe(el);
+    });
+    window.addEventListener("scroll", update, { passive: true });
+  })();
+</script>
+{{- end }}

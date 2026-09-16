@@ -1,0 +1,45 @@
+# About page — CV and projects — Design Spec
+
+**Date:** 2026-09-16
+**Status:** Built locally for the owner's validation; not yet pushed.
+**Supersedes:** the thin `/about/` prose page from the professional-site spec (2026-08-19).
+
+## Purpose
+
+Give a recruiter or executive one page that answers "who is this, what has he done, what does he build" — the rich `/about/` ↔ `/pt-br/sobre/`. The homepage stays a summary but stops being empty. Articles come later; this page does not depend on them.
+
+## Decisions
+
+| Decision | Choice | Rationale |
+|---|---|---|
+| Location | Rich `/about/`; homepage stays a summary | Owner's choice over "homepage becomes the page" and "separate /cv/ + /projects/" |
+| Languages | EN and PT-BR from day one | CI enforces the mirror; a half-built page is not validatable |
+| Contact | Email, LinkedIn, GitHub public; **phone stays private** | Owner's choice |
+| Positioning | Breadth and adaptability across stacks, teams and sectors; justice-sector work in the body, not the headline | Owner's 2026-08-21 decision — do not re-argue |
+| Source of truth | `data/career.yaml`, every prose field `{ en, pt-br }` | One file feeds the about page, the homepage hero, the metrics band and the footer email. `params.profile` in `hugo.toml` is retired. Shape mirrors the career-source tool's model (roles ≠ projects; a project has problem / approach / outcome) so that tool can emit this file later |
+| Project visuals | Generated architecture strip from `components[]`; no screenshots | Spartacus screenshots show children's data; DOP's cockpit shot carries an emulator-mode banner. Screenshots are a later swap-in |
+| The one visual device | Year ruler 2003 → today above the timeline, one segment per role, labelled with `short` | Twenty-three unbroken years read at a glance before any bullet. Everything else stays quiet text |
+| Print | `@media print` turns the page into the CV | What a recruiter does with it; no separate PDF pipeline yet |
+
+## Page structure
+
+1. **Identity** (navy) — photo, name, headline, positioning sentence, location · email · LinkedIn · GitHub, sector chips.
+2. **Rail + body** (white) — sticky section rail (Profile · Experience · Projects · Skills · Education) with a scroll-spy; horizontal strip on mobile.
+3. **Experience** — year ruler, then the timeline: period, title, company (with an EN gloss for Brazilian institutions), sector, highlights, stack chips.
+4. **Projects** — DOP and Spartacus: architecture strip on the left; tagline, problem, approach, where it stands, stack, repo link on the right.
+5. **Skills** grouped as the CV header groups them; **Education & certifications**; the personal paragraph from the page body.
+6. **Closing** (navy) — one question and the two buttons.
+
+## Also fixed
+
+`data/practice.yaml` still used `title_pt` keys after the `pt → pt-br` locale rename, so the PT homepage's capability cards rendered empty. Now `{ en, pt-br }` like `career.yaml`. The footer's six social icons overflowed a 390px viewport; it wraps now.
+
+## Facts the owner should check
+
+- `profile.location` is "Brasnorte, MT — Brazil" (confirmed by the owner, 2026-09-16).
+- Project periods come from first commits (Spartacus 2025-11, DOP 2026-05); Spartacus is described as in production on the strength of the July 2026 Play Store testing marathon.
+- Metrics: 23 years, 7 sectors, 2 teams (MP-MT and Sogni Sports). No number was invented; a "states integrated with PJe" figure was dropped because the CV does not give one.
+
+## Verification
+
+`make check` (build + translation mirror) passes. Reviewed at 1360px and 390px in both languages; all text pairs meet WCAG AA (lowest: ruler labels at 4.6:1). Printed via headless Chromium: header, rail and closing hidden; identity, ruler and timeline survive.

@@ -57,3 +57,52 @@ other = "Categoria"
 
 [taxonomyTag]
 other = "Etiqueta"
+
+# ---- Página Sobre ----
+[aboutProfile]
+other = "Perfil"
+
+[aboutExperience]
+other = "Experiência"
+
+[aboutProjects]
+other = "Projetos"
+
+[aboutSkills]
+other = "Competências"
+
+[aboutEducation]
+other = "Formação"
+
+[certifications]
+other = "Certificações"
+
+[present]
+other = "atual"
+
+[yearsInField]
+other = "anos de carreira"
+
+[monthsShort]
+other = "jan,fev,mar,abr,mai,jun,jul,ago,set,out,nov,dez"
+
+[projectProblem]
+other = "O problema"
+
+[projectApproach]
+other = "A abordagem"
+
+[projectOutcome]
+other = "Onde está"
+
+[sourceOnGitHub]
+other = "Código no GitHub"
+
+[aboutClosing]
+other = "Procura um arquiteto ou líder técnico que assuma um domínio desconhecido e faça o time entregar?"
+
+[rulerLabel]
+other = "Linha do tempo da carreira, de 2003 até hoje"
+
+[sectorsLabel]
+other = "Setores em que entreguei"

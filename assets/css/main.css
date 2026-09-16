@@ -167,8 +167,22 @@ p { margin: 0 0 18px 0; }
 }
 .hero-prior {
   display: inline-block;
-  margin-left: 4px;
 }
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 160px;
+  gap: 48px;
+  align-items: start;
+}
+.hero-photo-link { display: block; justify-self: end; margin-top: 8px; }
+.hero-photo {
+  width: 160px; height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--border);
+  background: var(--panel);
+}
+.hero-photo-link:hover .hero-photo { border-color: var(--accent); }
 
 .hero-actions {
   display: flex;
@@ -203,7 +217,7 @@ p { margin: 0 0 18px 0; }
 }
 .metrics-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 0;
 }
 .metric {
@@ -392,6 +406,9 @@ p { margin: 0 0 18px 0; }
 
 @media (max-width: 900px) {
   .hero-title { font-size: 38px; }
+  .hero-grid { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .hero-photo-link { order: -1; justify-self: start; margin-top: 0; }
+  .hero-photo { width: 112px; height: 112px; }
   .metrics-grid { grid-template-columns: minmax(0, 1fr); }
   .metric { border-left: none; border-top: 1px solid var(--border); }
   .metric:first-child { border-top: none; }
@@ -402,6 +419,8 @@ p { margin: 0 0 18px 0; }
 
 @media (max-width: 480px) {
   .wrap { padding: 0 20px; }
+  .footer-inner { flex-wrap: wrap; row-gap: 20px; }
+  .social-icons { gap: 14px; flex-wrap: wrap; }
   .header-inner { gap: 10px; }
   .site-nav { gap: 12px; }
   .site-nav a { font-size: 13px; }
@@ -411,4 +430,297 @@ p { margin: 0 0 18px 0; }
 @media (max-width: 400px) {
   .header-inner { flex-wrap: wrap; row-gap: 10px; }
   .site-nav { flex-wrap: wrap; row-gap: 8px; }
+}
+
+/* ---- About page ----
+   Identity block on the navy ground, then the career on a white reading
+   surface laid out as rail + body. The one visual device that is not text is
+   the year ruler at the top of Experience: every role as a segment on a
+   single 2003 → today track, so twenty-three years read as one unbroken
+   line before anyone reads a bullet. Everything else stays quiet.
+   Tints used on the white surface: #eef2f7 (the code-block tint, reused for
+   chips and the ruler track) and #e6ebf2 / #c9d3e0 (hairlines). */
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+
+.identity { padding-top: 72px; padding-bottom: 56px; }
+.identity-grid {
+  display: grid;
+  grid-template-columns: 140px minmax(0, 1fr);
+  gap: 40px;
+  align-items: start;
+}
+.identity-photo {
+  width: 140px; height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--border);
+  background: var(--panel);
+}
+.identity-name { font-size: 44px; margin-bottom: 6px; }
+.identity-headline {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  color: var(--accent);
+  margin-bottom: 20px;
+}
+.identity-positioning {
+  font-size: 21px;
+  line-height: 1.5;
+  max-width: 34em;
+  margin-bottom: 22px;
+}
+.identity-contact {
+  list-style: none; margin: 0 0 22px; padding: 0;
+  display: flex; flex-wrap: wrap; gap: 6px 22px;
+  font-size: 15px; color: var(--muted);
+}
+.identity-contact a { color: var(--text); border-bottom: 1px solid var(--border); }
+.identity-contact a:hover { color: var(--accent); border-bottom-color: var(--accent); text-decoration: none; }
+.identity-sectors {
+  list-style: none; margin: 0; padding: 0;
+  display: flex; flex-wrap: wrap; gap: 8px;
+}
+.identity-sectors li {
+  font-size: 13px;
+  padding: 5px 11px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+}
+
+.about-surface { background: var(--surface); color: var(--text-dark); }
+.about-grid {
+  display: grid;
+  grid-template-columns: 180px minmax(0, 760px);
+  gap: 64px;
+  padding-top: 64px;
+  padding-bottom: 80px;
+}
+.rail {
+  position: sticky;
+  top: 32px;
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.rail a {
+  color: var(--muted-dark);
+  font-size: 15px;
+  padding: 8px 0 8px 14px;
+  border-left: 2px solid transparent;
+}
+.rail a:hover { color: var(--text-dark); text-decoration: none; }
+.rail a.rail-on { color: var(--link-dark); border-left-color: var(--link-dark); }
+.rail a:focus-visible, .ruler-seg:focus-visible, .identity-contact a:focus-visible {
+  outline: 2px solid var(--accent); outline-offset: 2px;
+}
+
+.about-body h2, .about-body h3 { color: var(--text-dark); }
+.about-body a { color: var(--link-dark); }
+.about-body p { color: var(--text-dark); }
+.about-section { margin-bottom: 72px; scroll-margin-top: 24px; }
+.about-section:last-child { margin-bottom: 0; }
+.about-section > h2 {
+  font-size: 26px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #e6ebf2;
+  margin-bottom: 28px;
+}
+.about-personal p { color: var(--muted-dark); font-size: 15px; }
+
+/* Year ruler */
+.ruler { margin: 0 0 44px; }
+.ruler-track { position: relative; height: 22px; background: #eef2f7; }
+.ruler-seg {
+  position: absolute; top: 0; bottom: 0;
+  background: var(--link-dark);
+  opacity: 0.92;
+  box-shadow: inset 2px 0 0 var(--surface);
+  overflow: hidden;
+  display: flex; align-items: center;
+  padding-left: 8px;
+}
+.ruler-seg:nth-child(even) { opacity: 0.75; }
+.ruler-seg-now, .ruler-seg:hover, .ruler-seg:focus-visible { opacity: 1; }
+.ruler-seg:hover { text-decoration: none; }
+.ruler-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: #fff;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+}
+.ruler-ticks {
+  position: relative; height: 24px;
+  font-family: var(--font-mono); font-size: 12px; color: var(--muted-dark);
+}
+.ruler-ticks span { position: absolute; top: 6px; transform: translateX(-50%); }
+.ruler-ticks span:first-child { transform: none; }
+.ruler-caption { font-size: 14px; color: var(--muted-dark); }
+
+/* Roles */
+.roles { list-style: none; margin: 0; padding: 0; }
+.role {
+  display: grid;
+  grid-template-columns: 160px minmax(0, 1fr);
+  gap: 24px;
+  padding: 28px 0;
+  border-top: 1px solid #e6ebf2;
+}
+.role:first-child { border-top: none; padding-top: 0; }
+.role-when {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--muted-dark);
+  padding-top: 5px;
+  white-space: nowrap;
+}
+.role-now { color: var(--link-dark); font-weight: 500; }
+.role-title { font-size: 19px; margin-bottom: 2px; }
+.role-company { font-size: 16px; font-weight: 500; margin-bottom: 2px; }
+.role-gloss { font-weight: 400; color: var(--muted-dark); }
+.role-sector { font-size: 14px; color: var(--muted-dark) !important; margin-bottom: 14px; }
+.role-highlights { margin: 0 0 16px; padding-left: 18px; font-size: 15.5px; line-height: 1.6; }
+.role-highlights li { margin-bottom: 6px; }
+
+.chips { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.chips li {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  padding: 4px 9px;
+  background: #eef2f7;
+  color: var(--text-dark);
+}
+
+/* Projects: the architecture strip on the left, the write-up on the right */
+.project {
+  display: grid;
+  grid-template-columns: 200px minmax(0, 1fr);
+  gap: 40px;
+  padding: 36px 0;
+  border-top: 1px solid #e6ebf2;
+}
+.project:first-of-type { border-top: none; padding-top: 0; }
+.project-arch { display: flex; flex-direction: column; padding-top: 6px; }
+.arch-block {
+  position: relative;
+  border: 1px solid #c9d3e0;
+  padding: 9px 12px;
+  background: var(--surface);
+}
+.arch-block + .arch-block { margin-top: 18px; }
+.arch-block + .arch-block::before {
+  content: "";
+  position: absolute; left: 50%; top: -19px; height: 18px;
+  border-left: 1px solid #c9d3e0;
+}
+.arch-block.arch-apart { margin-top: 28px; border-style: dashed; }
+.arch-block.arch-apart::before { display: none; }
+.arch-name { display: block; font-family: var(--font-mono); font-size: 13px; font-weight: 500; }
+.arch-kind { display: block; font-size: 12px; color: var(--muted-dark); }
+.project-title { font-size: 24px; margin-bottom: 6px; }
+.project-period {
+  font-family: var(--font-mono); font-size: 13px; font-weight: 400;
+  color: var(--muted-dark); margin-left: 8px; letter-spacing: 0;
+}
+.project-tagline { font-size: 17px; color: var(--muted-dark) !important; margin-bottom: 20px; }
+.project-facts { margin: 0 0 18px; }
+.project-facts dt { font-weight: 600; font-size: 14px; color: var(--link-dark); margin-bottom: 4px; }
+.project-facts dd { margin: 0 0 14px; font-size: 15.5px; line-height: 1.6; }
+.project-status { color: var(--muted-dark); }
+.project-links { margin: 16px 0 0; font-size: 15px; }
+.project-link-path { font-family: var(--font-mono); font-size: 13px; color: var(--muted-dark); }
+
+/* Skills, education */
+.skills, .credentials {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr);
+  gap: 14px 24px;
+}
+.skills dt, .credentials dt { font-weight: 500; font-size: 15px; padding-top: 3px; }
+.skills dd, .credentials dd { margin: 0; }
+.credentials dd { color: var(--muted-dark); padding-top: 3px; }
+
+.about-closing { padding-top: 64px; padding-bottom: 72px; }
+.about-closing-text {
+  font-size: 24px;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  max-width: 30em;
+  margin-bottom: 28px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+@media (max-width: 900px) {
+  .identity { padding-top: 48px; padding-bottom: 40px; }
+  .identity-grid { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .identity-photo { width: 112px; height: 112px; }
+  .identity-name { font-size: 34px; }
+  .identity-positioning { font-size: 18px; }
+  .about-grid { grid-template-columns: minmax(0, 1fr); gap: 32px; padding-top: 0; padding-bottom: 56px; }
+  .rail {
+    top: 0;
+    flex-direction: row;
+    gap: 0;
+    margin: 0 -32px;
+    padding: 0 24px;
+    overflow-x: auto;
+    background: var(--surface);
+    border-bottom: 1px solid #e6ebf2;
+    z-index: 2;
+  }
+  .rail a { padding: 14px 10px; border-left: none; border-bottom: 2px solid transparent; white-space: nowrap; font-size: 14px; }
+  .rail a.rail-on { border-bottom-color: var(--link-dark); }
+  .about-section { scroll-margin-top: 64px; }
+  .role { grid-template-columns: minmax(0, 1fr); gap: 6px; padding: 24px 0; }
+  .role-when { padding-top: 0; }
+  .project { grid-template-columns: minmax(0, 1fr); gap: 20px; padding: 28px 0; }
+  .project-arch { order: 2; flex-direction: row; flex-wrap: wrap; gap: 8px; padding-top: 0; }
+  .arch-block + .arch-block, .arch-block.arch-apart { margin-top: 0; }
+  .arch-block + .arch-block::before { display: none; }
+  .skills, .credentials { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+  .skills dt { margin-top: 12px; }
+  .skills dt:first-child { margin-top: 0; }
+  .about-closing-text { font-size: 20px; }
+}
+
+@media (max-width: 600px) {
+  /* Segments get too narrow to carry a name; the ticks and the list below
+     still tell the story. */
+  .ruler-label { display: none; }
+  .ruler-track { height: 14px; }
+}
+
+@media (max-width: 480px) {
+  .rail { margin: 0 -20px; padding: 0 12px; }
+  .identity-contact { gap: 4px 16px; font-size: 14px; }
+}
+
+/* Printed, the about page is the CV. */
+@media print {
+  .site-header, .site-footer, .rail, .about-closing, .about-personal, script { display: none !important; }
+  body { background: #fff; color: #000; font-size: 11pt; }
+  .identity { padding: 0 0 16pt; color: #000; border-bottom: 1px solid #999; }
+  .identity-grid { grid-template-columns: 96px 1fr; gap: 20pt; }
+  .identity-photo { width: 96px; height: 96px; border-color: #999; }
+  .identity-name, .identity-positioning, .identity-contact, .identity-contact a { color: #000; }
+  .identity-headline { color: #333; }
+  .identity-contact a { border: none; }
+  .identity-sectors li { border-color: #999; color: #333; }
+  .about-grid { display: block; padding: 16pt 0 0; }
+  .about-section { margin-bottom: 20pt; }
+  .about-section > h2 { border-bottom-color: #999; }
+  .role, .project, .arch-block { break-inside: avoid; }
+  .ruler-seg, .chips li, .ruler-track { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .chips li { border: 1px solid #bbb; background: none; }
+  .about-body a { color: #000; }
 }
