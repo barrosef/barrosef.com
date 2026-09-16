@@ -377,9 +377,9 @@ p { margin: 0 0 18px 0; }
   background: #eef2f7;
   border: 1px solid var(--border);
   border-radius: 0;
-  padding: 20px 24px;
+  padding: 18px 20px;
   overflow-x: auto;
-  font-size: 14px;
+  font-size: 13px;
   line-height: 1.6;
   margin: 0 0 24px 0;
 }
@@ -729,4 +729,59 @@ p { margin: 0 0 18px 0; }
   .ruler-seg, .chips li, .ruler-track { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
   .chips li { border: 1px solid #bbb; background: none; }
   .about-body a { color: #000; }
+}
+
+/* ---- Post content: tables and the precedence ladder ----
+   Tables carry reference material, so they read as a grid, not as prose:
+   hairline rows, no zebra, code in the first column. The ladder is the one
+   figure a settings article needs — five steps, the winning one on top. */
+.post-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 0 28px;
+  font-size: 14.5px;
+  line-height: 1.5;
+}
+.post-content th, .post-content td {
+  text-align: left;
+  vertical-align: top;
+  padding: 10px 12px 10px 0;
+  border-bottom: 1px solid #e6ebf2;
+}
+.post-content th {
+  font-weight: 600;
+  color: var(--muted-dark);
+  font-size: 13px;
+  border-bottom-color: #c9d3e0;
+}
+.post-content td:last-child, .post-content th:last-child { padding-right: 0; }
+.post-content td code { white-space: nowrap; }
+
+.ladder { margin: 0 0 28px; }
+.ladder-step {
+  display: grid;
+  grid-template-columns: 28px 1fr auto;
+  grid-template-areas: "n name who" "n code who";
+  column-gap: 12px;
+  align-items: center;
+  padding: 10px 14px;
+  border: 1px solid #c9d3e0;
+  border-top: none;
+  background: var(--surface);
+}
+.ladder-step:first-child {
+  border-top: 1px solid #c9d3e0;
+  background: #eef2f7;
+  border-left: 3px solid var(--link-dark);
+}
+.ladder-n { grid-area: n; font-family: var(--font-mono); font-size: 13px; color: var(--muted-dark); }
+.ladder-name { grid-area: name; font-weight: 600; font-size: 15px; }
+.ladder-step code { grid-area: code; font-size: 12.5px; background: none !important; padding: 0 !important; color: var(--muted-dark); }
+.ladder-who { grid-area: who; font-size: 13px; color: var(--muted-dark); text-align: right; }
+
+@media (max-width: 600px) {
+  .post-content table { font-size: 14px; }
+  .post-content td code { white-space: normal; word-break: break-all; }
+  .ladder-step { grid-template-columns: 28px 1fr; grid-template-areas: "n name" "n code" "n who"; }
+  .ladder-who { text-align: left; }
 }
