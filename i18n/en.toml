@@ -57,3 +57,52 @@ other = "Category"
 
 [taxonomyTag]
 other = "Tag"
+
+# ---- About page ----
+[aboutProfile]
+other = "Profile"
+
+[aboutExperience]
+other = "Experience"
+
+[aboutProjects]
+other = "Projects"
+
+[aboutSkills]
+other = "Skills"
+
+[aboutEducation]
+other = "Education"
+
+[certifications]
+other = "Certifications"
+
+[present]
+other = "present"
+
+[yearsInField]
+other = "years in the field"
+
+[monthsShort]
+other = "Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec"
+
+[projectProblem]
+other = "The problem"
+
+[projectApproach]
+other = "The approach"
+
+[projectOutcome]
+other = "Where it stands"
+
+[sourceOnGitHub]
+other = "Source on GitHub"
+
+[aboutClosing]
+other = "Looking for an architect or a technical lead who can pick up an unfamiliar domain and make it ship?"
+
+[rulerLabel]
+other = "Career timeline, 2003 to today"
+
+[sectorsLabel]
+other = "Sectors delivered in"

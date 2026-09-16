@@ -1,21 +1,28 @@
 {{ define "main" }}
-{{ $p := .Site.Params.profile }}
+{{ $lang := .Site.Language.Lang }}
+{{ $c := .Site.Data.career }}
+{{ $p := $c.profile }}
+{{ $current := index $c.roles 0 }}
+{{ $prior := slice }}
+{{ range first 3 (after 1 $c.roles) }}{{ $prior = $prior | append .company }}{{ end }}
 
-<section class="hero wrap">
-  <div class="eyebrow">{{ i18n "kicker" }}</div>
-  <h1 class="hero-title">{{ with $p.positioning }}{{ . }}{{ else }}{{ i18n "heroDefault" }}{{ end }}</h1>
-  {{ with $p.summary }}<p class="lede hero-lede">{{ . }}</p>{{ end }}
-  {{ if or $p.currentRole $p.priorRoles }}
-  <p class="hero-role">
-    {{- with $p.currentRole }}{{ . }}{{ with $p.company }} · {{ . }}{{ end }}{{ with $p.location }} · {{ . }}{{ end }}{{ end -}}
-    {{- if and $p.currentRole $p.priorRoles }} · {{ end -}}
-    {{- with $p.priorRoles }}<span class="hero-prior">{{ i18n "previously" }} {{ . }}</span>{{ end -}}
-  </p>
-  {{ end }}
-  <div class="hero-actions">
-    <a class="btn btn-primary" href="{{ i18n "contactURL" }}">{{ i18n "getInTouch" }}</a>
-    {{ with $p.linkedin }}<a class="btn btn-ghost" href="{{ . }}">LinkedIn</a>{{ end }}
+<section class="hero wrap hero-grid">
+  <div>
+    <div class="eyebrow">{{ i18n "kicker" }}</div>
+    <h1 class="hero-title">{{ index $p.hero $lang }}</h1>
+    <p class="lede hero-lede">{{ index $p.positioning $lang }}</p>
+    <p class="hero-role">
+      {{- index $current.title $lang }} · {{ $current.company }} · {{ index $p.location $lang }} ·
+      <span class="hero-prior">{{ i18n "previously" }} {{ delimit $prior ", " }}</span>
+    </p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="{{ i18n "contactURL" }}">{{ i18n "getInTouch" }}</a>
+      <a class="btn btn-ghost" href="{{ i18n "aboutURL" }}#experience">{{ i18n "aboutExperience" }}</a>
+    </div>
   </div>
+  <a class="hero-photo-link" href="{{ i18n "aboutURL" }}">
+    <img class="hero-photo" src="{{ $p.photo }}" width="160" height="160" alt="{{ $p.name }}">
+  </a>
 </section>
 
 {{ with $p.metrics }}
@@ -24,7 +31,7 @@
     {{ range . }}
     <div class="metric">
       <div class="metric-value">{{ .value }}</div>
-      <div class="metric-label">{{ .label }}</div>
+      <div class="metric-label">{{ index .label $lang }}</div>
     </div>
     {{ end }}
   </div>
@@ -36,8 +43,8 @@
   <div class="practice-grid">
     {{ range .Site.Data.practice.items }}
     <article class="practice-card">
-      <h3>{{ index . (printf "title_%s" $.Site.Language.Lang) }}</h3>
-      <p>{{ index . (printf "body_%s" $.Site.Language.Lang) }}</p>
+      <h3>{{ index .title $lang }}</h3>
+      <p>{{ index .body $lang }}</p>
     </article>
     {{ end }}
   </div>

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Assert every non-draft post's translationKey exists in both content/en and content/pt.
+"""Assert every non-draft post's translationKey exists in both content/en and content/pt-br.
 
 Usage: python3 scripts/check_translations.py <content-dir>
 Exit 0 on a complete mirror, 1 (with a listing) otherwise.
@@ -26,7 +26,7 @@ def parse_front_matter(path: Path) -> dict:
     return fields
 
 
-SECTION = {"en": "writing", "pt": "artigos"}
+SECTION = {"en": "writing", "pt-br": "artigos"}
 
 
 def collect_keys(content_dir: Path, lang: str) -> dict:
@@ -50,7 +50,7 @@ def collect_keys(content_dir: Path, lang: str) -> dict:
 
 def main() -> None:
     content = Path(sys.argv[1]) if len(sys.argv) > 1 else Path("content")
-    en, pt = collect_keys(content, "en"), collect_keys(content, "pt")
+    en, pt = collect_keys(content, "en"), collect_keys(content, "pt-br")
     problems = [f"EN post {en[k]} has no PT pair (translationKey: {k})" for k in sorted(en.keys() - pt.keys())]
     problems += [f"PT post {pt[k]} has no EN pair (translationKey: {k})" for k in sorted(pt.keys() - en.keys())]
     if problems:

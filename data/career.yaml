@@ -1,0 +1,242 @@
+# The owner's career, as one source for the about page and the homepage.
+#
+# Every prose field is bilingual: { en: ..., pt-br: ... }. Templates read the
+# current language with `index .field $.Site.Language.Lang`. The shape mirrors
+# the career-source tool's data model (roles are not projects; a project
+# carries problem / approach / outcome), so that tool can emit this file later.
+#
+# Deliberately absent: the phone number. It stays in the private CV.
+
+profile:
+  name: "Ed Fernando Barros"
+  shortName: "Ed Barros"
+  photo: "/img/profile.png"
+  headline:
+    en: "Software Architect & Tech Lead"
+    pt-br: "Arquiteto de Software & Tech Lead"
+  years: 23
+  since: 2003
+  # The homepage headline. His own closing line from the CV, not a slogan.
+  hero:
+    en: "Architecture a team can actually execute."
+    pt-br: "Arquitetura que um time consegue de fato executar."
+  positioning:
+    en: "Twenty-three years building and running systems where failure is expensive — across stacks, teams and business domains that had little in common except the need to work."
+    pt-br: "Vinte e três anos construindo e operando sistemas onde falhar custa caro — em stacks, times e domínios de negócio que tinham pouco em comum além da necessidade de funcionar."
+  location:
+    en: "Brasnorte, MT — Brazil"
+    pt-br: "Brasnorte, MT — Brasil"
+  email: "barrosef@gmail.com"
+  linkedin: "https://www.linkedin.com/in/barrosef/"
+  github: "https://github.com/barrosef"
+  # The sectors delivered in, in the order the CV lists them. The visual proof
+  # of range on the identity block.
+  sectors:
+    - { en: "Financial services", pt-br: "Serviços financeiros" }
+    - { en: "Crypto-asset trading", pt-br: "Criptoativos" }
+    - { en: "Sports", pt-br: "Esportes" }
+    - { en: "Energy", pt-br: "Energia" }
+    - { en: "Public security", pt-br: "Segurança pública" }
+    - { en: "Tax & revenue", pt-br: "Tributação e receita" }
+    - { en: "Justice", pt-br: "Justiça" }
+  # Track-record band on the homepage.
+  metrics:
+    - value: "23"
+      label: { en: "years building and running systems", pt-br: "anos construindo e operando sistemas" }
+    - value: "7"
+      label: { en: "business sectors delivered in", pt-br: "setores de negócio atendidos" }
+    - value: "2"
+      label: { en: "engineering teams built from hiring to handover", pt-br: "times de engenharia formados da contratação à transferência" }
+  summary:
+    - en: "Software architect and engineering lead with 23 years building and running systems where failure is expensive. I work across the full technical range — Java and Spring Boot, Angular and Node.js, microservices, cloud on AWS and GCP, identity and access management, event streaming, and the container and CI/CD tooling that keeps delivery predictable."
+      pt-br: "Arquiteto de software e líder de engenharia com 23 anos construindo e operando sistemas onde falhar custa caro. Atuo em toda a faixa técnica — Java e Spring Boot, Angular e Node.js, microsserviços, nuvem em AWS e GCP, gestão de identidade e acesso, streaming de eventos, e o ferramental de contêineres e CI/CD que mantém a entrega previsível."
+    - en: "I adapt quickly to new stacks, new teams and new business domains, and have delivered in financial services and crypto-asset trading, sports, energy, public security, tax and the justice sector. I have built development teams from hiring through to structured handover, and worked equally as hands-on engineer, architect and technical leader."
+      pt-br: "Adapto-me rápido a novas stacks, novos times e novos domínios de negócio, e já entreguei em serviços financeiros e negociação de criptoativos, esportes, energia, segurança pública, tributação e no setor de justiça. Formei times de desenvolvimento da contratação até a transferência estruturada, e atuei igualmente como engenheiro hands-on, arquiteto e líder técnico."
+    - en: "What carries across all of it is the same thing: turning business constraints into architecture a team can actually execute."
+      pt-br: "O que atravessa tudo isso é a mesma coisa: transformar restrições de negócio em arquitetura que um time consegue de fato executar."
+
+# Employment history, newest first. `start`/`end` are YYYY-MM; `end: null`
+# means current. The year ruler is drawn from these dates and labelled with
+# `short`, which must fit inside the segment (a handful of characters).
+roles:
+  - company: "Sogni Sports"
+    short: "Sogni"
+    title: { en: "Tech Lead", pt-br: "Tech Lead" }
+    start: "2023-12"
+    end: null
+    note: { en: "transitioning out", pt-br: "em transição de saída" }
+    sector: { en: "Sports", pt-br: "Esportes" }
+    highlights:
+      - en: "Designed the foundational architecture for a cloud-based Java application ecosystem on AWS and GCP, with containers and an automated DevOps pipeline."
+        pt-br: "Projetei a arquitetura de base de um ecossistema de aplicações Java em nuvem (AWS e GCP), com contêineres e pipeline de DevOps automatizado."
+      - en: "Implemented and integrated an IAM solution on Keycloak, defining the authentication and authorisation protocols (OAuth2/OIDC, SSO) for internal and external integrations, applications and web front ends."
+        pt-br: "Implementei e integrei uma solução de IAM com Keycloak, definindo os protocolos de autenticação e autorização (OAuth2/OIDC, SSO) para integrações internas e externas, aplicações e front-ends web."
+      - en: "Designed and developed applications for individual and corporate accounts, covering planning, sales, and payment integration and processing."
+        pt-br: "Projetei e desenvolvi aplicações para contas individuais e corporativas, cobrindo planejamento, vendas e integração e processamento de pagamentos."
+      - en: "Supported the hiring that formed the development team, and am leading a structured handover of the project to them."
+        pt-br: "Apoiei a contratação que formou o time de desenvolvimento e conduzo a transferência estruturada do projeto para ele."
+    stack: [Java, Spring Boot, Keycloak, PostgreSQL, Docker, AWS, GCP, "CI/CD", Apache Camel]
+
+  - company: "BEE4"
+    short: "BEE4"
+    title: { en: "Senior Software Engineer", pt-br: "Engenheiro de Software Sênior" }
+    start: "2022-01"
+    end: "2023-11"
+    sector: { en: "Financial services · crypto-assets", pt-br: "Serviços financeiros · criptoativos" }
+    highlights:
+      - en: "Architect, developer and agile practitioner in an AWS environment, building back ends in Java and Node.js."
+        pt-br: "Arquiteto, desenvolvedor e praticante ágil em ambiente AWS, construindo back-ends em Java e Node.js."
+      - en: "Established the CI/CD pipelines, managed the product board and onboarded new developers."
+        pt-br: "Estabeleci os pipelines de CI/CD, geri o board do produto e integrei novos desenvolvedores."
+      - en: "Built integrations with crypto-asset exchanges, blockchain and financial systems for asset exchange in crypto format."
+        pt-br: "Construí integrações com exchanges de criptoativos, blockchain e sistemas financeiros para troca de ativos em formato cripto."
+    stack: [Java, Node.js, AWS, REST APIs, "Financial integrations", "DevOps automation"]
+
+  - company: "Totem"
+    short: "Totem"
+    title: { en: "Software Architect", pt-br: "Arquiteto de Software" }
+    start: "2018-07"
+    end: "2021-12"
+    sector: { en: "Justice · energy", pt-br: "Justiça · energia" }
+    highlights:
+      - en: "Integrated multiple Public Prosecutor's Office systems with PJe (Processo Judicial Eletrônico), Brazil's national electronic judicial process platform."
+        pt-br: "Integrei diversos sistemas do Ministério Público ao PJe (Processo Judicial Eletrônico), a plataforma nacional de processo judicial eletrônico."
+      - en: "Delivered public-sector projects in the justice and electricity domains, at both state and federal level."
+        pt-br: "Entreguei projetos para o setor público nos domínios de justiça e energia elétrica, nas esferas estadual e federal."
+      - en: "Data modelling, system-to-system integration, and deployment of JBoss servers, Docker containers and Linux in cloud and on-premise environments."
+        pt-br: "Modelagem de dados, integração entre sistemas e implantação de servidores JBoss, contêineres Docker e Linux em nuvem e on-premise."
+    stack: [Java, "JBoss/WildFly", Tomcat, Docker, Linux, "Data modelling", Integrations]
+
+  - company: "Ministério Público do Estado do Pará"
+    short: "MP-PA"
+    companyGloss: { en: "Public Prosecutor's Office of the State of Pará", pt-br: "" }
+    title: { en: "IT Advisor", pt-br: "Assessor de TI" }
+    start: "2013-08"
+    end: "2018-01"
+    sector: { en: "Justice · IT governance", pt-br: "Justiça · governança de TI" }
+    highlights:
+      - en: "Advisor to the Strategic IT Committee (CETI) on technology planning and strategic projects."
+        pt-br: "Assessor do Comitê Estratégico de TI (CETI) em planejamento de tecnologia e projetos estratégicos."
+      - en: "Project and vendor management; ran public procurement end to end — basic project specifications, terms of reference, public consultation."
+        pt-br: "Gestão de projetos e fornecedores; conduzi processos de contratação pública de ponta a ponta — projeto básico, termo de referência, consulta pública."
+      - en: "IT governance, strategic planning, contract management and alignment with executive leadership."
+        pt-br: "Governança de TI, planejamento estratégico, gestão de contratos e alinhamento com a alta administração."
+    stack: ["IT governance", "Public procurement", "Strategic planning", "Vendor management"]
+
+  - company: "Ministério Público do Estado do Mato Grosso"
+    short: "MP-MT"
+    companyGloss: { en: "Public Prosecutor's Office of the State of Mato Grosso", pt-br: "" }
+    title: { en: "Manager", pt-br: "Gerente" }
+    start: "2009-01"
+    end: "2013-06"
+    sector: { en: "Justice", pt-br: "Justiça" }
+    highlights:
+      - en: "Built and led the Java development team; introduced development technologies and processes supported by automated tooling."
+        pt-br: "Formei e liderei o time de desenvolvimento Java; introduzi tecnologias e processos de desenvolvimento apoiados em ferramental automatizado."
+      - en: "Designed the infrastructure for Java applications and Oracle databases; hands-on Java development; JBoss and Tomcat on Linux."
+        pt-br: "Projetei a infraestrutura para aplicações Java e bancos Oracle; desenvolvimento Java hands-on; JBoss e Tomcat em Linux."
+      - en: "Ran vendor procurement — terms of reference, basic project specifications, selection."
+        pt-br: "Conduzi contratações de fornecedores — termo de referência, projeto básico, seleção."
+    stack: [Java, Oracle, JBoss, Tomcat, Linux, "Team leadership"]
+
+  - company: "Módulo Risk Manager"
+    short: "Módulo"
+    title: { en: "Development Consultant", pt-br: "Consultor de Desenvolvimento" }
+    start: "2007-04"
+    end: "2008-12"
+    sector: { en: "Justice", pt-br: "Justiça" }
+    highlights:
+      - en: "Embedded with the web team on projects for the Public Prosecutor's Office of the State of Mato Grosso, delivering eight enterprise applications."
+        pt-br: "Alocado no time web em projetos para o Ministério Público do Estado de Mato Grosso, entregando oito aplicações corporativas."
+    stack: ["Java web", Integrations]
+
+  - company: "Ábaco · Univag"
+    short: "Ábaco"
+    title: { en: "Web developer", pt-br: "Desenvolvedor web" }
+    start: "2003-01"
+    end: "2007-03"
+    sector: { en: "Tax · public security", pt-br: "Tributação · segurança pública" }
+    highlights:
+      - en: "Web development and technical support, notably on tax, revenue and public-security projects for the State of Mato Grosso."
+        pt-br: "Desenvolvimento web e suporte técnico, em especial em projetos de tributação, receita e segurança pública para o Estado de Mato Grosso."
+    stack: ["Web development"]
+
+# Portfolio pieces. Distinct from roles: a project carries a problem, an
+# approach and an outcome. `components` draws the architecture strip.
+projects:
+  - slug: "dop"
+    title: "DOP"
+    tagline:
+      en: "An AI-first cockpit where a developer and Claude run a demand end to end"
+      pt-br: "Um cockpit AI-first onde o desenvolvedor e o Claude conduzem uma demanda de ponta a ponta"
+    period: "2026 – "
+    status: { en: "Platform under construction; the operational CLI is in daily use (v0.7.1)", pt-br: "Plataforma em construção; a CLI operacional está em uso diário (v0.7.1)" }
+    problem:
+      en: "Running a software demand — environment, branch, development, pull request, delivery — is a chain of hand-offs between the developer and an AI agent that lose state at every step."
+      pt-br: "Conduzir uma demanda de software — ambiente, branch, desenvolvimento, pull request, entrega — é uma cadeia de passagens de bastão entre o desenvolvedor e um agente de IA que perde estado a cada passo."
+    approach:
+      en: "A Go core owns the domain, the state and a transactional event log; a Python BFF exposes REST and SSE to a React cockpit and gRPC to the CLI; the developer follows and steers from above while the agent operates the tooling underneath. Multi-tenant from the first migration, with a second factor built in before any organisation existed."
+      pt-br: "Um núcleo em Go é dono do domínio, do estado e de um log de eventos transacional; um BFF em Python expõe REST e SSE para o cockpit em React e gRPC para a CLI; o desenvolvedor acompanha e direciona de cima enquanto o agente opera o ferramental por baixo. Multi-tenant desde a primeira migração, com segundo fator construído antes de existir qualquer organização."
+    outcome:
+      en: "Twenty-six architecture decision records, a contract-first proto, and a local k3d environment that brings the whole platform up in one command."
+      pt-br: "Vinte e seis registros de decisão de arquitetura, um contrato proto-first e um ambiente k3d local que sobe a plataforma inteira em um comando."
+    components:
+      - { name: "dop-app", kind: "React cockpit" }
+      - { name: "dop-api", kind: "Python BFF" }
+      - { name: "dop-core", kind: "Go core" }
+      - { name: "dop-infra", kind: "k3d · Terraform" }
+      - { name: "dop-cmd", kind: "CLI v0.7.1", apart: true }   # a project of its own, not a layer
+    stack: [Go, Python, React, gRPC, NATS JetStream, PostgreSQL, Terraform, k3s, GCP, Claude]
+    links:
+      - { label: "github.com/barrosef/dop", url: "https://github.com/barrosef/dop" }
+
+  - slug: "spartacus"
+    title: "Spartacus"
+    tagline:
+      en: "Web back office and mobile app for a martial-arts social project in Brasnorte, Mato Grosso"
+      pt-br: "Backoffice web e aplicativo móvel para um projeto social de artes marciais em Brasnorte, Mato Grosso"
+    period: "2025 – "
+    status: { en: "In production, running on GCP's free tier", pt-br: "Em produção, rodando no free tier do GCP" }
+    problem:
+      en: "A social project teaching jiu-jitsu, capoeira and Muay Thai to children needed attendance, monthly food-donation tracking and a channel to families — without a secretary becoming a queue operator and without a hosting bill."
+      pt-br: "Um projeto social que ensina jiu-jitsu, capoeira e Muay Thai a crianças precisava de frequência, controle da doação mensal de alimentos e um canal com as famílias — sem transformar a secretária em operadora de fila e sem conta de hospedagem."
+    approach:
+      en: "One QR code per class instead of one per student, so the teacher never queues anyone. Guardians act on behalf of their children with dual authorship on every record. A FastAPI back end on Cloud Run, Firestore, and Firebase Auth with Google sign-in for adults."
+      pt-br: "Um QR por aula em vez de um por aluno, para que o professor nunca precise enfileirar ninguém. Responsáveis agem em nome dos filhos com dupla autoria em cada registro. Back-end FastAPI no Cloud Run, Firestore e Firebase Auth com login Google para adultos."
+    outcome:
+      en: "Six repositories — app, back end, back office, shared UI components, infrastructure and a prototype — shipped to the families of Brasnorte at zero operating cost."
+      pt-br: "Seis repositórios — app, back-end, backoffice, componentes de UI compartilhados, infraestrutura e um protótipo — entregues às famílias de Brasnorte a custo operacional zero."
+    components:
+      - { name: "app", kind: "React Native · Expo" }
+      - { name: "backoffice", kind: "React · Vite" }
+      - { name: "backend", kind: "FastAPI · Cloud Run" }
+      - { name: "infra", kind: "Firebase · GCP" }
+      - { name: "ui-components", kind: "shared UI" }
+    stack: [Python, FastAPI, React, React Native, Expo, Firestore, Firebase, Cloud Run, GCP]
+    links:
+      - { label: "github.com/barrosef/spartacus", url: "https://github.com/barrosef/spartacus" }
+
+# Grouped as the CV header groups them.
+skills:
+  - group: { en: "Backend & messaging", pt-br: "Backend e mensageria" }
+    items: [Java, Spring Boot, Node.js, Python, FastAPI, Go, Microservices, Kafka, Apache Camel]
+  - group: { en: "Cloud & runtime", pt-br: "Nuvem e runtime" }
+    items: [AWS, GCP, Firebase, Docker, Kubernetes, "JBoss/WildFly", Linux]
+  - group: { en: "Identity", pt-br: "Identidade" }
+    items: ["OAuth2/OIDC", Keycloak, "Google Cloud Authentication", SSO]
+  - group: { en: "Data", pt-br: "Dados" }
+    items: [PostgreSQL, Oracle, Firestore, Apache Solr, "Data modelling"]
+  - group: { en: "Delivery", pt-br: "Entrega" }
+    items: ["GitHub Actions", "GitLab CI", Gradle, Expo, Terraform, "CI/CD"]
+  - group: { en: "Front end", pt-br: "Front-end" }
+    items: [Angular, React, "React Native"]
+
+credentials:
+  education:
+    - degree: { en: "BSc in Information Systems", pt-br: "Bacharelado em Sistemas de Informação" }
+      school: "UNIVAG – Centro Universitário"
+      period: "2001 – 2004"
+  certifications:
+    - "Apache Kafka"
+    - "ISO 27001"
+    - "Agile Scrum"

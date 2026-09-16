@@ -25,22 +25,8 @@ enableRobotsTXT = true
   description = "Technology leadership — writing on engineering, systems and liberty."
   comments = true
 
-  # Owner's professional facts. EVERY homepage block that uses these renders
-  # only when its value is non-empty, so blanks are invisible, never brackets.
-  [params.profile]
-    positioning = ""      # hero headline; falls back to the default in home.html
-    summary = ""          # one sentence under the headline
-    currentRole = ""
-    company = ""
-    location = ""
-    priorRoles = ""
-    email = ""
-    linkedin = "https://www.linkedin.com/in/barrosef/"
-
-  # Track record. Empty list hides the whole band.
-  # [[params.profile.metrics]]
-  #   value = "12"
-  #   label = "years leading engineering teams"
+  # The owner's professional facts live in data/career.yaml (one bilingual
+  # source for the homepage, the about page and the footer).
 
   [params.analytics]
     ga4 = ""
@@ -92,20 +78,20 @@ enableRobotsTXT = true
       url = "/contact/"
       weight = 30
 
-  [languages.pt]
+  [languages.pt-br]
     languageName = "Português"
-    languageCode = "pt-br"
-    contentDir = "content/pt"
+    languageCode = "pt-BR"
+    contentDir = "content/pt-br"
     weight = 2
-    [[languages.pt.menus.main]]
+    [[languages.pt-br.menus.main]]
       name = "Artigos"
-      url = "/pt/artigos/"
+      url = "/pt-br/artigos/"
       weight = 10
-    [[languages.pt.menus.main]]
+    [[languages.pt-br.menus.main]]
       name = "Sobre"
-      url = "/pt/sobre/"
+      url = "/pt-br/sobre/"
       weight = 20
-    [[languages.pt.menus.main]]
+    [[languages.pt-br.menus.main]]
       name = "Contato"
-      url = "/pt/contato/"
+      url = "/pt-br/contato/"
       weight = 30
