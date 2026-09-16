@@ -34,10 +34,18 @@ Give a recruiter or executive one page that answers "who is this, what has he do
 
 `data/practice.yaml` still used `title_pt` keys after the `pt → pt-br` locale rename, so the PT homepage's capability cards rendered empty. Now `{ en, pt-br }` like `career.yaml`. The footer's six social icons overflowed a 390px viewport; it wraps now.
 
+## Revision 2026-09-16 (same day)
+
+- Owner is no longer at Sogni Sports (ended 2025-10). Current role since 2025-11: **independent consultant** — AI-assisted software development, cloud infrastructure, IT product development. The homepage kicker and the three capability cards now state the consulting offer; the hero role line reads "Independent consultant · Brasnorte, MT — Brazil · Previously Sogni Sports, BEE4, Totem".
+- Two client projects added, **Factor** (last-mile logistics: driver app + payroll pipeline) and **Pipe365 Mobile** (WhatsApp customer-service app), marked `client: true`: product name only, no client company named, no repo links, a "Client engagement · private code" label instead.
+- `company` and `short` in `roles[]` may be bilingual maps; `layouts/_partials/l10n.html` resolves either shape.
+- Ruler labels hide via a container query when a segment is narrower than 44px (the current consulting segment).
+
 ## Facts the owner should check
 
 - `profile.location` is "Brasnorte, MT — Brazil" (confirmed by the owner, 2026-09-16).
 - Project periods come from first commits (Spartacus 2025-11, DOP 2026-05); Spartacus is described as in production on the strength of the July 2026 Play Store testing marathon.
+- Naming the client products (Factor, Pipe365) publicly is assumed acceptable; the client companies are not named.
 - Metrics: 23 years, 7 sectors, 2 teams (MP-MT and Sogni Sports). No number was invented; a "states integrated with PJe" figure was dropped because the CV does not give one.
 
 ## Verification

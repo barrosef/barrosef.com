@@ -4,7 +4,7 @@
 {{ $p := $c.profile }}
 {{ $current := index $c.roles 0 }}
 {{ $prior := slice }}
-{{ range first 3 (after 1 $c.roles) }}{{ $prior = $prior | append .company }}{{ end }}
+{{ range first 3 (after 1 $c.roles) }}{{ $prior = $prior | append (partial "l10n" (dict "v" .company "lang" $lang)) }}{{ end }}
 
 <section class="hero wrap hero-grid">
   <div>
@@ -12,7 +12,7 @@
     <h1 class="hero-title">{{ index $p.hero $lang }}</h1>
     <p class="lede hero-lede">{{ index $p.positioning $lang }}</p>
     <p class="hero-role">
-      {{- index $current.title $lang }} · {{ $current.company }} · {{ index $p.location $lang }} ·
+      {{- partial "l10n" (dict "v" $current.company "lang" $lang) }} · {{ index $p.location $lang }} ·
       <span class="hero-prior">{{ i18n "previously" }} {{ delimit $prior ", " }}</span>
     </p>
     <div class="hero-actions">

@@ -61,7 +61,7 @@
             {{- with $r.end }}{{ $et := time.AsTime (printf "%s-01" .) }}{{ $to = sub (add (float $et.Year) (div (float (int $et.Month)) 12.0)) (float $p.since) }}{{ end }}
             <a class="ruler-seg{{ if not $r.end }} ruler-seg-now{{ end }}" href="#role-{{ $i }}"
                style="left:{{ printf "%.2f" (mul 100 (div $from $span)) }}%;width:{{ printf "%.2f" (mul 100 (div (sub $to $from) $span)) }}%"
-               title="{{ $r.company }}"><span class="ruler-label">{{ $r.short | default $r.company }}</span></a>
+               title="{{ partial "l10n" (dict "v" $r.company "lang" $lang) }}"><span class="ruler-label">{{ partial "l10n" (dict "v" ($r.short | default $r.company) "lang" $lang) }}</span></a>
             {{- end }}
           </div>
           <div class="ruler-ticks">
@@ -83,7 +83,7 @@
             </div>
             <div class="role-body">
               <h3 class="role-title">{{ index $r.title $lang }}</h3>
-              <p class="role-company">{{ $r.company }}{{ with $r.companyGloss }}{{ with index . $lang }} <span class="role-gloss">({{ . }})</span>{{ end }}{{ end }}</p>
+              <p class="role-company">{{ partial "l10n" (dict "v" $r.company "lang" $lang) }}{{ with $r.companyGloss }}{{ with index . $lang }} <span class="role-gloss">({{ . }})</span>{{ end }}{{ end }}</p>
               <p class="role-sector">{{ index $r.sector $lang }}{{ with $r.note }} · {{ index . $lang }}{{ end }}</p>
               <ul class="role-highlights">
                 {{- range $r.highlights }}<li>{{ index . $lang }}</li>{{ end }}
@@ -119,6 +119,7 @@
             </ul>
             <p class="project-links">
               {{- range .links }}<a href="{{ .url }}">{{ i18n "sourceOnGitHub" }} <span class="project-link-path">{{ .label }}</span></a>{{ end }}
+              {{- if .client }}<span class="project-client">{{ i18n "clientWork" }}</span>{{ end }}
             </p>
           </div>
         </article>
