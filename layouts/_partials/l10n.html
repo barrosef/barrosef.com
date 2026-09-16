@@ -1,0 +1,3 @@
+{{- /* A field that is either a plain string or { en, pt-br }: returns the
+       current language's value. Usage: partial "l10n" (dict "v" .company "lang" $lang) */ -}}
+{{- if reflect.IsMap .v }}{{ index .v .lang }}{{ else }}{{ .v }}{{ end -}}

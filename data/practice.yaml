@@ -1,15 +1,15 @@
-# Homepage capability cards. Prose is { en, pt-br }, read with the current
-# language code — the same shape as data/career.yaml.
+# Homepage capability cards — the three consulting lines. Prose is
+# { en, pt-br }, read with the current language code, like data/career.yaml.
 items:
-  - title: { en: "Engineering leadership", pt-br: "Liderança em engenharia" }
+  - title: { en: "AI-assisted software development", pt-br: "Desenvolvimento de software com IA" }
     body:
-      en: "Hiring, structure, and the operating cadence that makes delivery predictable instead of heroic."
-      pt-br: "Contratação, estrutura e a cadência operacional que torna a entrega previsível em vez de heroica."
-  - title: { en: "Platform & architecture", pt-br: "Plataforma e arquitetura" }
+      en: "Bringing AI into how a team builds software — agent-assisted engineering with the specifications, review gates and delivery cadence that make it dependable."
+      pt-br: "Levar a IA para a forma como o time constrói software — engenharia assistida por agentes, com as especificações, os portões de revisão e a cadência de entrega que a tornam confiável."
+  - title: { en: "Cloud infrastructure", pt-br: "Infraestrutura em nuvem" }
     body:
-      en: "Systems designed for the load they will actually carry, with the trade-offs written down rather than assumed."
-      pt-br: "Sistemas projetados para a carga real, com os trade-offs documentados em vez de presumidos."
-  - title: { en: "Technology strategy", pt-br: "Estratégia de tecnologia" }
+      en: "AWS and GCP environments designed for the load they will actually carry, automated end to end, with the trade-offs written down rather than assumed."
+      pt-br: "Ambientes AWS e GCP projetados para a carga real, automatizados de ponta a ponta, com os trade-offs documentados em vez de presumidos."
+  - title: { en: "IT product development", pt-br: "Desenvolvimento de produtos de TI" }
     body:
-      en: "Turning business constraints into direction a board can follow and a team can execute."
-      pt-br: "Traduzir restrições de negócio em direção que o conselho acompanha e o time executa."
+      en: "From the first specification to a shipped product: architecture, the team, and the operating cadence that makes delivery predictable instead of heroic."
+      pt-br: "Da primeira especificação ao produto entregue: arquitetura, time e a cadência operacional que torna a entrega previsível em vez de heroica."

@@ -11,7 +11,7 @@ other = "Decline"
 other = "Get new posts by email"
 
 [kicker]
-other = "Technology leadership"
+other = "Consulting — AI, cloud and product"
 
 [heroDefault]
 other = "I build engineering organisations that ship."
@@ -23,7 +23,7 @@ other = "Previously"
 other = "Get in touch"
 
 [capabilities]
-other = "What I do"
+other = "What I consult on"
 
 [writing]
 other = "Writing"
@@ -106,3 +106,6 @@ other = "Career timeline, 2003 to today"
 
 [sectorsLabel]
 other = "Sectors delivered in"
+
+[clientWork]
+other = "Client engagement · private code"

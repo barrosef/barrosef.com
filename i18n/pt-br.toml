@@ -11,7 +11,7 @@ other = "Recusar"
 other = "Receba novos posts por e-mail"
 
 [kicker]
-other = "Liderança em tecnologia"
+other = "Consultoria — IA, nuvem e produto"
 
 [heroDefault]
 other = "Construo organizações de engenharia que entregam."
@@ -23,7 +23,7 @@ other = "Anteriormente"
 other = "Entre em contato"
 
 [capabilities]
-other = "O que eu faço"
+other = "Em que eu consulto"
 
 [writing]
 other = "Artigos"
@@ -106,3 +106,6 @@ other = "Linha do tempo da carreira, de 2003 até hoje"
 
 [sectorsLabel]
 other = "Setores em que entreguei"
+
+[clientWork]
+other = "Trabalho para cliente · código privado"

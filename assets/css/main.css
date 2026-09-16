@@ -547,6 +547,11 @@ p { margin: 0 0 18px 0; }
 .ruler-seg:nth-child(even) { opacity: 0.75; }
 .ruler-seg-now, .ruler-seg:hover, .ruler-seg:focus-visible { opacity: 1; }
 .ruler-seg:hover { text-decoration: none; }
+/* A segment shorter than its label shows no label — the tooltip and the
+   list below still name it. Container query so the rule follows the
+   segment's real width, not a guess about the viewport. */
+.ruler-seg { container-type: inline-size; }
+@container (max-width: 44px) { .ruler-label { display: none; } }
 .ruler-label {
   font-family: var(--font-mono);
   font-size: 11px;
@@ -635,6 +640,7 @@ p { margin: 0 0 18px 0; }
 .project-status { color: var(--muted-dark); }
 .project-links { margin: 16px 0 0; font-size: 15px; }
 .project-link-path { font-family: var(--font-mono); font-size: 13px; color: var(--muted-dark); }
+.project-client { font-family: var(--font-mono); font-size: 13px; color: var(--muted-dark); }
 
 /* Skills, education */
 .skills, .credentials {
