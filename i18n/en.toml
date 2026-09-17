@@ -183,3 +183,6 @@ other = "/about"
 other = "Track record"
 [photo]
 other = "Photo"
+
+[cookies]
+other = "Cookies"

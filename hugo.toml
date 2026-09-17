@@ -28,8 +28,15 @@ enableRobotsTXT = true
   # The owner's professional facts live in data/career.yaml (one bilingual
   # source for the homepage, the about page and the footer).
 
+  # Google Analytics 4 measurement ID (G-XXXXXXXXXX). The tag loads only after
+  # the visitor accepts the cookie banner; "Cookies" in the footer reopens it.
   [params.analytics]
     ga4 = ""
+
+  # Google Search Console: the content of the HTML-tag verification method.
+  # (Verifying the domain by DNS TXT at the registrar needs nothing here.)
+  [params.seo]
+    googleSiteVerification = ""
 
   [params.newsletter]
     kitFormId = ""
