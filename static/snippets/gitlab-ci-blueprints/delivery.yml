@@ -1,0 +1,22 @@
+# blueprints/orders/delivery.yml — hand the rollout set to the fleet
+.deliver:
+  stage: delivery
+  rules:
+    - if: '$RING =~ /^(preview|live)$/'
+  trigger:
+    project: platform/fleet
+    strategy: depend          # wait for the child; inherit its result
+    forward: { pipeline_variables: true }
+  variables:
+    APP: orders
+    RING: $RING
+    ORIGIN_SHA: $CI_COMMIT_SHA
+    ROLLOUT_SET: |
+      [
+        {"unit":"api",    "container":"api",    "image":"$API_IMAGE"},
+        {"unit":"web",    "container":"web",    "image":"$WEB_IMAGE"},
+        {"unit":"worker", "container":"worker", "image":"$WORKER_IMAGE"}
+      ]
+
+deliver_north: { extends: .deliver, variables: { CLUSTER: north } }
+deliver_south: { extends: .deliver, variables: { CLUSTER: south } }

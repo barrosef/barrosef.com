@@ -1,34 +1,33 @@
-# platform/manifests/.gitlab-ci.yml
+# platform/fleet/.gitlab-ci.yml — the only pipeline that touches a cluster
 workflow:
   rules:
     - if: '$CI_PIPELINE_SOURCE == "pipeline"'   # an app pipeline fired it
     - if: '$CI_PIPELINE_SOURCE == "web"'        # or someone pressed Run
     - when: never
 
-deploy:
-  stage: deploy
+rollout:
+  stage: rollout
   image: bitnami/kubectl:1.31
-  resource_group: $CLUSTER-$ENVIRONMENT-$APP   # one rollout per target
+  resource_group: $CLUSTER/$APP/$RING   # one rollout at a time per target
   script:
     - |
       set -euo pipefail
       # one file-type variable per cluster: KUBECONFIG_NORTH, ...
       eval "export KUBECONFIG=\$KUBECONFIG_$(echo "$CLUSTER" | tr a-z A-Z)"
-      DIR="$CLUSTER/$APP/$ENVIRONMENT"
-      NS=$(kubectl create --dry-run=client -f "$DIR/namespace.yaml" \
-             -o jsonpath='{.metadata.name}')
+      NS="$APP-$RING"                       # namespaces follow one convention
+      DIR="$CLUSTER/$APP/$RING"
 
-      kubectl -n "$NS" apply -f "$CLUSTER/$APP/_shared/$ENVIRONMENT/"
+      kubectl -n "$NS" apply -f "$CLUSTER/$APP/common/$RING/"
       kubectl -n "$NS" apply -f "$DIR/"
 
-      echo "$IMAGE_MATRIX" \
+      echo "$ROLLOUT_SET" \
         | jq -c '.[] | select(.image | test("@sha256"))' \
-        | while read -r e; do
-            part=$(jq -r .part <<<"$e")
-            container=$(jq -r .container <<<"$e")
-            image=$(jq -r .image <<<"$e")
+        | while read -r entry; do
+            unit=$(jq -r .unit <<<"$entry")
+            container=$(jq -r .container <<<"$entry")
+            image=$(jq -r .image <<<"$entry")
             kubectl -n "$NS" set image deployment \
-              -l "app=$APP,part=$part" "$container=$image"
+              -l "app=$APP,unit=$unit" "$container=$image"
           done
 
       for d in $(kubectl -n "$NS" get deploy -l "app=$APP" -o name); do

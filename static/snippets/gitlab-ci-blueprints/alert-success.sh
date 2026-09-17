@@ -1,8 +1,8 @@
-# end of the manifests deploy job — success only; a failure exited above
-digest=$(kubectl -n "$NS" get deploy -l "app=$APP,part=api" \
+# end of the fleet rollout job — success only; a failure exited above
+digest=$(kubectl -n "$NS" get deploy -l "app=$APP,unit=api" \
   -o jsonpath='{.items[0].spec.template.spec.containers[0].image}' \
   | sed 's/.*@sha256://' | head -c 12)
-jq -n --arg t ":large_green_circle: orders → $ENVIRONMENT on $CLUSTER" \
+jq -n --arg t ":large_green_circle: orders → $RING on $CLUSTER" \
       --arg d "api @ $digest…" --arg u "$CI_JOB_URL" \
   '{blocks:[{type:"section",text:{type:"mrkdwn",
      text:("*"+$t+"*\n"+$d+"  <"+$u+"|job>")}}]}' \

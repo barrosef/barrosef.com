@@ -1,0 +1,13 @@
+# orders/.gitlab-ci.yml — the whole file
+include:
+  - project: platform/ci-blueprints
+    ref: v2.3.0            # a tag, never main
+    file:
+      - blueprints/orders/routine.yml
+      - blueprints/orders/images.yml
+      - blueprints/orders/release.yml
+      - blueprints/orders/delivery.yml
+      - blueprints/orders/alerts.yml
+
+variables:
+  SHIP_WORKER: "true"      # units opt in one at a time

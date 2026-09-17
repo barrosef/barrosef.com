@@ -1,0 +1,20 @@
+# blueprints/orders/release.yml
+# On main it re-tags preview as live; on candidate it only resolves digests.
+release:
+  stage: release
+  image: gcr.io/go-containerregistry/crane:debug
+  script:
+    - |
+      for unit in api web worker; do
+        img="$CI_REGISTRY_IMAGE/$unit"
+        if [ "$RING" = "live" ]; then
+          digest=$(crane digest "$img:preview")   # what preview runs now
+          crane tag "$img@$digest" live           # same bytes, new name
+        else
+          digest=$(crane digest "$img:$CI_COMMIT_SHA")
+        fi
+        key=$(echo "$unit" | tr a-z A-Z)
+        echo "${key}_IMAGE=$img@$digest" >> images.env
+      done
+  artifacts:
+    reports: { dotenv: images.env }   # *_IMAGE reach the delivery jobs
