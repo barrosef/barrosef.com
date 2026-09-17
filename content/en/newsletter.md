@@ -1,6 +1,9 @@
 ---
 title: "Newsletter"
 translationKey: "newsletter"
+noindex: true
+sitemap:
+  disable: true
 description: "Get new posts by email."
 ---
 
