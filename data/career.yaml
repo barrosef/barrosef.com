@@ -59,7 +59,7 @@ profile:
 # means current. `company` and `short` may be a plain string or { en, pt-br }. The year ruler is drawn from these dates and labelled with
 # `short`, which must fit inside the segment (a handful of characters).
 roles:
-  - company: { en: "Independent consultant", pt-br: "Consultor independente" }
+  - company: { en: "Technology consultant", pt-br: "Consultor de Tecnologia" }
     short: { en: "Consulting", pt-br: "Consultoria" }
     title: { en: "Consultant — AI, cloud and product", pt-br: "Consultor — IA, nuvem e produto" }
     start: "2025-11"
