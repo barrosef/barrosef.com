@@ -1,0 +1,53 @@
+{{- define "main" }}
+{{ partial "about-header.html" . }}
+<div class="about-surface">
+  <article class="corner">
+    <div class="wrap-reading corner-text">
+      <h1 class="corner-title">{{ .Title }}</h1>
+      {{ with .Params.lede }}<p class="corner-lede">{{ . }}</p>{{ end }}
+      <div class="post-content corner-content">
+        {{ .Content }}
+      </div>
+    </div>
+    {{- with .Params.gallery }}
+    <section class="wrap gallery" aria-label="{{ i18n "gallery" }}">
+      <h2 class="gallery-title">{{ i18n "gallery" }}</h2>
+      <ul class="gallery-grid">
+        {{- range $i, $g := . }}
+        <li>
+          <a class="gallery-item" href="{{ $g.src }}" data-caption="{{ $g.caption }}">
+            <img src="{{ $g.thumb | default $g.src }}" alt="{{ $g.alt }}" loading="lazy" width="600" height="800">
+          </a>
+          {{ with $g.caption }}<p class="gallery-caption">{{ . }}</p>{{ end }}
+        </li>
+        {{- end }}
+      </ul>
+    </section>
+    <dialog class="lightbox" aria-label="{{ i18n "gallery" }}">
+      <button type="button" class="lightbox-close" aria-label="{{ i18n "close" }}">×</button>
+      <img alt="">
+      <p class="lightbox-caption"></p>
+    </dialog>
+    <script>
+      // Lightbox on the gallery: a native dialog, closed by Esc, backdrop or the button.
+      (function () {
+        var dlg = document.querySelector(".lightbox");
+        if (!dlg || !dlg.showModal) return;
+        var img = dlg.querySelector("img"), cap = dlg.querySelector(".lightbox-caption");
+        document.querySelectorAll(".gallery-item").forEach(function (a) {
+          a.addEventListener("click", function (e) {
+            e.preventDefault();
+            img.src = a.getAttribute("href");
+            img.alt = a.querySelector("img").alt;
+            cap.textContent = a.dataset.caption || "";
+            dlg.showModal();
+          });
+        });
+        dlg.querySelector(".lightbox-close").addEventListener("click", function () { dlg.close(); });
+        dlg.addEventListener("click", function (e) { if (e.target === dlg) dlg.close(); });
+      })();
+    </script>
+    {{- end }}
+  </article>
+</div>
+{{- end }}

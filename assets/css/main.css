@@ -989,3 +989,46 @@ pre.has-copy:hover .copy-btn, pre.has-copy:focus-within .copy-btn { opacity: 1; 
   .about-head-role { display: block; margin: 2px 0 0; }
   .soon-title { font-size: 32px; }
 }
+
+/* ---- Corner pages (jiu-jitsu, barbecue, …): an essay, then a gallery ---- */
+.corner { padding-bottom: 72px; }
+.corner-text { max-width: var(--reading); margin: 0 auto; padding: 64px 32px 8px; }
+.corner-title { color: var(--text-dark); font-size: 44px; margin-bottom: 14px; }
+.corner-lede { font-size: 21px; line-height: 1.5; color: var(--muted-dark); margin-bottom: 36px; }
+.corner-content { font-size: 17.5px; line-height: 1.75; }
+.corner-content p { margin-bottom: 22px; }
+.corner-content h2 { font-size: 24px; margin-top: 44px; }
+.corner-content em { font-style: italic; }
+.corner-content .drop::first-letter {
+  float: left; font-size: 64px; line-height: 0.85; font-weight: 600;
+  padding: 6px 10px 0 0; color: var(--link-dark);
+}
+
+.gallery { margin-top: 56px; }
+.gallery-title { color: var(--text-dark); font-size: 20px; margin-bottom: 20px; }
+.gallery-grid {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px;
+}
+.gallery-item { display: block; aspect-ratio: 3 / 4; overflow: hidden; background: #eef2f7; }
+.gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 240ms ease; }
+.gallery-item:hover img { transform: scale(1.03); }
+.gallery-item:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.gallery-caption { font-size: 13px; color: var(--muted-dark); margin: 8px 0 0; line-height: 1.4; }
+
+.lightbox { border: none; padding: 0; background: transparent; max-width: 92vw; max-height: 92vh; }
+.lightbox::backdrop { background: rgba(11, 22, 34, 0.92); }
+.lightbox img { display: block; max-width: 92vw; max-height: 84vh; object-fit: contain; margin: 0 auto; }
+.lightbox-caption { color: var(--muted); text-align: center; font-size: 14px; margin: 12px 0 0; }
+.lightbox-close {
+  position: fixed; top: 16px; right: 20px;
+  font: 300 32px/1 var(--font-sans); color: #fff; background: none; border: none; cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  .corner-text { padding: 40px 20px 8px; }
+  .corner-title { font-size: 34px; }
+  .corner-lede { font-size: 18px; }
+  .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (prefers-reduced-motion: reduce) { .gallery-item img { transition: none; } .gallery-item:hover img { transform: none; } }
