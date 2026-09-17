@@ -1,6 +1,6 @@
-# templates/orders/notify.yml
-notify_failure:
-  stage: notify
+# blueprints/orders/alerts.yml
+alert_failure:
+  stage: alerts
   image: alpine:3.20
   rules:
     - when: on_failure
@@ -11,7 +11,7 @@ notify_failure:
         || { echo "no SLACK_WEBHOOK_URL; skipping"; exit 0; }
       title=":red_circle: orders — failed on $CI_COMMIT_REF_NAME"
       msg=$(printf '%s' "$CI_COMMIT_MESSAGE" | head -c 300)
-      PAYLOAD=$(jq -n --arg title "$title ($TARGET_ENV)" \
+      PAYLOAD=$(jq -n --arg title "$title ($RING)" \
         --arg who "${GITLAB_USER_NAME:-?}" --arg sha "$CI_COMMIT_SHORT_SHA" \
         --arg msg "$msg" --arg url "$CI_PIPELINE_URL" '{
           blocks: [

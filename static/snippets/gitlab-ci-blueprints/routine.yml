@@ -1,0 +1,39 @@
+# blueprints/orders/routine.yml — what a branch means, for every consumer
+stages: [images, release, delivery, alerts]
+
+workflow:
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "candidate"'
+      variables: { RING: preview }
+    - if: '$CI_COMMIT_BRANCH == "main"'
+      variables: { RING: live }
+    - when: never              # anything else creates no pipeline
+
+# Infrastructure retries only. script_failure is deliberately
+# absent: a real defect would run three times and look flaky.
+default:
+  retry:
+    max: 2
+    when:
+      - runner_system_failure
+      - stuck_or_timeout_failure
+      - api_failure
+      - scheduler_failure
+
+# Shell library, pulled into jobs with `!reference [.lib, shell]`.
+.lib:
+  shell: |
+    # probe: 0 = present · 1 = absent · 2 = unknown (caller must stop)
+    probe() {   # $1=namespace $2=kind $3=name
+      for n in 1 2 3; do
+        out=$(kubectl -n "$1" get "$2" "$3" -o name 2>&1 >/dev/null) \
+          && return 0
+        case "$out" in *NotFound*) return 1 ;; esac
+        sleep $((n * 5))
+      done
+      echo "unknown: $2/$3 in $1" >&2; return 2
+    }
+    attempt() {
+      for n in 1 2 3; do "$@" && return 0; sleep $((n * 5)); done
+      return 1
+    }

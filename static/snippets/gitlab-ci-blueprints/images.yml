@@ -1,0 +1,32 @@
+# blueprints/orders/images.yml — bake one image per unit
+.bake:
+  stage: images
+  image: docker:27
+  services: [docker:27-dind]
+  rules:
+    - if: '$RING == "preview"'          # the live ring never bakes
+  variables:
+    IMAGE: $CI_REGISTRY_IMAGE/$UNIT
+  script:
+    - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" \
+        --password-stdin "$CI_REGISTRY"
+    - docker build -t "$IMAGE:$CI_COMMIT_SHA" \
+        --build-arg RING="$RING" \
+        -f "$SRC/Dockerfile" "$SRC"
+    - docker push "$IMAGE:$CI_COMMIT_SHA"
+    - docker tag "$IMAGE:$CI_COMMIT_SHA" "$IMAGE:$RING"
+    - docker push "$IMAGE:$RING"
+
+bake_api:
+  extends: .bake
+  variables: { UNIT: api, SRC: services/api }
+
+bake_web:
+  extends: .bake
+  variables: { UNIT: web, SRC: web }
+
+bake_worker:
+  extends: .bake
+  variables: { UNIT: worker, SRC: services/worker }
+  rules:
+    - if: '$RING == "preview" && $SHIP_WORKER == "true"'
