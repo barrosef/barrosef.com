@@ -1,5 +1,5 @@
 [consentText]
-other = "This site uses cookies for anonymous analytics only if you accept."
+other = "This site uses Google Analytics to count visits, anonymously, and only if you accept. Decline and nothing from Google is loaded."
 
 [consentAccept]
 other = "Accept"
@@ -186,3 +186,6 @@ other = "Photo"
 
 [cookies]
 other = "Cookies"
+
+[consentTitle]
+other = "Cookies and analytics"
