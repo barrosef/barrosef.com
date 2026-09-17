@@ -698,7 +698,7 @@ p { margin: 0 0 18px 0; }
 .project-facts dt { font-weight: 600; font-size: 14px; color: var(--link-dark); margin-bottom: 4px; }
 .project-facts dd { margin: 0 0 14px; font-size: 15.5px; line-height: 1.6; }
 .project-status { color: var(--muted-dark); }
-.project-links { margin: 16px 0 0; font-size: 15px; }
+.project-links { margin: 16px 0 0; font-size: 15px; display: flex; flex-wrap: wrap; gap: 6px 24px; }
 .project-link-path { font-family: var(--font-mono); font-size: 13px; color: var(--muted-dark); }
 .project-client { font-family: var(--font-mono); font-size: 13px; color: var(--muted-dark); }
 

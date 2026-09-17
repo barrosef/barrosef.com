@@ -108,7 +108,7 @@
               {{- range .stack }}<li>{{ . }}</li>{{ end }}
             </ul>
             <p class="project-links">
-              {{- range .links }}<a href="{{ .url }}">{{ i18n "sourceOnGitHub" }} <span class="project-link-path">{{ .label }}</span></a>{{ end }}
+              {{- range .links }}<a href="{{ .url }}">{{ if eq .kind "site" }}{{ i18n "website" }}{{ else }}{{ i18n "sourceOnGitHub" }}{{ end }} <span class="project-link-path">{{ .label }}</span></a>{{ end }}
             </p>
           </div>
         </article>
