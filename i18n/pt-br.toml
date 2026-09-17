@@ -23,7 +23,7 @@ other = "Anteriormente"
 other = "Entre em contato"
 
 [capabilities]
-other = "Em que eu consulto"
+other = "O que eu faço"
 
 [writing]
 other = "Artigos"
@@ -32,7 +32,7 @@ other = "Artigos"
 other = "Todos os artigos"
 
 [personalNote]
-other = "Há mais na vida além do trabalho — churrasco, jiu-jitsu e uma boa dose de opinião sobre liberdade."
+other = "Há mais na vida além do trabalho."
 
 [moreAboutThat]
 other = "Mais sobre isso"
@@ -166,3 +166,15 @@ other = "Fechar"
 
 [website]
 other = "Site"
+
+[latestWriting]
+other = "Últimos artigos"
+
+[minRead]
+other = "min de leitura"
+
+[readArticle]
+other = "Ler o artigo"
+
+[aboutSection]
+other = "/sobre"

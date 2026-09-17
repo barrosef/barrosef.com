@@ -23,7 +23,7 @@ other = "Previously"
 other = "Get in touch"
 
 [capabilities]
-other = "What I consult on"
+other = "What I do"
 
 [writing]
 other = "Writing"
@@ -32,7 +32,7 @@ other = "Writing"
 other = "All writing"
 
 [personalNote]
-other = "There is more to life than work — barbecue, jiu-jitsu, and a fair amount of opinion on liberty."
+other = "There is more to life than work."
 
 [moreAboutThat]
 other = "More about that"
@@ -166,3 +166,15 @@ other = "Close"
 
 [website]
 other = "Website"
+
+[latestWriting]
+other = "Latest writing"
+
+[minRead]
+other = "min read"
+
+[readArticle]
+other = "Read the article"
+
+[aboutSection]
+other = "/about"
