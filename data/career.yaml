@@ -197,24 +197,26 @@ projects:
       en: "An AI-first cockpit where a developer and Claude run a demand end to end"
       pt-br: "Um cockpit AI-first onde o desenvolvedor e o Claude conduzem uma demanda de ponta a ponta"
     period: "2026 – "
-    status: { en: "Platform under construction; the operational CLI is in daily use (v0.7.1)", pt-br: "Plataforma em construção; a CLI operacional está em uso diário (v0.7.1)" }
+    status: { en: "Under construction, with a QA environment live on GCP; the operational CLI is in daily use (v0.7.1)", pt-br: "Em construção, com um ambiente de QA no ar no GCP; a CLI operacional está em uso diário (v0.7.1)" }
     problem:
       en: "Running a software demand — environment, branch, development, pull request, delivery — is a chain of hand-offs between the developer and an AI agent that lose state at every step."
       pt-br: "Conduzir uma demanda de software — ambiente, branch, desenvolvimento, pull request, entrega — é uma cadeia de passagens de bastão entre o desenvolvedor e um agente de IA que perde estado a cada passo."
     approach:
-      en: "A Go core owns the domain, the state and a transactional event log; a Python BFF exposes REST and SSE to a React cockpit and gRPC to the CLI; the developer follows and steers from above while the agent operates the tooling underneath. Multi-tenant from the first migration, with a second factor built in before any organisation existed."
-      pt-br: "Um núcleo em Go é dono do domínio, do estado e de um log de eventos transacional; um BFF em Python expõe REST e SSE para o cockpit em React e gRPC para a CLI; o desenvolvedor acompanha e direciona de cima enquanto o agente opera o ferramental por baixo. Multi-tenant desde a primeira migração, com segundo fator construído antes de existir qualquer organização."
+      en: "A Go core owns the domain, the state and a transactional event log; a Python BFF exposes REST and SSE to a React cockpit and gRPC to the CLI; the developer follows and steers from above while the agent operates the tooling underneath. Multi-tenant from the first migration, a second factor built in before any organisation existed, and every action recorded as an event with its context and a dead-letter queue for the ones no consumer could handle."
+      pt-br: "Um núcleo em Go é dono do domínio, do estado e de um log de eventos transacional; um BFF em Python expõe REST e SSE para o cockpit em React e gRPC para a CLI; o desenvolvedor acompanha e direciona de cima enquanto o agente opera o ferramental por baixo. Multi-tenant desde a primeira migração, segundo fator construído antes de existir qualquer organização, e toda ação registrada como evento com o seu contexto, com uma fila de dead letter para os que nenhum consumidor conseguiu tratar."
     outcome:
-      en: "Twenty-six architecture decision records, a contract-first proto, and a local k3d environment that brings the whole platform up in one command."
-      pt-br: "Vinte e seis registros de decisão de arquitetura, um contrato proto-first e um ambiente k3d local que sobe a plataforma inteira em um comando."
+      en: "A QA environment on GCP: the core and the BFF on Cloud Run behind api.qa.dop-t.com, sign-in through Firebase, e-mail through SendGrid, a data VM on the free tier — all in Terraform, designed to carry no fixed monthly cost, with a smoke test that proves the chain from a real sign-in to a row in the database. The cockpit signs people up, enrols a second factor and handles invites. Twenty-three architecture decision records, a proto-first contract, a local k3d environment that brings the whole platform up in one command, and a public site at dop-t.com."
+      pt-br: "Um ambiente de QA no GCP: o núcleo e o BFF no Cloud Run atrás de api.qa.dop-t.com, login pelo Firebase, e-mail pelo SendGrid, uma VM de dados no free tier — tudo em Terraform, projetado para não ter custo fixo mensal, com um smoke test que prova a cadeia de um login real até a linha no banco. O cockpit cadastra pessoas, registra o segundo fator e trata convites. Vinte e três registros de decisão de arquitetura, um contrato proto-first, um ambiente k3d local que sobe a plataforma inteira em um comando e um site público em dop-t.com."
     components:
       - { name: "dop-app", kind: "React cockpit" }
-      - { name: "dop-api", kind: "Python BFF" }
-      - { name: "dop-core", kind: "Go core" }
-      - { name: "dop-infra", kind: "k3d · Terraform" }
+      - { name: "dop-api", kind: "Python BFF · Cloud Run" }
+      - { name: "dop-core", kind: "Go core · Cloud Run" }
+      - { name: "dop-infra", kind: "Terraform · GCP · k3d" }
       - { name: "dop-cmd", kind: "CLI v0.7.1", apart: true }   # a project of its own, not a layer
-    stack: [Go, Python, React, gRPC, NATS JetStream, PostgreSQL, Terraform, k3s, GCP, Claude]
+      - { name: "dop-t.com", kind: "site · GitHub Pages", apart: true }
+    stack: [Go, Python, React, gRPC, NATS JetStream, PostgreSQL, Terraform, Cloud Run, Firebase, k3s, GCP, Claude]
     links:
+      - { label: "dop-t.com", url: "https://dop-t.com/", kind: site }
       - { label: "github.com/barrosef/dop", url: "https://github.com/barrosef/dop" }
 
   - slug: "spartacus"
