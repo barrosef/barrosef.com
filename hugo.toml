@@ -21,8 +21,27 @@ enableRobotsTXT = true
 [outputs]
   home = ["HTML", "RSS"]
 
+# Tag pages are thin while the archive is small: crawlable, but neither
+# indexed nor listed in the sitemap. Categories stay in.
+[[cascade]]
+  [cascade.params]
+    noindex = true
+  [cascade.sitemap]
+    disable = true
+  [cascade._target]
+    kind = "term"
+    path = "/tags/**"
+[[cascade]]
+  [cascade.params]
+    noindex = true
+  [cascade.sitemap]
+    disable = true
+  [cascade._target]
+    kind = "taxonomy"
+    path = "/tags"
+
 [params]
-  description = "Technology leadership — writing on engineering, systems and liberty."
+  description = "Software architecture, AI-assisted delivery and the decisions in between — by Ed Barros. Also jiu-jitsu, barbecue and liberty."
   comments = true
 
   # The owner's professional facts live in data/career.yaml (one bilingual
@@ -69,7 +88,7 @@ enableRobotsTXT = true
 [languages]
   [languages.en]
     languageName = "English"
-    languageCode = "en-us"
+    languageCode = "en-US"
     contentDir = "content/en"
     weight = 1
     [[languages.en.menus.main]]
@@ -111,6 +130,8 @@ enableRobotsTXT = true
     languageCode = "pt-BR"
     contentDir = "content/pt-br"
     weight = 2
+    [languages.pt-br.params]
+      description = "Arquitetura de software, entrega com IA e as decisões entre as duas — por Ed Barros. Também jiu-jitsu, churrasco e liberdade."
     [[languages.pt-br.menus.main]]
       name = "Artigos"
       url = "/pt-br/artigos/"
