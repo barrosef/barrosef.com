@@ -109,3 +109,21 @@ other = "Setores em que entreguei"
 
 [clientWork]
 other = "Trabalho para cliente · código privado"
+
+[clientsLabel]
+other = "Clientes"
+
+[ownProducts]
+other = "Produtos próprios"
+
+[clientWorkGroup]
+other = "Trabalho para clientes"
+
+[clientFor]
+other = "para"
+
+[today]
+other = "hoje"
+
+[timelineHint]
+other = "Selecione um cargo para ver o detalhe"

@@ -109,3 +109,21 @@ other = "Sectors delivered in"
 
 [clientWork]
 other = "Client engagement · private code"
+
+[clientsLabel]
+other = "Clients"
+
+[ownProducts]
+other = "Own products"
+
+[clientWorkGroup]
+other = "Client work"
+
+[clientFor]
+other = "for"
+
+[today]
+other = "today"
+
+[timelineHint]
+other = "Select a role to see its detail"
