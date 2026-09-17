@@ -3,6 +3,7 @@
     <div>
       <div class="footer-name">{{ .Site.Title }}</div>
       {{ with .Site.Data.career.profile.email }}<a class="footer-email" href="mailto:{{ . }}">{{ . }}</a>{{ end }}
+      {{- if .Site.Params.analytics.ga4 }} <span class="footer-sep">·</span> <button type="button" class="footer-consent" id="consent-revisit">{{ i18n "cookies" }}</button>{{ end }}
     </div>
     {{ partial "social-icons.html" . }}
   </div>

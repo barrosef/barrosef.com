@@ -1119,3 +1119,8 @@ pre.has-copy:hover .copy-btn, pre.has-copy:focus-within .copy-btn { opacity: 1; 
   .lead { padding-right: 0; padding-bottom: 28px; border-right: none; border-bottom: 1px solid #e6ebf2; }
   .corners-list { grid-template-columns: minmax(0, 1fr); }
 }
+
+/* Footer: cookie-consent revisit */
+.footer-sep { color: var(--dim); margin: 0 4px; font-size: 14px; }
+.footer-consent { font: inherit; font-size: 14px; color: var(--muted); background: none; border: none; padding: 0; cursor: pointer; }
+.footer-consent:hover { color: var(--text); text-decoration: underline; }

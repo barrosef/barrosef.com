@@ -18,6 +18,12 @@
       localStorage.setItem("cookie-consent", "declined");
       banner.style.display = "none";
     });
+    // "Cookies" in the footer reopens the banner, so a choice is never final.
+    var revisit = document.getElementById("consent-revisit");
+    if (revisit) revisit.addEventListener("click", function () {
+      localStorage.removeItem("cookie-consent");
+      banner.style.display = "block";
+    });
   })();
 </script>
 {{- end }}
