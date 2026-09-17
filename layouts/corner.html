@@ -12,13 +12,15 @@
     {{- with .Params.gallery }}
     <section class="wrap gallery" aria-label="{{ i18n "gallery" }}">
       <h2 class="gallery-title">{{ i18n "gallery" }}</h2>
-      <ul class="gallery-grid">
+      {{- $land := eq $.Params.galleryShape "landscape" }}
+      <ul class="gallery-grid{{ if $land }} gallery-grid-landscape{{ end }}">
         {{- range $i, $g := . }}
         <li>
           <a class="gallery-item" href="{{ $g.src }}" data-caption="{{ $g.caption }}">
-            <img src="{{ $g.thumb | default $g.src }}" alt="{{ $g.alt }}" loading="lazy" width="600" height="800">
+            <img src="{{ $g.thumb | default $g.src }}" alt="{{ $g.alt }}" loading="lazy" width="{{ if $land }}800{{ else }}600{{ end }}" height="{{ if $land }}600{{ else }}800{{ end }}">
           </a>
           {{ with $g.caption }}<p class="gallery-caption">{{ . }}</p>{{ end }}
+          {{ with $g.credit }}<p class="gallery-credit">{{ i18n "photo" }}: {{ with $g.creditURL }}<a href="{{ . }}">{{ end }}{{ $g.credit }}{{ if $g.creditURL }}</a>{{ end }}</p>{{ end }}
         </li>
         {{- end }}
       </ul>
