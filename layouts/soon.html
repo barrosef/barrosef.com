@@ -1,0 +1,12 @@
+{{- define "main" }}
+{{ partial "about-header.html" . }}
+<div class="about-surface">
+  <div class="wrap soon-body">
+    <h1 class="soon-title">{{ .Title }}</h1>
+    <p class="soon-lede">{{ .Description }}</p>
+    <p class="soon-badge">{{ i18n "comingSoon" }}</p>
+    <p class="soon-text">{{ i18n "comingSoonText" }}</p>
+    {{ .Content }}
+  </div>
+</div>
+{{- end }}

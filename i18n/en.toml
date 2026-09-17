@@ -139,3 +139,21 @@ other = "Copy failed"
 
 [snippetRaw]
 other = "raw"
+
+[aboutOverview]
+other = "Overview"
+
+[comingSoon]
+other = "Coming soon"
+
+[comingSoonText]
+other = "This corner is being written. Check back, or follow the writing in the meantime."
+
+[open]
+other = "Open"
+
+[careerURL]
+other = "/about/career/"
+
+[aboutCareer]
+other = "Career"

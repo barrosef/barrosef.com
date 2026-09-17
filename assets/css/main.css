@@ -778,7 +778,7 @@ p { margin: 0 0 18px 0; }
 
 /* Printed, the about page is the CV. */
 @media print {
-  .site-header, .site-footer, .rail, .about-closing, .about-personal, .tl, script { display: none !important; }
+  .site-header, .site-footer, .rail, .about-closing, .about-personal, .about-nav, .tl, script { display: none !important; }
   .tl-js .role { display: grid; }
   body { background: #fff; color: #000; font-size: 11pt; }
   .identity { padding: 0 0 16pt; color: #000; border-bottom: 1px solid #999; }
@@ -912,3 +912,80 @@ pre.has-copy:hover .copy-btn, pre.has-copy:focus-within .copy-btn { opacity: 1; 
 .snip-raw:hover { color: var(--link-dark) !important; }
 .snip .highlight { margin: 0; }
 .snip pre { border: none !important; margin: 0 !important; }
+
+/* ---- Header dropdown (the About sub-menu) ----
+   CSS only: opens on hover and on keyboard focus within; on a phone the
+   sub-pages are reached through the tabs on the about pages instead. */
+.nav-group { position: relative; }
+.nav-sub {
+  display: none;
+  position: absolute; top: calc(100% + 14px); left: -14px;
+  min-width: 180px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 8px 0;
+  z-index: 20;
+}
+.nav-sub::before { content: ""; position: absolute; left: 0; right: 0; top: -14px; height: 14px; }
+.nav-group:hover .nav-sub, .nav-group:focus-within .nav-sub { display: block; }
+.nav-sub a { display: block; padding: 8px 16px; font-size: 14px; color: var(--muted); }
+.nav-sub a:hover { color: var(--text); background: var(--ground); }
+@media (max-width: 900px) { .nav-sub { display: none !important; } }
+
+/* ---- About section: hub, sub-nav, compact header, coming-soon ---- */
+.about-nav {
+  display: flex; flex-wrap: wrap; gap: 4px 22px;
+  margin-top: 36px; padding-top: 16px;
+  border-top: 1px solid var(--border);
+  font-size: 15px;
+}
+.about-nav a { color: var(--muted); padding: 6px 0; border-bottom: 2px solid transparent; }
+.about-nav a:hover { color: var(--text); text-decoration: none; }
+.about-nav a[aria-current="page"] { color: var(--text); border-bottom-color: var(--accent); }
+.about-nav-soon {
+  font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.04em;
+  color: var(--dim); margin-left: 4px; vertical-align: 1px;
+}
+
+.hub-body { padding-top: 56px; padding-bottom: 80px; }
+.hub-intro p { color: var(--muted-dark); font-size: 17px; max-width: 60ch; margin-bottom: 36px; }
+.hub-tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; max-width: 860px; }
+.hub-tile {
+  display: flex; flex-direction: column; gap: 8px;
+  padding: 24px; min-height: 150px;
+  border: 1px solid #c9d3e0; color: var(--text-dark) !important;
+  transition: border-color 120ms;
+}
+.hub-tile:hover { border-color: var(--link-dark); text-decoration: none; }
+.hub-tile:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.hub-tile-title { font-size: 20px; font-weight: 600; letter-spacing: -0.01em; }
+.hub-tile-desc { font-size: 15px; color: var(--muted-dark); flex: 1; }
+.hub-tile-foot { font-family: var(--font-mono); font-size: 12.5px; color: var(--link-dark); }
+.hub-tile-soon .hub-tile-foot { color: var(--muted-dark); }
+.hub-tile-soon .hub-tile-title { color: var(--muted-dark); }
+
+.about-head { padding-top: 32px; }
+.about-head-grid { display: flex; align-items: center; gap: 18px; }
+.about-head-photo { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; border: 2px solid var(--border); display: block; }
+.about-head-name { margin: 0 0 4px; font-weight: 600; font-size: 17px; }
+.about-head-role { font-family: var(--font-mono); font-size: 13px; font-weight: 400; color: var(--accent); margin-left: 8px; }
+.about-head-contact { margin: 0; font-size: 14px; }
+.about-head .about-nav { margin-top: 24px; }
+
+.soon-body { padding-top: 72px; padding-bottom: 96px; }
+.soon-lede, .soon-text { max-width: 58ch; }
+.soon-title { color: var(--text-dark); font-size: 40px; margin-bottom: 12px; }
+.soon-lede { color: var(--muted-dark); font-size: 19px; margin-bottom: 32px; }
+.soon-badge {
+  display: inline-block; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--link-dark);
+  border: 1px solid var(--link-dark); padding: 6px 12px; margin-bottom: 14px;
+}
+.soon-text { color: var(--text-dark); }
+
+@media (max-width: 900px) {
+  .hub-tiles { grid-template-columns: minmax(0, 1fr); }
+  .about-head-grid { align-items: flex-start; }
+  .about-head-role { display: block; margin: 2px 0 0; }
+  .soon-title { font-size: 32px; }
+}

@@ -4,25 +4,8 @@
 {{- $p := $c.profile }}
 {{- $months := split (i18n "monthsShort") "," }}
 
-<section class="identity">
-  <div class="wrap identity-grid">
-    <img class="identity-photo" src="{{ $p.photo }}" width="140" height="140" alt="{{ $p.name }}">
-    <div class="identity-text">
-      <h1 class="identity-name">{{ $p.name }}</h1>
-      <p class="identity-headline">{{ index $p.headline $lang }}</p>
-      <p class="identity-positioning">{{ index $p.positioning $lang }}</p>
-      <ul class="identity-contact">
-        <li>{{ index $p.location $lang }}</li>
-        <li><a href="mailto:{{ $p.email }}">{{ $p.email }}</a></li>
-        <li><a href="{{ $p.linkedin }}">LinkedIn</a></li>
-        <li><a href="{{ $p.github }}">GitHub</a></li>
-      </ul>
-      <ul class="identity-sectors" aria-label="{{ i18n "sectorsLabel" }}">
-        {{- range $p.sectors }}<li>{{ index . $lang }}</li>{{ end }}
-      </ul>
-    </div>
-  </div>
-</section>
+{{ partial "about-header.html" . }}
+<h1 class="sr-only">{{ .Title }}</h1>
 
 <div class="about-surface">
   <div class="wrap about-grid">
@@ -106,11 +89,7 @@
 
       <section id="projects" class="about-section">
         <h2>{{ i18n "aboutProjects" }}</h2>
-        {{- range $group := slice (dict "kind" "own" "label" (i18n "ownProducts")) (dict "kind" "client" "label" (i18n "clientWorkGroup")) }}
-        {{- $items := where $c.projects "kind" $group.kind }}
-        {{- with $items }}
-        <h3 class="project-group">{{ $group.label }}</h3>
-        {{- range . }}
+        {{- range where $c.projects "kind" "own" }}
         <article class="project" id="project-{{ .slug }}">
           <div class="project-arch" aria-hidden="true">
             {{- range .components }}
@@ -118,7 +97,7 @@
             {{- end }}
           </div>
           <div class="project-text">
-            <h3 class="project-title">{{ .title }}{{ with .client }} <span class="project-for">{{ i18n "clientFor" }} {{ . }}</span>{{ end }} <span class="project-period">{{ .period }}</span></h3>
+            <h3 class="project-title">{{ .title }} <span class="project-period">{{ .period }}</span></h3>
             <p class="project-tagline">{{ index .tagline $lang }}</p>
             <dl class="project-facts">
               <dt>{{ i18n "projectProblem" }}</dt><dd>{{ index .problem $lang }}</dd>
@@ -130,12 +109,9 @@
             </ul>
             <p class="project-links">
               {{- range .links }}<a href="{{ .url }}">{{ i18n "sourceOnGitHub" }} <span class="project-link-path">{{ .label }}</span></a>{{ end }}
-              {{- if eq .kind "client" }}<span class="project-client">{{ i18n "clientWork" }}</span>{{ end }}
             </p>
           </div>
         </article>
-        {{- end }}
-        {{- end }}
         {{- end }}
       </section>
 
@@ -161,11 +137,6 @@
         </dl>
       </section>
 
-      {{- with .Content }}
-      <section class="about-section about-personal">
-        {{ . }}
-      </section>
-      {{- end }}
 
     </div>
   </div>

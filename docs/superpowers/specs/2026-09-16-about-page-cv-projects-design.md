@@ -47,6 +47,13 @@ Give a recruiter or executive one page that answers "who is this, what has he do
 - **Clients are named on the consulting role**, one high-level line each, no project detail: CSP Tech, Tecnomapas, Connsoft, Factor Logistics. `roles[].clients[]` in `career.yaml`.
 - **Projects are grouped**: "Own products" (DOP, Spartacus) and "Client work" (Factor for Factor Logistics, Pipe365 Mobile for Connsoft) via `kind: own | client`; the client's name is shown after the title.
 
+## Revision 2026-09-17 (afternoon) — the about section
+
+- `/about/` is now a **section** with a hub and four sub-pages: **Career** (`/about/career/` ↔ `/pt-br/sobre/carreira/`, everything the about page used to be), **Jiu-Jitsu**, **Barbecue**, **Libertarianism** — the last three "coming soon" pages (`soon: true`, `layout: soon`). Layouts: `hub.html`, `career.html` (was `about.html`), `soon.html`; partials `about-nav.html` (tabs: Overview + sub-pages by weight) and `about-header.html` (compact identity strip on sub-pages).
+- The header's About item is a CSS-only dropdown (hover / focus-within) built from nested menu entries in `hugo.toml`; hidden under 900px, where the tabs do the job.
+- Projects list **own products only** (DOP, Spartacus); Factor and Pipe365 were removed from `career.yaml`. Client work stays as one-line citations on the consulting role.
+- Fixed in passing: `layouts/list.html` still tested `eq $lang "pt"` after the `pt-br` rename, so the PT writing index grouped nothing under Tecnologia.
+
 ## Facts the owner should check
 
 - `profile.location` is "Brasnorte, MT — Brazil" (confirmed by the owner, 2026-09-16).

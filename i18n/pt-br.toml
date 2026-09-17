@@ -139,3 +139,21 @@ other = "Falha ao copiar"
 
 [snippetRaw]
 other = "raw"
+
+[aboutOverview]
+other = "Visão geral"
+
+[comingSoon]
+other = "Em breve"
+
+[comingSoonText]
+other = "Este canto está sendo escrito. Volte depois, ou acompanhe os artigos enquanto isso."
+
+[open]
+other = "Abrir"
+
+[careerURL]
+other = "/pt-br/sobre/carreira/"
+
+[aboutCareer]
+other = "Carreira"
