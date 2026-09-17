@@ -21,6 +21,16 @@
   </div>
 </section>
 
+{{- with $p.metrics }}
+<section class="metrics-band" aria-label="{{ i18n "trackRecord" }}">
+  <ul class="wrap metrics-band-list">
+    {{- range . }}
+    <li><span class="metric-value">{{ .value }}</span><span class="metric-label">{{ index .label $lang }}</span></li>
+    {{- end }}
+  </ul>
+</section>
+{{- end }}
+
 {{- $posts := where .Site.RegularPages "Section" "in" (slice "writing" "artigos") }}
 {{- with $posts }}
 <section class="feed">
@@ -30,6 +40,7 @@
       <a class="feed-all" href="{{ i18n "writingIndexURL" }}">{{ i18n "allWriting" }} →</a>
     </div>
     {{- $lead := index . 0 }}
+    <div class="feed-grid">
     <article class="lead">
       <div class="post-meta">
         {{- with (index ($lead.GetTerms "categories") 0) }}<a class="post-meta-cat" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}
@@ -55,6 +66,7 @@
       {{- end }}
     </ol>
     {{- end }}
+    </div>
   </div>
 </section>
 {{- end }}
@@ -73,11 +85,6 @@
       </article>
       {{ end }}
     </div>
-    {{ with $p.metrics }}
-    <ul class="metrics-strip">
-      {{ range . }}<li><span class="metric-value">{{ .value }}</span><span class="metric-label">{{ index .label $lang }}</span></li>{{ end }}
-    </ul>
-    {{ end }}
     <div class="hero-actions practice-actions">
       <a class="btn btn-primary" href="{{ i18n "contactURL" }}">{{ i18n "getInTouch" }}</a>
       <a class="btn btn-ghost" href="{{ $p.linkedin }}">LinkedIn</a>
