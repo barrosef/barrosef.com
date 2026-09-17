@@ -1,0 +1,24 @@
+{{- /* A copy button on every code block in a post, progressive enhancement. */ -}}
+<script>
+  (function () {
+    if (!navigator.clipboard) return;
+    var L = { copy: {{ i18n "copy" }}, copied: {{ i18n "copied" }}, failed: {{ i18n "copyFailed" }} };
+    document.querySelectorAll(".post-content pre").forEach(function (pre) {
+      var code = pre.querySelector("code") || pre;
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "copy-btn";
+      btn.textContent = L.copy;
+      btn.setAttribute("aria-label", L.copy);
+      btn.addEventListener("click", function () {
+        navigator.clipboard.writeText(code.textContent.replace(/\n$/, "")).then(function () {
+          btn.textContent = L.copied; btn.classList.add("copy-btn-done");
+          setTimeout(function () { btn.textContent = L.copy; btn.classList.remove("copy-btn-done"); }, 1600);
+        }, function () { btn.textContent = L.failed; });
+      });
+      var snip = pre.closest(".snip");
+      var bar = snip ? snip.querySelector(".snip-bar") : null;
+      if (bar) { bar.appendChild(btn); } else { pre.classList.add("has-copy"); pre.appendChild(btn); }
+    });
+  })();
+</script>

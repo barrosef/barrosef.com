@@ -22,6 +22,13 @@ projects are separate lists; a project carries problem / approach / outcome and
 the `components` that draw its architecture strip. The phone number is
 deliberately not in it.
 
+## Code in articles
+
+Every code block in a post gets a copy button (`layouts/_partials/code-copy.html`).
+A block worth fetching lives as a real file under `static/snippets/<post>/` and is
+embedded with `{{< snippet file="<post>/<name>" lang="yaml" >}}`: the reader sees
+the file name, a *raw* link and the copy button — the site's own gists.
+
 ## Configuration knobs (`hugo.toml`)
 
 - `params.analytics.ga4` — GA4 measurement ID (loads only after cookie consent).

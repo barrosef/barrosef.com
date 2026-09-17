@@ -1,0 +1,12 @@
+# orders/.gitlab-ci.yml — the whole file
+include:
+  - project: platform/ci-templates
+    ref: v2.3.0            # a tag, never main
+    file:
+      - templates/orders/workflow.yml
+      - templates/orders/build.yml
+      - templates/orders/deploy.yml
+      - templates/orders/notify.yml
+
+variables:
+  ENABLE_WORKER: "true"    # parts opt in one at a time

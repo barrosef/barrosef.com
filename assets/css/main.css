@@ -881,3 +881,34 @@ p { margin: 0 0 18px 0; }
 .diagram { margin: 0 0 28px; }
 .diagram svg { display: block; width: 100%; height: auto; }
 .diagram figcaption { font-size: 14px; line-height: 1.5; color: var(--muted-dark); margin-top: 10px; }
+
+/* ---- Code blocks: copy button and file-backed snippets ---- */
+.post-content pre.has-copy { position: relative; }
+.copy-btn {
+  font: 500 12px/1 var(--font-sans);
+  color: var(--muted-dark);
+  background: var(--surface);
+  border: 1px solid #c9d3e0;
+  border-radius: 0;
+  padding: 5px 9px;
+  cursor: pointer;
+}
+.copy-btn:hover { color: var(--link-dark); border-color: var(--link-dark); }
+.copy-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.copy-btn-done { color: #1c6b5a; border-color: #1c6b5a; }
+pre.has-copy .copy-btn { position: absolute; top: 8px; right: 8px; opacity: 0; transition: opacity 120ms; }
+pre.has-copy:hover .copy-btn, pre.has-copy:focus-within .copy-btn { opacity: 1; }
+@media (hover: none) { pre.has-copy .copy-btn { opacity: 1; } }
+
+.snip { margin: 0 0 24px; border: 1px solid var(--border); }
+.snip-bar {
+  display: flex; align-items: center; gap: 12px;
+  padding: 7px 12px;
+  background: #e6ebf2;
+  border-bottom: 1px solid var(--border);
+}
+.snip-name { font-family: var(--font-mono); font-size: 12.5px; font-weight: 500; color: var(--text-dark); flex: 1; }
+.snip-raw { font-family: var(--font-mono); font-size: 12px; color: var(--muted-dark) !important; }
+.snip-raw:hover { color: var(--link-dark) !important; }
+.snip .highlight { margin: 0; }
+.snip pre { border: none !important; margin: 0 !important; }
