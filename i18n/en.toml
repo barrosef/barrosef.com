@@ -157,3 +157,9 @@ other = "/about/career/"
 
 [aboutCareer]
 other = "Career"
+
+[gallery]
+other = "Gallery"
+
+[close]
+other = "Close"
