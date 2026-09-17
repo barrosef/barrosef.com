@@ -2,7 +2,6 @@
 {{ $lang := .Site.Language.Lang }}
 {{ $c := .Site.Data.career }}
 {{ $p := $c.profile }}
-{{ $current := index $c.roles 0 }}
 
 {{- /* A content site with a person at the top, not a brochure with posts at
        the bottom: a compact masthead, then the writing takes the page. */}}
@@ -14,7 +13,6 @@
     <div class="masthead-text">
       <p class="masthead-kicker">{{ index $p.headline $lang }}</p>
       <h1 class="masthead-title">{{ index $p.hero $lang }}</h1>
-      <p class="masthead-role">{{ partial "l10n" (dict "v" $current.company "lang" $lang) }} · {{ index $p.location $lang }}</p>
     </div>
     <div class="masthead-actions">
       <a class="btn btn-primary" href="{{ i18n "writingIndexURL" }}">{{ i18n "allWriting" }}</a>
