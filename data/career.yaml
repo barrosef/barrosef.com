@@ -12,8 +12,8 @@ profile:
   shortName: "Ed Barros"
   photo: "/img/profile.png"
   headline:
-    en: "Software Architect & Tech Lead"
-    pt-br: "Arquiteto de Software & Tech Lead"
+    en: "Software & Solutions Architect"
+    pt-br: "Arquiteto de Software e Soluções"
   years: 23
   since: 2003
   # The homepage headline. His own closing line from the CV, not a slogan.
