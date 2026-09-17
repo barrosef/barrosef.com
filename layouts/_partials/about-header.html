@@ -1,0 +1,17 @@
+{{- /* Compact identity strip for the about sub-pages: photo, name, contact, then the sub-nav. */ -}}
+{{- $lang := .Site.Language.Lang }}
+{{- $p := .Site.Data.career.profile }}
+<section class="about-head">
+  <div class="wrap about-head-grid">
+    <a href="{{ .CurrentSection.RelPermalink }}"><img class="about-head-photo" src="{{ $p.photo }}" width="56" height="56" alt="{{ $p.name }}"></a>
+    <div>
+      <p class="about-head-name">{{ $p.name }} <span class="about-head-role">{{ index $p.headline $lang }}</span></p>
+      <ul class="identity-contact about-head-contact">
+        <li><a href="mailto:{{ $p.email }}">{{ $p.email }}</a></li>
+        <li><a href="{{ $p.linkedin }}">LinkedIn</a></li>
+        <li><a href="{{ $p.github }}">GitHub</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap">{{ partial "about-nav.html" . }}</div>
+</section>

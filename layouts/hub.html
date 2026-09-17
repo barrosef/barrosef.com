@@ -1,0 +1,40 @@
+{{- define "main" }}
+{{- $lang := .Site.Language.Lang }}
+{{- $p := .Site.Data.career.profile }}
+
+<section class="identity">
+  <div class="wrap identity-grid">
+    <img class="identity-photo" src="{{ $p.photo }}" width="140" height="140" alt="{{ $p.name }}">
+    <div class="identity-text">
+      <h1 class="identity-name">{{ $p.name }}</h1>
+      <p class="identity-headline">{{ index $p.headline $lang }}</p>
+      <p class="identity-positioning">{{ index $p.positioning $lang }}</p>
+      <ul class="identity-contact">
+        <li>{{ index $p.location $lang }}</li>
+        <li><a href="mailto:{{ $p.email }}">{{ $p.email }}</a></li>
+        <li><a href="{{ $p.linkedin }}">LinkedIn</a></li>
+        <li><a href="{{ $p.github }}">GitHub</a></li>
+      </ul>
+      <ul class="identity-sectors" aria-label="{{ i18n "sectorsLabel" }}">
+        {{- range $p.sectors }}<li>{{ index . $lang }}</li>{{ end }}
+      </ul>
+    </div>
+  </div>
+  <div class="wrap">{{ partial "about-nav.html" . }}</div>
+</section>
+
+<div class="about-surface">
+  <div class="wrap hub-body">
+    <div class="hub-intro">{{ .Content }}</div>
+    <div class="hub-tiles">
+      {{- range .RegularPages.ByWeight }}
+      <a class="hub-tile{{ if .Params.soon }} hub-tile-soon{{ end }}" href="{{ .RelPermalink }}">
+        <span class="hub-tile-title">{{ .Title }}</span>
+        <span class="hub-tile-desc">{{ .Description }}</span>
+        <span class="hub-tile-foot">{{ if .Params.soon }}{{ i18n "comingSoon" }}{{ else }}{{ i18n "open" }} →{{ end }}</span>
+      </a>
+      {{- end }}
+    </div>
+  </div>
+</div>
+{{- end }}

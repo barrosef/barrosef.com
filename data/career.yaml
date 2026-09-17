@@ -187,8 +187,8 @@ roles:
 
 # Portfolio pieces. Distinct from roles: a project carries a problem, an
 # approach and an outcome. `components` draws the architecture strip.
-# `kind: own` is a product of mine; `kind: client` is work for the named
-# client, whose code is private: no links, and no detail beyond the write-up.
+# Only `kind: own` products are listed on the site; client work is cited in
+# the consulting role's `clients`, one line each, and nowhere else.
 projects:
   - slug: "dop"
     title: "DOP"
@@ -216,58 +216,6 @@ projects:
     stack: [Go, Python, React, gRPC, NATS JetStream, PostgreSQL, Terraform, k3s, GCP, Claude]
     links:
       - { label: "github.com/barrosef/dop", url: "https://github.com/barrosef/dop" }
-
-  - slug: "factor"
-    title: "Factor"
-    kind: client
-    client: "Factor Logistics"
-    tagline:
-      en: "The driver's app and the fortnightly payroll pipeline of a last-mile logistics operation"
-      pt-br: "O app do motorista e a esteira do espelho quinzenal de uma operação de logística last-mile"
-    period: "2026 – "
-    status: { en: "Client engagement, ongoing", pt-br: "Trabalho para cliente, em andamento" }
-    problem:
-      en: "A Flutter app for drivers talked to four back ends — a black-box gateway, a NestJS logistics API, a CTE generator and a WhatsApp CRM — with no build pipeline, a release signed with the debug keystore, production secrets committed, and the knowledge of how it all fit together living in nobody's head."
-      pt-br: "Um app Flutter para motoristas falava com quatro back-ends — um gateway caixa-preta, uma API de logística em NestJS, um gerador de CT-e e um CRM de WhatsApp — sem esteira de build, com release assinado pelo keystore de debug, segredos de produção commitados e o conhecimento de como tudo se encaixava na cabeça de ninguém."
-    approach:
-      en: "Forensic analysis of every repository before touching code, written up as eleven numbered documents: the app's specification, the app-to-back-end contracts, the build and release state, a gap analysis between the two API generations. Then the work: a deploy pipeline, and an NFS-e invoicing gateway designed contract-first — the OpenAPI spec frozen and served as a mock before a line of implementation."
-      pt-br: "Análise forense de cada repositório antes de tocar em código, registrada em onze documentos numerados: a especificação do app, os contratos app–back-end, o estado de build e release, uma análise de lacunas entre as duas gerações de API. Depois o trabalho: a esteira de deploy e um gateway de emissão de NFS-e projetado contract-first — o OpenAPI congelado e servido como mock antes de qualquer linha de implementação."
-    outcome:
-      en: "An ecosystem that is documented where it was tribal, a release process that can reach the stores, and invoicing moving from a manual step to the driver's own app."
-      pt-br: "Um ecossistema documentado onde antes era tribal, um processo de release que consegue chegar às lojas e a emissão de nota saindo de um passo manual para o próprio app do motorista."
-    components:
-      - { name: "factor-mobile", kind: "Flutter" }
-      - { name: "logistics-backend", kind: "NestJS · PostgreSQL" }
-      - { name: "talkhub360-api", kind: "WhatsApp CRM · NestJS" }
-      - { name: "emissor-nfse", kind: "NFS-e gateway · OpenAPI" }
-    stack: [Flutter, NestJS, TypeScript, PHP, PostgreSQL, RabbitMQ, Kubernetes, OpenAPI, "GitHub Actions"]
-    links: []
-
-  - slug: "pipe365"
-    title: "Pipe365 Mobile"
-    kind: client
-    client: "Connsoft"
-    tagline:
-      en: "The attendant's mobile app for a WhatsApp customer-service platform"
-      pt-br: "O app do atendente para uma plataforma de atendimento via WhatsApp"
-    period: "2026"
-    status: { en: "Client engagement; Android and iOS builds on an automated EAS pipeline", pt-br: "Trabalho para cliente; builds Android e iOS em esteira EAS automatizada" }
-    problem:
-      en: "Attendants needed the web console's essential flows on the phone — chat list and filters, text and push-to-talk audio, attachments, closing and transferring a conversation, notifications — and the client wanted to validate the experience before paying for integration work."
-      pt-br: "Os atendentes precisavam dos fluxos essenciais do console web no celular — lista de chats e filtros, texto e áudio por push-to-talk, anexos, finalização e transferência de atendimento, notificações — e o cliente queria validar a experiência antes de pagar pela integração."
-    approach:
-      en: "Mock-first, with one rule: src/data/ is the only surface that touches data. An AI coding agent built every screen against an in-memory mock; a second agent later implemented the HTTP client behind the same interface; humans reviewed at the boundary. Swapping mock for real is one line."
-      pt-br: "Mock-first, com uma regra: src/data/ é a única superfície que toca dados. Um agente de codificação construiu todas as telas contra um mock em memória; um segundo agente implementou depois o cliente HTTP atrás da mesma interface; humanos revisaram na fronteira. Trocar o mock pelo real é uma linha."
-    outcome:
-      en: "A navigable app the client could hold before the API existed, then wired to it without touching a screen — with CI, EAS builds and store submission automated for both platforms."
-      pt-br: "Um app navegável que o cliente pôde segurar na mão antes de a API existir, depois ligado a ela sem tocar em uma tela — com CI, builds EAS e submissão às lojas automatizadas nas duas plataformas."
-    components:
-      - { name: "app", kind: "Expo · React Native" }
-      - { name: "src/data", kind: "mock ↔ HTTP boundary" }
-      - { name: "Pipe365 API", kind: "REST · client's" }
-      - { name: "ci", kind: "EAS · GitHub Actions" }
-    stack: [TypeScript, Expo, React Native, React Query, Zustand, EAS, "GitHub Actions", "AI agents"]
-    links: []
 
   - slug: "spartacus"
     title: "Spartacus"

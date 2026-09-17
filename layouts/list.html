@@ -1,6 +1,6 @@
 {{- define "main" }}
 {{- $lang := .Site.Language.Lang }}
-{{- $isPT := eq $lang "pt" }}
+{{- $isPT := eq $lang "pt-br" }}
 {{- $techName := cond $isPT "Tecnologia" "Technology" }}
 {{- $libName := cond $isPT "Liberdade" "Liberty" }}
 {{- $bbqName := cond $isPT "Churrasco" "Barbecue" }}

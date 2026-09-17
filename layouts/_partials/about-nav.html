@@ -1,0 +1,8 @@
+{{- /* The about section's sub-navigation: Overview, then each sub-page by weight. */ -}}
+{{- $sec := .CurrentSection }}
+<nav class="about-nav" aria-label="{{ $sec.Title }}">
+  <a href="{{ $sec.RelPermalink }}"{{ if eq . $sec }} aria-current="page"{{ end }}>{{ i18n "aboutOverview" }}</a>
+  {{- range $sec.RegularPages.ByWeight }}
+  <a href="{{ .RelPermalink }}"{{ if eq . $ }} aria-current="page"{{ end }}>{{ .Title }}{{ if .Params.soon }} <span class="about-nav-soon">{{ i18n "comingSoon" }}</span>{{ end }}</a>
+  {{- end }}
+</nav>
