@@ -4,11 +4,6 @@
 {{- $p := $c.profile }}
 {{- $months := split (i18n "monthsShort") "," }}
 
-{{- /* The ruler maps each role onto 2003 → today. Dates are "YYYY-MM"; a
-       month becomes a fraction of a year so a role that starts in December
-       is placed in December, not January. */}}
-{{- $span := sub (add (float now.Year) (div (float (sub now.Month 1)) 12.0)) (float $p.since) }}
-
 <section class="identity">
   <div class="wrap identity-grid">
     <img class="identity-photo" src="{{ $p.photo }}" width="140" height="140" alt="{{ $p.name }}">
@@ -49,33 +44,39 @@
         {{- end }}
       </section>
 
-      <section id="experience" class="about-section">
+      <section id="experience" class="about-section experience">
         <h2>{{ i18n "aboutExperience" }}</h2>
 
-        <figure class="ruler" aria-label="{{ i18n "rulerLabel" }}">
-          <div class="ruler-track">
-            {{- range $i, $r := $c.roles }}
+        {{- /* The timeline: one stake per role, oldest on the left, cards
+               alternating above and below the axis so each has room. On a
+               wide screen it selects which role the panel below shows; on
+               a phone it is hidden and the list itself becomes the timeline. */}}
+        {{- $n := len $c.roles }}
+        <div class="tl" aria-label="{{ i18n "rulerLabel" }}">
+          <ol class="tl-stakes" style="--n:{{ $n }}">
+            {{- range $j, $r := collections.Reverse $c.roles }}
+            {{- $i := sub (sub $n 1) $j }}
             {{- $st := time.AsTime (printf "%s-01" $r.start) }}
-            {{- $from := sub (add (float $st.Year) (div (float (sub (int $st.Month) 1)) 12.0)) (float $p.since) }}
-            {{- $to := $span }}
-            {{- with $r.end }}{{ $et := time.AsTime (printf "%s-01" .) }}{{ $to = sub (add (float $et.Year) (div (float (int $et.Month)) 12.0)) (float $p.since) }}{{ end }}
-            <a class="ruler-seg{{ if not $r.end }} ruler-seg-now{{ end }}" href="#role-{{ $i }}"
-               style="left:{{ printf "%.2f" (mul 100 (div $from $span)) }}%;width:{{ printf "%.2f" (mul 100 (div (sub $to $from) $span)) }}%"
-               title="{{ partial "l10n" (dict "v" $r.company "lang" $lang) }}"><span class="ruler-label">{{ partial "l10n" (dict "v" ($r.short | default $r.company) "lang" $lang) }}</span></a>
+            <li class="tl-stake {{ if eq (mod $j 2) 0 }}tl-up{{ else }}tl-down{{ end }}{{ if not $r.end }} tl-now{{ end }}">
+              <button type="button" class="tl-card" data-role="role-{{ $i }}" aria-pressed="{{ if eq $i 0 }}true{{ else }}false{{ end }}">
+                <span class="tl-dates">{{ index $months (sub (int $st.Month) 1) }} {{ $st.Year }} – {{ with $r.end }}{{ $et := time.AsTime (printf "%s-01" .) }}{{ index $months (sub (int $et.Month) 1) }} {{ $et.Year }}{{ else }}{{ i18n "today" }}{{ end }}</span>
+                <span class="tl-title">{{ index $r.title $lang }}</span>
+                <span class="tl-co">{{ partial "l10n" (dict "v" $r.company "lang" $lang) }}</span>
+              </button>
+              <span class="tl-post" aria-hidden="true"></span>
+              <span class="tl-dot" aria-hidden="true"></span>
+              <span class="tl-year" aria-hidden="true">{{ $st.Year }}</span>
+            </li>
             {{- end }}
-          </div>
-          <div class="ruler-ticks">
-            {{- range $y := seq $p.since 5 now.Year }}
-            <span style="left:{{ printf "%.2f" (mul 100 (div (float (sub $y $p.since)) $span)) }}%">{{ $y }}</span>
-            {{- end }}
-          </div>
-          <figcaption class="ruler-caption">{{ $p.years }} {{ i18n "yearsInField" }}</figcaption>
-        </figure>
+          </ol>
+          <div class="tl-axis" aria-hidden="true"><span class="tl-axis-end">{{ i18n "today" }}</span></div>
+          <p class="tl-hint">{{ i18n "timelineHint" }}</p>
+        </div>
 
         <ol class="roles">
           {{- range $i, $r := $c.roles }}
           {{- $st := time.AsTime (printf "%s-01" $r.start) }}
-          <li class="role" id="role-{{ $i }}">
+          <li class="role{{ if eq $i 0 }} role-on{{ end }}" id="role-{{ $i }}">
             <div class="role-when">
               <time datetime="{{ $r.start }}">{{ index $months (sub (int $st.Month) 1) }} {{ $st.Year }}</time>
               <span class="role-dash">–</span>
@@ -88,6 +89,12 @@
               <ul class="role-highlights">
                 {{- range $r.highlights }}<li>{{ index . $lang }}</li>{{ end }}
               </ul>
+              {{- with $r.clients }}
+              <dl class="role-clients">
+                <dt>{{ i18n "clientsLabel" }}</dt>
+                <dd><ul>{{ range . }}<li><strong>{{ .name }}</strong> — {{ index .note $lang }}</li>{{ end }}</ul></dd>
+              </dl>
+              {{- end }}
               <ul class="chips">
                 {{- range $r.stack }}<li>{{ . }}</li>{{ end }}
               </ul>
@@ -99,7 +106,11 @@
 
       <section id="projects" class="about-section">
         <h2>{{ i18n "aboutProjects" }}</h2>
-        {{- range $c.projects }}
+        {{- range $group := slice (dict "kind" "own" "label" (i18n "ownProducts")) (dict "kind" "client" "label" (i18n "clientWorkGroup")) }}
+        {{- $items := where $c.projects "kind" $group.kind }}
+        {{- with $items }}
+        <h3 class="project-group">{{ $group.label }}</h3>
+        {{- range . }}
         <article class="project" id="project-{{ .slug }}">
           <div class="project-arch" aria-hidden="true">
             {{- range .components }}
@@ -107,7 +118,7 @@
             {{- end }}
           </div>
           <div class="project-text">
-            <h3 class="project-title">{{ .title }} <span class="project-period">{{ .period }}</span></h3>
+            <h3 class="project-title">{{ .title }}{{ with .client }} <span class="project-for">{{ i18n "clientFor" }} {{ . }}</span>{{ end }} <span class="project-period">{{ .period }}</span></h3>
             <p class="project-tagline">{{ index .tagline $lang }}</p>
             <dl class="project-facts">
               <dt>{{ i18n "projectProblem" }}</dt><dd>{{ index .problem $lang }}</dd>
@@ -119,10 +130,12 @@
             </ul>
             <p class="project-links">
               {{- range .links }}<a href="{{ .url }}">{{ i18n "sourceOnGitHub" }} <span class="project-link-path">{{ .label }}</span></a>{{ end }}
-              {{- if .client }}<span class="project-client">{{ i18n "clientWork" }}</span>{{ end }}
+              {{- if eq .kind "client" }}<span class="project-client">{{ i18n "clientWork" }}</span>{{ end }}
             </p>
           </div>
         </article>
+        {{- end }}
+        {{- end }}
         {{- end }}
       </section>
 
@@ -198,6 +211,29 @@
       if (el) io.observe(el);
     });
     window.addEventListener("scroll", update, { passive: true });
+  })();
+
+  // The timeline selects which role the panel shows. Without JS every role
+  // is listed; with it, one at a time, arrow keys moving along the axis.
+  (function () {
+    var exp = document.querySelector(".experience");
+    var cards = exp ? exp.querySelectorAll(".tl-card") : [];
+    if (!cards.length) return;
+    exp.classList.add("tl-js");
+    function select(card) {
+      cards.forEach(function (c) { c.setAttribute("aria-pressed", "false"); c.parentNode.classList.remove("tl-on"); });
+      card.setAttribute("aria-pressed", "true");
+      card.parentNode.classList.add("tl-on");
+      exp.querySelectorAll(".role").forEach(function (r) { r.classList.toggle("role-on", r.id === card.dataset.role); });
+    }
+    cards.forEach(function (card, i) {
+      card.addEventListener("click", function () { select(card); });
+      card.addEventListener("keydown", function (e) {
+        var next = e.key === "ArrowRight" ? cards[i + 1] : e.key === "ArrowLeft" ? cards[i - 1] : null;
+        if (next) { e.preventDefault(); next.focus(); select(next); }
+      });
+    });
+    select(exp.querySelector('.tl-card[aria-pressed="true"]') || cards[cards.length - 1]);
   })();
 </script>
 {{- end }}

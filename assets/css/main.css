@@ -435,11 +435,11 @@ p { margin: 0 0 18px 0; }
 /* ---- About page ----
    Identity block on the navy ground, then the career on a white reading
    surface laid out as rail + body. The one visual device that is not text is
-   the year ruler at the top of Experience: every role as a segment on a
-   single 2003 → today track, so twenty-three years read as one unbroken
-   line before anyone reads a bullet. Everything else stays quiet.
+   the horizontal timeline at the top of Experience: one stake per role on a
+   shared axis, oldest on the left, the current role's dot breathing, and the
+   selected stake's detail in the panel below. Everything else stays quiet.
    Tints used on the white surface: #eef2f7 (the code-block tint, reused for
-   chips and the ruler track) and #e6ebf2 / #c9d3e0 (hairlines). */
+   chips) and #e6ebf2 / #c9d3e0 (hairlines). */
 
 .sr-only {
   position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
@@ -515,7 +515,7 @@ p { margin: 0 0 18px 0; }
 }
 .rail a:hover { color: var(--text-dark); text-decoration: none; }
 .rail a.rail-on { color: var(--link-dark); border-left-color: var(--link-dark); }
-.rail a:focus-visible, .ruler-seg:focus-visible, .identity-contact a:focus-visible {
+.rail a:focus-visible, .identity-contact a:focus-visible {
   outline: 2px solid var(--accent); outline-offset: 2px;
 }
 
@@ -532,41 +532,88 @@ p { margin: 0 0 18px 0; }
 }
 .about-personal p { color: var(--muted-dark); font-size: 15px; }
 
-/* Year ruler */
-.ruler { margin: 0 0 44px; }
-.ruler-track { position: relative; height: 22px; background: #eef2f7; }
-.ruler-seg {
-  position: absolute; top: 0; bottom: 0;
-  background: var(--link-dark);
-  opacity: 0.92;
-  box-shadow: inset 2px 0 0 var(--surface);
-  overflow: hidden;
-  display: flex; align-items: center;
-  padding-left: 8px;
+/* The timeline. One stake per role on a shared axis, oldest on the left;
+   cards alternate above and below so each gets twice its column's width.
+   The current role's dot breathes. Selecting a card shows that role in the
+   panel below (the .roles list), one at a time once the script has run. */
+.tl { position: relative; margin: 8px 0 40px; }
+.tl-stakes {
+  list-style: none; margin: 0; padding: 0;
+  display: grid;
+  grid-template-columns: repeat(var(--n), minmax(0, 1fr));
+  padding: 0 60px;   /* half a card minus half a column, so the end cards stay inside */
 }
-.ruler-seg:nth-child(even) { opacity: 0.75; }
-.ruler-seg-now, .ruler-seg:hover, .ruler-seg:focus-visible { opacity: 1; }
-.ruler-seg:hover { text-decoration: none; }
-/* A segment shorter than its label shows no label — the tooltip and the
-   list below still name it. Container query so the rule follows the
-   segment's real width, not a guess about the viewport. */
-.ruler-seg { container-type: inline-size; }
-@container (max-width: 44px) { .ruler-label { display: none; } }
-.ruler-label {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 500;
-  color: #fff;
-  white-space: nowrap;
-  letter-spacing: 0.02em;
+.tl-stake {
+  position: relative;
+  display: grid;
+  grid-template-rows: 128px 26px 14px 22px 26px 128px;
+  grid-template-areas: "up" "post-up" "axis" "year" "post-down" "down";
+  justify-items: center;
 }
-.ruler-ticks {
-  position: relative; height: 24px;
-  font-family: var(--font-mono); font-size: 12px; color: var(--muted-dark);
+.tl-card {
+  position: absolute; z-index: 2;
+  left: 50%; transform: translateX(-50%);   /* centred on the dot; wider than its column on purpose */
+  width: 150px;
+  margin: 0; padding: 10px 12px;
+  text-align: left;
+  font: inherit; color: inherit;
+  background: var(--surface);
+  border: 1px solid #c9d3e0;
+  border-radius: 0;
+  cursor: pointer;
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
 }
-.ruler-ticks span { position: absolute; top: 6px; transform: translateX(-50%); }
-.ruler-ticks span:first-child { transform: none; }
-.ruler-caption { font-size: 14px; color: var(--muted-dark); }
+.tl-up .tl-card { bottom: 216px; }    /* the five rows below the "up" row */
+.tl-down .tl-card { top: 216px; }     /* the five rows above the "down" row */
+.tl-card:hover { border-color: var(--link-dark); transform: translate(-50%, -1px); }
+.tl-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.tl-card[aria-pressed="true"] {
+  border-color: var(--link-dark);
+  box-shadow: 0 6px 18px -8px rgba(29, 78, 137, 0.45), inset 3px 0 0 var(--link-dark);
+}
+.tl-dates { display: block; font-family: var(--font-mono); font-size: 11px; color: var(--muted-dark); margin-bottom: 4px; white-space: nowrap; }
+.tl-title { display: block; font-weight: 600; font-size: 13.5px; line-height: 1.3; color: var(--text-dark); }
+.tl-co { display: block; font-size: 12.5px; color: var(--muted-dark); margin-top: 2px; }
+.tl-post { width: 0; border-left: 1px solid #c9d3e0; }
+.tl-up .tl-post { grid-area: post-up; height: 100%; }
+.tl-down .tl-post { grid-area: post-down; height: 100%; }
+.tl-on .tl-post { border-left-color: var(--link-dark); }
+.tl-dot {
+  grid-area: axis; align-self: center;
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--surface); border: 2px solid var(--link-dark);
+  position: relative; z-index: 1;
+}
+.tl-on .tl-dot { background: var(--link-dark); }
+.tl-now .tl-dot::after {
+  content: ""; position: absolute; inset: -6px; border-radius: 50%;
+  border: 1px solid var(--link-dark); opacity: 0.5;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .tl-now .tl-dot::after { animation: tl-breathe 2.6s ease-in-out infinite; }
+  @keyframes tl-breathe { 0%, 100% { transform: scale(0.85); opacity: 0.55; } 50% { transform: scale(1.25); opacity: 0.1; } }
+}
+.tl-year { grid-area: year; align-self: start; font-family: var(--font-mono); font-size: 11px; color: var(--muted-dark); padding-top: 4px; }
+.tl-axis {
+  position: absolute; left: 0; right: 0;
+  top: calc(128px + 26px + 7px);
+  border-top: 1px solid #c9d3e0;
+}
+.tl-axis::after {
+  content: ""; position: absolute; right: 0; top: -4px;
+  border: 4px solid transparent; border-left: 6px solid #c9d3e0; border-right: 0;
+}
+.tl-axis-end {
+  position: absolute; right: 0; top: -20px;
+  font-family: var(--font-mono); font-size: 11px; color: var(--muted-dark);
+}
+.tl-hint { margin: 0; font-size: 13px; color: var(--muted-dark); text-align: center; }
+
+/* Once the script runs, the list is a panel showing one role. */
+.tl-js .role { display: none; }
+.tl-js .role.role-on { display: grid; border-top: none; padding-top: 0; animation: role-in 220ms ease; }
+@keyframes role-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .tl-js .role.role-on { animation: none; } }
 
 /* Roles */
 .roles { list-style: none; margin: 0; padding: 0; }
@@ -592,6 +639,12 @@ p { margin: 0 0 18px 0; }
 .role-sector { font-size: 14px; color: var(--muted-dark) !important; margin-bottom: 14px; }
 .role-highlights { margin: 0 0 16px; padding-left: 18px; font-size: 15.5px; line-height: 1.6; }
 .role-highlights li { margin-bottom: 6px; }
+
+.role-clients { margin: 0 0 16px; }
+.role-clients dt { font-weight: 600; font-size: 14px; color: var(--link-dark); margin-bottom: 6px; }
+.role-clients dd { margin: 0; }
+.role-clients ul { list-style: none; margin: 0; padding: 0; font-size: 15px; line-height: 1.55; }
+.role-clients li { margin-bottom: 4px; }
 
 .chips { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
 .chips li {
@@ -628,7 +681,14 @@ p { margin: 0 0 18px 0; }
 .arch-block.arch-apart::before { display: none; }
 .arch-name { display: block; font-family: var(--font-mono); font-size: 13px; font-weight: 500; }
 .arch-kind { display: block; font-size: 12px; color: var(--muted-dark); }
+.project-group {
+  font-size: 15px; font-weight: 600; color: var(--muted-dark);
+  margin: 40px 0 8px; padding-bottom: 8px; border-bottom: 1px solid #e6ebf2;
+}
+.project-group:first-of-type { margin-top: 0; }
+.project-group + .project { border-top: none; padding-top: 20px; }
 .project-title { font-size: 24px; margin-bottom: 6px; }
+.project-for { font-size: 15px; font-weight: 400; color: var(--muted-dark); margin-left: 6px; }
 .project-period {
   font-family: var(--font-mono); font-size: 13px; font-weight: 400;
   color: var(--muted-dark); margin-left: 8px; letter-spacing: 0;
@@ -687,7 +747,19 @@ p { margin: 0 0 18px 0; }
   .rail a { padding: 14px 10px; border-left: none; border-bottom: 2px solid transparent; white-space: nowrap; font-size: 14px; }
   .rail a.rail-on { border-bottom-color: var(--link-dark); }
   .about-section { scroll-margin-top: 64px; }
-  .role { grid-template-columns: minmax(0, 1fr); gap: 6px; padding: 24px 0; }
+  .tl { display: none; }
+  .tl-js .role { display: grid; }
+  .tl-js .role.role-on { animation: none; }
+  .roles { position: relative; padding-left: 28px; }
+  .roles::before { content: ""; position: absolute; left: 8px; top: 8px; bottom: 8px; border-left: 1px solid #c9d3e0; }
+  .role { grid-template-columns: minmax(0, 1fr); gap: 6px; padding: 24px 0; border-top: none; position: relative; }
+  .role::before {
+    content: ""; position: absolute; left: -25px; top: 30px;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--surface); border: 2px solid var(--link-dark);
+  }
+  .role:first-child::before { background: var(--link-dark); }
+  .role:first-child { padding-top: 24px; }
   .role-when { padding-top: 0; }
   .project { grid-template-columns: minmax(0, 1fr); gap: 20px; padding: 28px 0; }
   .project-arch { order: 2; flex-direction: row; flex-wrap: wrap; gap: 8px; padding-top: 0; }
@@ -699,13 +771,6 @@ p { margin: 0 0 18px 0; }
   .about-closing-text { font-size: 20px; }
 }
 
-@media (max-width: 600px) {
-  /* Segments get too narrow to carry a name; the ticks and the list below
-     still tell the story. */
-  .ruler-label { display: none; }
-  .ruler-track { height: 14px; }
-}
-
 @media (max-width: 480px) {
   .rail { margin: 0 -20px; padding: 0 12px; }
   .identity-contact { gap: 4px 16px; font-size: 14px; }
@@ -713,7 +778,8 @@ p { margin: 0 0 18px 0; }
 
 /* Printed, the about page is the CV. */
 @media print {
-  .site-header, .site-footer, .rail, .about-closing, .about-personal, script { display: none !important; }
+  .site-header, .site-footer, .rail, .about-closing, .about-personal, .tl, script { display: none !important; }
+  .tl-js .role { display: grid; }
   body { background: #fff; color: #000; font-size: 11pt; }
   .identity { padding: 0 0 16pt; color: #000; border-bottom: 1px solid #999; }
   .identity-grid { grid-template-columns: 96px 1fr; gap: 20pt; }
@@ -726,7 +792,7 @@ p { margin: 0 0 18px 0; }
   .about-section { margin-bottom: 20pt; }
   .about-section > h2 { border-bottom-color: #999; }
   .role, .project, .arch-block { break-inside: avoid; }
-  .ruler-seg, .chips li, .ruler-track { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .chips li { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
   .chips li { border: 1px solid #bbb; background: none; }
   .about-body a { color: #000; }
 }

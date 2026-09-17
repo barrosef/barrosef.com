@@ -70,9 +70,19 @@ roles:
         pt-br: "Assessoro empresas na adoção de IA na forma como constroem software — engenharia assistida por agentes, com as especificações, os portões de revisão e a cadência de entrega que a tornam confiável em vez de experimental."
       - en: "Cloud infrastructure on AWS and GCP: environments designed for the load they will actually carry, automated end to end, with the trade-offs written down."
         pt-br: "Infraestrutura em nuvem na AWS e no GCP: ambientes projetados para a carga real, automatizados de ponta a ponta, com os trade-offs documentados."
-      - en: "IT product development from the first specification to a shipped product — architecture, team and operating cadence. DOP and Spartacus, below, come from this period."
-        pt-br: "Desenvolvimento de produtos de TI da primeira especificação ao produto entregue — arquitetura, time e cadência operacional. DOP e Spartacus, abaixo, são deste período."
+      - en: "IT product development from the first specification to a shipped product — architecture, team and operating cadence. My own products, DOP and Spartacus, come from this period."
+        pt-br: "Desenvolvimento de produtos de TI da primeira especificação ao produto entregue — arquitetura, time e cadência operacional. Meus próprios produtos, DOP e Spartacus, são deste período."
     stack: [Claude, "AI agents", AWS, GCP, Kubernetes, Terraform, Python, Go, Java, React]
+    # Clients, at a deliberately high level: one line each, no project detail.
+    clients:
+      - name: "CSP Tech"
+        note: { en: "an AI-first delivery workflow, from the ticket to the pull request, across a multi-repository platform", pt-br: "um fluxo de entrega AI-first, do card ao pull request, em uma plataforma multirrepositório" }
+      - name: "Tecnomapas"
+        note: { en: "cloud infrastructure and delivery pipelines for geospatial environmental platforms serving state agencies", pt-br: "infraestrutura em nuvem e esteiras de entrega para plataformas ambientais geoespaciais de órgãos estaduais" }
+      - name: "Connsoft"
+        note: { en: "the mobile app of a WhatsApp customer-service platform", pt-br: "o aplicativo móvel de uma plataforma de atendimento via WhatsApp" }
+      - name: "Factor Logistics"
+        note: { en: "the driver's app and payroll pipeline of a last-mile logistics operation", pt-br: "o app do motorista e a esteira de pagamento de uma operação de logística last-mile" }
 
   - company: "Sogni Sports"
     short: "Sogni"
@@ -177,11 +187,12 @@ roles:
 
 # Portfolio pieces. Distinct from roles: a project carries a problem, an
 # approach and an outcome. `components` draws the architecture strip.
-# `client: true` marks work for a client whose code is private: no links,
-# product name only, no client company named.
+# `kind: own` is a product of mine; `kind: client` is work for the named
+# client, whose code is private: no links, and no detail beyond the write-up.
 projects:
   - slug: "dop"
     title: "DOP"
+    kind: own
     tagline:
       en: "An AI-first cockpit where a developer and Claude run a demand end to end"
       pt-br: "Um cockpit AI-first onde o desenvolvedor e o Claude conduzem uma demanda de ponta a ponta"
@@ -208,7 +219,8 @@ projects:
 
   - slug: "factor"
     title: "Factor"
-    client: true
+    kind: client
+    client: "Factor Logistics"
     tagline:
       en: "The driver's app and the fortnightly payroll pipeline of a last-mile logistics operation"
       pt-br: "O app do motorista e a esteira do espelho quinzenal de uma operação de logística last-mile"
@@ -233,7 +245,8 @@ projects:
 
   - slug: "pipe365"
     title: "Pipe365 Mobile"
-    client: true
+    kind: client
+    client: "Connsoft"
     tagline:
       en: "The attendant's mobile app for a WhatsApp customer-service platform"
       pt-br: "O app do atendente para uma plataforma de atendimento via WhatsApp"
@@ -258,6 +271,7 @@ projects:
 
   - slug: "spartacus"
     title: "Spartacus"
+    kind: own
     tagline:
       en: "Web back office and mobile app for a martial-arts social project in Brasnorte, Mato Grosso"
       pt-br: "Backoffice web e aplicativo móvel para um projeto social de artes marciais em Brasnorte, Mato Grosso"

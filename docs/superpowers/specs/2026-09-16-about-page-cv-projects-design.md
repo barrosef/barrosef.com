@@ -41,11 +41,16 @@ Give a recruiter or executive one page that answers "who is this, what has he do
 - `company` and `short` in `roles[]` may be bilingual maps; `layouts/_partials/l10n.html` resolves either shape.
 - Ruler labels hide via a container query when a segment is narrower than 44px (the current consulting segment).
 
+## Revision 2026-09-17
+
+- **The year ruler is gone; a horizontal timeline replaces it.** One stake per role on a shared axis, oldest on the left, cards alternating above and below the axis (each card is wider than its column, positioned absolutely and centred on its dot), the start year under each dot, the current role's dot breathing (reduced-motion respected). A card is a button: selecting it shows that role in the panel below, one at a time once the script runs (`.tl-js`); arrow keys move along the axis. Without JS, on a phone (< 900px) and in print, every role is listed — on a phone the list itself carries a vertical spine with dots.
+- **Clients are named on the consulting role**, one high-level line each, no project detail: CSP Tech, Tecnomapas, Connsoft, Factor Logistics. `roles[].clients[]` in `career.yaml`.
+- **Projects are grouped**: "Own products" (DOP, Spartacus) and "Client work" (Factor for Factor Logistics, Pipe365 Mobile for Connsoft) via `kind: own | client`; the client's name is shown after the title.
+
 ## Facts the owner should check
 
 - `profile.location` is "Brasnorte, MT — Brazil" (confirmed by the owner, 2026-09-16).
 - Project periods come from first commits (Spartacus 2025-11, DOP 2026-05); Spartacus is described as in production on the strength of the July 2026 Play Store testing marathon.
-- Naming the client products (Factor, Pipe365) publicly is assumed acceptable; the client companies are not named.
 - Metrics: 23 years, 7 sectors, 2 teams (MP-MT and Sogni Sports). No number was invented; a "states integrated with PJe" figure was dropped because the CV does not give one.
 
 ## Verification
