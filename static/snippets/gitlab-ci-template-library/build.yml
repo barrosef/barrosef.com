@@ -1,0 +1,32 @@
+# templates/orders/build.yml
+.build:
+  stage: build
+  image: docker:27
+  services: [docker:27-dind]
+  rules:
+    - if: '$TARGET_ENV == "staging"'     # production never builds
+  variables:
+    IMAGE: $CI_REGISTRY_IMAGE/$PART
+  script:
+    - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" \
+        --password-stdin "$CI_REGISTRY"
+    - docker build -t "$IMAGE:$CI_COMMIT_SHA" \
+        --build-arg TARGET_ENV="$TARGET_ENV" \
+        -f "$CONTEXT/Dockerfile" "$CONTEXT"
+    - docker push "$IMAGE:$CI_COMMIT_SHA"
+    - docker tag "$IMAGE:$CI_COMMIT_SHA" "$IMAGE:$TARGET_ENV"
+    - docker push "$IMAGE:$TARGET_ENV"
+
+build_api:
+  extends: .build
+  variables: { PART: api, CONTEXT: services/api }
+
+build_web:
+  extends: .build
+  variables: { PART: web, CONTEXT: web }
+
+build_worker:
+  extends: .build
+  variables: { PART: worker, CONTEXT: services/worker }
+  rules:
+    - if: '$TARGET_ENV == "staging" && $ENABLE_WORKER == "true"'

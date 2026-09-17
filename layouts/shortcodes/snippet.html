@@ -1,0 +1,20 @@
+{{- /*
+  A code block backed by a real file under static/snippets/, so the reader
+  can copy it, open it raw, or fetch it with curl — the site's own gists.
+
+    {{< snippet file="gitlab-ci-template-library/workflow.yml" lang="yaml" >}}
+
+  `file` is relative to static/snippets/; `lang` defaults to the extension.
+  The copy button is added by the site script (see extend_footer.html).
+*/ -}}
+{{- $file := .Get "file" -}}
+{{- $lang := .Get "lang" | default (path.Ext $file | strings.TrimPrefix ".") -}}
+{{- $path := printf "static/snippets/%s" $file -}}
+{{- $src := os.ReadFile $path -}}
+<div class="snip">
+  <div class="snip-bar">
+    <span class="snip-name">{{ path.Base $file }}</span>
+    <a class="snip-raw" href="{{ printf "/snippets/%s" $file }}" download>{{ i18n "snippetRaw" }}</a>
+  </div>
+  {{ highlight (strings.TrimSuffix "\n" $src) $lang "" }}
+</div>

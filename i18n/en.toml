@@ -127,3 +127,15 @@ other = "today"
 
 [timelineHint]
 other = "Select a role to see its detail"
+
+[copy]
+other = "Copy"
+
+[copied]
+other = "Copied"
+
+[copyFailed]
+other = "Copy failed"
+
+[snippetRaw]
+other = "raw"

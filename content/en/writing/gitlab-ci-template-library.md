@@ -36,20 +36,7 @@ single JSON variable, and that boundary is what keeps both sides simple.
 
 ## The consumer: a dozen lines
 
-```yaml
-# orders/.gitlab-ci.yml — the whole file
-include:
-  - project: platform/ci-templates
-    ref: v2.3.0            # a tag, never main
-    file:
-      - templates/orders/workflow.yml
-      - templates/orders/build.yml
-      - templates/orders/deploy.yml
-      - templates/orders/notify.yml
-
-variables:
-  ENABLE_WORKER: "true"    # parts opt in one at a time
-```
+{{< snippet file="gitlab-ci-template-library/orders.gitlab-ci.yml" lang="yaml" >}}
 
 The `ref` is a tag. `main` is for trying a change in one app before you cut
 `v2.4.0` and move the others. The file list is explicit on purpose: **the
@@ -66,47 +53,7 @@ one.
 
 ### workflow.yml: what a branch means
 
-```yaml
-# templates/orders/workflow.yml
-stages: [build, promote, deploy, notify]
-
-workflow:
-  rules:
-    - if: '$CI_COMMIT_BRANCH == "release"'
-      variables: { TARGET_ENV: staging }
-    - if: '$CI_COMMIT_BRANCH == "main"'
-      variables: { TARGET_ENV: production }
-    - when: never              # anything else creates no pipeline
-
-# Infrastructure retries only. script_failure is deliberately
-# absent: a real defect would run three times and look flaky.
-default:
-  retry:
-    max: 2
-    when:
-      - runner_system_failure
-      - stuck_or_timeout_failure
-      - api_failure
-      - scheduler_failure
-
-# Shell helpers, pulled into jobs with `!reference [.sh, helpers]`.
-.sh:
-  helpers: |
-    # 0 = exists · 1 = does not exist · 2 = could not tell
-    k8s_exists() {   # $1=namespace $2=kind $3=name
-      for attempt in 1 2 3; do
-        err=$(kubectl -n "$1" get "$2" "$3" -o name 2>&1 >/dev/null) \
-          && return 0
-        case "$err" in *NotFound*) return 1 ;; esac
-        sleep $((attempt * 5))
-      done
-      echo "undetermined: $2/$3 in $1" >&2; return 2
-    }
-    with_retry() {
-      for a in 1 2 3; do "$@" && return 0; sleep $((a * 5)); done
-      return 1
-    }
-```
+{{< snippet file="gitlab-ci-template-library/workflow.yml" lang="yaml" >}}
 
 Three decisions live here and nowhere else. **A branch maps to exactly one
 environment**, and a branch that maps to nothing creates no pipeline — `when:
@@ -121,40 +68,7 @@ tell is its own answer, and the caller aborts on it.
 
 ### build.yml: one hidden job, one concrete job per part
 
-```yaml
-# templates/orders/build.yml
-.build:
-  stage: build
-  image: docker:27
-  services: [docker:27-dind]
-  rules:
-    - if: '$TARGET_ENV == "staging"'     # production never builds
-  variables:
-    IMAGE: $CI_REGISTRY_IMAGE/$PART
-  script:
-    - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" \
-        --password-stdin "$CI_REGISTRY"
-    - docker build -t "$IMAGE:$CI_COMMIT_SHA" \
-        --build-arg TARGET_ENV="$TARGET_ENV" \
-        -f "$CONTEXT/Dockerfile" "$CONTEXT"
-    - docker push "$IMAGE:$CI_COMMIT_SHA"
-    - docker tag "$IMAGE:$CI_COMMIT_SHA" "$IMAGE:$TARGET_ENV"
-    - docker push "$IMAGE:$TARGET_ENV"
-
-build_api:
-  extends: .build
-  variables: { PART: api, CONTEXT: services/api }
-
-build_web:
-  extends: .build
-  variables: { PART: web, CONTEXT: web }
-
-build_worker:
-  extends: .build
-  variables: { PART: worker, CONTEXT: services/worker }
-  rules:
-    - if: '$TARGET_ENV == "staging" && $ENABLE_WORKER == "true"'
-```
+{{< snippet file="gitlab-ci-template-library/build.yml" lang="yaml" >}}
 
 The base job does the work; each concrete job is three variables. They run in
 parallel, since nothing in `build_web` depends on `build_api`. Every image is
@@ -164,30 +78,7 @@ promotion step will read.
 
 ### deploy.yml: the hand-off
 
-```yaml
-# templates/orders/deploy.yml
-.trigger:
-  stage: deploy
-  rules:
-    - if: '$TARGET_ENV =~ /^(staging|production)$/'
-  trigger:
-    project: platform/manifests
-    strategy: depend          # wait for the child; inherit its result
-    forward: { pipeline_variables: true }
-  variables:
-    APP: orders
-    ENVIRONMENT: $TARGET_ENV
-    SOURCE_SHA: $CI_COMMIT_SHA
-    IMAGE_MATRIX: |
-      [
-        {"part":"api",    "container":"api",    "image":"$API_REF"},
-        {"part":"web",    "container":"web",    "image":"$WEB_REF"},
-        {"part":"worker", "container":"worker", "image":"$WORKER_REF"}
-      ]
-
-deploy_north: { extends: .trigger, variables: { CLUSTER: north } }
-deploy_south: { extends: .trigger, variables: { CLUSTER: south } }
-```
+{{< snippet file="gitlab-ci-template-library/deploy.yml" lang="yaml" >}}
 
 `strategy: depend` makes the parent wait for the child and fail if it fails —
 the app pipeline's badge tells the truth about the deploy, not just the build.
@@ -202,28 +93,7 @@ else to update a deployment.
 
 <figure class="diagram"><svg viewBox="0 0 760 274" role="img" aria-label="Two lanes: the release branch builds, pushes and rolls out to staging; the main branch skips the build, re-tags the staging digest as production and rolls that out." xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, system-ui, sans-serif" color="#16233a"><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker><marker id="arrow-accent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1d4e89"/></marker></defs><text x="20" y="40" text-anchor="start" font-size="11" font-weight="600" fill="currentColor">branch release → staging</text><text x="20" y="170" text-anchor="start" font-size="11" font-weight="600" fill="currentColor">branch main → production</text><line x1="20" y1="126" x2="740" y2="126" stroke="#c9d3e0" stroke-dasharray="3 4"/><rect x="60" y="50" width="140" height="50" fill="#fff" stroke="currentColor" stroke-width="1"/><text x="130.0" y="72.0" text-anchor="middle" font-size="12" font-weight="600" fill="currentColor">build</text><text x="130.0" y="87.0" text-anchor="middle" font-size="10.5" fill="#5d6b7d" font-family="IBM Plex Mono, ui-monospace, monospace">3 parts</text><line x1="202" y1="75" x2="228" y2="75" stroke="currentColor" stroke-width="1.2" marker-end="url(#arrow)"/><rect x="230" y="50" width="140" height="50" fill="#fff" stroke="currentColor" stroke-width="1"/><text x="300.0" y="72.0" text-anchor="middle" font-size="12" font-weight="600" fill="currentColor">push</text><text x="300.0" y="87.0" text-anchor="middle" font-size="10.5" fill="#5d6b7d" font-family="IBM Plex Mono, ui-monospace, monospace">:&lt;sha&gt; · :staging</text><line x1="372" y1="75" x2="398" y2="75" stroke="currentColor" stroke-width="1.2" marker-end="url(#arrow)"/><rect x="400" y="50" width="140" height="50" fill="#fff" stroke="currentColor" stroke-width="1"/><text x="470.0" y="72.0" text-anchor="middle" font-size="12" font-weight="600" fill="currentColor">trigger</text><text x="470.0" y="87.0" text-anchor="middle" font-size="10.5" fill="#5d6b7d" font-family="IBM Plex Mono, ui-monospace, monospace">matrix :&lt;sha&gt;</text><line x1="542" y1="75" x2="568" y2="75" stroke="currentColor" stroke-width="1.2" marker-end="url(#arrow)"/><rect x="570" y="50" width="140" height="50" fill="#fff" stroke="currentColor" stroke-width="1"/><text x="640.0" y="72.0" text-anchor="middle" font-size="12" font-weight="600" fill="currentColor">rollout</text><text x="640.0" y="87.0" text-anchor="middle" font-size="10.5" fill="#5d6b7d" font-family="IBM Plex Mono, ui-monospace, monospace">staging</text><rect x="60" y="180" width="140" height="50" fill="#fff" stroke="currentColor" stroke-width="1" stroke-dasharray="5 4"/><text x="130.0" y="202.0" text-anchor="middle" font-size="12" font-weight="400" fill="#5d6b7d">no build</text><text x="130.0" y="217.0" text-anchor="middle" font-size="10.5" fill="#5d6b7d" font-family="IBM Plex Mono, ui-monospace, monospace">stage skipped</text><rect x="230" y="180" width="140" height="50" fill="#fff" stroke="#1d4e89" stroke-width="1"/><text x="300.0" y="202.0" text-anchor="middle" font-size="12" font-weight="600" fill="#1d4e89">promote</text><text x="300.0" y="217.0" text-anchor="middle" font-size="10.5" fill="#5d6b7d" font-family="IBM Plex Mono, ui-monospace, monospace">crane tag</text><rect x="400" y="180" width="140" height="50" fill="#fff" stroke="currentColor" stroke-width="1"/><text x="470.0" y="202.0" text-anchor="middle" font-size="12" font-weight="600" fill="currentColor">trigger</text><text x="470.0" y="217.0" text-anchor="middle" font-size="10.5" fill="#5d6b7d" font-family="IBM Plex Mono, ui-monospace, monospace">matrix @digest</text><rect x="570" y="180" width="140" height="50" fill="#fff" stroke="currentColor" stroke-width="1"/><text x="640.0" y="202.0" text-anchor="middle" font-size="12" font-weight="600" fill="currentColor">rollout</text><text x="640.0" y="217.0" text-anchor="middle" font-size="10.5" fill="#5d6b7d" font-family="IBM Plex Mono, ui-monospace, monospace">production</text><line x1="202" y1="205" x2="228" y2="205" stroke="currentColor" stroke-width="1.2" stroke-dasharray="5 4" marker-end="url(#arrow)"/><line x1="372" y1="205" x2="398" y2="205" stroke="currentColor" stroke-width="1.2" marker-end="url(#arrow)"/><line x1="542" y1="205" x2="568" y2="205" stroke="currentColor" stroke-width="1.2" marker-end="url(#arrow)"/><polyline points="300.0,102 300.0,178" fill="none" stroke="#1d4e89" stroke-width="1.2" marker-end="url(#arrow-accent)"/><text x="308.0" y="144" text-anchor="start" font-size="10.5" fill="#1d4e89" font-family="IBM Plex Mono, ui-monospace, monospace">same digest</text><text x="308.0" y="158" text-anchor="start" font-size="10" font-weight="400" fill="#1d4e89" font-family="IBM Plex Mono, ui-monospace, monospace">:staging → :production</text><text x="20" y="262" text-anchor="start" font-size="10.5" font-weight="400" fill="#5d6b7d">Production never builds. It promotes the image that already ran in staging, by digest, and rolls that out.</text></svg><figcaption>Staging builds; production promotes. The main branch re-tags the staging digest and deploys it — the bytes that passed staging are the bytes in production.</figcaption></figure>
 
-```yaml
-# templates/orders/promote.yml
-# On main it re-tags; on release it only resolves the digests.
-promote:
-  stage: promote
-  image: gcr.io/go-containerregistry/crane:debug
-  script:
-    - |
-      for part in api web worker; do
-        img="$CI_REGISTRY_IMAGE/$part"
-        if [ "$TARGET_ENV" = "production" ]; then
-          digest=$(crane digest "$img:staging")   # what staging runs
-          crane tag "$img@$digest" production     # same bytes, new name
-        else
-          digest=$(crane digest "$img:$CI_COMMIT_SHA")
-        fi
-        name=$(echo "$part" | tr a-z A-Z)
-        echo "${name}_REF=$img@$digest" >> refs.env
-      done
-  artifacts:
-    reports: { dotenv: refs.env }   # *_REF reach the trigger jobs
-```
+{{< snippet file="gitlab-ci-template-library/promote.yml" lang="yaml" >}}
 
 The `main` branch skips the build stage entirely. Rebuilding from the same
 commit would *probably* produce the same image; promoting by digest produces
@@ -247,48 +117,7 @@ platform/manifests/
         └── production/
 ```
 
-```yaml
-# platform/manifests/.gitlab-ci.yml
-workflow:
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "pipeline"'   # an app pipeline fired it
-    - if: '$CI_PIPELINE_SOURCE == "web"'        # or someone pressed Run
-    - when: never
-
-deploy:
-  stage: deploy
-  image: bitnami/kubectl:1.31
-  resource_group: $CLUSTER-$ENVIRONMENT-$APP   # one rollout per target
-  script:
-    - |
-      set -euo pipefail
-      # one file-type variable per cluster: KUBECONFIG_NORTH, ...
-      eval "export KUBECONFIG=\$KUBECONFIG_$(echo "$CLUSTER" | tr a-z A-Z)"
-      DIR="$CLUSTER/$APP/$ENVIRONMENT"
-      NS=$(kubectl create --dry-run=client -f "$DIR/namespace.yaml" \
-             -o jsonpath='{.metadata.name}')
-
-      kubectl -n "$NS" apply -f "$CLUSTER/$APP/_shared/$ENVIRONMENT/"
-      kubectl -n "$NS" apply -f "$DIR/"
-
-      echo "$IMAGE_MATRIX" \
-        | jq -c '.[] | select(.image | test("@sha256"))' \
-        | while read -r e; do
-            part=$(jq -r .part <<<"$e")
-            container=$(jq -r .container <<<"$e")
-            image=$(jq -r .image <<<"$e")
-            kubectl -n "$NS" set image deployment \
-              -l "app=$APP,part=$part" "$container=$image"
-          done
-
-      for d in $(kubectl -n "$NS" get deploy -l "app=$APP" -o name); do
-        kubectl -n "$NS" rollout status "$d" --timeout=10m || {
-          kubectl -n "$NS" describe "$d"
-          kubectl -n "$NS" logs "$d" --all-containers --tail=100 || true
-          exit 1
-        }
-      done
-```
+{{< snippet file="gitlab-ci-template-library/manifests.gitlab-ci.yml" lang="yaml" >}}
 
 Four things are doing the real work here.
 
@@ -314,55 +143,12 @@ the job at 2 a.m. should not need cluster access to see why.
 
 ## Telling someone
 
-```yaml
-# templates/orders/notify.yml
-notify_failure:
-  stage: notify
-  image: alpine:3.20
-  rules:
-    - when: on_failure
-  script:
-    - apk add --no-cache curl jq >/dev/null
-    - |
-      [ -n "${SLACK_WEBHOOK_URL:-}" ] \
-        || { echo "no SLACK_WEBHOOK_URL; skipping"; exit 0; }
-      title=":red_circle: orders — failed on $CI_COMMIT_REF_NAME"
-      msg=$(printf '%s' "$CI_COMMIT_MESSAGE" | head -c 300)
-      PAYLOAD=$(jq -n --arg title "$title ($TARGET_ENV)" \
-        --arg who "${GITLAB_USER_NAME:-?}" --arg sha "$CI_COMMIT_SHORT_SHA" \
-        --arg msg "$msg" --arg url "$CI_PIPELINE_URL" '{
-          blocks: [
-            { type: "header",
-              text: { type: "plain_text", text: $title } },
-            { type: "section", fields: [
-                { type: "mrkdwn", text: ("*Author*\n" + $who) },
-                { type: "mrkdwn", text: ("*Commit*\n`" + $sha + "`") } ] },
-            { type: "section",
-              text: { type: "mrkdwn", text: $msg } },
-            { type: "actions", elements: [
-                { type: "button", url: $url,
-                  text: { type: "plain_text", text: "Open pipeline" } } ] }
-          ] }')
-      curl -sS -o /dev/null -w "slack %{http_code}\n" -X POST \
-           -H 'Content-type: application/json' \
-           -d "$PAYLOAD" "$SLACK_WEBHOOK_URL"
-```
+{{< snippet file="gitlab-ci-template-library/notify.yml" lang="yaml" >}}
 
 On failure, always: branch, environment, author, commit, one button. On
 success, one line from the deploy job with the digest that went live:
 
-```bash
-# end of the manifests deploy job — success only; a failure exited above
-digest=$(kubectl -n "$NS" get deploy -l "app=$APP,part=api" \
-  -o jsonpath='{.items[0].spec.template.spec.containers[0].image}' \
-  | sed 's/.*@sha256://' | head -c 12)
-jq -n --arg t ":large_green_circle: orders → $ENVIRONMENT on $CLUSTER" \
-      --arg d "api @ $digest…" --arg u "$CI_JOB_URL" \
-  '{blocks:[{type:"section",text:{type:"mrkdwn",
-     text:("*"+$t+"*\n"+$d+"  <"+$u+"|job>")}}]}' \
-  | curl -sS -o /dev/null -X POST -H 'Content-type: application/json' \
-         -d @- "$SLACK_WEBHOOK_URL" || true
-```
+{{< snippet file="gitlab-ci-template-library/notify-success.sh" lang="bash" >}}
 
 The webhook URL is a masked, protected CI/CD variable on the consumer
 project; a project without one simply logs that it skipped the notification.

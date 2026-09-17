@@ -127,3 +127,15 @@ other = "hoje"
 
 [timelineHint]
 other = "Selecione um cargo para ver o detalhe"
+
+[copy]
+other = "Copiar"
+
+[copied]
+other = "Copiado"
+
+[copyFailed]
+other = "Falha ao copiar"
+
+[snippetRaw]
+other = "raw"

@@ -1,3 +1,4 @@
+{{- if .IsPage }}{{ partial "code-copy.html" . }}{{ end }}
 {{- if .Site.Params.analytics.ga4 }}
 <div id="cookie-consent" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:100;padding:16px;text-align:center;background:var(--panel);border-top:1px solid var(--border);color:var(--text);">
   <span>{{ i18n "consentText" }}</span>

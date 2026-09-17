@@ -1,0 +1,39 @@
+# templates/orders/workflow.yml
+stages: [build, promote, deploy, notify]
+
+workflow:
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "release"'
+      variables: { TARGET_ENV: staging }
+    - if: '$CI_COMMIT_BRANCH == "main"'
+      variables: { TARGET_ENV: production }
+    - when: never              # anything else creates no pipeline
+
+# Infrastructure retries only. script_failure is deliberately
+# absent: a real defect would run three times and look flaky.
+default:
+  retry:
+    max: 2
+    when:
+      - runner_system_failure
+      - stuck_or_timeout_failure
+      - api_failure
+      - scheduler_failure
+
+# Shell helpers, pulled into jobs with `!reference [.sh, helpers]`.
+.sh:
+  helpers: |
+    # 0 = exists · 1 = does not exist · 2 = could not tell
+    k8s_exists() {   # $1=namespace $2=kind $3=name
+      for attempt in 1 2 3; do
+        err=$(kubectl -n "$1" get "$2" "$3" -o name 2>&1 >/dev/null) \
+          && return 0
+        case "$err" in *NotFound*) return 1 ;; esac
+        sleep $((attempt * 5))
+      done
+      echo "undetermined: $2/$3 in $1" >&2; return 2
+    }
+    with_retry() {
+      for a in 1 2 3; do "$@" && return 0; sleep $((a * 5)); done
+      return 1
+    }

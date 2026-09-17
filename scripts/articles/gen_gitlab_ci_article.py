@@ -451,6 +451,28 @@ jq -n --arg t ":large_green_circle: orders → $ENVIRONMENT on $CLUSTER" \\
          -d @- "$SLACK_WEBHOOK_URL" || true
 ```'''
 
+# ---------------------------------------------------------------- snippets as files
+# Each block above is written under static/snippets/<article>/ and the article
+# embeds it with the snippet shortcode, so readers get copy, raw and curl.
+SNIP_DIR = SITE.parent / "static/snippets/gitlab-ci-template-library"
+SNIP_DIR.mkdir(parents=True, exist_ok=True)
+
+def snippet(name, block, lang):
+    body = block.strip()
+    assert body.startswith("```") and body.endswith("```"), name
+    body = body.split("\n", 1)[1].rsplit("\n", 1)[0]
+    (SNIP_DIR / name).write_text(body + "\n")
+    return f'{{{{< snippet file="gitlab-ci-template-library/{name}" lang="{lang}" >}}}}'
+
+Y_CONSUMER  = snippet("orders.gitlab-ci.yml",    Y_CONSUMER,  "yaml")
+Y_WORKFLOW  = snippet("workflow.yml",            Y_WORKFLOW,  "yaml")
+Y_BUILD     = snippet("build.yml",               Y_BUILD,     "yaml")
+Y_DEPLOY    = snippet("deploy.yml",              Y_DEPLOY,    "yaml")
+Y_PROMOTE   = snippet("promote.yml",             Y_PROMOTE,   "yaml")
+Y_MANIFESTS = snippet("manifests.gitlab-ci.yml", Y_MANIFESTS, "yaml")
+Y_NOTIFY    = snippet("notify.yml",              Y_NOTIFY,    "yaml")
+Y_SUCCESS   = snippet("notify-success.sh",       Y_SUCCESS,   "bash")
+
 # ---------------------------------------------------------------- article bodies
 def article_en(f1, f2, f3):
     return f'''---
