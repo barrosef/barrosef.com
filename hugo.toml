@@ -31,7 +31,7 @@ enableRobotsTXT = true
   # Google Analytics 4 measurement ID (G-XXXXXXXXXX). The tag loads only after
   # the visitor accepts the cookie banner; "Cookies" in the footer reopens it.
   [params.analytics]
-    ga4 = ""
+    ga4 = "G-TED882VY3R"
 
   # Google Search Console: the content of the HTML-tag verification method.
   # (Verifying the domain by DNS TXT at the registrar needs nothing here.)
