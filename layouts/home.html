@@ -61,7 +61,7 @@
         <div class="feed-item-body">
           {{ partial "post-meta" . }}
           <h3 class="feed-item-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
-          <p class="feed-item-desc">{{ .Description }}</p>
+          <p class="feed-item-desc">{{ .Description | truncate 170 }}</p>
         </div>
       </li>
       {{- end }}
