@@ -29,6 +29,14 @@ A block worth fetching lives as a real file under `static/snippets/<post>/` and 
 embedded with `{{< snippet file="<post>/<name>" lang="yaml" >}}`: the reader sees
 the file name, a *raw* link and the copy button — the site's own gists.
 
+## Covers
+
+Every post shows a cover on the home page: `cover:` in the front matter (any
+path under `static/`, e.g. a photo) or, by default, the vector drawn for it at
+`static/img/covers/<translationKey>.svg` — no text, shared by both languages
+(`layouts/_partials/post-cover.html`). A new post without either simply shows
+no image. Categories render as coloured badges keyed by slug in `main.css`.
+
 ## Social cards (`og:image`)
 
 Every post gets its own 1200×630 card at `static/og/<translationKey>.<lang>.png`,

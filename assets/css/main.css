@@ -1076,23 +1076,38 @@ pre.has-copy:hover .copy-btn, pre.has-copy:focus-within .copy-btn { opacity: 1; 
 .feed-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 28px; flex-wrap: wrap; }
 .feed-title { font-size: 15px; font-weight: 600; letter-spacing: 0.02em; color: var(--muted-dark); margin: 0; }
 .feed-all { font-family: var(--font-mono); font-size: 13px; color: var(--link-dark); }
-.post-meta { display: flex; flex-wrap: wrap; gap: 6px 14px; font-family: var(--font-mono); font-size: 12.5px; color: var(--muted-dark); margin-bottom: 10px; }
-.post-meta-cat { color: var(--link-dark); letter-spacing: 0.06em; text-transform: uppercase; font-size: 11.5px; font-weight: 500; }
-.feed-grid { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 56px; align-items: start; }
-.lead { padding-right: 56px; border-right: 1px solid #e6ebf2; }
-.lead-title { font-size: 40px; line-height: 1.1; letter-spacing: -0.02em; margin: 0 0 16px; }
+.post-meta { display: flex; flex-wrap: nowrap; align-items: center; gap: 10px; font-family: var(--font-mono); font-size: 12px; color: var(--muted-dark); margin-bottom: 10px; white-space: nowrap; overflow: hidden; }
+/* The category badge: one colour per subject, keyed by the category's slug in
+   both languages. Tint for the ground, the full colour for the text. */
+.badge { display: inline-block; padding: 2px 9px; border-radius: 999px; font-family: var(--font-sans); font-size: 11px; font-weight: 600; letter-spacing: 0.02em; line-height: 1.5; color: var(--badge, var(--link-dark)); background: var(--badge-bg, #e7eef8); text-decoration: none; }
+.badge:hover { text-decoration: none; filter: brightness(0.92); }
+.badge[data-cat="technology"], .badge[data-cat="tecnologia"] { --badge: #1d4e89; --badge-bg: #e3ecf8; }
+.badge[data-cat="liberty"], .badge[data-cat="liberdade"] { --badge: #8a3b12; --badge-bg: #fbe9dc; }
+.badge[data-cat="barbecue"], .badge[data-cat="churrasco"] { --badge: #7a1f1f; --badge-bg: #f9e1e1; }
+.badge[data-cat="jiu-jitsu"] { --badge: #1f6b47; --badge-bg: #dff1e7; }
+.feed-grid { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 48px; align-items: start; }
+.lead { padding-right: 48px; border-right: 1px solid #e6ebf2; }
+.lead::after { content: ""; display: block; clear: both; }
+/* The cover floats left so the title, the summary and the link wrap beside and
+   then under it — the column fills instead of leaving air below the text. */
+.lead-cover { float: left; width: 46%; max-width: 360px; margin: 4px 26px 8px 0; border-radius: 10px; overflow: hidden; background: #0b1622; }
+.lead-cover img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
+.lead-title { font-size: 30px; line-height: 1.12; letter-spacing: -0.02em; margin: 0 0 14px; }
 .lead-title a { color: var(--text-dark); }
 .lead-title a:hover { color: var(--link-dark); text-decoration: none; }
-.lead-desc { font-size: 18px; line-height: 1.6; color: var(--muted-dark); max-width: 62ch; margin: 0 0 18px; }
+.lead-desc { font-size: 17px; line-height: 1.6; color: var(--muted-dark); margin: 0 0 16px; }
 .lead-more { font-weight: 500; color: var(--link-dark); }
 .feed-list { list-style: none; margin: 0; padding: 0; }
-.feed-list .post-meta { margin-bottom: 6px; }
-.feed-item { padding: 0 0 22px; margin-bottom: 22px; border-bottom: 1px solid #e6ebf2; }
+.feed-list .post-meta { margin-bottom: 5px; font-size: 11.5px; gap: 8px; }
+.feed-item { display: flex; gap: 14px; align-items: flex-start; padding: 0 0 18px; margin-bottom: 18px; border-bottom: 1px solid #e6ebf2; }
 .feed-item:last-child { border-bottom: none; margin-bottom: 0; }
-.feed-item-title { font-size: 20px; line-height: 1.25; letter-spacing: -0.01em; margin: 0 0 6px; }
+.feed-item-cover { flex: 0 0 96px; border-radius: 8px; overflow: hidden; background: #0b1622; }
+.feed-item-cover img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
+.feed-item-body { min-width: 0; }
+.feed-item-title { font-size: 16.5px; line-height: 1.3; letter-spacing: -0.01em; margin: 0 0 5px; }
 .feed-item-title a { color: var(--text-dark); }
 .feed-item-title a:hover { color: var(--link-dark); text-decoration: none; }
-.feed-item-desc { font-size: 14.5px; line-height: 1.5; color: var(--muted-dark); margin: 0; }
+.feed-item-desc { font-size: 13px; line-height: 1.5; color: var(--muted-dark); margin: 0; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 
 .practice { padding-top: 64px; padding-bottom: 64px; }
 .practice-head { margin-bottom: 28px; }
@@ -1115,7 +1130,8 @@ pre.has-copy:hover .copy-btn, pre.has-copy:focus-within .copy-btn { opacity: 1; 
   .masthead-actions { grid-column: 1 / -1; justify-content: flex-start; }
   .metrics-band-list { flex-direction: column; gap: 6px; }
   .metrics-band-list li { border-right: none; margin-right: 0; padding-right: 0; }
-  .lead-title { font-size: 30px; }
+  .lead-title { font-size: 26px; }
+  .lead-cover { float: none; width: 100%; max-width: none; margin: 0 0 16px; }
   .feed-grid { grid-template-columns: minmax(0, 1fr); gap: 32px; }
   .lead { padding-right: 0; padding-bottom: 28px; border-right: none; border-bottom: 1px solid #e6ebf2; }
   .corners-list { grid-template-columns: minmax(0, 1fr); }
