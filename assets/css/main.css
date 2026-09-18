@@ -999,7 +999,8 @@ pre.has-copy:hover .copy-btn, pre.has-copy:focus-within .copy-btn { opacity: 1; 
 .corner-content p { margin-bottom: 22px; }
 .corner-content h2 { font-size: 24px; margin-top: 44px; }
 .corner-content em { font-style: italic; }
-.corner-content .drop::first-letter {
+/* The drop cap: the corner pages and any essay that opens with <p class="drop">. */
+.post-content .drop::first-letter {
   float: left; font-size: 64px; line-height: 0.85; font-weight: 600;
   padding: 6px 10px 0 0; color: var(--link-dark);
 }
