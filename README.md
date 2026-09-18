@@ -29,6 +29,15 @@ A block worth fetching lives as a real file under `static/snippets/<post>/` and 
 embedded with `{{< snippet file="<post>/<name>" lang="yaml" >}}`: the reader sees
 the file name, a *raw* link and the copy button — the site's own gists.
 
+## Social cards (`og:image`)
+
+Every post gets its own 1200×630 card at `static/og/<translationKey>.<lang>.png`,
+rendered by `python3 scripts/gen_og_images.py` (Pillow + fontTools; the site's
+own Plex fonts) and committed. `head.html` uses it when the file exists, a page's
+`image:` front matter overrides it, and everything else falls back to
+`static/og-default.png`. CI fails a post without a card; a retitled post needs
+the script re-run.
+
 ## Configuration knobs (`hugo.toml`)
 
 - `params.analytics.ga4` — GA4 measurement ID (loads only after cookie consent).
