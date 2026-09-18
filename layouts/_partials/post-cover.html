@@ -1,0 +1,10 @@
+{{- /*
+  A post's cover image URL, or "" when it has none.
+
+  `cover:` in the front matter wins (a photo, a screenshot — any path under
+  static/). Otherwise the vector cover drawn for the post, one per
+  translationKey so both languages share it: static/img/covers/<key>.svg.
+*/ -}}
+{{- $key := .Params.translationKey -}}
+{{- $drawn := printf "/img/covers/%s.svg" $key -}}
+{{- if .Params.cover }}{{ .Params.cover }}{{ else if and $key (fileExists (printf "static%s" $drawn)) }}{{ $drawn }}{{ end -}}

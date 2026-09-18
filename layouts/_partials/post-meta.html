@@ -1,0 +1,9 @@
+{{- /*
+  One line: the category as a coloured badge, the date, the reading time.
+  The badge's colour comes from data-cat (the category's slug), see main.css.
+*/ -}}
+<div class="post-meta">
+  {{- with (index (.GetTerms "categories") 0) }}<a class="badge" data-cat="{{ .LinkTitle | urlize }}" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}
+  <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date | time.Format "2 Jan 2006" }}</time>
+  <span>{{ .ReadingTime }} min</span>
+</div>

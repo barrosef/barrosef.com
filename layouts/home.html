@@ -42,11 +42,10 @@
     {{- $lead := index . 0 }}
     <div class="feed-grid">
     <article class="lead">
-      <div class="post-meta">
-        {{- with (index ($lead.GetTerms "categories") 0) }}<a class="post-meta-cat" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}
-        <time datetime="{{ $lead.Date.Format "2006-01-02" }}">{{ $lead.Date | time.Format ":date_long" }}</time>
-        <span>{{ $lead.ReadingTime }} {{ i18n "minRead" }}</span>
-      </div>
+      {{- with partial "post-cover" $lead }}
+      <a class="lead-cover" href="{{ $lead.RelPermalink }}" tabindex="-1" aria-hidden="true"><img src="{{ . }}" alt="" width="800" height="600" loading="lazy"></a>
+      {{- end }}
+      {{ partial "post-meta" $lead }}
       <h3 class="lead-title"><a href="{{ $lead.RelPermalink }}">{{ $lead.Title }}</a></h3>
       <p class="lead-desc">{{ $lead.Description }}</p>
       <a class="lead-more" href="{{ $lead.RelPermalink }}">{{ i18n "readArticle" }} →</a>
@@ -56,13 +55,14 @@
     <ol class="feed-list">
       {{- range . }}
       <li class="feed-item">
-        <div class="post-meta">
-          {{- with (index (.GetTerms "categories") 0) }}<a class="post-meta-cat" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}
-          <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date | time.Format ":date_long" }}</time>
-          <span>{{ .ReadingTime }} {{ i18n "minRead" }}</span>
+        {{- with partial "post-cover" . }}
+        <a class="feed-item-cover" href="{{ $.RelPermalink }}" tabindex="-1" aria-hidden="true"><img src="{{ . }}" alt="" width="800" height="600" loading="lazy"></a>
+        {{- end }}
+        <div class="feed-item-body">
+          {{ partial "post-meta" . }}
+          <h3 class="feed-item-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+          <p class="feed-item-desc">{{ .Description }}</p>
         </div>
-        <h3 class="feed-item-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
-        <p class="feed-item-desc">{{ .Description }}</p>
       </li>
       {{- end }}
     </ol>
