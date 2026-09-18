@@ -52,20 +52,11 @@
     </article>
     {{- /* Two beside the lead: a third leaves the lead column short of the sidebar. */}}
     {{- with first 2 (after 1 .) }}
-    <ol class="feed-list">
+    <div class="feed-list">
       {{- range . }}
-      <li class="feed-item">
-        {{- with partial "post-cover" . }}
-        <a class="feed-item-cover" href="{{ $.RelPermalink }}" tabindex="-1" aria-hidden="true"><img src="{{ . }}" alt="" width="800" height="600" loading="lazy"></a>
-        {{- end }}
-        <div class="feed-item-body">
-          {{ partial "post-meta" . }}
-          <h3 class="feed-item-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
-          <p class="feed-item-desc">{{ .Description | truncate 170 }}</p>
-        </div>
-      </li>
+      {{ partial "post-card.html" . }}
       {{- end }}
-    </ol>
+    </div>
     {{- end }}
     </div>
   </div>
