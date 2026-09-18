@@ -284,19 +284,6 @@ p { margin: 0 0 18px 0; }
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 32px;
 }
-.post-card-cat {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--link-dark);
-  margin-bottom: 10px;
-}
-.post-card-title { margin-bottom: 8px; }
-.post-card-title a { color: var(--text-dark); }
-.post-card-title a:hover { text-decoration: underline; }
-.post-card-desc { color: var(--muted-dark); font-size: 15px; margin: 0; }
 
 .personal-note {
   padding-top: 40px;
@@ -1098,10 +1085,12 @@ pre.has-copy:hover .copy-btn, pre.has-copy:focus-within .copy-btn { opacity: 1; 
 .lead-desc { font-size: 17px; line-height: 1.6; color: var(--muted-dark); margin: 0 0 16px; }
 .lead-more { font-weight: 500; color: var(--link-dark); }
 .feed-list { list-style: none; margin: 0; padding: 0; }
-.feed-list .post-meta { margin-bottom: 5px; font-size: 11.5px; gap: 8px; }
+.feed-item .post-meta { margin-bottom: 5px; font-size: 11px; gap: 8px; }
+.feed-item .badge { padding: 1px 7px; font-size: 10.5px; }
 /* Same shape as the lead, smaller: the thumbnail floats left and the meta,
    title and summary wrap beside it, then run on under it. */
 .feed-item { padding: 0 0 18px; margin-bottom: 18px; border-bottom: 1px solid #e6ebf2; }
+.featured-grid .feed-item { padding: 0; margin: 0; border-bottom: none; }
 .feed-item::after { content: ""; display: block; clear: both; }
 .feed-item:last-child { border-bottom: none; margin-bottom: 0; }
 .feed-item-cover { float: left; width: 104px; margin: 3px 14px 6px 0; border-radius: 8px; overflow: hidden; background: #0b1622; }

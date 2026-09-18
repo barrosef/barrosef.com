@@ -1,5 +1,15 @@
-<article class="post-card">
-  <div class="post-card-cat">{{ with (index (.GetTerms "categories") 0) }}{{ .LinkTitle }}{{ end }}</div>
-  <h3 class="post-card-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
-  {{ with .Description }}<p class="post-card-desc">{{ . }}</p>{{ end }}
+{{- /*
+  A post in a list: the same shape as the home's sidebar item. The cover
+  floats left; badge, date and minutes on one line; title; a truncated
+  summary that runs beside the cover and then under it.
+*/ -}}
+<article class="feed-item">
+  {{- with partial "post-cover" . }}
+  <a class="feed-item-cover" href="{{ $.RelPermalink }}" tabindex="-1" aria-hidden="true"><img src="{{ . }}" alt="" width="800" height="600" loading="lazy"></a>
+  {{- end }}
+  <div class="feed-item-body">
+    {{ partial "post-meta" . }}
+    <h3 class="feed-item-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+    {{ with .Description }}<p class="feed-item-desc">{{ . | truncate 170 }}</p>{{ end }}
+  </div>
 </article>
