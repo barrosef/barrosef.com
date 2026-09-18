@@ -51,7 +51,8 @@
       <p class="lead-desc">{{ $lead.Description }}</p>
       <a class="lead-more" href="{{ $lead.RelPermalink }}">{{ i18n "readArticle" }} →</a>
     </article>
-    {{- with after 1 . }}
+    {{- /* Two beside the lead: a third leaves the lead column short of the sidebar. */}}
+    {{- with first 2 (after 1 .) }}
     <ol class="feed-list">
       {{- range . }}
       <li class="feed-item">

@@ -3,265 +3,289 @@
 from pathlib import Path
 
 SITE = Path(__file__).resolve().parents[2] / "content"
-ACCENT = "#1d4e89"
-MUTED = "#5d6b7d"
-HAIR = "#c9d3e0"
-TINT = "#eef2f7"
-MONO = ' font-family="IBM Plex Mono, ui-monospace, monospace"'
 
-# ---------------------------------------------------------------- helpers
-def box(x, y, w, h, title, sub=None, fill="#fff", stroke="currentColor", dash=False, bold=True, tcolor="currentColor", sub_mono=True):
-    d = ' stroke-dasharray="5 4"' if dash else ""
-    out = f'<rect x="{x}" y="{y}" width="{w}" height="{h}" fill="{fill}" stroke="{stroke}" stroke-width="1"{d}/>'
+# ---------------------------------------------------------------- drawing primitives
+# The column renders at ~600px, so the canvas is 720 wide and labels are
+# 12.5–14px: legible at the size people actually read them. One memorable
+# element per figure (the navy domain); everything else white cards on soft
+# zones. Legends live in the figcaption, not inside the picture.
+NAVY = "#1d4e89"
+NAVY_DEEP = "#173d6e"
+INK = "#16233a"
+MUTED = "#5d6b7d"
+ZONE = "#eef2f7"
+ZONE_LINE = "#d5dde8"
+CARD_LINE = "#b9c5d4"
+FORBID = "#b3261e"
+SANS = "IBM Plex Sans, system-ui, sans-serif"
+MONO_F = "IBM Plex Mono, ui-monospace, monospace"
+
+def T(x, y, text, size=13, color=INK, anchor="start", weight=400, mono=False, italic=False):
+    ff = f' font-family="{MONO_F}"' if mono else ""
+    it = ' font-style="italic"' if italic else ""
+    return f'<text x="{x}" y="{y}" text-anchor="{anchor}" font-size="{size}" font-weight="{weight}" fill="{color}"{ff}{it}>{text}</text>'
+
+def zone(x, y, w, h, title=None, fill=ZONE, line=ZONE_LINE, dash=False):
+    d = ' stroke-dasharray="6 5"' if dash else ""
+    out = f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="10" fill="{fill}" stroke="{line}" stroke-width="1"{d}/>'
+    if title:
+        out += T(x + 16, y + 24, title, size=12.5, color=MUTED, weight=600)
+    return out
+
+def card(x, y, w, h, title, sub=None, fill="#fff", line=CARD_LINE, tcolor=INK, scolor=MUTED, sub_mono=False, dash=False, weight=600, size=13):
+    d = ' stroke-dasharray="6 5"' if dash else ""
+    out = f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="6" fill="{fill}" stroke="{line}" stroke-width="1.2"{d}/>'
     cx = x + w / 2
     if sub:
-        out += f'<text x="{cx}" y="{y + h/2 - 3}" text-anchor="middle" font-size="12" font-weight="{600 if bold else 400}" fill="{tcolor}">{title}</text>'
-        out += f'<text x="{cx}" y="{y + h/2 + 12}" text-anchor="middle" font-size="10.5" fill="{MUTED}"{MONO if sub_mono else ""}>{sub}</text>'
+        out += T(cx, y + h / 2 - 3, title, size=size, color=tcolor, anchor="middle", weight=weight)
+        out += T(cx, y + h / 2 + 14, sub, size=11, color=scolor, anchor="middle", mono=sub_mono)
     else:
-        out += f'<text x="{cx}" y="{y + h/2 + 4}" text-anchor="middle" font-size="12" font-weight="{600 if bold else 400}" fill="{tcolor}">{title}</text>'
+        out += T(cx, y + h / 2 + 5, title, size=size, color=tcolor, anchor="middle", weight=weight)
     return out
 
-def arrow(x1, y1, x2, y2, label=None, lx=None, ly=None, color="currentColor", dash=False, anchor="middle", mono=True):
-    d = ' stroke-dasharray="5 4"' if dash else ""
-    m = "arrow-accent" if color == ACCENT else "arrow"
-    out = f'<line x1="{x1}" y1="{y1}" x2="{x2}" y2="{y2}" stroke="{color}" stroke-width="1.2"{d} marker-end="url(#{m})"/>'
-    if label:
-        lx = (x1 + x2) / 2 if lx is None else lx
-        ly = (y1 + y2) / 2 - 6 if ly is None else ly
-        out += f'<text x="{lx}" y="{ly}" text-anchor="{anchor}" font-size="10.5" fill="{color if color == ACCENT else MUTED}"{MONO if mono else ""}>{label}</text>'
-    return out
+def chip(x, y, text, w=None, fill="#fff", line=CARD_LINE, color=INK, size=11):
+    w = w or int(len(text) * size * 0.62 + 18)
+    return (f'<rect x="{x}" y="{y}" width="{w}" height="22" rx="11" fill="{fill}" stroke="{line}" stroke-width="1"/>'
+            + T(x + w / 2, y + 15, text, size=size, color=color, anchor="middle", mono=True)), w
 
-def elbow(points, label=None, lx=None, ly=None, color="currentColor", dash=False, anchor="middle", head=True):
-    d = ' stroke-dasharray="5 4"' if dash else ""
-    m = "arrow-accent" if color == ACCENT else "arrow"
-    pts = " ".join(f"{x},{y}" for x, y in points)
+def link(pts, color=INK, dash=False, head=True, width=1.6):
+    d = ' stroke-dasharray="6 5"' if dash else ""
+    m = {INK: "h-ink", NAVY: "h-navy", FORBID: "h-forbid", MUTED: "h-muted"}.get(color, "h-ink")
     mk = f' marker-end="url(#{m})"' if head else ""
-    out = f'<polyline points="{pts}" fill="none" stroke="{color}" stroke-width="1.2"{d}{mk}/>'
-    if label:
-        out += f'<text x="{lx}" y="{ly}" text-anchor="{anchor}" font-size="10.5" fill="{color if color == ACCENT else MUTED}"{MONO}>{label}</text>'
-    return out
+    pth = "M " + " L ".join(f"{x},{y}" for x, y in pts)
+    return f'<path d="{pth}" fill="none" stroke="{color}" stroke-width="{width}" stroke-linecap="round" stroke-linejoin="round"{d}{mk}/>'
 
-def label(x, y, text, size=11, color=MUTED, anchor="start", weight=400, mono=False):
-    return f'<text x="{x}" y="{y}" text-anchor="{anchor}" font-size="{size}" font-weight="{weight}" fill="{color}"{MONO if mono else ""}>{text}</text>'
+def socket(x, y, r=6):
+    # a port: a white socket on the hexagon's edge
+    return f'<rect x="{x - r}" y="{y - r}" width="{2*r}" height="{2*r}" rx="2" fill="#fff" stroke="{NAVY}" stroke-width="1.6"/>'
 
-DEFS = f'''<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker><marker id="arrow-accent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="{ACCENT}"/></marker></defs>'''
+def marker(mid, color):
+    return (f'<marker id="{mid}" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">'
+            f'<path d="M1,1 L9,5 L1,9 z" fill="{color}"/></marker>')
+
+DEFS = "<defs>" + marker("h-ink", INK) + marker("h-navy", NAVY) + marker("h-forbid", FORBID) + marker("h-muted", MUTED) + "</defs>"
 
 def figure(w, h, body, caption, aria):
     # No blank lines inside: Goldmark ends an HTML block at the first blank line.
     return (f'<figure class="diagram"><svg viewBox="0 0 {w} {h}" role="img" aria-label="{aria}" '
-            f'xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans, system-ui, sans-serif" color="#16233a">'
+            f'xmlns="http://www.w3.org/2000/svg" font-family="{SANS}" color="{INK}">'
             f'{DEFS}{body}</svg><figcaption>{caption}</figcaption></figure>')
+
+def curve(x1, y1, x2, y2, color=NAVY, width=1.2):
+    c = (x2 - x1) * 0.5
+    return (f'<path d="M {x1},{y1} C {x1 + c},{y1} {x2 - c},{y2} {x2},{y2}" fill="none" '
+            f'stroke="{color}" stroke-width="{width}" stroke-linecap="round"/>')
 
 # ---------------------------------------------------------------- figure 1: the shape
 def fig_shape(L):
     b = ""
-    # driving side
-    b += label(20, 30, L["driving_col"], size=11, weight=600, color="currentColor")
-    b += box(20, 60, 140, 46, "dop-api", L["bff_sub"], fill="#fff")
-    b += box(20, 122, 140, 46, "dop-cmd", L["cli_sub"], fill="#fff")
-    b += box(190, 60, 80, 108, L["edge"], None, fill=TINT, bold=True)
-    b += label(230, 154, "internal/app/grpc", size=9, anchor="middle", mono=True)
-    b += arrow(162, 83, 188, 90, label="gRPC", lx=175, ly=72)
-    b += arrow(162, 145, 188, 138)
-    b += arrow(272, 114, 296, 114)
-    # the hexagon: the domain
-    hx = [(320, 40), (450, 40), (474, 190), (450, 340), (320, 340), (296, 190)]
-    pts = " ".join(f"{x},{y}" for x, y in hx)
-    b += f'<polygon points="{pts}" fill="{TINT}" stroke="currentColor" stroke-width="1.2"/>'
-    b += label(385, 70, "internal/domain", size=12, anchor="middle", color="currentColor", weight=600)
-    b += label(385, 86, L["domain_sub"], size=10, anchor="middle")
-    pk = ["demand", "delivery", "execution", "resource", "identity", "event", "workflow", "…"]
-    for i, p in enumerate(pk):
-        b += label(385, 116 + i * 17, p, size=10.5, anchor="middle", color="currentColor", mono=True)
-    b += label(385, 264, L["ports_pkg"], size=10, anchor="middle", color=ACCENT, weight=600)
-    b += label(385, 278, L["ports_sub"], size=9.5, anchor="middle", color=ACCENT)
-    b += label(385, 292, "domain/ports", size=9, anchor="middle", color=ACCENT, mono=True)
-    b += label(385, 304, "delivery.GitProvider …", size=9, anchor="middle", color=ACCENT, mono=True)
-    # driven side: two families
-    b += label(500, 30, L["driven_col"], size=11, weight=600, color="currentColor")
-    b += label(500, 56, L["family_a"], size=10, color=ACCENT, weight=600)
-    rows_a = [("SecretStore", "memory · k8s · gcp"), ("EventBus", "memory · nats"), ("IdentityProvider", "firebase · oidc"),
-              ("ObjectStore", "fs · gcs"), ("SandboxLauncher", "docker · k8s"), ("repositories", "postgres")]
-    def edge_x(y):  # the hexagon's right edge: (450,40) → (474,190) → (450,340)
-        return 450 + (y - 40) * 0.16 if y < 190 else 474 - (y - 190) * 0.16
-    y = 74
-    for name, ad in rows_a:
-        b += f'<circle cx="{edge_x(y - 4):.0f}" cy="{y - 4}" r="3" fill="{ACCENT}"/>'
-        b += label(500, y, name, size=10.5, color="currentColor", mono=True)
-        b += label(740, y, ad, size=10, anchor="end", mono=True)
-        y += 20
-    b += label(500, 212, L["family_b"], size=10, color=ACCENT, weight=600)
-    rows_b = [("GitProvider", "github · gitlab"), ("AgentProvider", "anthropic · openai"), ("Mailer", "smtp · sendgrid"), ("SMSer", "twilio · zenvia")]
-    y = 230
-    for name, ad in rows_b:
-        b += f'<circle cx="{edge_x(y - 4):.0f}" cy="{y - 4}" r="3" fill="{ACCENT}"/>'
-        b += label(500, y, name, size=10.5, color="currentColor", mono=True)
-        b += label(740, y, ad, size=10, anchor="end", mono=True)
-        y += 20
-    b += label(500, 318, L["adapter_pkg"], size=9.5, mono=True)
-    b += label(500, 332, L["adapter_note"], size=10)
-    # composition root band
-    b += f'<rect x="20" y="364" width="720" height="34" fill="#fff" stroke="currentColor" stroke-dasharray="5 4"/>'
-    b += label(30, 385, "internal/app", size=11, weight=600, color="currentColor", mono=True)
-    b += label(122, 385, L["root_note"], size=10.5)
-    b += label(20, 420, L["legend"], size=10.5)
-    return figure(760, 432, b, L["fig1_caption"], L["fig1_aria"])
+    cx, cy, R = 306, 222, 96
+    hx = [(cx - R * 0.5, cy - R * 0.87), (cx + R * 0.5, cy - R * 0.87), (cx + R, cy),
+          (cx + R * 0.5, cy + R * 0.87), (cx - R * 0.5, cy + R * 0.87), (cx - R, cy)]
+    b += zone(16, 60, 190, 330, L["driving"])
+    b += zone(420, 60, 284, 330, L["driven"])
+    pts = " ".join(f"{x:.1f},{y:.1f}" for x, y in hx)
+    b += f'<polygon points="{pts}" fill="{NAVY}" stroke="{NAVY_DEEP}" stroke-width="1.5"/>'
+    b += T(cx, cy - 30, "internal/domain", size=14.5, color="#fff", anchor="middle", weight=600)
+    b += T(cx, cy - 11, L["domain_sub"], size=11, color="#cfe0f5", anchor="middle")
+    for i, ln in enumerate(L["domain_lines"]):
+        b += T(cx, cy + 14 + i * 16, ln, size=10.5, color="#e8f0fa", anchor="middle", mono=True)
+    # driving side: two callers, one edge, one socket on the left vertex
+    b += card(32, 104, 110, 50, "dop-api", L["bff_sub"])
+    b += card(32, 176, 110, 50, "dop-cmd", L["cli_sub"])
+    b += card(150, 138, 50, 56, L["edge"], "gRPC", sub_mono=True)
+    b += link([(142, 129), (150, 152)])
+    b += link([(142, 201), (150, 180)])
+    b += link([(200, 166), (204, 214)], color=NAVY, head=False)
+    b += socket(hx[5][0], hx[5][1])
+    b += T(32, 262, L["driving_note1"], size=11.5, color=MUTED)
+    b += T(32, 279, L["driving_note2"], size=11.5, color=MUTED)
+    b += T(32, 296, L["driving_note3"], size=11.5, color=MUTED)
+    # driven side: sockets spread along the right edges, one curve per port row
+    rows_a = [("SecretStore", ["memory", "k8s", "gcp"]), ("EventBus", ["memory", "nats"]),
+              ("IdentityProvider", ["firebase", "oidc"]), ("SandboxLauncher", ["docker", "k8s"])]
+    rows_b = [("GitProvider", ["github", "gitlab"]), ("AgentProvider", ["anthropic", "openai"]), ("Mailer", ["smtp", "sendgrid"])]
+    b += T(436, 108, L["family_a"], size=11.5, color=NAVY, weight=600)
+    b += T(436, 280, L["family_b"], size=11.5, color=NAVY, weight=600)
+    def edge_x(y):
+        top, mid, bot = hx[1], hx[2], hx[3]
+        if y <= mid[1]:
+            return top[0] + (mid[0] - top[0]) * (y - top[1]) / (mid[1] - top[1])
+        return mid[0] - (mid[0] - bot[0]) * (y - mid[1]) / (bot[1] - mid[1])
+    rows = [(n, a, 132 + i * 34) for i, (n, a) in enumerate(rows_a)] + [(n, a, 304 + i * 34) for i, (n, a) in enumerate(rows_b)]
+    for i, (name, adapters, ry) in enumerate(rows):
+        sy = 152 + i * 24
+        sx = edge_x(sy)
+        b += curve(sx + 7, sy, 428, ry)
+        b += socket(sx, sy, r=5)
+        b += T(436, ry + 4, name, size=11.5, color=INK, weight=600, mono=True)
+        x = 436 + int(len(name) * 7.1) + 10
+        for a in adapters:
+            w = int(len(a) * 6.4 + 16)
+            b += f'<rect x="{x}" y="{ry - 11}" width="{w}" height="22" rx="11" fill="#fff" stroke="{CARD_LINE}" stroke-width="1"/>'
+            b += T(x + w / 2, ry + 4, a, size=10.5, color=INK, anchor="middle", mono=True)
+            x += w + 6
+    # the composition root
+    b += zone(16, 404, 688, 44, fill="#fff", line=CARD_LINE, dash=True)
+    b += T(32, 431, "internal/app", size=13, weight=600, mono=True)
+    b += T(140, 431, L["root_note"], size=12, color=MUTED)
+    return figure(720, 464, b, L["fig1_caption"], L["fig1_aria"])
 
 # ---------------------------------------------------------------- figure 2: the adapter pays
 def fig_pays(L):
     b = ""
-    # the port, top-left
-    b += box(20, 20, 200, 46, "SecretStore.Put", L["promise"], fill=TINT)
-    # lane: memory
-    b += label(20, 100, L["lane_mem"], size=11, weight=600, color="currentColor")
-    b += box(20, 110, 130, 40, "map[key] = copy", None, fill="#fff", bold=False)
-    b += arrow(152, 130, 188, 130)
-    b += box(190, 110, 90, 40, "return nil", None, fill="#fff", bold=False)
-    b += label(300, 134, L["mem_note"], size=10.5)
-    b += f'<line x1="20" y1="168" x2="740" y2="168" stroke="{HAIR}" stroke-dasharray="3 4"/>'
-    # lane: gcp
-    b += label(20, 192, L["lane_gcp"], size=11, weight=600, color="currentColor")
-    steps = [("AddSecretVersion", L["s1"]), ("confirm v=n", L["s2"]), ("await latest ≥ n", L["s3"]), ("destroyOlder", L["s4"])]
-    W, G = 130, 20
-    for i, (t, s_) in enumerate(steps):
-        x = 20 + i * (W + G)
-        stroke = ACCENT if i == 2 else "currentColor"
-        b += box(x, 204, W, 48, t, s_, fill="#fff", bold=False, stroke=stroke, sub_mono=False)
-        b += arrow(x + W + 2, 228, x + W + G - 2, 228)
-    b += box(620, 204, 120, 48, "return nil", None, fill="#fff", bold=False)
-    # the retry loop under step 3 (x 320..450), and the refusal past the ceiling
-    b += elbow([(340, 254), (340, 272), (326, 272), (326, 256)], color=ACCENT)
-    b += label(350, 276, L["loop"], size=9.5, color=ACCENT, mono=True)
-    b += elbow([(430, 254), (430, 298)], color=ACCENT, dash=True)
-    b += box(355, 300, 150, 40, "KindUnavailable", L["refuse_sub"], fill="#fff", stroke=ACCENT, bold=True, tcolor=ACCENT, sub_mono=False)
-    b += label(515, 316, L["refuse_note1"], size=9.5)
-    b += label(515, 330, L["refuse_note2"], size=9.5)
-    b += label(20, 384, L["fig2_legend"], size=10.5)
-    return figure(760, 396, b, L["fig2_caption"], L["fig2_aria"])
+    b += card(16, 16, 250, 48, "SecretStore.Put", L["promise"], sub_mono=False, fill=NAVY, line=NAVY_DEEP, tcolor="#fff", scolor="#cfe0f5")
+    # lane 1: memory
+    b += zone(16, 88, 688, 88, L["lane_mem"])
+    b += card(32, 122, 150, 40, "map[key] = copy", None, weight=400, size=12.5)
+    b += link([(182, 142), (208, 142)])
+    b += card(210, 122, 110, 40, "return nil", None, weight=400, size=12.5)
+    b += T(340, 147, L["mem_note"], size=12, color=MUTED, italic=True)
+    # lane 2: GCP
+    b += zone(16, 192, 688, 246, L["lane_gcp"])
+    steps = [("AddSecretVersion", L["s1"]), ("confirm v = n", L["s2"]), ("await latest ≥ n", L["s3"]), ("destroyOlder", L["s4"])]
+    W, G, y = 138, 18, 226
+    for i, (t, s) in enumerate(steps):
+        x = 32 + i * (W + G)
+        hot = i == 2
+        b += card(x, y, W, 52, t, s, weight=600 if hot else 500, size=12.5,
+                  fill=NAVY if hot else "#fff", line=NAVY_DEEP if hot else CARD_LINE,
+                  tcolor="#fff" if hot else INK, scolor="#cfe0f5" if hot else MUTED)
+        b += link([(x + W + 2, y + 26), (x + W + G - 2, y + 26)])
+    b += card(656, y, 34, 52, "✓", None, weight=600, size=16, fill="#fff")
+    # under the hot step: the retry loop (left) and the way out (right)
+    hx0 = 32 + 2 * (W + G)
+    b += link([(hx0 + 30, y + 54), (hx0 + 30, y + 76), (hx0 + 12, y + 76), (hx0 + 12, y + 56)], color=NAVY, width=1.3)
+    b += T(hx0 + 2, y + 80, L["loop"], size=11, color=NAVY, mono=True, anchor="end")
+    b += link([(hx0 + W - 24, y + 54), (hx0 + W - 24, y + 112)], color=NAVY, dash=True, width=1.3)
+    rx = hx0 + W - 24 - 80
+    b += card(rx, y + 114, 160, 44, "KindUnavailable", L["refuse_sub"], line=NAVY, tcolor=NAVY, weight=600, size=12.5)
+    b += T(rx + 80, y + 178, L["refuse_note1"], size=11.5, color=MUTED, anchor="middle")
+    b += T(rx + 80, y + 194, L["refuse_note2"], size=11.5, color=MUTED, anchor="middle")
+    return figure(720, 454, b, L["fig2_caption"], L["fig2_aria"])
 
 # ---------------------------------------------------------------- figure 3: per-request provider
 def fig_provider(L):
     b = ""
-    # left: the delivery domain
-    b += box(20, 60, 170, 60, "domain/delivery", L["dl_sub"], fill=TINT)
-    b += arrow(192, 90, 208, 90)
-    b += label(105, 138, "→ For(account, repo)", size=10, anchor="middle", mono=True)
-    # the resolver
-    b += f'<rect x="210" y="20" width="330" height="150" fill="#fff" stroke="currentColor" stroke-dasharray="5 4"/>'
-    b += label(220, 38, "internal/app · gitProviders.For", size=11, weight=600, color="currentColor", mono=True)
-    b += box(224, 52, 92, 40, "1 · repo", L["r1"], fill="#fff", bold=False, sub_mono=False)
-    b += arrow(318, 72, 336, 72)
-    b += box(338, 52, 92, 40, "2 · integration", L["r2"], fill="#fff", bold=False, sub_mono=False)
-    b += arrow(432, 72, 450, 72)
-    b += box(452, 52, 78, 40, "3 · vault", L["r3"], fill="#fff", bold=False, sub_mono=False)
-    b += label(360, 122, L["per_request"], size=10, anchor="middle", color=ACCENT)
-    b += label(360, 152, L["refusal"], size=10, anchor="middle")
-    # the adapters
-    b += box(590, 36, 150, 44, "gitprovider.GitHub", L["gh_sub"], fill="#fff", bold=False, sub_mono=False)
-    b += box(590, 100, 150, 44, "gitprovider.GitLab", L["gl_sub"], fill="#fff", bold=False, sub_mono=False)
-    b += arrow(542, 72, 588, 58, color=ACCENT)
-    b += arrow(542, 100, 588, 122, color=ACCENT)
-    # the vault below
-    b += box(414, 200, 150, 40, "ports.SecretStore", L["vault_sub"], fill=TINT, bold=False)
-    b += elbow([(522, 94), (522, 198)], color="currentColor", label="Get(ref)", lx=528, ly=150, anchor="start")
-    # what nobody knows
-    b += label(20, 200, L["k1"], size=10.5)
-    b += label(20, 216, L["k2"], size=10.5)
-    b += label(20, 232, L["k3"], size=10.5)
-    b += label(20, 266, L["fig3_legend"], size=10.5)
-    return figure(760, 278, b, L["fig3_caption"], L["fig3_aria"])
+    b += card(16, 60, 160, 64, "domain/delivery", L["dl_sub"], fill=NAVY, line=NAVY_DEEP, tcolor="#fff", scolor="#cfe0f5")
+    b += link([(176, 92), (206, 92)], color=NAVY)
+    b += T(96, 146, "For(account, repo)", size=11, color=NAVY, anchor="middle", mono=True)
+    # the resolver zone with three steps
+    b += zone(208, 24, 320, 172, "internal/app · gitProviders.For")
+    steps = [("1", L["r1_t"], L["r1_s"]), ("2", L["r2_t"], L["r2_s"]), ("3", L["r3_t"], L["r3_s"])]
+    for i, (n, t, s) in enumerate(steps):
+        x = 222 + i * 100
+        b += card(x, 56, 92, 52, t, s, weight=600, size=12.5)
+        if i < 2:
+            b += link([(x + 94, 82), (x + 98, 82)], head=False)
+    b += T(222, 138, L["per_request"], size=11.5, color=NAVY, weight=600)
+    b += T(222, 156, L["refusal1"], size=11.5, color=MUTED)
+    b += T(222, 172, L["refusal2"], size=11.5, color=MUTED)
+    # adapters
+    b += card(548, 36, 156, 52, "GitHub", L["gh_sub"])
+    b += card(548, 108, 156, 52, "GitLab", L["gl_sub"])
+    b += link([(528, 82), (546, 62)], color=NAVY)
+    b += link([(528, 110), (546, 134)], color=NAVY)
+    b += T(632, 180, L["adapter_note"], size=11, color=MUTED, anchor="middle", italic=True)
+    # the vault, read inside the resolver
+    b += link([(468, 110), (468, 224)], color=INK, head=True, width=1.3)
+    b += T(476, 214, "Get(ref)", size=11, color=MUTED, mono=True)
+    b += card(388, 226, 160, 48, "ports.SecretStore", L["vault_sub"])
+    b += T(16, 232, L["k1"], size=12, color=MUTED)
+    b += T(16, 250, L["k2"], size=12, color=MUTED)
+    b += T(16, 268, L["k3"], size=12, color=MUTED)
+    return figure(720, 290, b, L["fig3_caption"], L["fig3_aria"])
 
-# ---------------------------------------------------------------- figure 4: one suite, three adapters, two guards
+# ---------------------------------------------------------------- figure 4: one suite, three adapters, the frontier
 def fig_suite(L):
     b = ""
-    b += box(20, 40, 190, 70, "SecretStoreSuite", L["suite_sub"], fill=TINT)
-    b += label(115, 124, "test/contract/secretstore.go", size=9.5, anchor="middle", mono=True)
-    targets = [("memory", L["t_mem"], "go test ./...", False), ("k8s", L["t_k8s"], "-run SecretStore", False), ("gcp", L["t_gcp"], "-tags=integration", True)]
-    for i, (name, cond, cmd, dash) in enumerate(targets):
-        y = 30 + i * 46
-        b += box(300, y, 150, 38, name, cmd, fill="#fff", bold=False, dash=dash)
-        b += arrow(212, 75, 298, y + 19)
-        b += label(460, y + 23, cond, size=10.5)
-    b += label(300, 172, L["same_fn"], size=10.5, color=ACCENT)
-    # the guards
-    b += f'<line x1="20" y1="192" x2="740" y2="192" stroke="{HAIR}" stroke-dasharray="3 4"/>'
-    b += label(20, 214, L["guards"], size=11, weight=600, color="currentColor")
-    b += box(20, 226, 150, 40, "internal/domain", L["g_dom"], fill=TINT, bold=True, sub_mono=False)
-    b += box(320, 226, 150, 40, "internal/adapter", L["g_ad"], fill="#fff", bold=True, sub_mono=False)
-    b += box(590, 226, 150, 40, "vendor SDKs", "pgx · nats · gcp · k8s", fill="#fff", bold=True)
-    b += arrow(172, 246, 318, 246, color=ACCENT, dash=True)
-    b += f'<text x="245" y="240" text-anchor="middle" font-size="14" font-weight="700" fill="{ACCENT}">✕</text>'
-    b += arrow(472, 246, 588, 246, color=ACCENT, dash=True)
-    b += f'<text x="530" y="240" text-anchor="middle" font-size="14" font-weight="700" fill="{ACCENT}">✕</text>'
-    b += label(20, 290, L["g_note1"], size=10.5)
-    b += label(20, 305, L["g_note2"], size=10.5)
-    return figure(760, 318, b, L["fig4_caption"], L["fig4_aria"])
+    b += card(16, 44, 190, 70, "SecretStoreSuite", L["suite_sub"], fill=NAVY, line=NAVY_DEEP, tcolor="#fff", scolor="#cfe0f5")
+    b += T(111, 132, "test/contract/secretstore.go", size=10.5, color=MUTED, anchor="middle", mono=True)
+    targets = [("memory", L["t_mem"], False), ("k8s", L["t_k8s"], False), ("gcp", L["t_gcp"], True)]
+    for i, (name, cond, dash) in enumerate(targets):
+        y = 24 + i * 52
+        b += link([(206, 79), (240, 79), (262, y + 22), (282, y + 22)], color=NAVY, width=1.4)
+        b += card(284, y, 110, 44, name, None, dash=dash, weight=600)
+        b += T(408, y + 27, cond, size=12, color=MUTED)
+    b += T(284, 194, L["same_fn"], size=12, color=NAVY, weight=600)
+    # the frontier: three columns, allowed in navy, forbidden in red
+    b += zone(16, 226, 688, 150, L["guards"])
+    cols = [("internal/domain", L["g_dom"], 40), ("internal/adapter", L["g_ad"], 290), ("SDKs", "pgx · nats · gcp · k8s", 540)]
+    for name, sub, x in cols:
+        b += card(x, 262, 150, 52, name, sub, sub_mono=(name == "SDKs"), weight=600, size=12.5)
+    b += link([(440, 288), (538, 288)], color=NAVY)          # adapter → SDK: allowed
+    b += T(489, 280, L["allowed"], size=10.5, color=NAVY, anchor="middle")
+    b += link([(290, 276), (192, 276)], color=NAVY)          # adapter → domain (ports): allowed
+    b += T(241, 268, L["implements"], size=10.5, color=NAVY, anchor="middle")
+    b += link([(192, 300), (290, 300)], color=FORBID, dash=True)  # domain → adapter: forbidden
+    b += T(241, 322, L["forbidden"], size=10.5, color=FORBID, anchor="middle", weight=600)
+    b += T(40, 350, L["g_note1"], size=11.5, color=MUTED)
+    b += T(40, 366, L["g_note2"], size=11.5, color=MUTED)
+    return figure(720, 392, b, L["fig4_caption"], L["fig4_aria"])
 
 # ---------------------------------------------------------------- figure text
 LANG = {
     "en": dict(
-        driving_col="who drives the domain", bff_sub="Python BFF · REST+SSE", cli_sub="CLI · v0.7.1", edge="gRPC edge",
-        domain_sub="model · use cases · ports", ports_pkg="the PORTS", ports_sub="in the domain's language",
-        driven_col="what the domain drives", family_a="infrastructure — chosen at boot, one active",
-        family_b="domain providers — per request, several active",
-        adapter_pkg="internal/adapter/<technology>", adapter_note="one package per vendor",
-        root_note="the composition root: the only place that knows both ends — a config value picks the adapter for each port",
-        legend="Left: driving adapters reach the domain through gRPC. Right: each port's adapters. Blue dot: a port on the hexagon's edge.",
-        fig1_caption="The three regions of dop-core. The domain declares the ports; the adapters implement them one technology per package; the composition root wires them by configuration. The two families on the right have opposite life cycles.",
-        fig1_aria="The BFF and the CLI reach the domain hexagon through a gRPC edge; on the other side, infrastructure ports chosen at boot and domain provider ports chosen per request each list their adapters; a composition root band underneath wires both ends.",
-        promise="promise: read-after-write", lane_mem="in-memory adapter", mem_note="the promise is free here",
-        lane_gcp="GCP Secret Manager adapter", s1="version n created", s2="by number: strong", s3="alias: eventual", s4="old material gone",
-        loop="retry · 25 ms → 1 s backoff · ≤ SECRET_PROPAGATION_SECONDS", refuse_sub="past the ceiling",
+        driving="drives the domain", driven="driven by the domain",
+        domain_sub="model · use cases · ports", domain_lines=["demand · delivery", "execution · resource", "identity · …"],
+        bff_sub="Python BFF", cli_sub="CLI", edge="edge",
+        driving_note1="The BFF and the CLI reach the", driving_note2="domain only through gRPC —", driving_note3="the one driving adapter.",
+        family_a="infrastructure · chosen at boot, one active", family_b="providers · per request, several active",
+        root_note="the composition root — knows both ends; configuration picks each adapter",
+        fig1_caption="The three regions of dop-core. The domain declares the ports (the sockets on its edges); each adapter package plugs into one; the composition root does the plugging, by configuration. The two families on the right have opposite life cycles.",
+        fig1_aria="The BFF and the CLI reach a navy hexagon labelled internal/domain through a gRPC edge; on the right, ports drawn as sockets on the hexagon's edge connect to rows of adapter chips, grouped as infrastructure ports chosen at boot and domain provider ports chosen per request; a composition root band underneath.",
+        promise="the promise: read-after-write", lane_mem="in-memory adapter", mem_note="the promise costs nothing here",
+        lane_gcp="Secret Manager adapter", s1="version n created", s2="by number — strong", s3="alias — eventual", s4="old material gone",
+        loop="retry · 25 ms → 1 s · ≤ 30 s", refuse_sub="past the ceiling",
         refuse_note1="write accepted, read-after-write not confirmed:", refuse_note2="an error somebody reads, not a Get saying \"absent\".",
-        fig2_legend="Blue: the step that exists only because the vendor's alias is eventually consistent. Dashed: the way out when it does not converge.",
-        fig2_caption="The same Put through two adapters. In memory the promise costs nothing; on Secret Manager the adapter confirms by version number, waits for the alias, and refuses rather than lie.",
-        fig2_aria="Two lanes for SecretStore.Put: the in-memory adapter writes a map and returns; the GCP adapter adds a version, confirms it by number, waits for the latest alias with backoff, destroys older versions and returns, or refuses with KindUnavailable past the ceiling.",
-        dl_sub="PRs · rebase · merge", r1="→ integration id", r2="→ provider", r3="→ token",
-        per_request="resolved on EVERY request: two hosts, both work", refusal="unknown provider → refusal, never a default",
-        gh_sub="REST + GraphQL, merge queue", gl_sub="REST, merge trains", vault_sub="read HERE, in the core",
-        k1="the delivery domain never learns GitHub exists;", k2="the git adapter never learns a vault exists;", k3="the resource domain never learns PRs exist.",
-        fig3_legend="Blue: the adapter chosen for this call. The vault is read in the composition root and the token is handed over ready.",
-        fig3_caption="A per-request port. The delivery domain asks for a provider by repository; the composition root resolves integration and credential and returns a ready adapter.",
-        fig3_aria="The delivery domain calls For with account and repo; inside the composition root the repository gives the integration, the integration gives the provider, the vault gives the token; a GitHub or GitLab adapter is returned per call.",
-        suite_sub="the six numbered guarantees", t_mem="always", t_k8s="when a cluster answers", t_gcp="when a credential exists (emulator or real GCP)",
-        same_fn="one function, three targets: substitutability in fact, not in intention",
-        guards="two tests guard the frontier on every go test ./...", g_dom="declares the ports", g_ad="implements them",
-        g_note1="TestTheDomainDoesNotImportInfrastructure: no file under internal/domain imports an adapter or a vendor SDK.",
-        g_note2="TestOnlyAppKnowsTheAdapters: outside internal/app, nothing imports internal/adapter.",
-        fig4_caption="What makes the pattern true over time: one contract suite that every adapter passes, and two import tests that break the build when the frontier is crossed.",
-        fig4_aria="The SecretStore contract suite fans out to three adapters, memory always, k8s when a cluster answers, GCP behind a build tag; below, two crossed-out arrows show that the domain may not import adapters and adapters' SDKs may not reach the domain.",
+        fig2_caption="The same Put through two adapters. In memory the promise is free. On Secret Manager the adapter confirms by version number, waits for the alias to catch up — the highlighted step — and past the ceiling refuses rather than lie.",
+        fig2_aria="Two lanes for SecretStore.Put: the in-memory adapter writes a map and returns; the Secret Manager adapter adds a version, confirms it by number, waits for the latest alias with retries, destroys older versions and returns, or refuses with KindUnavailable past the ceiling.",
+        dl_sub="opens the PR", r1_t="repository", r1_s="→ integration", r2_t="integration", r2_s="→ provider", r3_t="vault", r3_s="→ token",
+        per_request="resolved on every request", refusal1="unknown provider: a refusal,", refusal2="never a default",
+        gh_sub="GraphQL · merge queue", gl_sub="REST · merge trains", adapter_note="the token arrives ready-made",
+        vault_sub="read here, in the core",
+        k1="The delivery domain never learns GitHub exists.", k2="The git adapter never learns a vault exists.", k3="The resource domain never learns PRs exist.",
+        fig3_caption="A per-request port. The delivery domain asks for a provider by repository; the composition root resolves integration and credential and returns a ready adapter — GitHub for one repository, GitLab for the next.",
+        fig3_aria="The delivery domain calls For with account and repository; inside the composition root three steps resolve repository, integration and vault; a GitHub or GitLab adapter is returned per call; the vault is read inside the resolver.",
+        suite_sub="six numbered guarantees", t_mem="always", t_k8s="when a cluster answers", t_gcp="behind a build tag, when a credential exists",
+        same_fn="one function, three targets",
+        guards="the frontier, guarded by two tests on every go test ./...", g_dom="declares the ports", g_ad="implements them",
+        allowed="allowed", implements="implements", forbidden="never",
+        g_note1="TestTheDomainDoesNotImportInfrastructure — nothing under internal/domain imports an adapter or an SDK.",
+        g_note2="TestOnlyAppKnowsTheAdapters — outside internal/app, nothing imports internal/adapter.",
+        fig4_caption="What keeps the pattern true over time. Above: one contract suite runs against every adapter. Below: the import frontier — adapters may know the domain and the SDKs; the domain may know neither — enforced by tests that break the build.",
+        fig4_aria="The SecretStore contract suite fans out to three adapters: memory always, k8s when a cluster answers, GCP behind a build tag; below, three columns for domain, adapter and SDKs, with allowed arrows from adapter to domain and to SDKs, and a red dashed forbidden arrow from domain to adapter.",
     ),
     "pt-br": dict(
-        driving_col="quem aciona o domínio", bff_sub="BFF Python · REST+SSE", cli_sub="CLI · v0.7.1", edge="borda gRPC",
-        domain_sub="modelo · casos de uso · ports", ports_pkg="os PORTS", ports_sub="na linguagem do domínio",
-        driven_col="o que o domínio aciona", family_a="infraestrutura — escolhidos no boot, um ativo",
-        family_b="provedores de domínio — por requisição, vários ativos",
-        adapter_pkg="internal/adapter/<tecnologia>", adapter_note="um pacote por fornecedor",
-        root_note="a raiz de composição: o único lugar que conhece as duas pontas — a configuração escolhe o adapter de cada port",
-        legend="Esquerda: adapters primários chegam ao domínio via gRPC. Direita: os adapters de cada port. Ponto azul: um port na borda do hexágono.",
-        fig1_caption="As três regiões do dop-core. O domínio declara os ports; os adapters os implementam, uma tecnologia por pacote; a raiz de composição os liga por configuração. As duas famílias à direita têm ciclos de vida opostos.",
-        fig1_aria="O BFF e a CLI chegam ao hexágono do domínio por uma borda gRPC; do outro lado, ports de infraestrutura escolhidos no boot e ports de provedor escolhidos por requisição listam seus adapters; uma faixa de raiz de composição embaixo liga as duas pontas.",
-        promise="promessa: read-after-write", lane_mem="adapter em memória", mem_note="aqui a promessa é de graça",
-        lane_gcp="adapter GCP Secret Manager", s1="versão n criada", s2="por número: forte", s3="alias: eventual", s4="material antigo destruído",
-        loop="retry · backoff 25 ms → 1 s · ≤ SECRET_PROPAGATION_SECONDS", refuse_sub="passado o teto",
+        driving="aciona o domínio", driven="acionado pelo domínio",
+        domain_sub="modelo · casos de uso · ports", domain_lines=["demand · delivery", "execution · resource", "identity · …"],
+        bff_sub="BFF Python", cli_sub="CLI", edge="borda",
+        driving_note1="O BFF e a CLI chegam ao", driving_note2="domínio só por gRPC —", driving_note3="o único adapter primário.",
+        family_a="infraestrutura · no boot, um ativo", family_b="provedores · por requisição, vários ativos",
+        root_note="a raiz de composição — conhece as duas pontas; a configuração escolhe cada adapter",
+        fig1_caption="As três regiões do dop-core. O domínio declara os ports (as tomadas nas suas bordas); cada pacote de adapter se liga a uma; a raiz de composição faz a ligação, por configuração. As duas famílias à direita têm ciclos de vida opostos.",
+        fig1_aria="O BFF e a CLI chegam a um hexágono azul-marinho rotulado internal/domain por uma borda gRPC; à direita, ports desenhados como tomadas na borda do hexágono ligam-se a fileiras de chips de adapters, agrupados em ports de infraestrutura escolhidos no boot e ports de provedor escolhidos por requisição; uma faixa de raiz de composição embaixo.",
+        promise="a promessa: read-after-write", lane_mem="adapter em memória", mem_note="aqui a promessa não custa nada",
+        lane_gcp="adapter Secret Manager", s1="versão n criada", s2="por número — forte", s3="alias — eventual", s4="material antigo destruído",
+        loop="retry · 25 ms → 1 s · ≤ 30 s", refuse_sub="passado o teto",
         refuse_note1="escrita aceita, read-after-write não confirmado:", refuse_note2="um erro que alguém lê, não um Get dizendo \"não existe\".",
-        fig2_legend="Azul: o passo que só existe porque o alias do fornecedor é eventualmente consistente. Tracejado: a saída quando não converge.",
-        fig2_caption="O mesmo Put por dois adapters. Em memória a promessa não custa nada; no Secret Manager o adapter confirma por número de versão, espera o alias e recusa em vez de mentir.",
-        fig2_aria="Duas raias para SecretStore.Put: o adapter em memória escreve num map e retorna; o adapter GCP cria uma versão, confirma por número, espera o alias latest com backoff, destrói versões antigas e retorna, ou recusa com KindUnavailable passado o teto.",
-        dl_sub="PRs · rebase · merge", r1="→ id da integração", r2="→ provedor", r3="→ token",
-        per_request="resolvido a CADA requisição: dois hosts, os dois funcionam", refusal="provedor desconhecido → recusa, nunca um default",
-        gh_sub="REST + GraphQL, merge queue", gl_sub="REST, merge trains", vault_sub="lido AQUI, no core",
-        k1="o domínio de entrega nunca fica sabendo que o GitHub existe;", k2="o adapter git nunca fica sabendo que existe um cofre;", k3="o domínio de recursos nunca fica sabendo que PRs existem.",
-        fig3_legend="Azul: o adapter escolhido para esta chamada. O cofre é lido na raiz de composição e o token é entregue pronto.",
-        fig3_caption="Um port por requisição. O domínio de entrega pede um provedor por repositório; a raiz de composição resolve integração e credencial e devolve um adapter pronto.",
-        fig3_aria="O domínio de entrega chama For com conta e repo; dentro da raiz de composição o repositório dá a integração, a integração dá o provedor, o cofre dá o token; um adapter GitHub ou GitLab é devolvido por chamada.",
-        suite_sub="as seis garantias numeradas", t_mem="sempre", t_k8s="quando um cluster responde", t_gcp="quando existe credencial (emulador ou GCP real)",
-        same_fn="uma função, três alvos: substituibilidade de fato, não de intenção",
-        guards="dois testes guardam a fronteira em todo go test ./...", g_dom="declara os ports", g_ad="os implementa",
-        g_note1="TestTheDomainDoesNotImportInfrastructure: nenhum arquivo sob internal/domain importa um adapter ou SDK de fornecedor.",
-        g_note2="TestOnlyAppKnowsTheAdapters: fora de internal/app, nada importa internal/adapter.",
-        fig4_caption="O que mantém o padrão verdadeiro ao longo do tempo: uma suíte de contrato que todo adapter passa, e dois testes de import que quebram o build quando a fronteira é cruzada.",
-        fig4_aria="A suíte de contrato do SecretStore se abre em três adapters, memória sempre, k8s quando um cluster responde, GCP atrás de uma build tag; abaixo, duas setas cortadas mostram que o domínio não pode importar adapters e os SDKs dos adapters não chegam ao domínio.",
+        fig2_caption="O mesmo Put por dois adapters. Em memória a promessa é de graça. No Secret Manager o adapter confirma por número de versão, espera o alias alcançar — o passo destacado — e, passado o teto, recusa em vez de mentir.",
+        fig2_aria="Duas raias para SecretStore.Put: o adapter em memória escreve num map e retorna; o adapter Secret Manager cria uma versão, confirma por número, espera o alias latest com retries, destrói versões antigas e retorna, ou recusa com KindUnavailable passado o teto.",
+        dl_sub="abre o PR", r1_t="repositório", r1_s="→ integração", r2_t="integração", r2_s="→ provedor", r3_t="cofre", r3_s="→ token",
+        per_request="resolvido a cada requisição", refusal1="provedor desconhecido: recusa,", refusal2="nunca um default",
+        gh_sub="GraphQL · merge queue", gl_sub="REST · merge trains", adapter_note="o token chega pronto",
+        vault_sub="lido aqui, no core",
+        k1="O domínio de entrega nunca fica sabendo que o GitHub existe.", k2="O adapter git nunca fica sabendo que existe um cofre.", k3="O domínio de recursos nunca fica sabendo que PRs existem.",
+        fig3_caption="Um port por requisição. O domínio de entrega pede um provedor por repositório; a raiz de composição resolve integração e credencial e devolve um adapter pronto — GitHub para um repositório, GitLab para o seguinte.",
+        fig3_aria="O domínio de entrega chama For com conta e repositório; dentro da raiz de composição três passos resolvem repositório, integração e cofre; um adapter GitHub ou GitLab é devolvido por chamada; o cofre é lido dentro do resolvedor.",
+        suite_sub="seis garantias numeradas", t_mem="sempre", t_k8s="quando um cluster responde", t_gcp="atrás de uma build tag, quando há credencial",
+        same_fn="uma função, três alvos",
+        guards="a fronteira, guardada por dois testes em todo go test ./...", g_dom="declara os ports", g_ad="os implementa",
+        allowed="permitido", implements="implementa", forbidden="nunca",
+        g_note1="TestTheDomainDoesNotImportInfrastructure — nada sob internal/domain importa um adapter ou um SDK.",
+        g_note2="TestOnlyAppKnowsTheAdapters — fora de internal/app, nada importa internal/adapter.",
+        fig4_caption="O que mantém o padrão verdadeiro ao longo do tempo. Em cima: uma suíte de contrato roda contra todo adapter. Embaixo: a fronteira de imports — adapters podem conhecer o domínio e os SDKs; o domínio não conhece nenhum dos dois — imposta por testes que quebram o build.",
+        fig4_aria="A suíte de contrato do SecretStore se abre em três adapters: memória sempre, k8s quando um cluster responde, GCP atrás de uma build tag; embaixo, três colunas para domínio, adapter e SDKs, com setas permitidas do adapter para o domínio e para os SDKs, e uma seta tracejada vermelha proibida do domínio para o adapter.",
     ),
 }
 
