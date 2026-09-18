@@ -1,0 +1,10 @@
+{{- /* The display name of a social network, by its config name. */ -}}
+{{- $displayNames := dict
+  "linkedin" "LinkedIn"
+  "github" "GitHub"
+  "x" "X"
+  "instagram" "Instagram"
+  "tiktok" "TikTok"
+  "facebook" "Facebook"
+-}}
+{{- return (or (index $displayNames .) (. | title)) -}}

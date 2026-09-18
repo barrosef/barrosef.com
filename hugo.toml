@@ -57,6 +57,11 @@ enableRobotsTXT = true
   [params.seo]
     googleSiteVerification = ""
 
+  # The address on the Contact page. The footer and the about pages use
+  # data/career.yaml's profile.email.
+  [params.contact]
+    email = "ed.barros@digitalbusinessone.com"
+
   [params.newsletter]
     kitFormId = ""
 

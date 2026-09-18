@@ -189,3 +189,30 @@ other = "Cookies"
 
 [consentTitle]
 other = "Cookies and analytics"
+
+[contactEmail]
+other = "E-mail"
+
+[contactWrite]
+other = "Write an e-mail"
+
+[contactCopy]
+other = "Copy address"
+
+[contactCopied]
+other = "Copied"
+
+[contactTopicsTitle]
+other = "What I usually talk about"
+
+[contactTopic1]
+other = "Consulting — AI in software engineering, cloud (AWS and GCP) and product"
+
+[contactTopic2]
+other = "Software architecture and technical leadership"
+
+[contactTopic3]
+other = "The articles on this site — critiques, corrections and ideas"
+
+[contactNetworks]
+other = "Networks"

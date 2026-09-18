@@ -1,10 +1,8 @@
 ---
 title: "Contact"
+layout: "contact"
 translationKey: "contact"
-description: "How to reach Ed Barros."
+description: "How to reach Ed Barros: e-mail and networks."
 ---
 
-Ed Barros can be reached through the channels below. He reads every message
-himself and replies personally.
-
-{{< contact-details >}}
+E-mail is the shortest route. I read every message myself and reply personally.

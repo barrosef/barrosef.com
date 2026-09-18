@@ -189,3 +189,30 @@ other = "Cookies"
 
 [consentTitle]
 other = "Cookies e estatísticas"
+
+[contactEmail]
+other = "E-mail"
+
+[contactWrite]
+other = "Escrever e-mail"
+
+[contactCopy]
+other = "Copiar endereço"
+
+[contactCopied]
+other = "Copiado"
+
+[contactTopicsTitle]
+other = "Sobre o que costumo conversar"
+
+[contactTopic1]
+other = "Consultoria — IA na engenharia de software, nuvem (AWS e GCP) e produto"
+
+[contactTopic2]
+other = "Arquitetura de software e liderança técnica"
+
+[contactTopic3]
+other = "Os artigos deste site — críticas, correções e ideias"
+
+[contactNetworks]
+other = "Redes"

@@ -1,11 +1,9 @@
 ---
 title: "Contato"
+layout: "contact"
 translationKey: "contact"
-description: "Como entrar em contato com Ed Barros."
+description: "Como falar com Ed Barros: e-mail e redes."
 aliases: ["/pt/contato/"]
 ---
 
-Ed Barros pode ser contatado pelos canais abaixo. Ele lê cada
-mensagem pessoalmente e responde diretamente.
-
-{{< contact-details >}}
+Um e-mail é o caminho mais curto. Leio cada mensagem pessoalmente e respondo eu mesmo.
