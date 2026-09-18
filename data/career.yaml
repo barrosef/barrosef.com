@@ -165,25 +165,35 @@ roles:
 
   - company: "Módulo Risk Manager"
     short: "Módulo"
-    title: { en: "Development Consultant", pt-br: "Consultor de Desenvolvimento" }
+    title: { en: "Java Development Consultant", pt-br: "Consultor de Desenvolvimento Java" }
     start: "2007-04"
     end: "2008-12"
     sector: { en: "Justice", pt-br: "Justiça" }
     highlights:
-      - en: "Embedded with the web team on projects for the Public Prosecutor's Office of the State of Mato Grosso, delivering eight enterprise applications."
-        pt-br: "Alocado no time web em projetos para o Ministério Público do Estado de Mato Grosso, entregando oito aplicações corporativas."
-    stack: ["Java web", Integrations]
+      - en: "A technology-modernisation programme for the Public Prosecutor's Office of the State of Mato Grosso: eight desktop applications migrated to the web platform."
+        pt-br: "Programa de modernização tecnológica do Ministério Público do Estado de Mato Grosso: oito aplicações desktop migradas para a plataforma web."
+      - en: "Helped set the architecture through proofs of concept and technical documentation, and helped select and train the project's Java development team."
+        pt-br: "Apoiei a definição da arquitetura com provas de conceito e documentação técnica, e a seleção e formação do time de desenvolvimento Java do projeto."
+      - en: "Hands-on Java development with Struts, Spring and Hibernate, SOAP web-service integrations, and continuous architectural review as the platform grew."
+        pt-br: "Desenvolvimento Java com Struts, Spring e Hibernate, integrações via web services SOAP e revisão arquitetural contínua conforme a plataforma crescia."
+      - en: "Eight Java EE applications delivered in under two years."
+        pt-br: "Oito aplicações Java EE entregues em menos de dois anos."
+    stack: ["Java EE", Struts, Spring, Hibernate, "SOAP web services", "Desktop-to-web migration"]
 
-  - company: "Ábaco · Univag"
+  - company: "Ábaco"
     short: "Ábaco"
-    title: { en: "Web developer", pt-br: "Desenvolvedor web" }
+    title: { en: "Java Developer — junior to senior", pt-br: "Desenvolvedor Java — de júnior a sênior" }
     start: "2003-01"
     end: "2007-03"
     sector: { en: "Tax · public security", pt-br: "Tributação · segurança pública" }
     highlights:
-      - en: "Web development and technical support, notably on tax, revenue and public-security projects for the State of Mato Grosso."
-        pt-br: "Desenvolvimento web e suporte técnico, em especial em projetos de tributação, receita e segurança pública para o Estado de Mato Grosso."
-    stack: ["Web development"]
+      - en: "Started as a junior developer building Java applications for the web and the desktop, and integrating Java EE systems through SOAP web services."
+        pt-br: "Comecei como desenvolvedor júnior construindo aplicações Java para web e desktop e integrando sistemas Java EE por meio de web services SOAP."
+      - en: "As a mid-level developer, worked on the critical tax-collection systems of the State of Mato Grosso — where a defect halts revenue coming in — and onboarded the developers who joined the team."
+        pt-br: "Como pleno, atuei nos sistemas críticos de arrecadação tributária do Estado de Mato Grosso — onde um defeito interrompe a entrada de receita — e fiz o onboarding dos desenvolvedores que entravam no time."
+      - en: "As a senior developer, scouted and defined the architecture and development stack, coached mid-level and senior developers, and managed and negotiated deliveries with mission-critical clients."
+        pt-br: "Como sênior, prospectei e defini a arquitetura e as tecnologias de desenvolvimento, fui coach de desenvolvedores plenos e sêniores, e geri e negociei entregas com clientes de missão crítica."
+    stack: [Java, "Java EE", "SOAP web services", "Web & desktop", "Architecture"]
 
 # Portfolio pieces. Distinct from roles: a project carries a problem, an
 # approach and an outcome. `components` draws the architecture strip.
