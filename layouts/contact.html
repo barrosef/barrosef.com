@@ -1,0 +1,68 @@
+{{- define "main" }}
+{{- $lang := .Site.Language.Lang }}
+{{- $p := .Site.Data.career.profile }}
+{{- $email := .Site.Params.contact.email }}
+<section class="reading-surface contact">
+  <div class="wrap contact-grid">
+    <div class="contact-main">
+      <div class="eyebrow eyebrow-dark">{{ .Title }}</div>
+      <div class="contact-identity">
+        <img class="contact-photo" src="{{ $p.photo }}" width="72" height="72" alt="{{ $p.name }}">
+        <div>
+          <h1 class="contact-name">{{ $p.name }}</h1>
+          <p class="contact-role">{{ index $p.headline $lang }} · {{ index $p.location $lang }}</p>
+        </div>
+      </div>
+      <div class="contact-lede">{{ .Content }}</div>
+
+      <div class="contact-card">
+        <span class="contact-card-label">{{ i18n "contactEmail" }}</span>
+        <a class="contact-address" href="mailto:{{ $email }}">{{ $email }}</a>
+        <div class="contact-actions">
+          <a class="btn btn-primary" href="mailto:{{ $email }}">{{ i18n "contactWrite" }}</a>
+          <button type="button" class="btn btn-ghost contact-copy" data-copy="{{ $email }}" data-done="{{ i18n "contactCopied" }}">{{ i18n "contactCopy" }}</button>
+        </div>
+      </div>
+
+      <h2 class="contact-h2">{{ i18n "contactTopicsTitle" }}</h2>
+      <ul class="contact-topics">
+        <li>{{ i18n "contactTopic1" }}</li>
+        <li>{{ i18n "contactTopic2" }}</li>
+        <li>{{ i18n "contactTopic3" }}</li>
+      </ul>
+    </div>
+
+    <aside class="contact-side">
+      <h2 class="contact-h2">{{ i18n "contactNetworks" }}</h2>
+      <ul class="contact-networks">
+        {{- range .Site.Params.socialIcons }}
+        {{- $net := . }}
+        {{- with partial "social-icon-path.html" .name }}
+        <li>
+          <a href="{{ $net.url }}" rel="me noopener" target="_blank">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">{{ . | safeHTML }}</svg>
+            <span class="contact-net-name">{{ partial "social-name.html" $net.name }}</span>
+            <span class="contact-net-handle">{{ $net.url | replaceRE "^https?://(www\\.)?" "" | strings.TrimSuffix "/" }}</span>
+          </a>
+        </li>
+        {{- end }}
+        {{- end }}
+      </ul>
+    </aside>
+  </div>
+</section>
+<script>
+  // "Copy address": the clipboard when the page has it, a brief confirmation on the button.
+  document.querySelectorAll(".contact-copy").forEach(function (b) {
+    b.addEventListener("click", function () {
+      if (!navigator.clipboard) return;
+      navigator.clipboard.writeText(b.dataset.copy).then(function () {
+        var label = b.textContent;
+        b.textContent = b.dataset.done;
+        b.classList.add("is-done");
+        setTimeout(function () { b.textContent = label; b.classList.remove("is-done"); }, 1800);
+      });
+    });
+  });
+</script>
+{{- end }}
