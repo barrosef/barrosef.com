@@ -3,14 +3,7 @@
     <a class="wordmark" href="{{ "" | absLangURL }}">{{ .Site.Title }}</a>
     <nav class="site-nav">
       {{- range .Site.Menus.main }}
-      {{- if .HasChildren }}
-      <div class="nav-group">
-        <a href="{{ .URL | absURL }}" aria-haspopup="true">{{ .Name }}</a>
-        <div class="nav-sub">
-          {{- range .Children }}<a href="{{ .URL | absURL }}">{{ .Name }}</a>{{ end }}
-        </div>
-      </div>
-      {{- else }}<a href="{{ .URL | absURL }}">{{ .Name }}</a>{{ end }}
+      <a href="{{ .URL | absURL }}">{{ .Name }}</a>
       {{- end }}
       {{ partial "lang-switch.html" . }}
     </nav>

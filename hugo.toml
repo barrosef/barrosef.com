@@ -106,26 +106,6 @@ enableRobotsTXT = true
       url = "/about/"
       weight = 20
     [[languages.en.menus.main]]
-      parent = "about"
-      name = "Career"
-      url = "/about/career/"
-      weight = 1
-    [[languages.en.menus.main]]
-      parent = "about"
-      name = "Jiu-Jitsu"
-      url = "/about/jiu-jitsu/"
-      weight = 2
-    [[languages.en.menus.main]]
-      parent = "about"
-      name = "Barbecue"
-      url = "/about/barbecue/"
-      weight = 3
-    [[languages.en.menus.main]]
-      parent = "about"
-      name = "Libertarianism"
-      url = "/about/libertarianism/"
-      weight = 4
-    [[languages.en.menus.main]]
       name = "Contact"
       url = "/contact/"
       weight = 30
@@ -146,26 +126,6 @@ enableRobotsTXT = true
       name = "Sobre"
       url = "/pt-br/sobre/"
       weight = 20
-    [[languages.pt-br.menus.main]]
-      parent = "about"
-      name = "Carreira"
-      url = "/pt-br/sobre/carreira/"
-      weight = 1
-    [[languages.pt-br.menus.main]]
-      parent = "about"
-      name = "Jiu-Jitsu"
-      url = "/pt-br/sobre/jiu-jitsu/"
-      weight = 2
-    [[languages.pt-br.menus.main]]
-      parent = "about"
-      name = "Churrasco"
-      url = "/pt-br/sobre/churrasco/"
-      weight = 3
-    [[languages.pt-br.menus.main]]
-      parent = "about"
-      name = "Libertarianismo"
-      url = "/pt-br/sobre/libertarianismo/"
-      weight = 4
     [[languages.pt-br.menus.main]]
       name = "Contato"
       url = "/pt-br/contato/"
