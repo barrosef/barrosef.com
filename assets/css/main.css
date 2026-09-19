@@ -925,25 +925,6 @@ pre.has-copy:hover .copy-btn, pre.has-copy:focus-within .copy-btn { opacity: 1; 
 .snip .highlight { margin: 0; }
 .snip pre { border: none !important; margin: 0 !important; }
 
-/* ---- Header dropdown (the About sub-menu) ----
-   CSS only: opens on hover and on keyboard focus within; on a phone the
-   sub-pages are reached through the tabs on the about pages instead. */
-.nav-group { position: relative; }
-.nav-sub {
-  display: none;
-  position: absolute; top: calc(100% + 14px); left: -14px;
-  min-width: 180px;
-  background: var(--panel);
-  border: 1px solid var(--border);
-  padding: 8px 0;
-  z-index: 20;
-}
-.nav-sub::before { content: ""; position: absolute; left: 0; right: 0; top: -14px; height: 14px; }
-.nav-group:hover .nav-sub, .nav-group:focus-within .nav-sub { display: block; }
-.nav-sub a { display: block; padding: 8px 16px; font-size: 14px; color: var(--muted); }
-.nav-sub a:hover { color: var(--text); background: var(--ground); }
-@media (max-width: 900px) { .nav-sub { display: none !important; } }
-
 /* ---- About section: hub, sub-nav, compact header, coming-soon ---- */
 .about-nav {
   display: flex; flex-wrap: wrap; gap: 4px 22px;
