@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# ~/.local/bin/clh — Claude Code through Headroom.
+# Plain `claude` stays proxy-free on purpose: it is the control group.
+# Usage: clh [claude args]   e.g. clh --resume, clh -c
+systemctl --user is-active -q headroom.service \
+  || systemctl --user start headroom.service
+for _ in $(seq 1 30); do
+  curl -sf -m1 http://127.0.0.1:8787/readyz >/dev/null && break
+  sleep 0.5
+done
+exec env ANTHROPIC_BASE_URL=http://127.0.0.1:8787 ENABLE_TOOL_SEARCH=true \
+  claude --dangerously-skip-permissions "$@"
