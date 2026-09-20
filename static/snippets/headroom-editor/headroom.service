@@ -1,0 +1,20 @@
+# ~/.config/systemd/user/headroom.service
+# Enable: systemctl --user daemon-reload
+#         systemctl --user enable --now headroom.service
+[Unit]
+Description=Headroom proxy (Claude Code context optimization, token mode)
+Documentation=https://github.com/headroomlabs-ai/headroom
+After=default.target
+StartLimitIntervalSec=60
+StartLimitBurst=10
+
+[Service]
+Type=simple
+EnvironmentFile=%h/.headroom/proxy.env
+ExecStart=%h/.local/bin/headroom proxy --host 127.0.0.1 --port 8787
+Restart=always
+RestartSec=2
+OOMPolicy=continue
+
+[Install]
+WantedBy=default.target
