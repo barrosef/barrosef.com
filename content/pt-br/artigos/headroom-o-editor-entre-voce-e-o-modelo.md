@@ -8,19 +8,19 @@ tags: ["claude-code", "headroom", "desenvolvimento-com-ia", "ferramentas", "cust
 description: "Cada requisição a um agente de código reenvia a conversa inteira. O Headroom é um proxy local que a edita na saída. O que ele promete, como instalar no Linux, no macOS e no Windows, e as regras de um teste que começa amanhã em projetos reais."
 ---
 
-Imagine um mensageiro que leva um dossiê entre você e um especialista. Cada
-vez que você acrescenta uma página, ele vai até lá e lê para o especialista o
-arquivo inteiro, desde a primeira folha — a página nova e as quatrocentas
-anteriores —, porque o especialista não guarda nada entre uma visita e outra.
-E o especialista cobra por palavra.
+Trinta dias. Um projeto. **3,6 bilhões de tokens** de entrada enviados à
+API. O número vem dos transcripts das minhas próprias sessões do Claude Code,
+não do slide de um fornecedor. Noventa e oito por cento voltaram do cache do
+provedor a um décimo do preço — e a requisição média ainda assim carregava
+**meio milhão de tokens** de contexto.
 
-Uma conversa com um modelo de linguagem é isso. Ele não tem memória: cada
-requisição carrega tudo o que já foi dito, e a conta soma tudo, todas as
-vezes. Em um projeto real que examinei na semana passada, trinta dias de
-sessões do Claude Code enviaram **3,6 bilhões de tokens** de entrada à API.
-Noventa e oito por cento vieram do cache do provedor, a um décimo do preço. A
-requisição média ainda assim carregava **meio milhão de tokens** de contexto
-— o dossiê, lido em voz alta mais uma vez.
+Meio milhão de tokens é um livro. Cada requisição reenvia o livro.
+
+É isso que significa conversar com um modelo sem memória. É um mensageiro que
+leva um dossiê entre você e um especialista e, a cada visita, lê para ele o
+arquivo inteiro desde a primeira folha — a página nova e as quatrocentas
+anteriores —, porque nada fica guardado entre uma visita e outra. E o
+especialista cobra por palavra.
 
 O Headroom propõe pôr um editor na porta.
 

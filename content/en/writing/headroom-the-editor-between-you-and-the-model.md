@@ -8,18 +8,19 @@ tags: ["claude-code", "headroom", "ai-assisted-development", "tooling", "cost"]
 description: "Every request to a coding agent re-sends the whole conversation. Headroom is a local proxy that edits it on the way out. What it promises, how to set it up on Linux, macOS and Windows, and the rules of a test that starts tomorrow on real projects."
 ---
 
-Picture a courier who carries a dossier between you and a specialist. Every
-time you add a page, he walks over and reads the specialist the entire file
-from page one — the new page and the four hundred before it — because the
-specialist keeps nothing between visits. The specialist charges by the word.
+Thirty days. One project. **3.6 billion tokens** of input sent to the API.
+The number comes from the transcripts of my own Claude Code sessions, not from
+a vendor's slide. Ninety-eight percent came back from the provider's cache at
+a tenth of the price — and the average request still carried **half a million
+tokens** of context.
 
-That is a conversation with a language model. It has no memory: each request
-carries everything said so far, and the bill counts all of it, every time. In
-one real project I looked at last week, thirty days of Claude Code sessions
-sent **3.6 billion tokens** of input to the API. Ninety-eight percent were
-served from the provider's cache, at a tenth of the price. The average request
-still carried **half a million tokens** of context — the dossier, read aloud
-again.
+Half a million tokens is a book. Every request re-sends the book.
+
+That is what talking to a model with no memory means. It is a courier who
+carries a dossier between you and a specialist and, at every visit, reads the
+specialist the entire file from page one — the new page and the four hundred
+before it — because nothing is kept between visits. The specialist charges by
+the word.
 
 Headroom proposes to put an editor at the door.
 
