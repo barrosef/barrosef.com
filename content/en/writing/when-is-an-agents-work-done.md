@@ -5,7 +5,7 @@ draft: false
 translationKey: "when-is-an-agents-work-done"
 categories: ["Technology"]
 tags: ["dop", "ai-agents", "software-delivery", "architecture-decisions"]
-description: "An agent opens a pull request in twenty minutes; a person takes an hour to review it. DOP's answer: no green, no PR — and green has to be earned on a commit, not a dirty tree."
+description: "An agent opens a pull request in twenty minutes; review takes an hour. DOP's answer: no green, no PR — and green must be earned on a commit."
 ---
 
 An agent opens a pull request in twenty minutes. A person takes an hour to

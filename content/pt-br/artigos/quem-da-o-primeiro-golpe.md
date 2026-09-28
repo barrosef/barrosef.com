@@ -1,11 +1,12 @@
 ---
 title: "Quem dá o primeiro golpe: o princípio da não agressão, da guia de imposto ao quartel"
+seoTitle: "Quem dá o primeiro golpe: a não agressão aplicada"
 date: 2026-09-18T10:30:00-04:00
 draft: false
 translationKey: "who-strikes-first"
 categories: ["Liberdade"]
 tags: ["libertarianismo", "nao-agressao", "impostos", "fundo-eleitoral", "servico-militar"]
-description: "O libertarianismo cabe numa frase: ninguém pode iniciar força contra outra pessoa ou contra o que é dela. O resto é aplicá-la — à guia com código de barras, ao fundo que paga a campanha de quem cobra a guia, e à carta que chama um rapaz de dezoito anos para servir."
+description: "O libertarianismo numa frase: ninguém pode iniciar força. O resto é aplicá-la — à guia de imposto, ao fundo de campanha, à carta do quartel."
 ---
 
 <p class="drop">Há uma frase que cabe na palma da mão, e o libertarianismo inteiro cabe dentro dela. <em>Ninguém pode iniciar força contra outra pessoa, nem contra o que é dela.</em> Chamam de princípio da não agressão. Não diz que a força é proibida — diz que ninguém pode dar o primeiro golpe. Quem se defende não agride. Quem começa, sim.</p>

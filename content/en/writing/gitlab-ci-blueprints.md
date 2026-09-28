@@ -1,11 +1,12 @@
 ---
 title: "GitLab CI for Kubernetes: a blueprint library for many apps and many clusters"
+seoTitle: "GitLab CI for Kubernetes: a blueprint library"
 date: 2026-09-17T09:00:00-04:00
 draft: false
 translationKey: "gitlab-ci-blueprints"
 categories: ["Technology"]
 tags: ["gitlab-ci", "kubernetes", "devops", "delivery"]
-description: "A delivery architecture that survived several apps, two rings and more than one cluster: a versioned blueprint library, thin app pipelines, a fleet repository that is the only thing talking to Kubernetes, and a live ring that releases what preview already ran instead of building again."
+description: "A versioned blueprint library, thin app pipelines, and one fleet repository that alone talks to Kubernetes. What survived many apps and clusters."
 aliases: ["/writing/gitlab-ci-template-library/"]
 ---
 

@@ -5,7 +5,7 @@ draft: false
 translationKey: "when-is-an-agents-work-done"
 categories: ["Tecnologia"]
 tags: ["dop", "agentes-de-ia", "entrega-de-software", "decisoes-de-arquitetura"]
-description: "Um agente abre um pull request em vinte minutos; uma pessoa leva uma hora para revisar. A resposta do DOP: sem verde, sem PR — e o verde tem de ser conquistado num commit, não numa árvore suja."
+description: "Um agente abre um PR em vinte minutos; revisar leva uma hora. A resposta do DOP: sem verde, sem PR — e o verde se conquista num commit."
 ---
 
 Um agente abre um pull request em vinte minutos. Uma pessoa leva uma hora para

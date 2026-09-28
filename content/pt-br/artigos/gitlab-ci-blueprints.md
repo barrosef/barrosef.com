@@ -1,11 +1,12 @@
 ---
 title: "GitLab CI para Kubernetes: uma biblioteca de blueprints para muitas apps e muitos clusters"
+seoTitle: "GitLab CI para Kubernetes: biblioteca de blueprints"
 date: 2026-09-17T09:00:00-04:00
 draft: false
 translationKey: "gitlab-ci-blueprints"
 categories: ["Tecnologia"]
 tags: ["gitlab-ci", "kubernetes", "devops", "entrega"]
-description: "Uma arquitetura de entrega que sobreviveu a várias apps, dois anéis e mais de um cluster: uma biblioteca de blueprints versionada, pipelines de aplicação finos, um repositório de frota que é o único a falar com o Kubernetes, e um anel live que libera o que o preview já rodou em vez de construir de novo."
+description: "Uma biblioteca de blueprints versionada, pipelines de aplicação finos, e um repositório de frota que é o único a falar com o Kubernetes."
 aliases: ["/pt-br/artigos/gitlab-ci-biblioteca-de-templates/"]
 ---
 

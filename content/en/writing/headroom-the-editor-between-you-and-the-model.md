@@ -5,7 +5,7 @@ draft: false
 translationKey: "headroom-editor"
 categories: ["Technology"]
 tags: ["claude-code", "headroom", "ai-assisted-development", "tooling", "cost"]
-description: "Every request to a coding agent re-sends the whole conversation. Headroom is a local proxy that edits it on the way out. What it promises, how to set it up on Linux, macOS and Windows, and the rules of a test that starts tomorrow on real projects."
+description: "Every request to a coding agent re-sends the whole conversation. Headroom edits it on the way out — what it promises, and the rules of the test."
 ---
 
 Thirty days. One project. **3.6 billion tokens** of input sent to the API.

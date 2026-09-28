@@ -1,11 +1,12 @@
 ---
 title: "Arquitetura hexagonal onde ela compensa: como o DOP mantém os fornecedores atrás de ports"
+seoTitle: "Arquitetura hexagonal onde ela compensa"
 date: 2026-09-18T08:00:00-04:00
 draft: false
 translationKey: "hexagonal-architecture-dop"
 categories: ["Tecnologia"]
 tags: ["dop", "arquitetura-hexagonal", "go", "decisoes-de-arquitetura", "nuvem"]
-description: "O núcleo do DOP roda no Cloud Run e num cluster k3s sem mudar uma linha do domínio. O que torna isso verdade não é a estrutura de pastas: dois adapters por port desde o primeiro dia, uma suíte de contrato que todo adapter passa e um teste que quebra o build quando o domínio importa infraestrutura — com o código."
+description: "Dois adapters por port desde o primeiro dia, uma suíte de contrato que todos passam, e um teste que quebra o build quando o domínio importa infra."
 ---
 
 O núcleo do DOP precisa rodar em dois lugares que não concordam em nada. No

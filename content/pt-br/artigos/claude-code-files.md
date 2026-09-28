@@ -5,7 +5,7 @@ draft: false
 translationKey: "claude-code-files"
 categories: ["Tecnologia"]
 tags: ["claude-code", "desenvolvimento-com-ia", "ferramentas"]
-description: "O Claude Code é configurado por meia dúzia de arquivos de texto. Saiba qual é qual e a ferramenta passa a trabalhar do seu jeito — uma referência curta, com tabelas."
+description: "O Claude Code é configurado por meia dúzia de arquivos de texto. Saiba qual é qual e a ferramenta passa a trabalhar do seu jeito."
 ---
 
 O Claude Code lê meia dúzia de arquivos de texto antes de fazer qualquer coisa

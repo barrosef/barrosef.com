@@ -5,7 +5,7 @@ draft: false
 translationKey: "headroom-editor"
 categories: ["Tecnologia"]
 tags: ["claude-code", "headroom", "desenvolvimento-com-ia", "ferramentas", "custo"]
-description: "Cada requisição a um agente de código reenvia a conversa inteira. O Headroom é um proxy local que a edita na saída. O que ele promete, como instalar no Linux, no macOS e no Windows, e as regras de um teste que começa amanhã em projetos reais."
+description: "Cada requisição a um agente de código reenvia a conversa inteira. O Headroom a edita na saída — o que ele promete e as regras do teste."
 ---
 
 Trinta dias. Um projeto. **3,6 bilhões de tokens** de entrada enviados à
