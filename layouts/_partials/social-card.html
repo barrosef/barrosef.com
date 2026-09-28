@@ -1,0 +1,16 @@
+{{- /*
+  social-card — the absolute URL of the image that represents this page.
+
+  One partial, because this logic used to live twice: head.html resolved the
+  per-article card while structured-data.html did not, so every article offered
+  Google the generic image while offering the real one to social networks. Two
+  copies of a rule diverge; one cannot.
+
+  Order: the page's own `image:`, else the generated per-article card at
+  static/og/<translationKey>.<lang>.png (scripts/gen_og_images.py), else the
+  site default.
+*/ -}}
+{{- $card := printf "og/%s.%s.png" .Params.translationKey .Site.Language.Lang -}}
+{{- $isPost := and .IsPage (in (slice "writing" "artigos") .Section) -}}
+{{- $img := .Params.image | default (cond (and $isPost (fileExists (printf "static/%s" $card))) $card "og-default.png") -}}
+{{- return absURL $img -}}
