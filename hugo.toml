@@ -153,3 +153,22 @@ enableGitInfo = true
 # Lastmod from git rather than the front matter's `date`; see enableGitInfo.
 [frontmatter]
   lastmod = [":git", "lastmod", ":fileModTime"]
+
+# Related content, for the links at the foot of an article. Tags carry most of
+# the weight because they are the finest signal the site has; the category is a
+# coarse tiebreak and recency a finer one. `includeNewer` matters on a small
+# archive: without it an early article can never point at a later one, which is
+# exactly backwards for a site that keeps publishing.
+[related]
+  includeNewer = true
+  threshold = 20
+  toLower = true
+  [[related.indices]]
+    name = "tags"
+    weight = 100
+  [[related.indices]]
+    name = "categories"
+    weight = 40
+  [[related.indices]]
+    name = "date"
+    weight = 10

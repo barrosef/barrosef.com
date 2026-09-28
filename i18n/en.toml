@@ -222,3 +222,6 @@ other = "episode"
 
 [episodes]
 other = "episodes"
+
+[keepReading]
+other = "Keep reading"

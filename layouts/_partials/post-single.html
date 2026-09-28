@@ -22,6 +22,7 @@
     <div class="post-content">
       {{ .Content }}
     </div>
+    {{ partial "related-posts.html" . }}
     {{- if (.Param "comments") }}
     {{ partial "comments.html" . }}
     {{- end }}
