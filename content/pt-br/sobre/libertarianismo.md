@@ -3,7 +3,7 @@ title: "Libertarianismo"
 layout: "corner"
 translationKey: "about-libertarianism"
 weight: 40
-description: "Imposto é roubo. Uma opinião direta sobre o que o brasileiro paga, o que recebe em troca, o carro que o Estado toma para apodrecer num pátio, a burocracia que sufoca quem produz — e o que a liberdade econômica mudaria."
+description: "Imposto é roubo. O que o brasileiro paga, o que recebe em troca, o carro que o Estado toma para apodrecer num pátio — e o que a liberdade mudaria."
 lede: "Imposto é roubo. O resto desta página é só o desenvolvimento."
 galleryShape: landscape
 gallery:

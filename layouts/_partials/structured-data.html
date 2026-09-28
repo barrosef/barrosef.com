@@ -18,7 +18,7 @@
   {{- $site := dict "@type" "WebSite" "@id" (printf "%s#website" .Site.BaseURL) "url" .Site.BaseURL "name" .Site.Title "inLanguage" .Site.Language.LanguageCode "publisher" (dict "@id" (printf "%s#person" .Site.BaseURL)) }}
   {{- $graph = $graph | append $site $person }}
 {{- else if and .IsPage (in (slice "writing" "artigos") .Section) }}
-  {{- $tags := slice }}{{ range .GetTerms "tags" }}{{ $tags = $tags | append .LinkTitle }}{{ end }}
+  {{- $tags := slice }}{{ range .Params.tags }}{{ $tags = $tags | append (partial "tag-name.html" .) }}{{ end }}
   {{- $article := dict
     "@type" "BlogPosting"
     "@id" (printf "%s#article" .Permalink)
@@ -70,7 +70,8 @@
     {{- $pos = add $pos 1 }}
   {{- end }}
   {{- if $crumbs }}
-    {{- $crumbs = $crumbs | append (dict "@type" "ListItem" "position" $pos "name" (.LinkTitle | default .Title)) }}
+    {{- $crumbs = $crumbs | append (dict "@type" "ListItem" "position" $pos
+          "name" (.Params.seoTitle | default .LinkTitle | default .Title)) }}
     {{- $graph = $graph | append (dict
       "@type" "BreadcrumbList"
       "@id" (printf "%s#breadcrumb" .Permalink)
