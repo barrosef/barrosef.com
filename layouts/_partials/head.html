@@ -1,10 +1,21 @@
 {{- $lang := .Site.Language.Lang }}
 {{- $p := .Site.Data.career.profile }}
 {{- $headline := index $p.headline $lang }}
-{{- /* Title: the person and what he is on the home; page title · site elsewhere. */}}
-{{- $title := cond .IsHome (printf "%s — %s" .Site.Title $headline) (printf "%s · %s" .Title .Site.Title) }}
-{{- $desc := .Description | default .Site.Params.description }}
 {{- $isPost := and .IsPage (in (slice "writing" "artigos") .Section) }}
+{{- /* Title: the person and what he is on the home; the article alone on a post;
+       page title · site elsewhere.
+
+       An article carries no site suffix. Google appends the site name to a result
+       on its own and og:site_name already says it, so the twelve characters were
+       spent twice — and a search result has room for about sixty.
+
+       `seoTitle` exists for the few essay titles that are deliberately long,
+       where the length is the rhetorical move. The H1 keeps the full title and
+       only the search result gets the short one; the two are different jobs. */}}
+{{- $pageTitle := .Params.seoTitle | default .Title }}
+{{- $title := cond .IsHome (printf "%s — %s" .Site.Title $headline)
+      (cond $isPost $pageTitle (printf "%s · %s" .Title .Site.Title)) }}
+{{- $desc := .Description | default .Site.Params.description }}
 {{- $image := partial "social-card.html" . }}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">

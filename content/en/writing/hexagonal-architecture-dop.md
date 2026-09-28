@@ -1,11 +1,12 @@
 ---
 title: "Hexagonal architecture where it pays: how DOP keeps vendors behind ports"
+seoTitle: "Hexagonal architecture where it pays"
 date: 2026-09-18T08:00:00-04:00
 draft: false
 translationKey: "hexagonal-architecture-dop"
 categories: ["Technology"]
 tags: ["dop", "hexagonal-architecture", "go", "architecture-decisions", "cloud"]
-description: "DOP's core runs on Cloud Run and on a k3s cluster with no change to the domain. What makes that true is not the folder layout: two adapters per port from day one, one contract suite every adapter passes, and a test that breaks the build when the domain imports infrastructure — with the code."
+description: "Two adapters per port from day one, one contract suite all of them pass, and a test that breaks the build when the domain imports infrastructure."
 ---
 
 DOP's core has to run in two places that agree on nothing. On Google Cloud

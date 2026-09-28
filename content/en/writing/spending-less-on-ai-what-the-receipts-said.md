@@ -5,7 +5,7 @@ draft: false
 translationKey: "headroom-receipts"
 categories: ["Technology"]
 tags: ["claude-code", "headroom", "ai-assisted-development", "tooling", "cost", "spending-less-on-ai"]
-description: "Episode 2 of Spending Less on AI. The editor took his seat eight days ago; here is what the receipts say. It saved $439 and about $1,200 came back on another line — and the rule I wrote in advance had a blind spot exactly where the money went."
+description: "Episode 2. It saved $439 and about $1,200 came back on another line of the same invoice — and my own rule was blind exactly where the money went."
 ---
 
 *Second episode of **Spending Less on AI**. The first one — {{< episode 1 >}} —

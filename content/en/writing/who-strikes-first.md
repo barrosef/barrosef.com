@@ -1,11 +1,12 @@
 ---
 title: "Who strikes first: the non-aggression principle, from the tax bill to the barracks"
+seoTitle: "Who strikes first: the non-aggression principle"
 date: 2026-09-18T10:30:00-04:00
 draft: false
 translationKey: "who-strikes-first"
 categories: ["Liberty"]
 tags: ["libertarianism", "non-aggression", "taxes", "electoral-fund", "conscription"]
-description: "Libertarianism fits in one sentence: no one may initiate force against another person or against what is theirs. The rest is applying it — to the bill with the barcode, to the fund that pays the campaigns of those who send the bill, and to the letter that calls an eighteen-year-old to serve."
+description: "Libertarianism in one sentence: no one may initiate force. The rest is applying it — to the tax bill, to the campaign fund, to the draft letter."
 ---
 
 <p class="drop">There is a sentence that fits in the palm of a hand, and the whole of libertarianism fits inside it. <em>No one may initiate force against another person, nor against what is theirs.</em> It is called the non-aggression principle. It does not say force is forbidden — it says no one may strike first. Whoever defends himself does not aggress. Whoever starts, does.</p>
