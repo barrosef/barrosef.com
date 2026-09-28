@@ -112,6 +112,10 @@ enableGitInfo = true
       url = "/writing/"
       weight = 10
     [[languages.en.menus.main]]
+      name = "Series"
+      url = "/series/"
+      weight = 15
+    [[languages.en.menus.main]]
       identifier = "about"
       name = "About"
       url = "/about/"
@@ -132,6 +136,10 @@ enableGitInfo = true
       name = "Artigos"
       url = "/pt-br/artigos/"
       weight = 10
+    [[languages.pt-br.menus.main]]
+      name = "Séries"
+      url = "/pt-br/serie/"
+      weight = 15
     [[languages.pt-br.menus.main]]
       identifier = "about"
       name = "Sobre"

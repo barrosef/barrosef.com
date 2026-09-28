@@ -1,0 +1,17 @@
+{{- /*
+  series-hub — the hub page for a given series slug, in the language being built.
+
+  Returns the Page, or "" when no hub page exists for that series. Lets an
+  article link to its series without knowing the hub's URL, which differs per
+  language (/series/... and /pt-br/serie/...).
+
+  Takes: a series slug.
+*/ -}}
+{{- $slug := . -}}
+{{- $found := "" -}}
+{{- range site.RegularPages -}}
+  {{- if and (not $found) (eq .Params.seriesKey $slug) -}}
+    {{- $found = . -}}
+  {{- end -}}
+{{- end -}}
+{{- return $found -}}

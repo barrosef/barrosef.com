@@ -8,7 +8,12 @@
 {{- with partial "series-episode.html" . -}}
 {{- $lang := site.Language.Lang -}}
 <nav class="series-band" aria-label="{{ index .series.title $lang }}">
+  {{- $hub := partial "series-hub.html" .slug }}
+  {{- if $hub }}
+  <a class="series-band__name" href="{{ $hub.RelPermalink }}">{{ index .series.title $lang }}</a>
+  {{- else }}
   <span class="series-band__name">{{ index .series.title $lang }}</span>
+  {{- end }}
   <span class="series-band__ep">{{ i18n "episode" | default "episode" }} {{ .n }}/{{ .total }}</span>
   {{- with .prevPage }}
   <a class="series-band__prev" href="{{ .RelPermalink }}">← {{ .Title }}</a>

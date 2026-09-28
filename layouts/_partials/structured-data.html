@@ -52,6 +52,36 @@
     ) }}
   {{- end }}
   {{- $graph = $graph | append $article $person }}
+{{- else if eq .Type "series" }}
+  {{- /* The hub of a series, and the series itself. The @id matches the one each
+         episode's isPartOf points at, so the graph joins up instead of declaring
+         two unrelated series with the same name. */}}
+  {{- $collection := dict "@type" "CollectionPage" "@id" .Permalink "url" .Permalink
+        "name" .Title "description" .Description "inLanguage" .Site.Language.LanguageCode
+        "isPartOf" (dict "@id" (printf "%s#website" .Site.BaseURL)) }}
+  {{- with .Params.seriesKey }}
+    {{- $s := index site.Data.series . }}
+    {{- $parts := slice }}
+    {{- range $s.episodes }}
+      {{- with .key }}
+        {{- with partial "series-page.html" (dict "key" .) }}
+          {{- $parts = $parts | append (dict "@id" (printf "%s#article" .Permalink)) }}
+        {{- end }}
+      {{- end }}
+    {{- end }}
+    {{- $series := dict
+      "@type" "CreativeWorkSeries"
+      "@id" (printf "%s#series-%s" $.Site.BaseURL .)
+      "name" (index $s.title $lang)
+      "description" (index $s.blurb $lang)
+      "url" $.Permalink
+      "author" (dict "@id" (printf "%s#person" $.Site.BaseURL))
+    }}
+    {{- with $parts }}{{ $series = merge $series (dict "hasPart" .) }}{{ end }}
+    {{- $collection = merge $collection (dict "mainEntity" (dict "@id" (printf "%s#series-%s" $.Site.BaseURL $.Params.seriesKey))) }}
+    {{- $graph = $graph | append $series }}
+  {{- end }}
+  {{- $graph = $graph | append $collection $person }}
 {{- else if in (slice "about" "sobre") .Section }}
   {{- $graph = $graph | append (dict "@type" "ProfilePage" "@id" .Permalink "url" .Permalink "name" .Title "inLanguage" .Site.Language.LanguageCode "mainEntity" (dict "@id" (printf "%s#person" .Site.BaseURL))) $person }}
 {{- else }}

@@ -1,0 +1,19 @@
+{{ define "main" }}
+{{- $lang := site.Language.Lang -}}
+<article class="reading-surface post-single">
+  <div class="wrap-reading">
+    <h1 class="post-title">{{ .Title }}</h1>
+    <p class="series-blurb">{{ .Description }}</p>
+    <ul class="series-index">
+      {{- range .Pages.ByParam "date" }}
+      {{- $s := index site.Data.series .Params.seriesKey }}
+      <li>
+        <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+        <p>{{ index $s.blurb $lang }}</p>
+        <p class="series-index__count">{{ len $s.episodes }} {{ i18n "episodes" }}</p>
+      </li>
+      {{- end }}
+    </ul>
+  </div>
+</article>
+{{ end }}

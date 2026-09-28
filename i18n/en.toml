@@ -219,3 +219,6 @@ other = "Networks"
 
 [episode]
 other = "episode"
+
+[episodes]
+other = "episodes"
