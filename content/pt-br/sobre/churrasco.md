@@ -7,23 +7,18 @@ description: "Fogo, carne, paciência e gente em volta: o churrasco como hobby, 
 lede: "Fogo, carne, paciência e gente em volta. O lugar onde a semana se desconecta."
 gallery:
   - src: /img/barbecue/01-mate.jpg
-    thumb: /img/barbecue/01-mate-thumb.jpg
     alt: "Uma cuia de tereré na mão, com a churrasqueira ao fundo e a brasa começando"
     caption: "O tereré, enquanto o fogo decide o que vai ser."
   - src: /img/barbecue/02-burgers.jpg
-    thumb: /img/barbecue/02-burgers-thumb.jpg
     alt: "Hambúrgueres e pães na grelha, sobre um leito de brasas vermelhas"
     caption: "Hambúrguer na brasa. O pão também vai."
   - src: /img/barbecue/03-board.jpg
-    thumb: /img/barbecue/03-board-thumb.jpg
     alt: "Bife fatiado ao ponto mal passado numa tábua de madeira, com pão de alho ao lado"
     caption: "Na tábua: mal passado, e não é cru."
   - src: /img/barbecue/04-crust.jpg
-    thumb: /img/barbecue/04-crust-thumb.jpg
     alt: "Uma peça inteira de carne com a crosta dourada e crocante, recém-saída do fogo"
     caption: "A crosta. Maillard fazendo o trabalho dela."
   - src: /img/barbecue/05-flame.jpg
-    thumb: /img/barbecue/05-flame-thumb.jpg
     alt: "Bifes na grelha com a chama alta subindo da lenha embaixo"
     caption: "Fogo alto para selar; brasa mansa para terminar."
 ---

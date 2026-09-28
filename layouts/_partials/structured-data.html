@@ -8,7 +8,7 @@
   "alternateName" $p.shortName
   "jobTitle" (index $p.headline $lang)
   "url" .Site.BaseURL
-  "image" ($p.photo | absURL)
+  "image" (partial "profile-image-url.html" .)
   "email" (printf "mailto:%s" $p.email)
   "sameAs" (slice $p.linkedin $p.github)
   "address" (dict "@type" "PostalAddress" "addressCountry" "BR")

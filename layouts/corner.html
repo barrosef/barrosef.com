@@ -16,8 +16,25 @@
       <ul class="gallery-grid{{ if $land }} gallery-grid-landscape{{ end }}">
         {{- range $i, $g := . }}
         <li>
-          <a class="gallery-item" href="{{ $g.src }}" data-caption="{{ $g.caption }}">
-            <img src="{{ $g.thumb | default $g.src }}" alt="{{ $g.alt }}" loading="lazy" width="{{ if $land }}800{{ else }}600{{ end }}" height="{{ if $land }}600{{ else }}800{{ end }}">
+          {{- /* Thumbnails are generated, not hand-made. The pairs of files that
+                 used to live beside each photo were 60-94 KB of JPEG each, and a
+                 page carried ten of them; Hugo crops and encodes to WebP at
+                 exactly the grid's size instead. The lightbox gets its own
+                 capped copy, loaded only on click. */}}
+          {{- /* The grid is 1120px wide: four landscape cells of ~268px, or five
+                 portrait cells of ~214px, dropping to two columns on a phone.
+                 Twice the widest real cell is about 560px, so that is what gets
+                 encoded — 800x600 was three times the pixels anyone sees. */}}
+          {{- $w := cond $land 560 440 }}
+          {{- $h := cond $land 420 587 }}
+          {{- $asset := resources.Get (strings.TrimPrefix "/" $g.src) }}
+          {{- $thumb := "" }}{{ $full := $g.src }}
+          {{- with $asset }}
+            {{- $thumb = .Fill (printf "%dx%d webp q80" $w $h) }}
+            {{- $full = (.Process "resize 1600x webp q82").RelPermalink }}
+          {{- end }}
+          <a class="gallery-item" href="{{ $full }}" data-caption="{{ $g.caption }}">
+            <img src="{{ with $thumb }}{{ .RelPermalink }}{{ else }}{{ $g.src }}{{ end }}" alt="{{ $g.alt }}" loading="lazy" decoding="async" width="{{ $w }}" height="{{ $h }}">
           </a>
           {{ with $g.caption }}<p class="gallery-caption">{{ . }}</p>{{ end }}
           {{ with $g.credit }}<p class="gallery-credit">{{ i18n "photo" }}: {{ with $g.creditURL }}<a href="{{ . }}">{{ end }}{{ $g.credit }}{{ if $g.creditURL }}</a>{{ end }}</p>{{ end }}

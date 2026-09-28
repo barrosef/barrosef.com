@@ -1,0 +1,23 @@
+{{- /*
+  profile-photo — the portrait, at exactly the size the call site shows it.
+
+  The source is a 280x280 PNG weighing 113 KB, and it sat on every page of the
+  site at four different display sizes, always at full weight. Here each call
+  gets a WebP resized to twice its display size — enough for a retina screen and
+  nothing more — which takes the same image below 15 KB.
+
+  No lazy loading: this is above the fold everywhere it appears, and deferring it
+  would delay the largest paint rather than help it.
+
+  Takes: dict "size" <css px> "class" <class> "ctx" <page>
+*/ -}}
+{{- $size := .size -}}
+{{- $photo := .ctx.Site.Data.career.profile -}}
+{{- $src := resources.Get (strings.TrimPrefix "/" $photo.photo) -}}
+{{- if $src -}}
+  {{- $img := $src.Process (printf "resize %dx webp q82" (mul $size 2)) -}}
+  <img class="{{ .class }}" src="{{ $img.RelPermalink }}" width="{{ $size }}" height="{{ $size }}" alt="{{ $photo.name }}" decoding="async">
+{{- else -}}
+  {{- /* Asset missing: fall back to the raw path rather than render nothing. */ -}}
+  <img class="{{ .class }}" src="{{ $photo.photo }}" width="{{ $size }}" height="{{ $size }}" alt="{{ $photo.name }}" decoding="async">
+{{- end -}}

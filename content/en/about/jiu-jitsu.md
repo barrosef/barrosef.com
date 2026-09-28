@@ -7,23 +7,18 @@ description: "Far beyond sport, self-defence and competition: a way of breathing
 lede: "Far beyond sport, self-defence and competition: a way of breathing under weight — and of carrying that into everything else."
 gallery:
   - src: /img/jiu-jitsu/01-podium.jpg
-    thumb: /img/jiu-jitsu/01-podium-thumb.jpg
     alt: "Ed on a championship podium with teammates, holding the flag of Mato Grosso"
     caption: "Podium day. The flag is Mato Grosso's; the result is the team's."
   - src: /img/jiu-jitsu/02-guard.jpg
-    thumb: /img/jiu-jitsu/02-guard-thumb.jpg
     alt: "Jiu-jitsu training on the mat: Ed playing guard against a standing partner"
     caption: "Guard. Underneath is where everything starts."
   - src: /img/jiu-jitsu/03-training.jpg
-    thumb: /img/jiu-jitsu/03-training-thumb.jpg
     alt: "Ed in a black gi on the mat, attentive, during training"
     caption: "Reading the situation before moving."
   - src: /img/jiu-jitsu/04-team.jpg
-    thumb: /img/jiu-jitsu/04-team-thumb.jpg
     alt: "The team lined up behind the Spartacus Fight Team banner, hands on chests, before a competition"
     caption: "The team, hands on chests, before the fight."
   - src: /img/jiu-jitsu/05-strength.jpg
-    thumb: /img/jiu-jitsu/05-strength-thumb.jpg
     alt: "Ed doing a barbell hip thrust at the gym"
     caption: "What holds up the mat happens off it."
 ---

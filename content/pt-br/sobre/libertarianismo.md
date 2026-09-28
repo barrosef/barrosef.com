@@ -8,49 +8,41 @@ lede: "Imposto é roubo. O resto desta página é só o desenvolvimento."
 galleryShape: landscape
 gallery:
   - src: /img/libertarianism/01-impostometro.jpg
-    thumb: /img/libertarianism/01-impostometro-thumb.jpg
     alt: "O painel do Impostômetro em São Paulo mostrando dezenas de bilhões de reais arrecadados"
     caption: "O contador que nunca anda para trás."
     credit: "Francisco Gonzalez · CC BY 2.0"
     creditURL: "https://commons.wikimedia.org/wiki/File%3AImpost%C3%B4metro_%286273752534%29.jpg"
   - src: /img/libertarianism/02-buraco-br116.jpg
-    thumb: /img/libertarianism/02-buraco-br116-thumb.jpg
     alt: "Um caminhão desviando de uma cratera no asfalto da BR-116"
     caption: "A BR-116, paga muitas vezes, entregue assim."
     credit: "Agencia CNT de Noticias · CC BY 2.0"
     creditURL: "https://commons.wikimedia.org/wiki/File%3ACear%C3%A1_%286276101325%29.jpg"
   - src: /img/libertarianism/03-buraco-rua.jpg
-    thumb: /img/libertarianism/03-buraco-rua-thumb.jpg
     alt: "Uma rua asfaltada coberta de buracos"
     caption: "Rua com IPTU, IPVA e CIDE dos combustíveis em dia."
     credit: "Sandrito Silva · CC BY-SA 4.0"
     creditURL: "https://commons.wikimedia.org/wiki/File%3ADsvcd.jpg"
   - src: /img/libertarianism/04-patio-ipva.jpg
-    thumb: /img/libertarianism/04-patio-ipva-thumb.jpg
     alt: "Centenas de carros amontoados num pátio de veículos apreendidos em São Paulo"
     caption: "O pátio. Seu carro, comprado com o que sobrou do seu salário, apodrecendo ao sol."
     credit: "Alex Vieira from SP, BR · CC BY 2.0"
     creditURL: "https://commons.wikimedia.org/wiki/File%3AIPVA_Atrasado%3F_%283440650115%29.jpg"
   - src: /img/libertarianism/05-malotes.jpg
-    thumb: /img/libertarianism/05-malotes-thumb.jpg
     alt: "Agentes da Polícia Federal carregando malotes apreendidos numa fase da Operação Lava Jato"
     caption: "Para onde parte do dinheiro foi: malotes."
     credit: "Rovena Rosa/Agência Brasil · CC BY 3.0 br"
     creditURL: "https://commons.wikimedia.org/wiki/File%3AEntrega_de_malotes_na_31%C2%AA_fase_da_Opera%C3%A7%C3%A3o_Lava_Jato.jpg"
   - src: /img/libertarianism/06-apreensao.jpg
-    thumb: /img/libertarianism/06-apreensao-thumb.jpg
     alt: "Agentes da Polícia Federal saindo de um prédio com computadores e documentos apreendidos"
     caption: "A rotina de quem administra o que você pagou."
     credit: "Tânia Rêgo · CC BY 3.0 br"
     creditURL: "https://commons.wikimedia.org/wiki/File%3AApreens%C3%B5es_da_Opera%C3%A7%C3%A3o_Calicute.jpg"
   - src: /img/libertarianism/07-fila.jpg
-    thumb: /img/libertarianism/07-fila-thumb.jpg
     alt: "Vista aérea de uma fila de centenas de pessoas na calçada em frente a uma agência bancária"
     caption: "A fila: o serviço público na sua forma mais honesta."
     credit: "Prefeitura de Itapevi from Itapevi, Brasil · CC BY 2.0"
     creditURL: "https://commons.wikimedia.org/wiki/File%3A%282020.05.04%29_Ag%C3%AAncias_Banc%C3%A1rias_e_Lot%C3%A9ricas%2C_Ser%C3%A3o_multada_se_n%C3%A3o_organizarem_suas_filas_%2849855207706%29.jpg"
   - src: /img/libertarianism/08-policia.jpg
-    thumb: /img/libertarianism/08-policia-thumb.jpg
     alt: "Policiais de pé diante de barracos numa comunidade"
     caption: "Segurança: a primeira função do Estado, a última que ele cumpre."
     credit: "Núcleo Editorial · CC BY 2.0"

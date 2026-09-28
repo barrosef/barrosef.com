@@ -8,49 +8,41 @@ lede: "Taxation is theft. The rest of this page is just the argument."
 galleryShape: landscape
 gallery:
   - src: /img/libertarianism/01-impostometro.jpg
-    thumb: /img/libertarianism/01-impostometro-thumb.jpg
     alt: "The Impostômetro board in São Paulo showing tens of billions of reais collected"
     caption: "The counter that never runs backwards."
     credit: "Francisco Gonzalez · CC BY 2.0"
     creditURL: "https://commons.wikimedia.org/wiki/File%3AImpost%C3%B4metro_%286273752534%29.jpg"
   - src: /img/libertarianism/02-buraco-br116.jpg
-    thumb: /img/libertarianism/02-buraco-br116-thumb.jpg
     alt: "A truck steering around a crater in the asphalt of the BR-116 highway"
     caption: "The BR-116, paid for many times over, delivered like this."
     credit: "Agencia CNT de Noticias · CC BY 2.0"
     creditURL: "https://commons.wikimedia.org/wiki/File%3ACear%C3%A1_%286276101325%29.jpg"
   - src: /img/libertarianism/03-buraco-rua.jpg
-    thumb: /img/libertarianism/03-buraco-rua-thumb.jpg
     alt: "A paved street covered in potholes"
     caption: "A street with its property, vehicle and fuel taxes all paid up."
     credit: "Sandrito Silva · CC BY-SA 4.0"
     creditURL: "https://commons.wikimedia.org/wiki/File%3ADsvcd.jpg"
   - src: /img/libertarianism/04-patio-ipva.jpg
-    thumb: /img/libertarianism/04-patio-ipva-thumb.jpg
     alt: "Hundreds of cars crammed into an impound lot in São Paulo"
     caption: "The yard. Your car, bought with what was left of your salary, rotting in the sun."
     credit: "Alex Vieira from SP, BR · CC BY 2.0"
     creditURL: "https://commons.wikimedia.org/wiki/File%3AIPVA_Atrasado%3F_%283440650115%29.jpg"
   - src: /img/libertarianism/05-malotes.jpg
-    thumb: /img/libertarianism/05-malotes-thumb.jpg
     alt: "Federal Police agents carrying seized bags during a phase of Operation Car Wash"
     caption: "Where part of the money went: bags."
     credit: "Rovena Rosa/Agência Brasil · CC BY 3.0 br"
     creditURL: "https://commons.wikimedia.org/wiki/File%3AEntrega_de_malotes_na_31%C2%AA_fase_da_Opera%C3%A7%C3%A3o_Lava_Jato.jpg"
   - src: /img/libertarianism/06-apreensao.jpg
-    thumb: /img/libertarianism/06-apreensao-thumb.jpg
     alt: "Federal Police agents leaving a building with seized computers and documents"
     caption: "The routine of those who administer what you paid."
     credit: "Tânia Rêgo · CC BY 3.0 br"
     creditURL: "https://commons.wikimedia.org/wiki/File%3AApreens%C3%B5es_da_Opera%C3%A7%C3%A3o_Calicute.jpg"
   - src: /img/libertarianism/07-fila.jpg
-    thumb: /img/libertarianism/07-fila-thumb.jpg
     alt: "Aerial view of a queue of hundreds of people on the pavement outside a bank branch"
     caption: "The queue: public service in its most honest form."
     credit: "Prefeitura de Itapevi from Itapevi, Brasil · CC BY 2.0"
     creditURL: "https://commons.wikimedia.org/wiki/File%3A%282020.05.04%29_Ag%C3%AAncias_Banc%C3%A1rias_e_Lot%C3%A9ricas%2C_Ser%C3%A3o_multada_se_n%C3%A3o_organizarem_suas_filas_%2849855207706%29.jpg"
   - src: /img/libertarianism/08-policia.jpg
-    thumb: /img/libertarianism/08-policia-thumb.jpg
     alt: "Police officers standing before shacks in a community"
     caption: "Security: the state's first duty, the last one it performs."
     credit: "Núcleo Editorial · CC BY 2.0"
