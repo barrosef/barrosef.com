@@ -373,6 +373,38 @@ p { margin: 0 0 18px 0; }
 }
 .reading-surface .post-title { font-size: 40px; margin-bottom: 28px; }
 .reading-surface .post-content { font-size: 17px; line-height: 1.7; }
+
+/* Série de artigos: a faixa que diz de que série o texto faz parte, qual
+   episódio é, e onde está o anterior. Renderizada por series-band.html a partir
+   de data/series.yaml; artigos fora de série não a recebem. */
+.reading-surface .series-band {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 14px;
+  margin: -14px 0 30px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border, #d5dde8);
+  font-size: 14px;
+}
+.reading-surface .series-band__name { font-weight: 600; }
+.reading-surface .series-band__ep {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--link-dark);
+}
+.reading-surface .series-band__prev {
+  margin-left: auto;
+  font-size: 13.5px;
+  text-decoration: none;
+  opacity: 0.85;
+}
+.reading-surface .series-band__prev:hover { opacity: 1; text-decoration: underline; }
+@media (max-width: 640px) {
+  .reading-surface .series-band__prev { margin-left: 0; flex-basis: 100%; }
+}
 .reading-surface .post-content p,
 .reading-surface .post-content li { color: var(--text-dark); }
 .reading-surface .post-content pre,

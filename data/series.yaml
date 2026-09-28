@@ -1,0 +1,46 @@
+# Article series. What the site can render: names, episodes, and the links that
+# live outside the site.
+#
+# Rule: never store the article's own URL here. Store its `key`, which is the
+# article's translationKey, and let Hugo resolve the URL per language. A slug can
+# change; the key does not, and a key that no longer resolves fails loudly at
+# build time instead of quietly at read time.
+#
+# The working dossier for each series — what has been tested, what is queued,
+# which numbers can be reused and where they came from — is not here. It lives in
+# docs/series/<slug>.yaml in the workspace, because the site does not render it.
+
+spending-less-on-ai:
+  order: 1
+  title:
+    en: Spending Less on AI
+    pt-br: Economizando com IA
+  blurb:
+    en: >-
+      Measuring what AI tooling actually costs, one configuration at a time, and
+      publishing the number whichever way it goes.
+    pt-br: >-
+      Medir o que o ferramental de IA custa de verdade, uma configuração por vez,
+      e publicar o número para o lado que ele for.
+  episodes:
+    - number: 1
+      key: headroom-editor
+      date: 2026-09-20
+      linkedin: https://www.linkedin.com/feed/update/urn:li:activity:7507547888445468672/
+      summary:
+        en: What the tool promises, and how to set it up.
+        pt-br: O que a ferramenta promete, e como configurá-la.
+    - number: 2
+      key: headroom-receipts
+      date: 2026-09-28
+      linkedin: null          # fill in when the post goes up
+      summary:
+        en: The receipts from the first round — and the blind spot in the rule.
+        pt-br: Os comprovantes da primeira rodada — e o ponto cego da régua.
+    - number: 3
+      key: null               # not written yet; the entry exists so the promise is tracked
+      date: null
+      linkedin: null
+      summary:
+        en: The same tool, configured the way its documentation describes.
+        pt-br: A mesma ferramenta, configurada como a documentação dela descreve.

@@ -1,0 +1,15 @@
+{{- /*
+  series-page — finds the page carrying a given translationKey, in the language
+  of the site being built. Returns the Page, or "" when the episode is registered
+  but not written yet.
+
+  Takes: dict "key" <translationKey>
+*/ -}}
+{{- $key := .key -}}
+{{- $found := "" -}}
+{{- range site.RegularPages -}}
+  {{- if and (not $found) (eq .Params.translationKey $key) -}}
+    {{- $found = . -}}
+  {{- end -}}
+{{- end -}}
+{{- return $found -}}

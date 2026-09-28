@@ -1,0 +1,17 @@
+{{- /*
+  series-band — the line that tells a reader this article is part of something,
+  which episode it is, and where the previous one is.
+
+  Renders nothing when the page is not in a series, so it is safe to call from
+  the shared post layout.
+*/ -}}
+{{- with partial "series-episode.html" . -}}
+{{- $lang := site.Language.Lang -}}
+<nav class="series-band" aria-label="{{ index .series.title $lang }}">
+  <span class="series-band__name">{{ index .series.title $lang }}</span>
+  <span class="series-band__ep">{{ i18n "episode" | default "episode" }} {{ .n }}/{{ .total }}</span>
+  {{- with .prevPage }}
+  <a class="series-band__prev" href="{{ .RelPermalink }}">← {{ .Title }}</a>
+  {{- end }}
+</nav>
+{{- end -}}

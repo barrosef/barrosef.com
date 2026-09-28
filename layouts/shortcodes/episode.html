@@ -1,0 +1,28 @@
+{{- /*
+  {{< episode N >}} — an inline link to episode N of the series this page belongs
+  to, in the current language, with that episode's real title as the label.
+
+  Use it in prose instead of pasting a URL. If the episode is registered but not
+  written yet, it renders its planned summary as plain text rather than a dead
+  link; if the number is not registered at all, the build fails loudly.
+*/ -}}
+{{- $want := int (.Get 0) -}}
+{{- $s := partial "series-episode.html" .Page -}}
+{{- if not $s -}}
+  {{- errorf "episode shortcode: %q is not registered in data/series.yaml" .Page.File.Path -}}
+{{- end -}}
+{{- $lang := site.Language.Lang -}}
+{{- $hit := "" -}}
+{{- range $s.series.episodes }}{{ if eq .number $want }}{{ $hit = . }}{{ end }}{{ end -}}
+{{- if not $hit -}}
+  {{- errorf "episode shortcode: series %q has no episode %d" $s.slug $want -}}
+{{- end -}}
+{{- with $hit.key -}}
+  {{- with partial "series-page.html" (dict "key" . "ctx" $.Page) -}}
+    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+  {{- else -}}
+    {{ index $hit.summary $lang }}
+  {{- end -}}
+{{- else -}}
+  {{ index $hit.summary $lang }}
+{{- end -}}
