@@ -3,7 +3,7 @@ title: "Churrasco"
 layout: "corner"
 translationKey: "about-barbecue"
 weight: 30
-description: "Fogo, carne, paciência e gente em volta: o churrasco como hobby, como mesa de família, como o lugar onde a tensão da semana se desconecta — e, quem sabe, um negócio."
+description: "Fogo, carne, paciência e gente em volta: o churrasco como hobby, como mesa de família, como onde a tensão da semana se desfaz — e quem sabe um negócio."
 lede: "Fogo, carne, paciência e gente em volta. O lugar onde a semana se desconecta."
 gallery:
   - src: /img/barbecue/01-mate.jpg

@@ -1,0 +1,47 @@
+# Display names for tags. The slug cannot carry them: Hugo titleizes a term by
+# capitalising each hyphenated word, which turns `spending-less-on-ai` into
+# "Spending-Less-On-Ai" and `entrega-de-software` into "Entrega-De-Software" —
+# and a slug has already lost the Portuguese accents that "Não agressão" needs.
+#
+# Only meta consumes these today (article:tag, JSON-LD keywords); categories are
+# written capitalised in the front matter and render from there. A tag missing
+# here falls back to the slug with hyphens turned into spaces, so adding a tag
+# never breaks a build — it just reads plainer until it gets a line.
+
+agentes-de-ia: Agentes de IA
+ai-agents: AI agents
+ai-assisted-development: AI-assisted development
+architecture-decisions: Architecture decisions
+arquitetura-hexagonal: Arquitetura hexagonal
+claude-code: Claude Code
+cloud: Cloud
+conscription: Conscription
+cost: Cost
+custo: Custo
+decisoes-de-arquitetura: Decisões de arquitetura
+delivery: Delivery
+desenvolvimento-com-ia: Desenvolvimento com IA
+devops: DevOps
+dop: DOP
+economizando-com-ia: Economizando com IA
+electoral-fund: Electoral fund
+entrega: Entrega
+entrega-de-software: Entrega de software
+ferramentas: Ferramentas
+fundo-eleitoral: Fundo eleitoral
+gitlab-ci: GitLab CI
+go: Go
+headroom: Headroom
+hexagonal-architecture: Hexagonal architecture
+impostos: Impostos
+kubernetes: Kubernetes
+libertarianism: Libertarianism
+libertarianismo: Libertarianismo
+nao-agressao: Não agressão
+non-aggression: Non-aggression
+nuvem: Nuvem
+servico-militar: Serviço militar
+software-delivery: Software delivery
+spending-less-on-ai: Spending Less on AI
+taxes: Taxes
+tooling: Tooling

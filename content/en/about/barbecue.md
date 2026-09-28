@@ -3,7 +3,7 @@ title: "Barbecue"
 layout: "corner"
 translationKey: "about-barbecue"
 weight: 30
-description: "Fire, meat, patience and people around it: barbecue as a hobby, as the family table, as the place where the week's tension comes undone — and, who knows, a business."
+description: "Fire, meat, patience and people around it: barbecue as a hobby, as the family table, as where the week's tension comes undone — and maybe a business."
 lede: "Fire, meat, patience and people around it. The place where the week comes undone."
 gallery:
   - src: /img/barbecue/01-mate.jpg

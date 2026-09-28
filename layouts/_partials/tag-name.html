@@ -1,0 +1,16 @@
+{{- /*
+  tag-name — the display name of a tag slug.
+
+  Takes a slug, returns the name from data/tags.yaml, or the slug with hyphens
+  turned into spaces and the first letter raised. The fallback keeps a new tag
+  from breaking anything: it reads plainer until someone gives it a line.
+
+  One `return`, at the top level. Hugo does not accept a second one, nor one
+  nested inside a block.
+*/ -}}
+{{- $slug := . -}}
+{{- $name := index site.Data.tags $slug -}}
+{{- if not $name -}}
+  {{- $name = replace $slug "-" " " | strings.FirstUpper -}}
+{{- end -}}
+{{- return $name -}}

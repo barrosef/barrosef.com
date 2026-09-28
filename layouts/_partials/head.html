@@ -52,8 +52,8 @@
 {{- with (index (.GetTerms "categories") 0) }}
 <meta property="article:section" content="{{ .LinkTitle }}">
 {{- end }}
-{{- range .GetTerms "tags" }}
-<meta property="article:tag" content="{{ .LinkTitle }}">
+{{- range .Params.tags }}
+<meta property="article:tag" content="{{ partial "tag-name.html" . }}">
 {{- end }}
 {{- end }}
 <meta name="twitter:card" content="summary_large_image">

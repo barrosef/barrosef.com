@@ -4,8 +4,8 @@ seoTitle: "Uma ferramenta para gastar menos com IA aumentou a conta"
 date: 2026-09-28T09:00:00-04:00
 draft: false
 translationKey: "headroom-receipts"
-categories: ["Technology"]
-tags: ["claude-code", "headroom", "ai-assisted-development", "tooling", "cost", "economizando-com-ia"]
+categories: ["Tecnologia"]
+tags: ["claude-code", "headroom", "desenvolvimento-com-ia", "ferramentas", "custo", "economizando-com-ia"]
 description: "Episódio 2. Economizou US$ 439 e cerca de US$ 1.200 voltaram em outra linha da mesma fatura — e a régua que eu escrevi antes era cega ali."
 ---
 

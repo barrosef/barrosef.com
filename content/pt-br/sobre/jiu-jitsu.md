@@ -3,7 +3,7 @@ title: "Jiu-Jitsu"
 layout: "corner"
 translationKey: "about-jiu-jitsu"
 weight: 20
-description: "Muito além do esporte, da defesa pessoal e das competições: um jeito de respirar debaixo do peso — e de levar isso para o trabalho, para o estudo e para o resto da vida."
+description: "Muito além do esporte e da competição: um jeito de respirar debaixo do peso — e de levar isso para o trabalho, o estudo e o resto da vida."
 lede: "Muito além do esporte, da defesa pessoal e das competições: um jeito de respirar debaixo do peso — e de levar isso para todo o resto."
 gallery:
   - src: /img/jiu-jitsu/01-podium.jpg

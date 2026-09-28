@@ -3,7 +3,7 @@ title: "Libertarianism"
 layout: "corner"
 translationKey: "about-libertarianism"
 weight: 40
-description: "Taxation is theft. A blunt opinion on what Brazilians pay, what they get back, the car the state seizes to rot in a yard, the bureaucracy that smothers whoever produces — and what economic freedom would change."
+description: "Taxation is theft. What Brazilians pay, what they get back, the car the state seizes to rot in a yard — and what economic freedom would change."
 lede: "Taxation is theft. The rest of this page is just the argument."
 galleryShape: landscape
 gallery:

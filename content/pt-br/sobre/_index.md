@@ -2,7 +2,7 @@
 title: "Sobre"
 layout: "hub"
 translationKey: "about"
-description: "Ed Barros — arquiteto de software e consultor de tecnologia. Vinte e três anos, do Java 1.4 ao 21, como dev, arquiteto, DevOps, agilista, gestor e assessor, em finanças, justiça, logística e saúde. E o resto da vida: jiu-jitsu, churrasco, libertarianismo."
+description: "Ed Barros — arquiteto de software e consultor de tecnologia. Vinte e três anos em finanças, justiça, logística e saúde, mais jiu-jitsu e churrasco."
 aliases: ["/pt/sobre/"]
 ---
 

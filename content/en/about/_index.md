@@ -2,7 +2,7 @@
 title: "About"
 layout: "hub"
 translationKey: "about"
-description: "Ed Barros — software architect and technology consultant. Twenty-three years, from Java 1.4 to 21, as developer, architect, DevOps, agile practitioner, manager and advisor, across finance, justice, logistics and healthcare. And the rest of life: jiu-jitsu, barbecue, libertarianism."
+description: "Ed Barros — software architect and technology consultant. Twenty-three years across finance, justice, logistics and healthcare, plus jiu-jitsu."
 ---
 
 I started in 2003 as a junior Java developer — Java 1.4, Struts and SOAP web

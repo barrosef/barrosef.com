@@ -26,6 +26,11 @@ enableGitInfo = true
 
 [outputs]
   home = ["HTML", "RSS"]
+  # No feed for tag or category pages. The tag pages are noindex already, and 46
+  # feeds were being generated and crawled for pages nobody subscribes to. The
+  # feeds readers use — the home and each section — stay.
+  term = ["HTML"]
+  taxonomy = ["HTML"]
 
 # Tag pages are thin while the archive is small: crawlable, but neither
 # indexed nor listed in the sitemap. Categories stay in.
