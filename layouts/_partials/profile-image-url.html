@@ -1,0 +1,13 @@
+{{- /*
+  profile-image-url — absolute URL of the portrait, for structured data.
+
+  Schema.org wants one canonical image for the Person. It gets the processed
+  WebP rather than the 113 KB PNG, and falls back to the raw path if the asset
+  is missing, so the graph never loses its image.
+*/ -}}
+{{- $p := site.Data.career.profile -}}
+{{- $url := $p.photo | absURL -}}
+{{- with resources.Get (strings.TrimPrefix "/" $p.photo) -}}
+  {{- $url = (.Process "resize 560x webp q82").Permalink -}}
+{{- end -}}
+{{- return $url -}}

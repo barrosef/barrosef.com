@@ -7,23 +7,18 @@ description: "Muito além do esporte e da competição: um jeito de respirar deb
 lede: "Muito além do esporte, da defesa pessoal e das competições: um jeito de respirar debaixo do peso — e de levar isso para todo o resto."
 gallery:
   - src: /img/jiu-jitsu/01-podium.jpg
-    thumb: /img/jiu-jitsu/01-podium-thumb.jpg
     alt: "Ed no pódio de um campeonato, ao lado de companheiros de equipe, segurando a bandeira de Mato Grosso"
     caption: "Dia de pódio. A bandeira é de Mato Grosso; o resultado é da equipe."
   - src: /img/jiu-jitsu/02-guard.jpg
-    thumb: /img/jiu-jitsu/02-guard-thumb.jpg
     alt: "Treino de jiu-jitsu no tatame: Ed jogando guarda contra um parceiro em pé"
     caption: "Guarda. Por baixo é onde tudo começa."
   - src: /img/jiu-jitsu/03-training.jpg
-    thumb: /img/jiu-jitsu/03-training-thumb.jpg
     alt: "Ed de kimono preto no tatame, atento, durante um treino"
     caption: "Lendo a situação antes de mover."
   - src: /img/jiu-jitsu/04-team.jpg
-    thumb: /img/jiu-jitsu/04-team-thumb.jpg
     alt: "A equipe enfileirada atrás da bandeira Spartacus Fight Team, mão no peito, antes de uma competição"
     caption: "A equipe, mão no peito, antes da luta."
   - src: /img/jiu-jitsu/05-strength.jpg
-    thumb: /img/jiu-jitsu/05-strength-thumb.jpg
     alt: "Ed fazendo elevação de quadril com barra na academia"
     caption: "O que sustenta o tatame acontece fora dele."
 ---

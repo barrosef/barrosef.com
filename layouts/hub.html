@@ -4,7 +4,7 @@
 
 <section class="identity">
   <div class="wrap identity-grid">
-    <img class="identity-photo" src="{{ $p.photo }}" width="140" height="140" alt="{{ $p.name }}">
+    {{ partial "profile-photo.html" (dict "size" 140 "class" "identity-photo" "ctx" .) }}
     <div class="identity-text">
       <h1 class="identity-name">{{ $p.name }}</h1>
       <p class="identity-headline">{{ index $p.headline $lang }}</p>

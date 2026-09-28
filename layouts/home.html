@@ -8,7 +8,7 @@
 <section class="masthead">
   <div class="wrap masthead-grid">
     <a class="masthead-photo-link" href="{{ i18n "careerURL" }}">
-      <img class="masthead-photo" src="{{ $p.photo }}" width="96" height="96" alt="{{ $p.name }}">
+      {{ partial "profile-photo.html" (dict "size" 96 "class" "masthead-photo" "ctx" .) }}
     </a>
     <div class="masthead-text">
       <p class="masthead-kicker">{{ index $p.headline $lang }}</p>

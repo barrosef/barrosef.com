@@ -7,7 +7,7 @@
     <div class="contact-main">
       <div class="eyebrow eyebrow-dark">{{ .Title }}</div>
       <div class="contact-identity">
-        <img class="contact-photo" src="{{ $p.photo }}" width="72" height="72" alt="{{ $p.name }}">
+        {{ partial "profile-photo.html" (dict "size" 72 "class" "contact-photo" "ctx" .) }}
         <div>
           <h1 class="contact-name">{{ $p.name }}</h1>
           <p class="contact-role">{{ index $p.headline $lang }} · {{ index $p.location $lang }}</p>

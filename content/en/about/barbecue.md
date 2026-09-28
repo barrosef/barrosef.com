@@ -7,23 +7,18 @@ description: "Fire, meat, patience and people around it: barbecue as a hobby, as
 lede: "Fire, meat, patience and people around it. The place where the week comes undone."
 gallery:
   - src: /img/barbecue/01-mate.jpg
-    thumb: /img/barbecue/01-mate-thumb.jpg
     alt: "A gourd of tereré in hand, the grill behind it and the embers just starting"
     caption: "Tereré in hand while the fire decides what it will be."
   - src: /img/barbecue/02-burgers.jpg
-    thumb: /img/barbecue/02-burgers-thumb.jpg
     alt: "Burgers and buns on the grate over a bed of red embers"
     caption: "Burgers over embers. The buns go on too."
   - src: /img/barbecue/03-board.jpg
-    thumb: /img/barbecue/03-board-thumb.jpg
     alt: "Sliced steak, rare, on a wooden board with garlic bread beside it"
     caption: "On the board: rare — not raw."
   - src: /img/barbecue/04-crust.jpg
-    thumb: /img/barbecue/04-crust-thumb.jpg
     alt: "A whole piece of meat with a golden, crisp crust, just off the fire"
     caption: "The crust. Maillard doing her work."
   - src: /img/barbecue/05-flame.jpg
-    thumb: /img/barbecue/05-flame-thumb.jpg
     alt: "Steaks on the grate with tall flames rising from the wood below"
     caption: "High fire to sear; gentle embers to finish."
 ---
