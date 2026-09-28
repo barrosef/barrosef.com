@@ -5,10 +5,7 @@
 {{- $title := cond .IsHome (printf "%s — %s" .Site.Title $headline) (printf "%s · %s" .Title .Site.Title) }}
 {{- $desc := .Description | default .Site.Params.description }}
 {{- $isPost := and .IsPage (in (slice "writing" "artigos") .Section) }}
-{{- /* Social card: the page's own `image:`, else the generated per-article card
-       (static/og/<translationKey>.<lang>.png, from scripts/gen_og_images.py), else the site default. */}}
-{{- $card := printf "og/%s.%s.png" .Params.translationKey .Site.Language.Lang }}
-{{- $image := .Params.image | default (cond (and $isPost (fileExists (printf "static/%s" $card))) $card "og-default.png") | absURL }}
+{{- $image := partial "social-card.html" . }}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{{ $title }}</title>

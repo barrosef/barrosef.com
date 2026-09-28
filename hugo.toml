@@ -4,6 +4,12 @@ defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = false
 enableRobotsTXT = true
 
+# dateModified came from the front matter's `date`, so every article claimed it
+# had never been touched since publication. Git knows better, and the deploy
+# workflow already checks out with fetch-depth: 0, which GitInfo needs.
+enableGitInfo = true
+
+
 [pagination]
   pagerSize = 20
 
@@ -130,3 +136,7 @@ enableRobotsTXT = true
       name = "Contato"
       url = "/pt-br/contato/"
       weight = 30
+
+# Lastmod from git rather than the front matter's `date`; see enableGitInfo.
+[frontmatter]
+  lastmod = [":git", "lastmod", ":fileModTime"]
