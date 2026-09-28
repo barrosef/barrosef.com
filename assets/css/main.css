@@ -405,6 +405,32 @@ p { margin: 0 0 18px 0; }
 @media (max-width: 640px) {
   .reading-surface .series-band__prev { margin-left: 0; flex-basis: 100%; }
 }
+/* ---- Related, at the foot of an article ---- */
+.reading-surface .related {
+  margin: 44px 0 0;
+  padding-top: 24px;
+  border-top: 1px solid var(--border, #d5dde8);
+}
+.reading-surface .related__title {
+  margin: 0 0 14px;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--link-dark);
+}
+.reading-surface .related__list { list-style: none; margin: 0; padding: 0; }
+.reading-surface .related__list > li { margin: 0 0 16px; }
+.reading-surface .related__list a { font-size: 17px; font-weight: 600; text-decoration: none; }
+.reading-surface .related__list a:hover { text-decoration: underline; }
+.reading-surface .related__desc {
+  margin: 4px 0 0;
+  font-size: 14.5px;
+  line-height: 1.45;
+  color: var(--muted-dark);
+}
+
 /* ---- Series hub ----
    The page that holds a series together: its blurb, then the episodes in order.
    An episode that is registered but not written stays on the list, dimmed — the

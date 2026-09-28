@@ -1,0 +1,58 @@
+{{- /*
+  related-posts — the three closest articles, at the foot of an article.
+
+  Every article carried exactly one internal link in its body, which is thin for
+  a site that wants to be found: a reader who arrives from a search has nowhere
+  to go, and a crawler sees a flat archive instead of a connected one.
+
+  Episodes of the same series are excluded. The band at the top and the series
+  hub already lead there, and repeating them would spend all three slots on
+  articles the reader has just been offered.
+*/ -}}
+{{- $posts := where site.RegularPages "Section" "in" (slice "writing" "artigos") -}}
+{{- $series := "" -}}
+{{- with partial "series-episode.html" . }}{{ $series = .slug }}{{ end -}}
+{{- $related := slice -}}
+{{- range $posts.Related . -}}
+  {{- $same := false -}}
+  {{- if $series -}}
+    {{- with partial "series-episode.html" . -}}
+      {{- if eq .slug $series }}{{ $same = true }}{{ end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if not $same }}{{ $related = $related | append . }}{{ end -}}
+{{- end -}}
+{{- /* A seven-article archive does not always produce three matches, and an
+       article that offers nowhere to go is a dead end for a reader who arrived
+       from a search. So the list is topped up: first from the same category,
+       newest first, then from anything else. Relevance still comes first — the
+       filler only ever takes the slots relatedness left empty. */ -}}
+{{- $cat := index (.Params.categories | default slice) 0 -}}
+{{- range $pool := (slice (where $posts "Params.categories" "intersect" (slice $cat)) $posts) -}}
+  {{- range $pool.ByDate.Reverse -}}
+    {{- if ge (len $related) 3 }}{{ else -}}
+      {{- $skip := eq .Permalink $.Permalink -}}
+      {{- range $related }}{{ if eq .Permalink $.Permalink }}{{ end }}{{ end -}}
+      {{- if in $related . }}{{ $skip = true }}{{ end -}}
+      {{- if and (not $skip) $series -}}
+        {{- with partial "series-episode.html" . -}}
+          {{- if eq .slug $series }}{{ $skip = true }}{{ end -}}
+        {{- end -}}
+      {{- end -}}
+      {{- if not $skip }}{{ $related = $related | append . }}{{ end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- with first 3 $related }}
+<nav class="related" aria-label="{{ i18n "keepReading" }}">
+  <h2 class="related__title">{{ i18n "keepReading" }}</h2>
+  <ul class="related__list">
+    {{- range . }}
+    <li>
+      <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+      {{- with .Description }}<p class="related__desc">{{ . }}</p>{{ end }}
+    </li>
+    {{- end }}
+  </ul>
+</nav>
+{{- end }}
