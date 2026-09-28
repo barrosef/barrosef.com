@@ -1,0 +1,50 @@
+{{- /*
+  series-episode — resolves which series and episode the given page belongs to.
+
+  Takes a page, returns a dict or nothing. Callers use it instead of hardcoding
+  series facts into an article. The registry is data/series.yaml, which stores a
+  translationKey per episode and never a URL: a slug can change, a key does not,
+  and resolving here means a renamed article cannot leave a stale link behind.
+
+  Returned keys:
+    slug, series  — the series id and its whole record
+    n, total      — this episode's number and how many are registered
+    episode       — this episode's record
+    prev, next    — the neighbouring records, when they exist
+    prevPage,
+    nextPage      — the neighbouring Pages in the current language, when they
+                    are written and translated; absent when only planned
+*/ -}}
+{{- $page := . -}}
+{{- $key := $page.Params.translationKey -}}
+{{- $out := dict -}}
+{{- if $key -}}
+  {{- range $slug, $s := site.Data.series -}}
+    {{- range $i, $ep := $s.episodes -}}
+      {{- if and $ep.key (eq $ep.key $key) -}}
+        {{- $eps := $s.episodes -}}
+        {{- $prev := "" -}}
+        {{- $next := "" -}}
+        {{- if gt $i 0 }}{{ $prev = index $eps (sub $i 1) }}{{ end -}}
+        {{- if lt (add $i 1) (len $eps) }}{{ $next = index $eps (add $i 1) }}{{ end -}}
+        {{- $out = dict "slug" $slug "series" $s "n" $ep.number "total" (len $eps)
+              "episode" $ep "prev" $prev "next" $next -}}
+        {{- with $prev -}}
+          {{- with .key -}}
+            {{- with partial "series-page.html" (dict "key" . "ctx" $page) -}}
+              {{- $out = merge $out (dict "prevPage" .) -}}
+            {{- end -}}
+          {{- end -}}
+        {{- end -}}
+        {{- with $next -}}
+          {{- with .key -}}
+            {{- with partial "series-page.html" (dict "key" . "ctx" $page) -}}
+              {{- $out = merge $out (dict "nextPage" .) -}}
+            {{- end -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- return $out -}}

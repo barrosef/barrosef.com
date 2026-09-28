@@ -8,8 +8,7 @@ tags: ["claude-code", "headroom", "ai-assisted-development", "tooling", "cost", 
 description: "Episódio 2 de Economizando com IA. O editor sentou-se há oito dias; aqui estão os comprovantes. Economizou US$ 439 e cerca de US$ 1.200 voltaram em outra linha — e a régua que escrevi antes tinha um ponto cego exatamente onde o dinheiro foi."
 ---
 
-*Segundo episódio de **Economizando com IA**. O primeiro — [Headroom: o editor
-entre você e o modelo](/pt-br/artigos/headroom-o-editor-entre-voce-e-o-modelo/) —
+*Segundo episódio de **Economizando com IA**. O primeiro — {{< episode 1 >}} —
 descreveu o que a ferramenta promete e a configurou. Este traz o que os
 comprovantes dizem. Na semana que vem, o episódio três: a mesma ferramenta,
 configurada como a documentação dela descreve, e não como eu improvisei.*

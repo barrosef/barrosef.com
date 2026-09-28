@@ -18,6 +18,7 @@
       <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date | time.Format ":date_long" }}</time>
     </div>
     <h1 class="post-title">{{ .Title }}</h1>
+    {{ partial "series-band.html" . }}
     <div class="post-content">
       {{ .Content }}
     </div>

@@ -8,9 +8,8 @@ tags: ["claude-code", "headroom", "ai-assisted-development", "tooling", "cost", 
 description: "Episode 2 of Spending Less on AI. The editor took his seat eight days ago; here is what the receipts say. It saved $439 and about $1,200 came back on another line — and the rule I wrote in advance had a blind spot exactly where the money went."
 ---
 
-*Second episode of **Spending Less on AI**. The first one — [Headroom: the editor
-between you and the model](/writing/headroom-the-editor-between-you-and-the-model/)
-— described what the tool promises and set it up. This one reports what the
+*Second episode of **Spending Less on AI**. The first one — {{< episode 1 >}} —
+described what the tool promises and set it up. This one reports what the
 receipts say. Next week, episode three: the same tool, configured the way its
 documentation describes rather than the way I improvised.*
 
