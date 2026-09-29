@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-hidden="true"><rect width="800" height="600" fill="#0b1622"/>
+<!-- the invoice: one slip, torn at the foot, holding both lines -->
+<path d="M140,70 L660,70 L660,505 L630,530 L600,505 L570,530 L540,505 L510,530 L480,505 L450,530 L420,505 L390,530 L360,505 L330,530 L300,505 L270,530 L240,505 L210,530 L180,505 L140,530 Z" fill="#16233a" stroke="#2f4763" stroke-width="4" stroke-linejoin="round"/>
+<!-- header rule, so the slip reads as a statement and not a card -->
+<g fill="#3d5878"><rect x="180" y="118" width="210" height="12" rx="6"/><rect x="180" y="150" width="130" height="12" rx="6"/></g>
+<line x1="180" y1="196" x2="620" y2="196" stroke="#2f4763" stroke-width="3"/>
+<!-- line one: what the tool saved. Short, and green. -->
+<g fill="#7f92a8"><rect x="180" y="243" width="118" height="12" rx="6"/></g>
+<rect x="340" y="230" width="86" height="38" rx="8" fill="#5fd49a"/>
+<!-- line two: what came back on the same invoice. Nearly three times longer, and red. -->
+<g fill="#7f92a8"><rect x="180" y="323" width="150" height="12" rx="6"/></g>
+<rect x="340" y="310" width="280" height="38" rx="8" fill="#f08d92"/>
+<!-- the total: still red, because the two do not cancel out -->
+<line x1="340" y1="392" x2="620" y2="392" stroke="#7f92a8" stroke-width="4"/>
+<g fill="#7f92a8"><rect x="180" y="433" width="96" height="12" rx="6"/></g>
+<rect x="340" y="414" width="194" height="46" rx="8" fill="#a4252c"/>
+<!-- the arrow the whole article is about: the bill went up, not down -->
+<g stroke="#f08d92" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="none">
+  <path d="M712,470 L712,150"/><path d="M668,196 L712,150 L756,196"/>
+</g>
+</svg>
