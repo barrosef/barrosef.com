@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-hidden="true"><rect width="800" height="600" fill="#0b1622"/>
+<!-- floor -->
+<rect x="0" y="470" width="800" height="130" fill="#2f5f9e" opacity="0.35"/>
+<!-- the safe: a heavy body, open and empty -->
+<rect x="200" y="130" width="340" height="340" rx="18" fill="#1d4e89"/>
+<rect x="232" y="162" width="276" height="276" rx="8" fill="#0b1622"/>
+<!-- empty shelf -->
+<rect x="232" y="300" width="276" height="10" fill="#2f5f9e"/>
+<!-- feet -->
+<rect x="222" y="470" width="44" height="18" rx="4" fill="#1d4e89"/><rect x="474" y="470" width="44" height="18" rx="4" fill="#1d4e89"/>
+<!-- the door, swung open to the right -->
+<path d="M540,140 L660,110 L660,490 L540,460 Z" fill="#dce6f2"/>
+<path d="M540,140 L660,110 L660,490 L540,460 Z" fill="none" stroke="#7fb0ea" stroke-width="4" stroke-linejoin="round"/>
+<!-- dial and handle on the door -->
+<ellipse cx="600" cy="270" rx="30" ry="40" fill="none" stroke="#0b1622" stroke-width="8"/>
+<ellipse cx="600" cy="270" rx="8" ry="11" fill="#0b1622"/>
+<rect x="592" y="345" width="16" height="60" rx="8" fill="#0b1622"/>
+<!-- hinges -->
+<rect x="532" y="180" width="16" height="36" rx="4" fill="#7fb0ea"/><rect x="532" y="384" width="16" height="36" rx="4" fill="#7fb0ea"/>
+</svg>
