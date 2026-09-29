@@ -61,7 +61,9 @@ A Estônia não tributa o lucro que a empresa reinveste. O imposto corporativo [
 
 ### Suíça: o imposto com prazo de validade
 
-A carga tributária suíça foi de [26,9% do PIB em 2024](https://www.efv.admin.ch/dam/en/sd-web/bjAPAViEZor6/Taschenstatistik-2025-e-web.pdf). A brasileira, em 2025, bateu o [recorde de 32,4%](https://www.contabeis.com.br/noticias/76330/carga-tributaria-do-brasil-atinge-recorde-de-32-4-do-pib-em-2025/). A diferença não está só no número. Está em dois mecanismos que nenhum político gosta.
+A carga tributária suíça foi de [26,9% do PIB em 2024](https://www.efv.admin.ch/dam/en/sd-web/bjAPAViEZor6/Taschenstatistik-2025-e-web.pdf). A brasileira, em 2025, bateu o [recorde de 32,4%](https://www.contabeis.com.br/noticias/76330/carga-tributaria-do-brasil-atinge-recorde-de-32-4-do-pib-em-2025/). A minha opinião sobre isso você já sabe: [barrosef.com/libertarianismo](https://barrosef.com/libertarianismo/).
+
+Mas a diferença não está só no número. Está em dois mecanismos que nenhum político gosta.
 
 O primeiro: os 26 cantões competem entre si. Um cantão que cobra caro demais vê empresas e famílias se mudarem para o vizinho. É o que o economista Charles Tiebout descreveu em 1956 como *votar com os pés*: quando sair é fácil, o cofre precisa se justificar.
 

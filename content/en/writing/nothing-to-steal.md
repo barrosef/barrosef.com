@@ -61,7 +61,9 @@ Estonia does not tax profit a company reinvests. Corporate tax [applies only whe
 
 ### Switzerland: the tax with an expiry date
 
-Switzerland's tax burden was [26.9% of GDP in 2024](https://www.efv.admin.ch/dam/en/sd-web/bjAPAViEZor6/Taschenstatistik-2025-e-web.pdf). Brazil's, in 2025, hit a [record 32.4%](https://www.contabeis.com.br/noticias/76330/carga-tributaria-do-brasil-atinge-recorde-de-32-4-do-pib-em-2025/). The difference is not only in the number. It lies in two mechanisms no politician likes.
+Switzerland's tax burden was [26.9% of GDP in 2024](https://www.efv.admin.ch/dam/en/sd-web/bjAPAViEZor6/Taschenstatistik-2025-e-web.pdf). Brazil's, in 2025, hit a [record 32.4%](https://www.contabeis.com.br/noticias/76330/carga-tributaria-do-brasil-atinge-recorde-de-32-4-do-pib-em-2025/). What I think about that, you already know: [barrosef.com/libertarianism](https://barrosef.com/libertarianism/).
+
+But the difference is not only in the number. It lies in two mechanisms no politician likes.
 
 The first: the 26 cantons compete with each other. A canton that charges too much watches companies and families move next door. It is what the economist Charles Tiebout described in 1956 as *voting with your feet*: when leaving is easy, the vault has to justify itself.
 
