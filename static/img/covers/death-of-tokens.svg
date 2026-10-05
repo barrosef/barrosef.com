@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-hidden="true"><rect width="800" height="600" fill="#0b1622"/>
+<!-- left: the tokens, a column of coins thinning out, and the arrow everyone shows -->
+<g fill="#3d5878" stroke="#2f4763" stroke-width="3">
+<ellipse cx="230" cy="470" rx="110" ry="26"/><ellipse cx="230" cy="436" rx="110" ry="26"/><ellipse cx="230" cy="402" rx="110" ry="26"/><ellipse cx="230" cy="368" rx="110" ry="26"/>
+</g>
+<g fill="#2a3f5c" stroke="#243955" stroke-width="3" opacity="0.55">
+<ellipse cx="230" cy="334" rx="110" ry="26"/><ellipse cx="230" cy="300" rx="110" ry="26"/>
+</g>
+<g fill="#1c2e47" stroke="#1f3350" stroke-width="3" opacity="0.3">
+<ellipse cx="230" cy="266" rx="110" ry="26"/><ellipse cx="230" cy="232" rx="110" ry="26"/>
+</g>
+<path d="M230,110 L230,215" stroke="#5fd49a" stroke-width="14" stroke-linecap="round"/>
+<path d="M190,180 L230,222 L270,180" fill="none" stroke="#5fd49a" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+<!-- right: the invoice, one slip, and the line that went the other way -->
+<path d="M450,90 L690,90 L690,490 L670,508 L650,490 L630,508 L610,490 L590,508 L570,490 L550,508 L530,490 L510,508 L490,490 L470,508 L450,490 Z" fill="#16233a" stroke="#2f4763" stroke-width="4" stroke-linejoin="round"/>
+<g fill="#3d5878"><rect x="480" y="128" width="120" height="10" rx="5"/><rect x="480" y="152" width="80" height="10" rx="5"/></g>
+<line x1="480" y1="188" x2="660" y2="188" stroke="#2f4763" stroke-width="3"/>
+<g fill="#7f92a8"><rect x="480" y="222" width="70" height="10" rx="5"/><rect x="480" y="270" width="70" height="10" rx="5"/><rect x="480" y="318" width="70" height="10" rx="5"/></g>
+<rect x="566" y="212" width="94" height="30" rx="6" fill="#3d5878"/>
+<rect x="566" y="260" width="40" height="30" rx="6" fill="#3d5878"/>
+<rect x="566" y="308" width="58" height="30" rx="6" fill="#3d5878"/>
+<line x1="566" y1="362" x2="660" y2="362" stroke="#7f92a8" stroke-width="4"/>
+<rect x="566" y="384" width="94" height="40" rx="8" fill="#a4252c"/>
+<path d="M740,460 L740,340" stroke="#f08d92" stroke-width="14" stroke-linecap="round"/>
+<path d="M700,380 L740,336 L780,380" fill="none" stroke="#f08d92" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

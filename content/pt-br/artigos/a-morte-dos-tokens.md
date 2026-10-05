@@ -3,8 +3,8 @@ title: "A Morte dos Tokens"
 date: 2026-10-05T09:00:00-04:00
 draft: false
 translationKey: "death-of-tokens"
-categories: ["Technology"]
-tags: ["claude-code", "ai-assisted-development", "tooling", "cost", "prompt-caching", "economizando-com-ia"]
+categories: ["Tecnologia"]
+tags: ["claude-code", "desenvolvimento-com-ia", "ferramentas", "custo", "cache", "economizando-com-ia"]
 description: "Episódio 3 de Economizando com IA. Toda ferramenta que promete cortar a conta de IA mostra os tokens caindo. Abrimos a fatura linha por linha: os tokens caíram 46% e a conta subiu 14%. Onde o dinheiro mora de verdade, e por que o número que todo mundo cita deixou de significar alguma coisa."
 ---
 
