@@ -38,9 +38,9 @@ spending-less-on-ai:
         en: The receipts from the first round — and the blind spot in the rule.
         pt-br: Os comprovantes da primeira rodada — e o ponto cego da régua.
     - number: 3
-      key: null               # not written yet; the entry exists so the promise is tracked
-      date: null
-      linkedin: null
+      key: death-of-tokens
+      date: 2026-10-05
+      linkedin: null          # fill in when the post goes up
       summary:
-        en: The same tool, configured the way its documentation describes.
-        pt-br: A mesma ferramenta, configurada como a documentação dela descreve.
+        en: Tokens fell 46%, the bill rose 14%. Where the money actually lives.
+        pt-br: Os tokens caíram 46%, a conta subiu 14%. Onde o dinheiro mora de verdade.
