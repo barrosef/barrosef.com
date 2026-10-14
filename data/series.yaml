@@ -44,3 +44,10 @@ spending-less-on-ai:
       summary:
         en: Tokens fell 46%, the bill rose 14%. Where the money actually lives.
         pt-br: Os tokens caíram 46%, a conta subiu 14%. Onde o dinheiro mora de verdade.
+    - number: 4
+      key: model-effort
+      date: 2026-10-14
+      linkedin: null          # fill in when the post goes up
+      summary:
+        en: We stopped saving tokens and started managing models. Did it save money? The receipt.
+        pt-br: Paramos de economizar tokens e passamos a gerir modelos. Economizou ou não? O comprovante.
