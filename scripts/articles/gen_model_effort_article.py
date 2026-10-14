@@ -390,8 +390,8 @@ EN = dict(
     ba_after="after · by role",
     ba_roles={"lead": "the lead", "qa_lead": "QA lead · lead's level", "tester_inh": "tester, while it inherited the lead's model",
               "reviewer": "reviewer · lead's level", "tester": "tester · Sonnet", "builder": "builder · Sonnet", "reader": "reader · Sonnet", "builder_haiku": "builder · Haiku, by hand-off"},
-    ba_share1="rounds on the most expensive model: nine in ten before, about one in three after",
-    ba_share2="the weekly average round fell from about 40 cents to about 10",
+    ba_share1="a working day: US$ 163 before, US$ 137 after — with three times more rounds done",
+    ba_share2="rounds on the most expensive model: nine in ten before, about one in three after",
     cap_ba="The invoice, per round, before and after the lead and the helpers went in. Before, every round was the session itself on the expensive model. After, the lead's rounds cost half as much and the rounds that moved to the helpers cost a tenth. The red bar is the tester during the weeks it silently inherited the lead's model.",
     aria_ba="Horizontal bar chart of US dollars per round: one bar before at 0.52, then eight bars after, from the lead at 0.24 down to the builder on Haiku at 0.01; the tester while inheriting the lead's model is highlighted in red at 0.13.",
 )
@@ -447,8 +447,8 @@ PT = dict(
     ba_after="depois · por papel",
     ba_roles={"lead": "o líder", "qa_lead": "líder de QA · nível do líder", "tester_inh": "testador, enquanto herdava o modelo do líder",
               "reviewer": "revisor · nível do líder", "tester": "testador · Sonnet", "builder": "construtor · Sonnet", "reader": "leitor · Sonnet", "builder_haiku": "construtor · Haiku, por entrega"},
-    ba_share1="rodadas no modelo mais caro: nove em dez antes, cerca de uma em três depois",
-    ba_share2="a rodada média da semana caiu de uns 40 centavos para uns 10",
+    ba_share1="um dia de trabalho: US$ 163 antes, US$ 137 depois — com três vezes mais rodadas feitas",
+    ba_share2="rodadas no modelo mais caro: nove em dez antes, cerca de uma em três depois",
     cap_ba="A fatura, por rodada, antes e depois de o líder e os ajudantes entrarem. Antes, toda rodada era a própria sessão no modelo caro. Depois, as rodadas do líder custam a metade e as que foram para os ajudantes custam um décimo. A barra vermelha é o testador nas semanas em que herdou em silêncio o modelo do líder.",
     aria_ba="Gráfico de barras horizontais de dólares por rodada: uma barra antes em 0,52, depois oito barras, do líder em 0,24 até o construtor no Haiku em 0,01; o testador enquanto herdava o modelo do líder destacado em vermelho em 0,13.",
 )
@@ -460,624 +460,385 @@ def figs(L):
 
 # ---------------------------------------------------------------- the articles
 EN_MD = """---
-title: "The most expensive model, doing the cheapest work"
+title: "The Cheap Team"
 date: 2026-10-14T08:00:00-04:00
 draft: false
 translationKey: "model-effort"
 categories: ["Technology"]
 tags: ["ai-agents", "cost", "management", "delegation", "software-delivery", "spending-less-on-ai"]
-description: "Episode 4 of Spending Less on AI. Five weeks of an AI coding agent, task by task, all on the most expensive model because nobody had chosen otherwise. What four tasks revealed about where the money goes, the lead-and-helpers setup that replaced one model for everything, and what the invoice said after: the average round of work fell from about 40 cents to about 10."
+description: "Episode 4 of Spending Less on AI. Cutting tokens raised our bill. So we stopped saving tokens and started managing models: the expensive one decides, cheap ones execute. Sixteen days later, the invoice: a round of work at a quarter of the price, a working day 16% cheaper — and the lead is now the bill."
 ---
 
 *Fourth episode of **Spending Less on AI**. Episodes 1 and 2, {{{{< episode 1 >}}}}
-and {{{{< episode 2 >}}}}, tested a tool that promises a lighter bill. Episode 3,
-{{{{< episode 3 >}}}}, showed that the number every such tool reports is not the
-number on the invoice, and closed on the lever that moved our bill more than any
-tool: which model answered which kind of task. This episode pulls that lever,
-and comes back with the receipt.*
+and {{{{< episode 2 >}}}}, installed a tool that promised a lighter bill by sending
+fewer tokens to the model. Episode 3, {{{{< episode 3 >}}}}, opened the invoice: the
+tokens fell 46% and the bill rose 14%, because tokens are not what the provider
+charges for. This is what we did next.*
 
 ---
 
-For five weeks I wrote down what every task cost.
+For three episodes this series tried to spend less on AI by sending less
+text to the model. It is the obvious idea, every tool in this market sells
+it, and in our hands it failed. The tool cut what the agent sends by nearly
+half, and a round of work came out 14% dearer. Episode 3 explained why: a
+token is what the provider counts, the invoice has four lines at four
+prices, and the line the tool shrank is the cheapest of the four.
 
-Not to study anything. An AI coding agent had been doing the delivery work
-on a client platform for months, I had never looked at the invoice in
-detail, and it seemed like the sort of thing a person should know about his
-own operation. Thirty-six tasks went into the spreadsheet. At list price
-they came to **$5,908**.
+The same episode ended on the one lever that had moved our bill more than
+any tool, in both directions: which model answered which kind of task. So
+we stopped saving tokens and pulled that lever instead. This episode is the
+receipt.
 
-When I finally sorted the sheet, the first thing I noticed was not a number.
-It was how little the numbers varied.
+The short answer is yes, it saved money. The long answer is more
+interesting, because the bill did not fall the way the arithmetic said it
+would, and the reason points straight at the next episode.
+
+## Where the idea came from
+
+It came from a spreadsheet I kept for five weeks, not to study anything,
+just to know. An AI coding agent had been doing the delivery work on a
+client platform for months, and I had never looked at the invoice task by
+task. Thirty-six tasks went in. At list price they came to **$5,908**.
 
 {spread}
 
-Tasks that took a single round of work and tasks that took two and a
-half thousand had been done by the same model, at the same effort setting. The
-cheapest cost nine dollars, the most expensive nine hundred and forty-five,
-and nothing in between them had ever prompted a different choice. Not
-because anyone had weighed it and decided so — because that was the setting
-the session opened with, months earlier, and nobody had touched it since.
+Sorted, the sheet showed one thing before it showed anything else: every
+task had run on the same model, at the same effort, from the one that took
+a single round of work to the one that took two and a half thousand. Not
+because anyone had weighed it. Because that was the setting the session
+opened with, months earlier, and nobody had touched it since.
 
-Then I looked for the worst offender, and found a task that cost **$660**
-to work through a list of fourteen items that needed checking, one at a
-time. Twelve of the fourteen turned out to be the same mistake repeated.
-
-Six hundred and sixty dollars is not a catastrophe. But it was clearly the
-wrong price for that work, and I could not explain *why* it had been so
-expensive — which meant I did not actually understand what I was buying.
-
-## What you are paying for
-
-Here is the thing I had wrong, and I suspect I am not alone.
-
-An agent has no memory between one action and the next. Every time it does
-something — opens a file, runs a check, changes a line — it sends the whole
-conversation back to the model and asks what to do now. That is one round of
-work, and the five weeks were about sixteen thousand of them. By the
-afternoon, each round carried the equivalent of a 350-page book.
-
-{turn}
-
-A round is four lines on the invoice, at four prices: text the model
-re-reads from its cache, at a tenth of the price of new text; new text,
-never seen before; text written into the cache, at up to twice; and the
-answer it writes, at five times. Over these five weeks, with nothing
-disturbing the cache, the split was **73 cents of every dollar on
-re-reading, 20 on caching, 7 on the answer**. The part everyone pictures
-when they imagine what AI costs — the answer, thinking included — is the
-small one.
-
-Episode 3 showed what happens when something does disturb the cache: the
-20 grows until it is the bill. Nothing did here, which is what makes these
-five weeks a clean reading of the other two settings, the ones you actually
-control.
-
-The **model** sets the price of all four lines at once. At the time, Opus
-read at five dollars per million tokens, Sonnet at two, Haiku at one, and
-the other three lines scale the same way. Same book, same number of rounds,
-less than half the cost on Sonnet and a fifth on Haiku.
-
-The **effort level** sets how many rounds there are. It is usually
-described as how hard the model thinks, and on this kind of work that is
-nearly beside the point, because thinking lives inside the seven per cent.
-What lower effort really changes is behaviour: the agent takes fewer and
-larger steps, and every step it does not take is a book it does not
-re-send.
-
-Price per round, and number of rounds. With those two numbers in hand I
-went back to the spreadsheet, and the thirty-six tasks stopped looking like
-a list.
-
-## Four kinds of work
-
-### The one with no decision in it — $9
-
-Forty-two rounds, one day. A value that already existed in one part of
-the system had to appear in another, and the request asked whether it was
-available at the source. It was. After that the work was carrying one field
-through three layers, and there was no judgment call anywhere in it.
-
-Nine dollars is nothing. But on Sonnet at low effort it would have been
-closer to three, doing exactly the same work — and there were twenty-odd
-tasks of this size in five weeks. That is where the flat setting quietly
-costs you: not in the big tasks, where it is often right, but in the many
-small ones where it is never examined.
-
-### The one that was a rule, applied fourteen times — $660
-
-This was the task from the spreadsheet, and it is worth telling properly
-because the money went somewhere unexpected.
-
-An automated report had produced a list of fourteen items, each one a place
-in the code that might or might not have a real problem. The analysis
-itself was good work: the agent traced each one through the system, wrote a
-short rule for telling a real finding from a false one, and applied that
-rule to all fourteen. Twelve were false. Eleven of the twelve were the
-identical false finding — the report had matched a naming pattern and
-flagged eleven places that had nothing to do with the problem it was
-looking for.
-
-So the task needed **one** piece of judgment and thirteen mechanical
-repetitions of it. What it got was the most expensive model doing all
-fourteen, one after another, in a single conversation — which meant that by
-the fourteenth item it was re-reading everything it had learned about the
-first thirteen. The book grew all day.
-
-And it got worse, because that conversation also picked up a second,
-related task and the two got tangled. Five separate times I had to pull it
-back on course: *focus on this one, don't mix them, what do I actually need
-to decide?*
-
-The $660 bought one good rule, thirteen expensive repetitions of it, and
-five interventions from me.
+Then I went looking for the worst case and found a task that cost **$660**
+to work through fourteen items from an automated report, one at a time.
+The agent did good work: it traced each item, wrote a short rule to tell a
+real finding from a false one, and applied it. Twelve of the fourteen were
+false, and eleven of the twelve were the *same* false finding. The task
+needed one judgment and thirteen repetitions of it, and it got the most
+expensive model doing all fourteen in one long conversation, re-reading
+everything it had learned about the first thirteen before touching the
+last. Five times I had to pull it back on course.
 
 {caseb}
 
-Drawn the second way, the shape is obvious — and it is the shape the work
-had all along. One expensive model writes the rule, once. Fourteen cheap
-agents each take one item, apply the rule, and hand back a single line, in
-parallel, each one starting from a clean slate that cannot get tangled with
-anything because it has never heard of the second task. The expensive model
-comes back only for the two findings that survive.
+And then the opposite case, which is why the answer is not "use the cheap
+model". A **$304** task opened with one sentence: something the system
+sends arrives wrong on the other side. The agent doubted the sentence, read
+years of history, and found that a piece everybody assumed was added
+automatically had stopped being added during an old upgrade. Nine things
+were broken, not the one in the request. No cheap model asks that question.
+Three hundred dollars was the price of doubt, and the best three hundred of
+the five weeks.
 
-### The one that was worth every cent — $304
+Two kinds of work, then. Judgment, which wants the expensive model. And
+repetition, which wants anything but. One price for both.
 
-The opposite case, and I want it in here because the answer is not "use the
-cheap model".
+## What a round of work costs
 
-Nine hundred rounds, two days, and the request was a single sentence:
-something the system sends out was arriving wrong at the other end. True,
-and a symptom. The agent went into the history of the code and found that
-several years earlier someone had centralised the piece that was now
-missing — it used to be inserted automatically, so nobody producing that
-kind of message ever had to supply it, and years of them were written on
-that assumption. A later modernisation replaced the component with a leaner
-one that sends only what it is explicitly given, and the automatic
-insertion stayed behind in an old copy that nothing calls any more.
+To see why the price matters so much, you have to see what a round is.
 
-An assumption held for years had broken in silence. And it had broken
-**nine things, not the one in the request**.
+{turn}
 
-No cheap model finds that. Not because the cheaper ones lack skill, but
-because the question — *why does everything here refer to something nobody
-provides?* — only gets asked by a model willing to doubt the request, and
-only gets answered by one willing to read a change from years ago. Three
-hundred dollars was the price of the doubt, and it was the best three
-hundred dollars of the five weeks. Fixing the one reported symptom would
-have closed the request and left the other eight broken.
+An agent has no memory between one action and the next. Every time it does
+something, it sends the whole conversation back to the model and asks what
+to do now. That is one round, and by the afternoon each one carries the
+equivalent of a 350-page book. The book is four lines on the invoice:
+re-read from the cache at a tenth of the price of new text, new text at
+full price, text written into the cache at up to twice, and the answer at
+five times. In the five weeks, with nothing disturbing the cache,
+re-reading was 73 cents of every dollar and the answer, thinking included,
+seven.
 
-So: some tasks want the cheap model, some want the expensive one, and so
-far the rule is easy. The fourth task is where it stops being easy.
+The **model** multiplies all four lines at once. At the time, Opus read at
+five dollars per million tokens, Sonnet at two, Haiku at one. Same book,
+same number of rounds, less than half the cost on Sonnet and a fifth on
+Haiku. The **effort level** sets how many rounds there are: lower effort,
+fewer and larger steps, fewer books re-sent.
 
-### The one that changed the subject — $945
+That is the whole idea. Keep the expensive model for the judgment, hand the
+repetition to a cheaper one, and let somebody decide which is which, task
+by task.
 
-Two and a half thousand rounds, ten days.
+## What we changed, and for how long
 
-The request listed four requirements. The agent read the code and reported
-that three of them were already live and the fourth was impossible, because
-another rule in the product forbids the action in exactly that situation.
-That finding closed the request as written — and opened the real work,
-which we agreed on afterwards: an investigation, instrumentation so the
-behaviour could be traced, and a new screen.
-
-{cased}
-
-The investigation was the third task all over again. The screen was the
-first task, thirty times. The instrumentation was the second task: one
-pattern, repeated in five places.
-
-Ten days, three kinds of work already described, one setting for all of it.
-
-## Two questions
-
-{map}
-
-Once you have walked through the four, the sorting rule is simple, and it
-is two questions rather than one.
-
-**Can the request be trusted?** If the premise might be wrong, you are
-buying judgment, and judgment is bought with the model. That is the
-expensive one, at whatever effort the doubt requires, and it pays for
-itself — the third task proves it.
-
-**How much is there to do?** If the premise is sound, the model question
-settles cheaply and only volume is left. Volume is the effort lever and,
-past a certain size, the number of agents: not one model doing fourteen
-things, but fourteen doing one thing each.
-
-Three of the four tasks sit still in one square. The fourth crossed the
-whole map in ten days — and in my experience most tasks above a certain
-size are the fourth. Which is the problem with choosing a model at the
-start of a task: for anything big enough to matter, there is no single
-right answer to choose.
-
-## Somebody has to be choosing
+At the end of September, on the same client platform, one model for
+everything was replaced by a lead and five helpers.
 
 {leader}
 
-So the choice moves. Instead of one setting for the session, a lead and a
-few helpers.
+The lead is the session itself, on the expensive model, and it does three
+things only: reads the request and decides whether it can be trusted,
+splits the work and picks who does each piece, and holds the scope while
+the others work, judging what comes back. It does not read fourteen items.
 
-The lead runs on the expensive model and does three things only: it reads
-the request and decides whether it can be trusted; it splits the work into
-tasks and picks who does each one; and it holds the scope while the others
-work, judging what comes back. It does not read fourteen items. It does not
-fill in thirty fields.
+The helpers are five short configuration files, each naming a model, an
+effort level and a turn limit. A **reader** on Sonnet at low effort, which
+reads and never writes. A **builder** on Sonnet at medium effort, which
+implements one settled change and never negotiates with the request. A
+**tester** on Sonnet, dispatched by a **QA lead** that decides what the
+testing has to cover. And a **reviewer** that attacks the plan before any
+work is handed out. The reviewer and the QA lead run at the lead's own
+level, on purpose: a reviewer below the lead can only review spelling.
 
-The helpers are short configuration files, each naming a model, an effort
-level, a turn limit and the tools it is allowed to touch. This is what went
-in at the end of September, on the same client platform. A **reader** on
-Sonnet at low effort, read-only — for the fourteen items, and for every
-automated report that will ever land. A **builder** on Sonnet at medium
-effort — for the small task and for the thirty fields; it implements a
-settled change and never negotiates with the request. A **tester** on
-Sonnet, dispatched by a **QA lead** that decides what the testing has to
-cover. And a **reviewer** that attacks the plan before any work is handed
-out. The reviewer and the QA lead run at the lead's own level, on purpose:
-a reviewer below the lead can only review spelling. The doubt — the third
-task — stays with the lead, at whatever effort the doubt demands.
+And because a big task changes shape while it runs, the lead can override
+the model on any single hand-off. When a batch turns out to be trivial it
+says *Haiku, this one* and moves on. The file sets the default; the
+hand-off sets the exception.
 
-I had Haiku in mind for the reading. What went in was Sonnet at low effort,
-and that difference is small next to the one that matters, between the
-expensive model and either of them.
+This has been running since 29 September. The invoice below compares the
+twenty-four working days before it, all on the expensive model, with the
+sixteen days since, ten of them working days, on the same platform with
+the same operator.
 
-And because the fourth kind of task changes shape while it runs, the lead
-can override the model for a single hand-off. It does not decide on day
-one that this is an expensive-model task; it decides at each fork what the
-*next* piece of work is, and when a batch turns out to be trivial it says
-*Sonnet, this one* and moves on. The file sets the default. The hand-off
-sets the exception.
-
-## What it was worth, and the part I found last
-
-The first draft of this article ended in arithmetic: move the mechanical
-half of the rounds to Sonnet and the bill drops by almost a third. I did
-not publish it, because a reader of this series is owed a measurement, not
-a projection. So the lead and the helpers went in, the agent kept working
-on the same platform, and I kept the spreadsheet open.
+## What the invoice says
 
 {beforeafter}
 
-Here is what the invoice says, per round, at list price. Before, the
-session did everything itself on the expensive model, and a round cost
-**52 cents**. After, the lead's own rounds cost 24 cents — part of that is
-a newer generation of the same model, priced a fifth lower, and part is a
-lead that takes fewer, larger steps because it no longer executes. The
-rounds that moved to the helpers cost **four to five cents** each, and the
-batches the lead sent to Haiku by hand cost one. Across
-whole weeks, the average round fell from about 40 cents to about 10, and
-the share of rounds on the most expensive model fell from nine in ten to
-about one in three.
+Before, every round was the session itself on the expensive model, and a
+round cost **52 cents**. After, the lead's own rounds cost 24 — part of
+that is a newer generation of the same model, priced a fifth lower, and
+part is a lead that takes fewer, larger steps because it no longer
+executes. The rounds that moved to the helpers cost **four to five cents**.
+The batches the lead sent to Haiku by hand cost one. Nine in ten rounds ran
+on the most expensive model before; about one in three after.
 
-Three honest caveats. These are list prices on a subscription, so this is
-the shape of the bill, not an invoice. The weeks after are fewer than the
-weeks before, and some of them ran through the proxy of episodes 1 to 3,
-which makes a round dearer, not cheaper — so if anything the "after" is
-overstated. And the comparison is per round, never per total: a total
-moves with how much work happened, and the point of episode 3 was to stop
-reading the wrong number.
+The invoice also showed me something I had not configured. The tester had
+no model of its own: it inherited whatever the session was running, which
+was the most expensive one, and it did **1,441 rounds** that way at 13
+cents each before anyone noticed. Since the file got the one line it was
+missing, the same job costs under five cents a round. Nobody made a bad
+call there. Nobody made a call, and the default is invisible until you go
+looking.
 
-The practical version is one question. Look at where your agent's rounds
-went last month and check what model they ran on. If the answer is "the
-best one, always", you are paying senior rates for filing.
+## So: did it save money?
 
-I asked myself that question while the draft was still a draft, and the
-answer was worse than I expected. The helper that runs the tests on every
-task — the one thing that touches all of them — had no model of its own.
-It inherited whatever the session was running, which was the most
-expensive one, and had been doing so for weeks. The invoice has it in
-plain sight now: 1,441 rounds of testing at 13 cents each before anyone
-noticed, and the same job at under five cents a round since the file got
-the one line it was missing.
+Yes. Per round of work, a quarter of the price: 37 cents on average before,
+9 after. Per working day, **$163 before and $137 after**, 16% less — while
+the agent did three times as many rounds, because helpers take many small
+steps where the session took few large ones. Read it as: the day cost less
+and more got done, not as three times the work.
 
-Which is the whole point, really. The five weeks did not go wrong because
-somebody made a bad call. They went wrong because nobody made a call at
-all, and the default is invisible until you go looking for it.
+Sixteen per cent is less than the thirty the arithmetic promised when this
+article was still a draft, and the invoice says why. The lead's rounds
+cost 24 cents and it still does about four hundred of them a day. On a
+quiet day it is seventy per cent of the bill. We moved from *everything on
+the expensive model* to *the lead on the expensive model*, and the lead is
+now the bill. That is the next lever, and the next episode.
 
-I went looking. The spreadsheet is still open.
+Put the two experiments side by side. The tool of episodes 1 to 3 cut
+tokens by 46% and made a round 14% dearer. Managing models did not touch
+the tokens — the agent sends more than ever — and made a round 75%
+cheaper. Spending less on AI was never about tokens. It is about who does
+the work, and what you pay them per round.
+
+The spreadsheet is still open.
 
 ---
 
 *Method, in short. One client platform, the same operator throughout. The
 five weeks are 36 tasks with every round attributed to the task that asked
-for it, 15 August to 21 September, priced at the provider's published
-rates. The before and after is every round of the same platform from 31
-August to 28 September against every round from 29 September onward, each
-priced at the published rate of the model that answered it and attributed
-to the role that ran it, from the agent's own logs. All values are
-list-price equivalents: we pay a fixed monthly plan, and this series is the
-study we do before moving to metered use.*
+for it, 15 August to 21 September. The before and after is every round of
+the same platform from 31 August to 28 September against every round from
+29 September to 14 October, each priced at the provider's published rate
+for the model that answered it and attributed to the role that ran it, from
+the agent's own logs. Part of the after window still ran through the proxy
+of episodes 1 to 3, which makes a round dearer, so the after is, if
+anything, overstated; the days after the proxy was removed show the same
+per-round levels. All values are list-price equivalents: we pay a fixed
+monthly plan, and this series is the study we do before moving to metered
+use.*
 """
 
 PT_MD = """---
-title: "O modelo mais caro, fazendo o trabalho mais barato"
+title: "O Time Barato"
 date: 2026-10-14T08:00:00-04:00
 draft: false
 translationKey: "model-effort"
 categories: ["Tecnologia"]
 tags: ["agentes-de-ia", "custo", "gestão", "delegação", "entrega-de-software", "economizando-com-ia"]
-description: "Episódio 4 de Economizando com IA. Cinco semanas de um agente de IA, tarefa por tarefa, tudo no modelo mais caro porque ninguém tinha escolhido outra coisa. O que quatro tarefas revelaram sobre para onde o dinheiro vai, o arranjo de líder e ajudantes que substituiu um modelo para tudo, e o que a fatura disse depois: a rodada média de trabalho caiu de uns 40 centavos para uns 10."
+description: "Episódio 4 de Economizando com IA. Cortar tokens subiu a nossa conta. Então paramos de economizar tokens e passamos a gerir modelos: o caro decide, os baratos executam. Dezesseis dias depois, a fatura: a rodada de trabalho a um quarto do preço, o dia de trabalho 16% mais barato — e o líder virou a conta."
 ---
 
 *Quarto episódio de **Economizando com IA**. Os episódios 1 e 2, {{{{< episode 1 >}}}}
-e {{{{< episode 2 >}}}}, testaram uma ferramenta que promete uma conta mais leve. O
-episódio 3, {{{{< episode 3 >}}}}, mostrou que o número que toda ferramenta dessas
-exibe não é o número da fatura, e fechou na alavanca que moveu a nossa conta
-mais do que qualquer ferramenta: qual modelo respondeu que tipo de tarefa. Este
-episódio puxa essa alavanca, e volta com o comprovante.*
+e {{{{< episode 2 >}}}}, instalaram uma ferramenta que prometia uma conta mais leve
+enviando menos tokens ao modelo. O episódio 3, {{{{< episode 3 >}}}}, abriu a fatura:
+os tokens caíram 46% e a conta subiu 14%, porque token não é o que o provedor
+cobra. Isto é o que fizemos em seguida.*
 
 ---
 
-Durante cinco semanas, anotei quanto custava cada tarefa.
+Por três episódios esta série tentou gastar menos com IA enviando menos
+texto ao modelo. É a ideia óbvia, toda ferramenta desse mercado vende
+isso, e nas nossas mãos ela falhou. A ferramenta cortou quase pela metade o
+que o agente envia, e a rodada de trabalho saiu 14% mais cara. O episódio 3
+explicou por quê: token é o que o provedor conta, a fatura tem quatro
+linhas a quatro preços, e a linha que a ferramenta encolheu é a mais barata
+das quatro.
 
-Não era para estudar nada. Um agente de IA vinha fazendo o trabalho de
-entrega numa plataforma de cliente havia meses, eu nunca tinha olhado a
-fatura em detalhe, e me pareceu o tipo de coisa que uma pessoa deveria
-saber sobre a própria operação. Trinta e seis tarefas entraram na planilha.
-Em preço de tabela, somaram **US$ 5.908**.
+O mesmo episódio terminou na única alavanca que tinha movido a nossa conta
+mais do que qualquer ferramenta, nas duas direções: qual modelo respondeu
+que tipo de tarefa. Então paramos de economizar tokens e puxamos essa
+alavanca. Este episódio é o comprovante.
 
-Quando finalmente ordenei a planilha, a primeira coisa que me chamou a
-atenção não foi um número. Foi o quão pouco os números variavam.
+A resposta curta é sim, economizou. A resposta longa é mais interessante,
+porque a conta não caiu do jeito que a aritmética dizia que cairia, e o
+motivo aponta direto para o próximo episódio.
+
+## De onde saiu a ideia
+
+Saiu de uma planilha que mantive por cinco semanas, não para estudar nada,
+só para saber. Um agente de IA vinha fazendo o trabalho de entrega numa
+plataforma de cliente havia meses, e eu nunca tinha olhado a fatura tarefa
+por tarefa. Trinta e seis tarefas entraram. Em preço de lista, somaram
+**US$ 5.908**.
 
 {spread}
 
-Tarefas que levaram uma única rodada de trabalho e tarefas que levaram
-duas mil e quinhentas tinham sido feitas pelo mesmo modelo, no mesmo nível de esforço.
-A mais barata custou nove dólares, a mais cara novecentos e quarenta e
-cinco, e nada entre as duas jamais provocou uma escolha diferente. Não
-porque alguém tivesse pesado e decidido assim — mas porque era a
-configuração com que a sessão abria, meses antes, e ninguém tinha mexido
-nela desde então.
+Ordenada, a planilha mostrou uma coisa antes de qualquer outra: toda tarefa
+tinha rodado no mesmo modelo, no mesmo esforço, da que levou uma única
+rodada de trabalho à que levou duas mil e quinhentas. Não porque alguém
+tivesse pesado. Porque era a configuração com que a sessão abria, meses
+antes, e ninguém tinha mexido nela desde então.
 
-Aí fui procurar o pior caso, e encontrei uma tarefa que custou **US$ 660**
-para percorrer uma lista de catorze itens que precisavam ser conferidos, um
-a um. Doze dos catorze acabaram sendo o mesmo engano, repetido.
-
-Seiscentos e sessenta dólares não são uma catástrofe. Mas era claramente o
-preço errado para aquele trabalho, e eu não conseguia explicar *por que*
-tinha saído tão caro — o que significava que eu não entendia de fato o que
-estava comprando.
-
-## Pelo que você está pagando
-
-Aqui está o que eu entendia errado, e desconfio que não estou sozinho.
-
-Um agente não tem memória entre uma ação e a seguinte. Toda vez que faz
-alguma coisa — abre um arquivo, roda uma verificação, muda uma linha — ele
-manda a conversa inteira de volta ao modelo e pergunta o que fazer agora.
-Isso é uma rodada de trabalho, e as cinco semanas foram cerca de dezesseis
-mil delas. À tarde, cada rodada já carregava o equivalente a um livro de
-350 páginas.
-
-{turn}
-
-Uma rodada são quatro linhas na fatura, a quatro preços: o texto que o
-modelo relê do cache, a um décimo do preço do texto novo; o texto novo,
-nunca visto; o texto gravado no cache, a até o dobro; e a resposta que ele
-escreve, a cinco vezes. Nessas cinco semanas, sem nada perturbando o cache,
-a divisão foi **73 centavos de cada dólar em releitura, 20 em gravação, 7
-na resposta**. A parte que todo mundo imagina quando pensa no custo da IA —
-a resposta, raciocínio incluído — é a pequena.
-
-O episódio 3 mostrou o que acontece quando algo perturba o cache: os 20
-crescem até virar a conta. Aqui nada perturbou, e é isso que faz destas
-cinco semanas uma leitura limpa das outras duas configurações, as que você
-de fato controla.
-
-O **modelo** define o preço das quatro linhas de uma vez. Na época, o Opus
-lia a cinco dólares por milhão de tokens, o Sonnet a dois, o Haiku a um, e
-as outras três linhas escalam do mesmo jeito. Mesmo livro, mesmo número de
-rodadas, menos da metade do custo no Sonnet e um quinto no Haiku.
-
-O **nível de esforço** define quantas rodadas existem. Costuma ser descrito
-como o quanto o modelo pensa, e neste tipo de trabalho isso é quase
-irrelevante, porque o raciocínio mora dentro dos sete por cento. O que o
-esforço menor muda de verdade é comportamento: o agente dá passos menos
-numerosos e maiores, e cada passo que ele não dá é um livro que ele não
-reenvia.
-
-Preço por rodada, e número de rodadas. Com esses dois números na mão
-voltei à planilha, e as trinta e seis tarefas deixaram de parecer uma
-lista.
-
-## Quatro tipos de trabalho
-
-### A que não tinha decisão nenhuma — US$ 9
-
-Quarenta e duas rodadas, um dia. Um valor que já existia numa parte do
-sistema precisava aparecer em outra, e o pedido perguntava se ele estava
-disponível na origem. Estava. Depois disso, o trabalho era levar um campo
-por três camadas, e não havia juízo a fazer em ponto algum.
-
-Nove dólares não são nada. Mas no Sonnet com esforço baixo teriam sido mais
-perto de três, fazendo exatamente o mesmo trabalho — e havia vinte e tantas
-tarefas desse tamanho em cinco semanas. É aí que a configuração fixa cobra
-de você em silêncio: não nas tarefas grandes, onde ela costuma estar certa,
-mas nas muitas pequenas, onde nunca é examinada.
-
-### A que era uma regra, aplicada catorze vezes — US$ 660
-
-Era a tarefa da planilha, e vale contar direito, porque o dinheiro foi
-parar num lugar inesperado.
-
-Um relatório automático tinha produzido uma lista de catorze itens, cada um
-um ponto do código que podia ou não ter um problema real. A análise em si
-foi bom trabalho: o agente rastreou cada um deles pelo sistema, escreveu
-uma regra curta para separar achado real de achado falso, e aplicou essa
-regra aos catorze. Doze eram falsos. Onze dos doze eram o mesmo achado
-falso — o relatório tinha casado um padrão de nome e marcado onze pontos
-que não tinham nada a ver com o problema que ele procurava.
-
-Ou seja: a tarefa precisava de **um** juízo e treze repetições mecânicas
-dele. O que ela recebeu foi o modelo mais caro fazendo os catorze, um atrás
-do outro, numa única conversa — o que significa que, no décimo quarto item,
-ele estava relendo tudo o que tinha aprendido sobre os treze primeiros. O
-livro cresceu o dia inteiro.
-
-E piorou, porque aquela conversa também pegou uma segunda tarefa
-relacionada e as duas se emaranharam. Cinco vezes distintas tive de trazê-la
-de volta ao rumo: *foco nesta, não mistura, o que eu preciso de fato
-decidir?*
-
-Os US$ 660 compraram uma boa regra, treze repetições caras dela, e cinco
-intervenções minhas.
+Aí fui procurar o pior caso e encontrei uma tarefa que custou **US$ 660**
+para percorrer catorze itens de um relatório automático, um a um. O agente
+fez bom trabalho: rastreou cada item, escreveu uma regra curta para separar
+achado real de achado falso, e a aplicou. Doze dos catorze eram falsos, e
+onze dos doze eram o *mesmo* achado falso. A tarefa precisava de um juízo e
+treze repetições dele, e recebeu o modelo mais caro fazendo os catorze numa
+única conversa longa, relendo tudo o que tinha aprendido sobre os treze
+primeiros antes de tocar no último. Cinco vezes tive de trazê-la de volta
+ao rumo.
 
 {caseb}
 
-Desenhado do segundo jeito, a forma é óbvia — e é a forma que o trabalho
-sempre teve. Um modelo caro escreve a regra, uma vez. Catorze agentes
-baratos pegam um item cada, aplicam a regra e devolvem uma única linha, em
-paralelo, cada um partindo de uma página em branco que não consegue se
-emaranhar com nada porque nunca ouviu falar da segunda tarefa. O modelo
-caro só volta para os dois achados que sobrevivem.
+E depois o caso oposto, que é por que a resposta não é "use o modelo
+barato". Uma tarefa de **US$ 304** abriu com uma frase: algo que o sistema
+envia chega errado do outro lado. O agente duvidou da frase, leu anos de
+histórico, e descobriu que uma peça que todo mundo supunha inserida
+automaticamente tinha deixado de ser inserida numa atualização antiga. Nove
+coisas estavam quebradas, não a única do pedido. Nenhum modelo barato faz
+essa pergunta. Trezentos dólares foi o preço da dúvida, e os melhores
+trezentos das cinco semanas.
 
-### A que valeu cada centavo — US$ 304
+Dois tipos de trabalho, então. Julgamento, que quer o modelo caro. E
+repetição, que quer qualquer um menos ele. Um preço para os dois.
 
-O caso oposto, e eu quero ele aqui porque a resposta não é "use o modelo
-barato".
+## Quanto custa uma rodada de trabalho
 
-Novecentas rodadas, dois dias, e o pedido era uma frase só: algo que o
-sistema envia chegava errado do outro lado. Verdade, e um sintoma. O agente
-foi ao histórico do código e descobriu que, vários anos antes, alguém tinha
-centralizado justamente a peça que agora faltava — ela era inserida
-automaticamente, então ninguém que produzisse aquele tipo de mensagem
-precisava fornecê-la, e anos de mensagens foram escritos sobre essa
-suposição. Uma modernização posterior substituiu o componente por um mais
-enxuto, que envia só o que recebe explicitamente, e a inserção automática
-ficou para trás numa cópia antiga que nada mais chama.
+Para ver por que o preço importa tanto, é preciso ver o que é uma rodada.
 
-Uma suposição sustentada por anos tinha quebrado em silêncio. E tinha
-quebrado **nove coisas, não a única que o pedido citava**.
+{turn}
 
-Nenhum modelo barato acha isso. Não porque falte capacidade aos mais
-baratos, mas porque a pergunta — *por que tudo aqui se refere a algo que
-ninguém fornece?* — só é feita por um modelo disposto a duvidar do pedido,
-e só é respondida por um disposto a ler uma mudança de anos atrás.
-Trezentos dólares foi o preço da dúvida, e foram os melhores trezentos
-dólares das cinco semanas. Corrigir o único sintoma relatado teria fechado
-o pedido e deixado os outros oito quebrados.
+Um agente não tem memória entre uma ação e a seguinte. Toda vez que faz
+alguma coisa, manda a conversa inteira de volta ao modelo e pergunta o que
+fazer agora. Isso é uma rodada, e à tarde cada uma já carrega o equivalente
+a um livro de 350 páginas. O livro são quatro linhas na fatura: releitura
+do cache a um décimo do preço do texto novo, texto novo a preço cheio,
+texto gravado no cache a até o dobro, e a resposta a cinco vezes. Nas cinco
+semanas, sem nada perturbando o cache, a releitura foi 73 centavos de cada
+dólar e a resposta, raciocínio incluído, sete.
 
-Então: algumas tarefas querem o modelo barato, outras querem o caro, e até
-aqui a regra é fácil. A quarta tarefa é onde ela para de ser fácil.
+O **modelo** multiplica as quatro linhas de uma vez. Na época, o Opus lia a
+cinco dólares por milhão de tokens, o Sonnet a dois, o Haiku a um. Mesmo
+livro, mesmo número de rodadas, menos da metade do custo no Sonnet e um
+quinto no Haiku. O **nível de esforço** define quantas rodadas existem:
+menos esforço, passos maiores e em menor número, menos livros reenviados.
 
-### A que mudou de assunto — US$ 945
+Essa é a ideia inteira. Guardar o modelo caro para o julgamento, entregar a
+repetição a um mais barato, e deixar alguém decidir qual é qual, tarefa por
+tarefa.
 
-Duas mil e quinhentas rodadas, dez dias.
+## O que mudamos, e por quanto tempo
 
-O pedido listava quatro requisitos. O agente leu o código e reportou que
-três deles já estavam no ar e o quarto era impossível, porque outra regra
-do produto proíbe a ação exatamente naquela situação. Esse achado fechou o
-pedido como estava escrito — e abriu o trabalho de verdade, que combinamos
-depois: uma investigação, instrumentação para que o comportamento pudesse
-ser rastreado, e uma tela nova.
-
-{cased}
-
-A investigação era a terceira tarefa outra vez. A tela era a primeira
-tarefa, trinta vezes. A instrumentação era a segunda tarefa: um padrão,
-repetido em cinco lugares.
-
-Dez dias, três tipos de trabalho já descritos, uma configuração para tudo.
-
-## Duas perguntas
-
-{map}
-
-Depois de percorrer as quatro, a regra de triagem fica simples — e são duas
-perguntas, não uma.
-
-**Dá para confiar no pedido?** Se a premissa pode estar errada, você está
-comprando julgamento, e julgamento se compra com o modelo. É o caro, no
-esforço que a dúvida exigir, e ele se paga — a terceira tarefa prova.
-
-**Quanto há para fazer?** Se a premissa é sólida, a questão do modelo se
-resolve barato e só resta o volume. Volume é a alavanca do esforço e,
-passado certo tamanho, o número de agentes: não um modelo fazendo catorze
-coisas, mas catorze fazendo uma cada.
-
-Três das quatro tarefas ficam paradas num quadrante. A quarta atravessou o
-mapa inteiro em dez dias — e, na minha experiência, a maioria das tarefas
-acima de certo tamanho é a quarta. O que é justamente o problema de
-escolher o modelo no início de uma tarefa: para qualquer coisa grande o
-bastante para importar, não existe uma resposta única a escolher.
-
-## Alguém precisa estar escolhendo
+No fim de setembro, na mesma plataforma do cliente, um modelo para tudo foi
+substituído por um líder e cinco ajudantes.
 
 {leader}
 
-Então a escolha se muda de lugar. Em vez de uma configuração para a sessão,
-um líder e alguns ajudantes.
+O líder é a própria sessão, no modelo caro, e faz só três coisas: lê o
+pedido e decide se dá para confiar nele, divide o trabalho e escolhe quem
+faz cada pedaço, e segura o escopo enquanto os outros trabalham, julgando o
+que volta. Não lê catorze itens.
 
-O líder roda no modelo caro e faz só três coisas: lê o pedido e decide se
-dá para confiar nele; divide o trabalho em tarefas e escolhe quem faz cada
-uma; e segura o escopo enquanto os outros trabalham, julgando o que volta.
-Não lê catorze itens. Não preenche trinta campos.
-
-Os ajudantes são arquivos curtos de configuração, cada um nomeando um
-modelo, um nível de esforço, um limite de turnos e as ferramentas que pode
-tocar. Foi isto que entrou no fim de setembro, na mesma plataforma do
-cliente. Um **leitor** no Sonnet com esforço baixo, só leitura — para os
-catorze itens e para todo relatório automático que ainda vai chegar. Um
-**construtor** no Sonnet com esforço médio — para a tarefa pequena e para
-os trinta campos; ele implementa uma mudança já decidida e nunca negocia
-com o pedido. Um **testador** no Sonnet, despachado por um **líder de QA**
-que decide o que o teste precisa cobrir. E um **revisor** que ataca o plano
+Os ajudantes são cinco arquivos curtos de configuração, cada um nomeando um
+modelo, um nível de esforço e um limite de turnos. Um **leitor** no Sonnet
+com esforço baixo, que lê e nunca escreve. Um **construtor** no Sonnet com
+esforço médio, que implementa uma mudança já decidida e nunca negocia com o
+pedido. Um **testador** no Sonnet, despachado por um **líder de QA** que
+decide o que o teste precisa cobrir. E um **revisor** que ataca o plano
 antes de qualquer trabalho ser distribuído. O revisor e o líder de QA rodam
 no nível do próprio líder, de propósito: um revisor abaixo do líder só
-consegue revisar ortografia. A dúvida — a terceira tarefa — fica com o
-líder, no esforço que a dúvida exigir.
+consegue revisar ortografia.
 
-Eu tinha o Haiku em mente para a leitura. O que entrou foi o Sonnet com
-esforço baixo, e essa diferença é pequena perto da que importa, entre o
-modelo caro e qualquer um dos dois.
+E como uma tarefa grande muda de forma enquanto roda, o líder pode
+sobrescrever o modelo em qualquer entrega isolada. Quando um lote se revela
+trivial, ele diz *Haiku, neste* e segue. O arquivo define o padrão; a
+entrega define a exceção.
 
-E como o quarto tipo de tarefa muda de forma enquanto roda, o líder pode
-sobrescrever o modelo numa entrega isolada. Ele não decide no dia um que
-aquilo é tarefa de modelo caro; decide a cada bifurcação o que é o
-*próximo* pedaço de trabalho, e quando um lote se revela trivial diz
-*Sonnet, neste* e segue. O arquivo define o padrão. A entrega define a
-exceção.
+Isso está rodando desde 29 de setembro. A fatura abaixo compara os vinte e
+quatro dias úteis anteriores, todos no modelo caro, com os dezesseis dias
+desde então, dez deles de trabalho, na mesma plataforma e com o mesmo
+operador.
 
-## Quanto valeu, e a parte que encontrei por último
-
-A primeira versão deste artigo terminava em aritmética: mover a metade
-mecânica das rodadas para o Sonnet e a conta cai quase um terço. Não
-publiquei, porque quem lê esta série tem direito a uma medição, não a uma
-projeção. Então o líder e os ajudantes entraram, o agente seguiu
-trabalhando na mesma plataforma, e eu deixei a planilha aberta.
+## O que a fatura diz
 
 {beforeafter}
 
-Eis o que a fatura diz, por rodada, a preço de lista. Antes, a sessão fazia
-tudo sozinha no modelo caro, e uma rodada custava **52 centavos**. Depois,
-as rodadas do próprio líder custam 24 centavos — parte disso é uma geração
-mais nova do mesmo modelo, um quinto mais barata, e parte é um líder que dá
-passos menores em número e maiores em tamanho porque já não executa. As
-rodadas que foram para os ajudantes custam **quatro a cinco centavos** cada,
-e os lotes que o líder mandou à mão para o Haiku custam um. Em semanas
-inteiras, a rodada média caiu de uns 40 centavos para uns 10, e
-a fatia de rodadas no modelo mais caro caiu de nove em dez para cerca de
-uma em três.
+Antes, toda rodada era a própria sessão no modelo caro, e uma rodada custava
+**52 centavos**. Depois, as rodadas do próprio líder custam 24 — parte
+disso é uma geração mais nova do mesmo modelo, um quinto mais barata, e
+parte é um líder que dá passos maiores e em menor número porque já não
+executa. As rodadas que foram para os ajudantes custam **quatro a cinco
+centavos**. Os lotes que o líder mandou à mão para o Haiku custam um. Nove
+em dez rodadas rodavam no modelo mais caro antes; cerca de uma em três
+depois.
 
-Três ressalvas honestas. São preços de lista numa assinatura, então isto é
-a forma da conta, não uma fatura. As semanas de depois são menos que as de
-antes, e parte delas passou pelo proxy dos episódios 1 a 3, que encarece a
-rodada em vez de baratear — ou seja, se algo, o "depois" está
-superestimado. E a comparação é por rodada, nunca por total: um total se
-move com a quantidade de trabalho que houve, e o ponto do episódio 3 era
-parar de ler o número errado.
+A fatura também me mostrou algo que eu não tinha configurado. O testador
+não tinha modelo próprio: herdava o que a sessão estivesse rodando, que era
+o mais caro, e fez **1.441 rodadas** assim a 13 centavos cada antes de
+alguém notar. Desde que o arquivo ganhou a linha que faltava, o mesmo
+trabalho custa menos de cinco centavos por rodada. Ninguém tomou uma
+decisão ruim ali. Ninguém tomou decisão nenhuma, e o padrão é invisível até
+você ir procurar.
 
-A versão prática é uma pergunta. Olhe para onde foram as rodadas do seu
-agente no mês passado e veja em que modelo elas rodaram. Se a resposta for
-"no melhor, sempre", você está pagando hora de sênior para arquivar papel.
+## Então: economizou ou não?
 
-Fiz essa pergunta a mim mesmo quando o rascunho ainda era rascunho, e a
-resposta foi pior do que eu esperava. O ajudante que roda os testes em toda
-tarefa — a única coisa que encosta em todas — não tinha modelo próprio.
-Herdava o que a sessão estivesse rodando, que era o mais caro, e vinha
-fazendo isso havia semanas. A fatura agora mostra isso à vista: 1.441
-rodadas de teste a 13 centavos cada antes de alguém notar, e o mesmo
-trabalho a menos de cinco centavos por rodada desde que o arquivo ganhou a
-linha que faltava.
+Sim. Por rodada de trabalho, um quarto do preço: 37 centavos em média
+antes, 9 depois. Por dia de trabalho, **US$ 163 antes e US$ 137 depois**,
+16% a menos — enquanto o agente fez três vezes mais rodadas, porque
+ajudantes dão muitos passos pequenos onde a sessão dava poucos e grandes.
+Leia assim: o dia custou menos e rendeu mais, não como três vezes o
+trabalho.
 
-O que é o ponto inteiro, no fundo. As cinco semanas não deram errado porque
-alguém tomou uma decisão ruim. Deram errado porque ninguém tomou decisão
-nenhuma, e o padrão é invisível até você ir procurar.
+Dezesseis por cento é menos do que os trinta que a aritmética prometia
+quando este artigo ainda era rascunho, e a fatura diz por quê. As rodadas
+do líder custam 24 centavos e ele ainda faz umas quatrocentas por dia. Num
+dia calmo, ele é setenta por cento da conta. Saímos de *tudo no modelo
+caro* para *o líder no modelo caro*, e o líder virou a conta. Essa é a
+próxima alavanca, e o próximo episódio.
 
-Eu fui procurar. A planilha continua aberta.
+Ponha os dois experimentos lado a lado. A ferramenta dos episódios 1 a 3
+cortou 46% dos tokens e deixou a rodada 14% mais cara. Gerir modelos não
+tocou nos tokens — o agente envia mais do que nunca — e deixou a rodada 75%
+mais barata. Economizar com IA nunca foi sobre tokens. É sobre quem faz o
+trabalho, e quanto você paga a ele por rodada.
+
+A planilha continua aberta.
 
 ---
 
 *Método, em resumo. Uma plataforma de cliente, o mesmo operador do início
 ao fim. As cinco semanas são 36 tarefas com cada rodada atribuída à tarefa
-que a pediu, de 15 de agosto a 21 de setembro, precificadas pelas tarifas
-publicadas do provedor. O antes e depois é toda rodada da mesma plataforma
-de 31 de agosto a 28 de setembro contra toda rodada de 29 de setembro em
-diante, cada uma precificada pela tarifa publicada do modelo que a respondeu
-e atribuída ao papel que a rodou, a partir dos registros do próprio agente.
-Todos os valores são equivalentes a preço de lista: pagamos um plano mensal
-fixo, e esta série é o estudo que fazemos antes de migrar para o uso
-medido.*
+que a pediu, de 15 de agosto a 21 de setembro. O antes e depois é toda
+rodada da mesma plataforma de 31 de agosto a 28 de setembro contra toda
+rodada de 29 de setembro a 14 de outubro, cada uma precificada pela tarifa
+publicada do provedor para o modelo que a respondeu e atribuída ao papel
+que a rodou, a partir dos registros do próprio agente. Parte da janela de
+depois ainda passou pelo proxy dos episódios 1 a 3, que encarece a rodada,
+então o depois está, se algo, superestimado; os dias após a remoção do
+proxy mostram os mesmos níveis por rodada. Todos os valores são
+equivalentes a preço de lista: pagamos um plano mensal fixo, e esta série é
+o estudo que fazemos antes de migrar para o uso medido.*
 """
 
 
