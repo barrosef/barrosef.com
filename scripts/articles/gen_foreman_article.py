@@ -127,7 +127,7 @@ L = {
         f2_arch="the architect", f2_arch_s="reads, doubts, specifies, splits, judges", f2_arch_s2="the only one who sees the whole request",
         f2_rev="the reviewer", f2_rev_s="objects before anything is built", f2_rev_s2="at the architect's own level",
         f2_exec="executors", f2_reader="reader", f2_reader_s="one bounded question", f2_builder="builder", f2_builder_s="one bounded change",
-        f2_qa="quality team", f2_lead="the lead", f2_lead_s="sizes the attack, gives the verdict", f2_tester="tester",
+        f2_qa="quality team", f2_lead="the lead", f2_lead_s="sizes and judges the attack", f2_tester="tester",
         f2_tool="the project's tooling", f2_tool_s="delivery, with the verdict attached",
         f2_dev="DEV", f2_dev_s="where it runs",
         f2_human="the human", f2_human_s="sees it working · says done",
@@ -207,7 +207,7 @@ def fig_layers(t):
     b.append(link([(230, 64), (258, 64)], color=NAVY))
     b.append(link([(460, 64), (488, 64)], color=NAVY))
     # left: the culture
-    b.append(zone(16, 118, 330, 266, t["f1_left"]))
+    b.append(zone(16, 118, 330, 296, t["f1_left"]))
     b.append(card(32, 144, 298, 54, t["f1_rules"], t["f1_rules_s"], t["f1_rules_s2"]))
     b.append(card(32, 206, 298, 54, t["f1_roles"], t["f1_roles_s"], t["f1_roles_s2"]))
     b.append(navy_card(32, 268, 298, 54, t["f1_mech"], t["f1_mech_s"], t["f1_mech_s2"]))
@@ -218,7 +218,7 @@ def fig_layers(t):
         b.append(c)
         x += w + 6
     # right: the records
-    b.append(zone(362, 118, 342, 266, t["f1_right"]))
+    b.append(zone(362, 118, 342, 296, t["f1_right"]))
     y = 144
     for k, s in [("f1_r1", "f1_r1_s"), ("f1_r2", "f1_r2_s"), ("f1_r3", "f1_r3_s"), ("f1_r4", "f1_r4_s"), ("f1_r5", "f1_r5_s")]:
         b.append(card(378, y, 310, 38, t[k], t[s], size=12.5))
@@ -231,48 +231,47 @@ def fig_layers(t):
         x += w + 6
     # write → records
     b.append(link([(590, 92), (590, 112)], color=NAVY))
-    return figure(720, 404, "".join(b), t["f1_cap"], t["f1_aria"])
+    return figure(720, 430, "".join(b), t["f1_cap"], t["f1_aria"])
 
 
 # ---------------------------------------------------------------- figure 2: the roles around the cycle
 def fig_roles(t):
     b = []
-    # the request (human) at top centre
+    # the request (human) at the top, the architect below it, same centre line (x = 360)
     b.append(navy_card(250, 16, 220, 46, t["f2_req"], t["f2_req_s"], size=13))
-    b.append(link([(360, 64), (360, 150)], color=NAVY))
-    b.append(label(368, 112, t["f2_l1"], color=NAVY, weight=600))
-    # architect
-    b.append(navy_card(240, 154, 240, 78, t["f2_arch"], t["f2_arch_s"], t["f2_arch_s2"], size=14))
-    # reviewer
-    b.append(card(16, 100, 200, 60, t["f2_rev"], t["f2_rev_s"], t["f2_rev_s2"]))
-    b.append(link([(240, 176), (228, 176), (228, 150), (218, 150)], color=INK))
-    b.append(link([(216, 116), (232, 116), (232, 200), (240, 200)], color=MUTED, dash=True))
-    b.append(label(150, 90, t["f2_l2"], anchor="middle"))
-    b.append(label(140, 176, t["f2_l3"], anchor="middle"))
-    # executors
+    b.append(link([(360, 62), (360, 146)], color=NAVY))
+    b.append(label(368, 108, t["f2_l1"], color=NAVY, weight=600))
+    b.append(navy_card(248, 150, 224, 80, t["f2_arch"], t["f2_arch_s"], t["f2_arch_s2"], size=14))
+    # the reviewer, left: the plan goes over the top, the objections come straight back
+    b.append(card(16, 120, 168, 60, t["f2_rev"], t["f2_rev_s"], t["f2_rev_s2"], size=12.5))
+    b.append(link([(276, 150), (276, 96), (100, 96), (100, 116)], color=INK))
+    b.append(label(188, 90, t["f2_l2"], anchor="middle"))
+    b.append(link([(184, 160), (244, 160)], color=MUTED, dash=True))
+    b.append(label(214, 198, t["f2_l3"], anchor="middle", size=10))
+    # the executors, bottom left
     b.append(zone(16, 270, 232, 124, t["f2_exec"]))
     b.append(card(32, 296, 200, 42, t["f2_reader"], t["f2_reader_s"], size=12.5))
     b.append(card(32, 344, 200, 42, t["f2_builder"], t["f2_builder_s"], size=12.5))
-    b.append(link([(300, 232), (300, 256), (140, 256), (140, 266)], color=INK))
-    b.append(label(150, 250, t["f2_l4"], anchor="start"))
-    # quality team
-    b.append(zone(476, 84, 228, 150, t["f2_qa"]))
-    b.append(card(492, 110, 196, 46, t["f2_lead"], t["f2_lead_s"], size=12.5))
+    b.append(link([(290, 230), (290, 256), (132, 256), (132, 266)], color=INK))
+    b.append(label(298, 252, t["f2_l4"]))
+    # the quality team, right: the lead receives the attack, dispatches its testers
+    b.append(zone(520, 84, 184, 150, t["f2_qa"]))
+    b.append(card(536, 110, 152, 46, t["f2_lead"], t["f2_lead_s"], size=12.5))
     for i in range(3):
-        x = 492 + i * 66
-        b.append(card(x, 176, 60, 40, t["f2_tester"], size=11, weight=500))
-        b.append(link([(590, 158), (x + 30, 172)], color=MUTED, width=1.2))
-    b.append(link([(480, 176), (468, 176), (468, 100), (472, 100)], color=INK))
-    b.append(label(468, 92, t["f2_l5"], anchor="end"))
-    # tooling → DEV → human
+        x = 536 + i * 52
+        b.append(card(x, 176, 48, 40, t["f2_tester"], size=10.5, weight=500))
+        b.append(link([(612, 156), (x + 24, 172)], color=MUTED, width=1.2))
+    b.append(link([(440, 150), (440, 133), (532, 133)], color=INK))
+    b.append(label(486, 126, t["f2_l5"], anchor="middle"))
+    # delivery: through the tooling, into DEV, to the human
+    b.append(link([(395, 230), (395, 296)], color=NAVY))
+    b.append(label(403, 266, t["f2_l6"], color=NAVY, weight=600))
     b.append(card(300, 300, 190, 50, t["f2_tool"], t["f2_tool_s"], line=NAVY, size=12.5))
-    b.append(link([(420, 232), (420, 270), (395, 270), (395, 296)], color=NAVY))
-    b.append(label(428, 262, t["f2_l6"], color=NAVY, weight=600))
     b.append(card(526, 300, 90, 50, t["f2_dev"], t["f2_dev_s"], size=13))
     b.append(link([(490, 325), (522, 325)], color=NAVY))
     b.append(navy_card(526, 362, 178, 44, t["f2_human"], t["f2_human_s"], size=12.5))
     b.append(link([(571, 350), (571, 358)], color=NAVY))
-    b.append(label(624, 358, t["f2_l7"], color=NAVY, weight=600))
+    b.append(label(640, 358, t["f2_l7"], color=NAVY, weight=600))
     return figure(720, 420, "".join(b), t["f2_cap"], t["f2_aria"])
 
 
