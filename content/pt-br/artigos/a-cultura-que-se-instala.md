@@ -27,6 +27,11 @@ pergunta que eu já tinha respondido em outro projeto, e às vezes não fazia a 
 pergunta que importava. Nada disso era culpa do agente. O jeito de trabalhar nunca
 tinha sido escrito, então não havia nada para ele seguir.
 
+Esta é a história de como aquela conversa virou um documento, de como o documento
+virou algo que se instala em dois passos, e do que sai do outro lado: um jeito de
+construir e entregar software que corre AI-first do pedido ao código em
+funcionamento, com o humano decidindo nos portões e em nenhum outro lugar.
+
 ## Escrever uma vez
 
 Numa plataforma de um cliente, depois de meses disso, a conversa finalmente virou
@@ -216,7 +221,42 @@ os registros não nomeiem. O agente vai lê-lo do jeito que lê qualquer pedido:
 dúvida, e depois com um plano a que outra pessoa tem o direito de objetar
 primeiro.
 
-Era isso que eu queria desde o começo, sem saber dizer. Não um agente a quem se
-manda ter cuidado, mas um projeto que já sabe como o trabalho é feito aqui,
-escrito uma vez, levado de projeto em projeto, e instalado em vez de explicado. A
-explicação, finalmente, fica.
+## Três coisas, e nada mais
+
+Olhando para trás, para tudo por que um pedido passa, do momento em que alguém o
+enuncia ao momento em que diz que está pronto, cada passo se revela apoiado em uma
+de três coisas, e só três. A **cultura** diz quem decide o quê: as regras, os
+quatro papéis e os cinco registros, escritos uma vez e levados de projeto em
+projeto, para que nenhum passo dependa de quem por acaso estava na sala. A
+**ferramenta** faz o que precisa ser feito sempre do mesmo jeito, subir e derrubar
+o ambiente, rodar os testes, mover o pedido, abrir a entrega, um verbo por ação,
+para que nenhum passo dependa do cuidado de um agente. E a **rotina** é o próprio
+ciclo, ler e duvidar, especificar, objetar, executar, atacar, entregar, validar,
+fechar, na mesma ordem para todo pedido, para que nenhum passo dependa de alguém
+lembrar o que vem depois. Cultura, ferramenta e rotina sustentam o todo, da
+primeira linha de um pedido ao código rodando onde deve rodar, e quando uma das
+três falta as outras duas não a substituem, que é por isso que os registros param
+o agente quando estão ausentes e por isso que um verbo que falta é reportado em
+vez de contornado.
+
+## O que sai do outro lado
+
+O que sai é um jeito de construir software que corre AI-first de ponta a ponta, e
+em que hoje confio mais do que no jeito que ele substituiu. O agente é autônomo
+entre os portões: não pergunta se pode prosseguir, anuncia o que decidiu e segue,
+e o trabalho de um dia já não espera que uma pessoa esteja disponível para
+responder a uma pergunta que as regras já tinham respondido. A qualidade não é
+uma esperança, mas um acordo, escrito no pedido como linhas de aceitação que um
+teste prova, objetado antes que alguém construa, atacado depois por um time que
+não escreveu o código, e levado pela entrega com o veredito anexado. O humano
+decide exatamente onde um humano deve decidir: no começo, o que se quer e por
+quê; no fim, se funciona; e nos poucos outros lugares que os registros nomeiam,
+onde uma decisão sobre o trabalho é dele e não do agente. Tudo o que fica no meio
+pertence à cultura, à ferramenta e à rotina.
+
+Era isso que eu queria desde os meus primeiros projetos AI-first, sem saber
+dizer: não um agente a quem se manda ter cuidado, mas um projeto que já sabe como
+o trabalho é feito aqui, escrito uma vez, instalado em vez de explicado, e capaz
+de levar um pedido de uma ideia a software em funcionamento enquanto as pessoas
+envolvidas decidem só o que é delas decidir. A explicação, finalmente, fica, e a
+qualidade fica com ela.

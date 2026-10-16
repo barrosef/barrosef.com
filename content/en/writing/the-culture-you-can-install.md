@@ -27,6 +27,11 @@ another project, and sometimes it did not ask the one question that mattered. No
 of this was the agent's fault. The way of working had never been written down,
 so there was nothing for it to follow.
 
+This is the story of how that conversation became a document, how the document
+became something you install in two steps, and what comes out the other end: a
+way of building and delivering software that runs AI-first from the request to
+the running code, with the human deciding at the gates and nowhere else.
+
 ## Writing it down once
 
 On a client platform, after months of this, the conversation finally became a
@@ -215,7 +220,42 @@ must not do, among them building anything the records do not name. The agent
 will read it the way it reads any request: with doubt, and then with a plan
 that someone else gets to object to first.
 
-That is what I wanted from the beginning, without knowing how to say it. Not an
-agent that is told to be careful, but a project that already knows how work is
-done here, written down once, carried from project to project, and installed
-rather than explained. The explanation finally stays.
+## Three things, and nothing else
+
+Looking back at everything a request goes through, from the moment someone
+states it to the moment they say it is done, every step turns out to rest on one
+of three things, and only three. The **culture** says who decides what: the
+rules, the four roles and the five records, written once and carried from
+project to project, so that no step depends on whoever happened to be in the
+room. The **tool** does what must be done the same way every time, bringing the
+environment up and down, running the tests, moving the request, opening the
+delivery, one verb per action, so that no step depends on an agent's care. And
+the **routine** is the cycle itself, read and doubt, specify, object, execute,
+attack, deliver, validate, close, in the same order for every request, so that
+no step depends on anyone remembering what comes next. Culture, tool and routine
+hold the whole of it, from the first line of a request to the code running where
+it is meant to run, and when one of the three is missing the other two cannot
+cover for it, which is why the records stop the agent when they are absent and
+why a missing verb is reported rather than worked around.
+
+## What comes out the other end
+
+What comes out is a way of building software that runs AI-first from end to
+end, and that I now trust more than the way it replaced. The agent is autonomous
+between the gates: it does not ask whether it may proceed, it announces what it
+decided and goes on, and a day's work no longer waits on a person being
+available to answer a question the rules had already answered. Quality is not a
+hope but an agreement, written into the request as acceptance rows that a test
+proves, objected to before anyone builds, attacked afterwards by a team that did
+not write the code, and carried through delivery with the verdict attached. The
+human decides exactly where a human should: at the start, what is wanted and
+why; at the end, whether it works; and at the few other places the records name,
+where a decision about the work is theirs and not the agent's. Everything in
+between belongs to the culture, the tool and the routine.
+
+That is what I wanted from my very first AI-first projects, without knowing how
+to say it: not an agent that is told to be careful, but a project that already
+knows how work is done here, written down once, installed rather than
+explained, and able to carry a request from an idea to running software while
+the people involved decide only what is theirs to decide. The explanation
+finally stays, and the quality stays with it.
