@@ -17,6 +17,7 @@ claude-code: Claude Code
 cloud: Cloud
 conscription: Conscription
 cost: Cost
+cultura-de-engenharia: Cultura de engenharia
 custo: Custo
 decisoes-de-arquitetura: Decisões de arquitetura
 delivery: Delivery
@@ -25,9 +26,11 @@ devops: DevOps
 dop: DOP
 economizando-com-ia: Economizando com IA
 electoral-fund: Electoral fund
+engineering-culture: Engineering culture
 entrega: Entrega
 entrega-de-software: Entrega de software
 ferramentas: Ferramentas
+foreman: foreman
 fundo-eleitoral: Fundo eleitoral
 gitlab-ci: GitLab CI
 go: Go
