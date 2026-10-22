@@ -109,7 +109,7 @@ L = {
         ],
         m_cap="Six requests and the right fit for each, as model · effort. Above it you overpay; below it you risk the rework.",
         m_aria="Matrix of six software requests — endpoint, bug, refactoring, tests, code review, architecture — each with its right model and effort, when to step up, what overpaying looks like and what being underpowered looks like.",
-        lead=("Lead", "decides, plans, checks", "Opus · Sonnet on routine days"),
+        lead=("Lead", "decides, plans, checks", "Opus"),
         helpers=[
             ("Reader", "Sonnet · low", "reads and reports"),
             ("Builder", "Sonnet · medium", "Haiku for trivial changes"),
@@ -125,15 +125,15 @@ L = {
         cols=("Medida certa", "Suba quando", "Pagando a mais", "Fraco demais"),
         rows=[
             ("Endpoint", "Haiku · high", "a regra é ambígua", "Opus · xhigh", "Haiku · low, regra vaga"),
-            ("Bug", "Sonnet · high", "não se reproduz", "Fable · max num erro bobo", "Haiku, bug intermitente"),
+            ("Bug", "Sonnet · high", "não se reproduz", "Fable · max, erro de digitação", "Haiku, bug intermitente"),
             ("Refatoração", "Sonnet · medium", "a estrutura muda", "Opus para renomear", "muitos arquivos sem testes"),
             ("Testes", "Sonnet · high", "as regras são críticas", "Fable em testes de rotina", "escrito pelo autor do código"),
             ("Revisão de código", "o do autor ou acima · high", "segurança, dinheiro, dados", "Fable · max em uma linha", "revisor abaixo do autor"),
-            ("Arquitetura", "Opus · xhigh", "irreversível: Fable · max", "Fable · max, reversível", "Sonnet ou Haiku"),
+            ("Arquitetura", "Opus · xhigh", "cara de desfazer: Fable · max", "Fable · max, reversível", "Sonnet ou Haiku"),
         ],
         m_cap="Seis pedidos e a medida certa de cada um, como modelo · esforço. Acima dela você paga a mais; abaixo, arrisca o retrabalho.",
         m_aria="Matriz de seis pedidos de software — endpoint, bug, refatoração, testes, revisão de código, arquitetura — cada um com o modelo e o esforço certos, quando subir, como é pagar a mais e como é ficar fraco demais.",
-        lead=("Líder", "decide, planeja, confere", "Opus · Sonnet em dias de rotina"),
+        lead=("Líder", "decide, planeja, confere", "Opus"),
         helpers=[
             ("Leitor", "Sonnet · low", "lê e relata"),
             ("Construtor", "Sonnet · medium", "Haiku nas mudanças triviais"),
