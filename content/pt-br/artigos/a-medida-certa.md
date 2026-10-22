@@ -32,13 +32,13 @@ o critério que fomos construindo enquanto pagávamos pelos nossos erros. Use-o
 como ponto de partida para conferir contra o seu próprio trabalho, como a
 própria documentação recomenda.
 
-## Dois botões, não um
+## Duas alavancas, não uma
 
-Costumamos imaginar a escolha de um modelo de IA como um único botão, do barato
-e fraco ao caro e forte, girado até onde o orçamento deixa; na verdade são dois
-botões, e a maior parte da eficiência mora no jeito como eles se combinam.
+Costumamos imaginar a escolha de um modelo de IA como uma única alavanca, do barato
+e fraco ao caro e forte, puxada até onde o orçamento deixa; na verdade são duas
+alavancas, e a maior parte da eficiência mora no jeito como elas se combinam.
 
-O primeiro botão é o **modelo**, que define o quanto o trabalhador é capaz. O
+A primeira alavanca é o **modelo**, que define o quanto o trabalhador é capaz. O
 Claude vem em quatro tamanhos que importam para software: o Haiku, o menor e
 mais rápido; o Sonnet, o burro de carga do dia a dia; o Opus, o sênior; e o
 Fable, o modelo mais capaz que a Anthropic vende de forma ampla. Os preços de
@@ -47,7 +47,7 @@ quantidade de texto lido ou escrito, o Opus cobra quarenta vezes o que o Haiku
 cobra, e o Fable cobra duas vezes e meia o que o Opus cobra, o que coloca um
 fator de cem entre o trabalhador mais barato e o mais caro do mesmo time.
 
-O segundo botão é o **esforço**, que define quanto tempo o trabalhador pensa
+A segunda alavanca é o **esforço**, que define quanto tempo o trabalhador pensa
 antes de agir e quantos passos ele se permite pelo caminho. Ele tem cinco
 posições, que o produto chama de low, medium, high, xhigh e max, e vale para
 tudo o que o modelo produz: o raciocínio, as ações que ele executa nos seus
@@ -56,7 +56,7 @@ direto ao ponto; no topo ele explora, confere duas vezes e explica. Esforço é
 um sinal, não um orçamento, insiste a documentação: mesmo no nível mais baixo o
 modelo ainda pensa quando o problema é de fato difícil, só que pensa menos.
 
-Junte os dois botões e aparece uma possibilidade que contraria a intuição. Como
+Junte as duas alavancas e aparece uma possibilidade que contraria a intuição. Como
 o Haiku custa quarenta vezes menos por palavra que o Opus, um Haiku com tempo
 para pensar bastante ainda pode custar uma fração de um Opus pensando pouco, e
 num trabalho que está ao seu alcance vai entregar o mesmo resultado. O modelo
@@ -234,7 +234,7 @@ que ainda não medimos, e quando tivermos o comprovante ele vai virar episódio.
 
 A planilha está fechada agora, porque o que ela realmente dizia cabe numa
 página. Eficiência com IA não é o modelo mais barato nem o mais capaz; é uma
-escolha feita a cada pedido, em dois botões, perguntando o quanto o trabalho é
+escolha feita a cada pedido, em duas alavancas, perguntando o quanto o trabalho é
 difícil e o quanto um erro sairia caro, e ela falha pelos dois lados: ou você
 paga por um critério que não usou, ou paga duas vezes pelo critério que não
 comprou. O padrão é o que custa dinheiro, porque o padrão é o modelo mais caro
