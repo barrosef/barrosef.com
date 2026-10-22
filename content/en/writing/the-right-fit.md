@@ -31,13 +31,15 @@ our work are the ones episode 4 already published, and the rest is the
 judgment we built while paying for our mistakes. Treat it as a starting point
 to check against your own work, as the documentation itself recommends.
 
-## Two dials, not one
+## Price times quantity
 
-People usually picture choosing an AI model as a single dial, from cheap and
-weak to expensive and strong, turned as far as the budget allows; there are in
-fact two dials, and most of the efficiency lives in how they combine.
+Every bill is price times quantity, and the AI bill is no exception, even
+though people usually picture choosing a model as a single decision, from cheap
+and weak to expensive and strong, pushed as far as the budget allows; there are
+two factors, and most of the efficiency lives in how they multiply.
 
-The first dial is the **model**, which sets how capable the worker is. Claude
+The first factor is the **model**, which sets the price, the rate every unit
+of work is charged at, and with it how capable the worker is. Claude
 comes in four sizes that matter for software work: Haiku, the smallest and
 fastest; Sonnet, the everyday workhorse; Opus, the senior one; and Fable, the
 most capable model Anthropic sells widely. Their list prices are further apart
@@ -46,8 +48,8 @@ charges forty times what Haiku charges, and Fable charges two and a half times
 what Opus charges, which means that the distance between the cheapest and the
 most expensive worker on the same team is a factor of a hundred.
 
-The second dial is **effort**, which sets how long the worker thinks before it
-acts and how many steps it allows itself along the way. It has five positions,
+The second factor is **effort**, which sets the quantity: how long the worker
+thinks before it acts and how many steps it allows itself along the way. It has five levels,
 low, medium, high, xhigh and max, and it applies to everything the model
 produces: its reasoning, the actions it takes on your systems, and the
 explanation it writes at the end. At low effort the model goes straight to the
@@ -55,7 +57,7 @@ point; at the top it explores, double-checks and explains. Effort is a signal ra
 documentation insists: even at low effort a model still thinks when a problem
 is genuinely hard, only less.
 
-Put the two dials together and a counter-intuitive possibility appears. Because
+Multiply the two and a counter-intuitive possibility appears. Because
 Haiku is forty times cheaper per word than Opus, Haiku allowed to think for a
 long time can still cost a fraction of Opus thinking briefly, and on a job that
 is within its reach it will deliver the same result. The cheap model given
@@ -232,7 +234,7 @@ not measured yet, and when we have the receipt it will be an episode.
 The spreadsheet is closed now, because what it was really saying fits on one
 page. Efficiency with AI is not
 the cheapest model or the most capable one. It is a choice made per request,
-on two dials, by asking how hard the job is and how expensive a mistake would
+on price and quantity, by asking how hard the job is and how expensive a mistake would
 be, and it fails on both sides: you either pay for judgment you did not use,
 or you pay twice for the judgment you did not buy. The default is what costs
 money, because the default is the most expensive model doing everything, and
