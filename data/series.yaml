@@ -51,3 +51,10 @@ spending-less-on-ai:
       summary:
         en: We stopped saving tokens and started managing models. Did it save money? The receipt.
         pt-br: Paramos de economizar tokens e passamos a gerir modelos. Economizou ou não? O comprovante.
+    - number: 5
+      key: right-fit
+      date: 2026-10-22
+      linkedin: null          # fill in when the post goes up
+      summary:
+        en: Which model, at what effort, for which request — and how a lead and its subagents make that choice for you.
+        pt-br: Qual modelo, com qual esforço, para qual pedido — e como um líder e seus subagentes fazem essa escolha por você.

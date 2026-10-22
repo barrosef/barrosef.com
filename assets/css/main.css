@@ -1010,6 +1010,12 @@ p { margin: 0 0 18px 0; }
 .diagram { margin: 0 0 28px; }
 .diagram svg { display: block; width: 100%; height: auto; }
 .diagram figcaption { font-size: 14px; line-height: 1.5; color: var(--muted-dark); margin-top: 10px; }
+/* A figure may carry a second, one-column drawing for phones: .wide shows above 560px, .narrow below. */
+.diagram svg.narrow { display: none; }
+@media (max-width: 560px) {
+  .diagram svg.wide { display: none; }
+  .diagram svg.narrow { display: block; }
+}
 
 /* ---- Code blocks: copy button and file-backed snippets ---- */
 .post-content pre.has-copy { position: relative; }
