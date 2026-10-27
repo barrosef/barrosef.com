@@ -229,6 +229,33 @@ projects:
       - { label: "dop-t.com", url: "https://dop-t.com/", kind: site }
       - { label: "github.com/barrosef/dop", url: "https://github.com/barrosef/dop" }
 
+  - slug: "foreman"
+    title: "foreman"
+    kind: own
+    tagline:
+      en: "An open-source Claude Code plugin that installs a way of working for AI-driven software delivery into any project"
+      pt-br: "Um plugin open source para o Claude Code que instala uma forma de trabalhar com entrega de software conduzida por IA em qualquer projeto"
+    period: "2026 – "
+    status: { en: "Open source under the MIT licence, version 0.1.2 released and in use on DOP", pt-br: "Open source sob licença MIT, versão 0.1.2 publicada e em uso no DOP" }
+    problem:
+      en: "Every project that puts AI agents to work begins with the same conversation — who decides what a request really asks for, who writes the change, who reviews it sceptically, when the agent should stop and ask — and because that conversation lives only in people's heads, the agent fills the gaps with its best guess."
+      pt-br: "Todo projeto que coloca agentes de IA para trabalhar começa com a mesma conversa — quem decide o que um pedido realmente pede, quem escreve a mudança, quem a revisa com olhar cético, quando o agente deve parar e perguntar — e, como essa conversa vive só na cabeça das pessoas, o agente preenche as lacunas com o melhor palpite."
+    approach:
+      en: "The conversation is written down once, in three layers. A vendor-free culture any agent can read, built on principles such as whoever decides does not execute and a single human gate placed after the work is live in DEV. Four roles that pull against each other on purpose — an architect who specifies and splits the work, a reviewer who attacks the plan before anything is built, executors that read or change one bounded thing, and a QA team whose lead dispatches its own testers. Five records hold what a culture cannot know about a project, from its codebases and delivery flow to its environment, work tracking and quality, and they arrive filled with defaults so the agent never stalls on day one."
+      pt-br: "A conversa é escrita uma vez, em três camadas. Uma cultura sem fornecedor que qualquer agente consegue ler, construída sobre princípios como quem decide não executa e um único portão humano posicionado depois que o trabalho está no ar em DEV. Quatro papéis que se tensionam de propósito — um arquiteto que especifica e divide o trabalho, um revisor que ataca o plano antes de qualquer coisa ser construída, executores que leem ou mudam uma única coisa delimitada e um time de QA cujo líder despacha os próprios testadores. Cinco registros guardam o que uma cultura não tem como saber sobre um projeto, dos repositórios e do fluxo de entrega ao ambiente, ao acompanhamento das demandas e à qualidade, e já chegam preenchidos com padrões para que o agente nunca trave no primeiro dia."
+    outcome:
+      en: "Two steps to adopt: install the plugin, then run /foreman:init, which reads the project, asks at most five plain-language questions with the detected answer already selected, and writes the culture, the records and five specialised agents mapped to a model by seniority — never overwriting what existed and never asking again. Built tests first, with 195 automated checks including an old-bash compatibility run, a fresh reviewer who found eleven defects and a first client project that found three more before 0.1.2 shipped."
+      pt-br: "Dois passos para adotar: instalar o plugin e rodar /foreman:init, que lê o projeto, faz no máximo cinco perguntas em linguagem simples com a resposta detectada já selecionada e escreve a cultura, os registros e cinco agentes especializados mapeados a um modelo por senioridade — sem sobrescrever o que já existia e sem perguntar de novo. Construído com testes primeiro, com 195 verificações automatizadas, incluindo uma rodada de compatibilidade com bash antigo, um revisor independente que encontrou onze defeitos e um primeiro projeto cliente que encontrou mais três antes da 0.1.2 sair."
+    components:
+      - { name: "CULTURE.md", kind: "rules · vendor-free" }
+      - { name: "roles", kind: "architect · reviewer · executor · QA" }
+      - { name: "records", kind: "five files · defaults" }
+      - { name: "agents", kind: "five · model by seniority" }
+      - { name: "/foreman:init", kind: "detect · ask · write", apart: true }
+    stack: [Claude Code, Bash, Markdown, "Agent orchestration", "AI governance", "Test-driven development"]
+    links:
+      - { label: "github.com/barrosef/foreman", url: "https://github.com/barrosef/foreman" }
+
   - slug: "spartacus"
     title: "Spartacus"
     kind: own
