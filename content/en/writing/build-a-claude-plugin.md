@@ -415,3 +415,12 @@ procedure, it becomes a skill; if it's a specialist you keep briefing, it become
 an agent; and if it's a rule that must hold even when nobody remembers it, it
 becomes a hook. The plugin is just the folder that carries them from your machine
 to everyone else's.
+
+If you'd like the finished plugin to compare against yours, or to install it as it is,
+it's in [a gist](https://gist.github.com/barrosef/170367c55782a6223f59b89cc7102342). A gist can't hold folders, so the files there are flat, and a
+short `setup.sh` puts each one where Claude Code expects it before installing:
+
+```bash
+git clone https://gist.github.com/barrosef/170367c55782a6223f59b89cc7102342.git commit-helper-gist
+sh commit-helper-gist/setup.sh
+```

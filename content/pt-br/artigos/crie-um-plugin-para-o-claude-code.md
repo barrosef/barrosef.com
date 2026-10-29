@@ -417,3 +417,12 @@ procedimento, vira skill; se é um especialista a quem você vive explicando a
 tarefa, vira agente; e se é uma regra que precisa valer mesmo quando ninguém se
 lembra dela, vira hook. O plugin é só a pasta que leva tudo isso da sua máquina
 para a de todo mundo.
+
+Se quiser o plugin pronto para comparar com o seu, ou para instalá-lo como está, ele
+está [num gist](https://gist.github.com/barrosef/170367c55782a6223f59b89cc7102342). Um gist não guarda pastas, então os arquivos lá ficam soltos, e
+um `setup.sh` curto coloca cada um onde o Claude Code espera antes de instalar:
+
+```bash
+git clone https://gist.github.com/barrosef/170367c55782a6223f59b89cc7102342.git commit-helper-gist
+sh commit-helper-gist/setup.sh
+```
