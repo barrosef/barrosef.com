@@ -1,7 +1,7 @@
 ---
 title: "Crie um plugin para o Claude Code, passo a passo"
 seoTitle: "Crie um plugin para o Claude Code, passo a passo"
-date: 2026-10-29T17:00:00-04:00
+date: 2026-10-29T08:00:00-04:00
 draft: false
 translationKey: "build-a-claude-plugin"
 categories: ["Tecnologia"]
@@ -15,7 +15,7 @@ regra que repete sobre quais arquivos nunca tocar, uma revisão que pede tantas
 vezes que já sabe de cor. Esses hábitos moram num arquivo de anotações, ou na
 cabeça de alguém, e param na borda da máquina daquela pessoa. Um plugin é o jeito
 de tirá-los de lá, porque empacota comandos, agentes e hooks numa pasta que
-qualquer pessoa instala com uma linha, e assim o seu jeito de trabalhar vira algo
+qualquer pessoa instala com dois comandos, e assim o seu jeito de trabalhar vira algo
 que você entrega em vez de algo que você explica.
 
 Este tutorial constrói um a partir de um diretório vazio. O plugin se chama
@@ -119,8 +119,9 @@ Commit the user's staged changes with a good message. Work in this order.
 
 1. Run `git diff --cached --stat`. If nothing is staged, say so and stop; do not stage
    files on your own.
-2. Dispatch the `diff-reviewer` agent and wait for its report. If the verdict is
-   `concerns`, show the list to the user and ask whether to go on.
+2. Run `git diff --cached`, dispatch the `diff-reviewer` agent with that diff in the
+   prompt, and wait for its report. If the verdict is `concerns`, show the list to the
+   user and ask whether to go on.
 3. Write the message in Conventional Commits form: a subject line under 72 characters
    (`feat:`, `fix:`, `docs:`, `refactor:`, `test:` or `chore:`), a blank line, then a short
    body that explains why the change was made, not what each line does.
@@ -129,12 +130,13 @@ Commit the user's staged changes with a good message. Work in this order.
    commit, show its reason and stop.
 ```
 
-Dois detalhes desse arquivo fazem a maior parte do trabalho. A `description` é o
-que o Claude lê para decidir para que a skill serve, então merece o mesmo cuidado
-que o corpo. `disable-model-invocation: true` significa que a skill só roda quando
-você a digita; sem essa linha, o Claude poderia decidir sozinho que agora é um bom
+Dois detalhes desse arquivo fazem a maior parte do trabalho.
+`disable-model-invocation: true` significa que a skill só roda quando você a
+digita; sem essa linha, o Claude poderia decidir sozinho que agora é um bom
 momento para commitar, que é exatamente o que você não quer de um comando que
-escreve histórico. O corpo em si são instruções simples, escritas para um colega
+escreve histórico. A `description` é o que você vê ao lado do comando no menu `/`,
+e, numa skill que o Claude pode invocar por conta própria, é também o que ele
+compara com o pedido, então merece o mesmo cuidado que o corpo. O corpo em si são instruções simples, escritas para um colega
 capaz, numeradas porque aqui a ordem importa, e já menciona o agente e o hook que
 ainda não escrevemos, porque é assim que as três peças vão se encontrar.
 
@@ -149,13 +151,13 @@ decidiu que a mudança está boa. Salve isto como `agents/diff-reviewer.md`:
 ````markdown
 ---
 name: diff-reviewer
-description: Reviews the staged git diff before a commit and reports problems. Use before writing a commit message. Reports only; never edits files.
-tools: Read, Grep, Glob, Bash
+description: Reviews a staged git diff, passed in by the caller, before a commit and reports problems. Reports only; has no tool that can change files.
+tools: Read, Grep, Glob
 model: sonnet
 ---
 
-You review a staged diff before it is committed. Run `git diff --cached` to see it,
-and open the surrounding files when a change needs context.
+You review a staged diff before it is committed. The diff is in the message that
+dispatched you; open the surrounding files when a change needs context.
 
 Look for things a reviewer would stop a commit for:
 
@@ -171,13 +173,14 @@ VERDICT: ok | concerns
 - <file>:<line> — <what you saw and why it matters>
 ```
 
-Write `VERDICT: ok` with no list when you find nothing. Never edit, stage or commit
-anything; your job ends at the report.
+Write `VERDICT: ok` with no list when you find nothing. Your job ends at the report.
 ````
 
-É no frontmatter que você torna o trabalho do agente seguro. `tools` deixa de fora
-`Edit` e `Write`, então nem um revisor que entenda mal as instruções consegue
-mexer nos seus arquivos, e `model: sonnet` entrega uma revisão de rotina a um
+É no frontmatter que você torna o trabalho do agente seguro. `tools` concede só
+`Read`, `Grep` e `Glob`, e é por isso que a skill entrega o diff a ele em vez de
+deixá-lo rodar o git: sem `Bash`, `Edit` ou `Write`, não há ferramenta ao alcance
+que mude um arquivo, então até um revisor que entenda mal as instruções só
+consegue relatar. `model: sonnet` entrega uma revisão de rotina a um
 modelo que dá conta dela sem gastar o seu modelo mais caro nisso. O formato fixo
 do relatório existe por causa da skill, que precisa distinguir `ok` de `concerns`
 sem interpretar prosa. No foreman os agentes são o mesmo tipo de arquivo, só que
@@ -188,9 +191,13 @@ frontmatter que esses limites também são impostos.
 ## Passo 4: o hook
 
 Skills e agentes são instruções, e uma instrução pode ser ignorada ou esquecida.
-Um hook não pode, porque nem chega a ser enviado ao modelo: é um programa que o
-próprio Claude Code roda num ponto fixo do seu ciclo. Isso faz dele o lugar certo
-para a única regra deste plugin que não pode nunca ceder. Vamos usar um hook
+Um hook nem chega a ser enviado ao modelo: é um programa que o próprio Claude
+Code roda num ponto fixo do seu ciclo, então o modelo não tem como convencê-lo.
+Isso faz dele o lugar certo para a única regra deste plugin que não pode ceder,
+com uma ressalva honesta de que a regra só é tão boa quanto o script: o nosso
+reconhece um punhado de padrões, o que faz dele uma rede de segurança para o
+deslize comum e não um scanner de segredos, e um time que precise de cobertura de
+verdade deve rodar também uma ferramenta dedicada, como o gitleaks. Vamos usar um hook
 `PreToolUse` na ferramenta Bash, que roda antes de todo comando de shell que o
 Claude está prestes a executar, recebe o comando como JSON na entrada padrão e o
 bloqueia saindo com código 2. Salve o registro como `hooks/hooks.json`:
@@ -229,7 +236,9 @@ exit 2 blocks it, and whatever we print on stderr is shown to Claude.
 from __future__ import annotations
 
 import json
+import os
 import re
+import shlex
 import subprocess
 import sys
 
@@ -241,13 +250,28 @@ PATTERNS = [
     re.compile(r"(password|secret|token|api_key)\s*[:=]\s*['\"][^'\"]{8,}['\"]", re.I),
 ]
 
-
-def is_commit(command: str) -> bool:
-    return re.search(r"\bgit\s+commit(\s|$)", command) is not None
+GLOBAL_OPTIONS_WITH_VALUE = {"-C", "-c", "--git-dir", "--work-tree", "--namespace"}
 
 
-def commit_all(command: str) -> bool:
-    return re.search(r"\bgit\s+commit\b.*\s(-[a-zA-Z]*a[a-zA-Z]*|--all)\b", command) is not None
+def find_commit(command: str) -> tuple[str | None, bool] | None:
+    """Find a `git commit` in the command; return (directory from -C, commits unstaged too)."""
+    for segment in re.split(r"&&|\|\||[;|\n]", command):
+        try:
+            words = shlex.split(segment)
+        except ValueError:
+            continue
+        while words and os.path.basename(words[0]) != "git":
+            words = words[1:]
+        directory, i = None, 1
+        while i < len(words) and words[i].startswith("-"):  # git's own options, before the subcommand
+            if words[i] == "-C" and i + 1 < len(words):
+                directory = words[i + 1]
+            i += 2 if words[i] in GLOBAL_OPTIONS_WITH_VALUE else 1
+        if i < len(words) and words[i] == "commit":
+            args = words[i + 1:]
+            every_tracked_file = any(a == "--all" or re.fullmatch(r"-[a-zA-Z]*a[a-zA-Z]*", a) for a in args)
+            return directory, every_tracked_file
+    return None
 
 
 def find_secrets(diff: str) -> list[str]:
@@ -256,21 +280,29 @@ def find_secrets(diff: str) -> list[str]:
     return [line for line in added if any(p.search(line) for p in PATTERNS)]
 
 
-def staged_diff(cwd: str | None, include_unstaged: bool) -> str:
-    target = ["HEAD"] if include_unstaged else ["--cached"]
-    result = subprocess.run(["git", "diff", *target], cwd=cwd, capture_output=True, text=True)
+def git_diff(cwd: str, *args: str) -> str:
+    try:
+        result = subprocess.run(["git", "--no-pager", "diff", "--no-color", "--no-ext-diff", *args],
+                                cwd=cwd, capture_output=True, text=True)
+    except OSError:  # git missing, or the directory doesn't exist
+        return ""
     return result.stdout if result.returncode == 0 else ""
 
 
 def main(stdin_text: str) -> int:
     try:
         event = json.loads(stdin_text)
-        command = event["tool_input"]["command"]
-    except (ValueError, KeyError, TypeError):
+        commit = find_commit(event["tool_input"]["command"])
+    except (ValueError, KeyError, TypeError, AttributeError):
         return 0  # not something we understand: never get in the way
-    if not is_commit(command):
+    if commit is None:
         return 0
-    hits = find_secrets(staged_diff(event.get("cwd"), commit_all(command)))
+    directory, every_tracked_file = commit
+    cwd = os.path.join(event.get("cwd") or ".", directory or "")
+    diff = git_diff(cwd, "--cached")
+    if every_tracked_file:
+        diff += git_diff(cwd)  # changes not staged yet, which `commit -a` will include
+    hits = find_secrets(diff)
     if not hits:
         return 0
     print("commit-helper blocked this commit: the diff adds what looks like a secret:", file=sys.stderr)
@@ -285,17 +317,21 @@ if __name__ == "__main__":
 ```
 
 Quase tudo o que torna este script seguro para rodar antes de cada comando de
-shell está nas pequenas decisões. Ele olha só para as linhas que o diff
-*acrescenta*, então apagar uma chave vazada nunca é bloqueado; lê `git diff HEAD`
-quando o commit usa `-a`, porque aí as mudanças que importam ainda não foram
-preparadas; roda o git no `cwd` que o Claude Code envia junto com o evento; e
-sempre que encontra algo que não entende, como uma entrada malformada ou uma pasta
-que não é repositório, sai com 0 e sai da frente, já que um hook que trava todo
-comando é pior do que hook nenhum. Usa só a biblioteca padrão, e o import de
-`__future__` deixa as anotações de tipo rodarem no Python 3.9 que vem no macOS.
-Como `main` recebe a entrada como string, a lógica é fácil de cobrir com testes
-comuns de pytest; a versão deste tutorial tem catorze, incluindo uma chave numa
-linha apagada e um `git commit` escondido no fim de uma cadeia `git add . && …`.
+shell está nas pequenas decisões. `find_commit` divide o comando em `&&`, `;` e
+pipes e lê cada pedaço como um shell leria, então encontra o `git commit` no fim de
+uma cadeia `git add . && …` ou atrás de um `git -C alguma/pasta`, que o Claude
+escreve com frequência, enquanto um `echo` que só menciona commitar fica em paz. O
+diff é lido com `--no-color`, porque quem usa `color.ui=always` entregaria ao
+script linhas que começam com um código de escape em vez de um `+`, e, quando o
+commit usa `-a`, entram também as mudanças ainda não preparadas, já que elas
+também vão para o commit. Só contam as linhas que o diff *acrescenta*, então
+apagar uma chave vazada nunca é bloqueado, e sempre que o script encontra algo que
+não entende, como uma entrada malformada ou uma pasta que não é repositório, sai
+com 0 e sai da frente, já que um hook que trava todo comando é pior do que hook
+nenhum. Usa só a biblioteca padrão, e o import de `__future__` deixa as anotações
+de tipo rodarem no Python 3.9 que vem no macOS. Como `main` recebe a entrada como
+string, a lógica é fácil de cobrir com testes comuns de pytest; a versão deste
+tutorial tem dezenove, e cada caso deste parágrafo é um deles.
 
 ## Passo 5: instale e veja funcionar
 
@@ -356,9 +392,11 @@ e o `git log` confirmou que nada tinha sido commitado. Depois troque a chave por
 `/commit-helper:commit`. A skill roda o revisor, recebe `VERDICT: ok` e volta com
 uma mensagem proposta (`chore: add config module reading AWS key from
 environment`, na minha execução) e uma pergunta, porque não commita até você
-confirmar. Enquanto você itera no plugin, dá para pular a instalação:
-`claude --plugin-dir ./commit-helper` carrega o plugin só naquela sessão, então
-cada edição é aplicada na próxima vez que você iniciar.
+confirmar. Enquanto você itera, não precisa reinstalar nada: um plugin
+adicionado a partir de uma pasta local é carregado no lugar, então uma edição vale
+assim que você roda `/reload-plugins` ou abre uma nova sessão, e
+`claude --plugin-dir ./commit-helper` deixa você testar uma versão por uma sessão
+sem instalá-la.
 
 ## Passo 6: compartilhe
 
