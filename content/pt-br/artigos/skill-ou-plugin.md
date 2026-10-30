@@ -76,7 +76,7 @@ compartilhar uma configuração completa via `git pull`. Quando duas skills têm
 mesmo nome, a pessoal vence a do projeto, o que vale lembrar quando um colega diz
 que o seu `/deploy` se comporta diferente do dele.
 
-Um plugin mora em outro lugar. Ele é buscado num marketplace (um repositório ou
+Um plugin mora em outro lugar. Normalmente ele é buscado num marketplace (um repositório ou
 pasta com um `marketplace.json` que lista plugins) para o armazenamento de plugins
 do próprio Claude Code, e você escolhe um escopo ao instalá-lo: para você em todos
 os projetos, ou para um repositório, em que as configurações commitadas o declaram
@@ -87,21 +87,25 @@ trazer cada um uma skill `review` sem pisar um no outro.
 ## O que só um plugin faz
 
 É tentador responder "hooks" ou "agentes", mas seria errado, já que cada um desses
-componentes também funciona sozinho. O que um plugin acrescenta não é uma
-capacidade nova, e sim um novo tipo de alcance. Ele deixa uma configuração viajar
+componentes também funciona sozinho. Tirando algumas peças que só existem dentro de
+um plugin, a mais útil delas um servidor de linguagem que dá ao Claude os
+diagnósticos do seu editor, o que um plugin acrescenta não é uma capacidade nova,
+e sim um novo tipo de alcance. Ele deixa uma configuração viajar
 como uma unidade só para muitos repositórios de uma vez, onde commitar `.claude/`
 significaria copiar os mesmos arquivos em cada um e torcer para que as cópias nunca
 se distanciem. Ele dá uma versão a essa configuração, para que as pessoas fiquem
 numa versão conhecida até você publicar a próxima, e dá a elas um jeito de receber
-a próxima, porque quem adiciona o seu marketplace recebe as suas atualizações em
-vez de um diff para aplicar à mão. Ele ainda tira os seus nomes do caminho dos
+a próxima, com um único comando de atualização, ou automaticamente quando ativam a
+atualização automática do seu marketplace (ela começa desligada para qualquer
+marketplace que não seja da Anthropic), em vez de um diff para aplicar à mão. Ele ainda tira os seus nomes do caminho dos
 outros por meio do prefixo do plugin, o que importa assim que a sua configuração
 encontra a de outras pessoas.
 
 ## O que um plugin cobra de você
 
 Nada disso sai de graça, e quando empacotei as regras de trabalho do meu próprio
-time como plugin, paguei cada um desses custos. Primeiro mudam os nomes: uma skill
+time como plugin, porque elas precisavam chegar a todos os repositórios que temos,
+paguei cada um desses custos. Primeiro mudam os nomes: uma skill
 que era `/deploy` vira `/meu-plugin:deploy`, e quem tinha o hábito de digitar a
 versão curta precisa ser avisado. Depois muda a presença, porque um plugin ativo
 faz parte de toda sessão, e não só das sessões em que você o usa: as descrições
@@ -123,18 +127,21 @@ exatamente até onde vai a pasta em que você a salvou.
 
 <div class="path" role="img" aria-label="Três perguntas em ordem: é só para mim, então uma skill pessoal em ~/.claude/skills; é para todos neste repositório, então commite em .claude no repositório; precisa chegar a outros repositórios ou pessoas como uma unidade versionada, então um plugin.">
   <div class="path-step"><span class="path-n">1</span><span class="path-name">É só para mim?</span><span class="path-who">uma skill pessoal em <code>~/.claude/skills/</code></span></div>
-  <div class="path-step"><span class="path-n">2</span><span class="path-name">É para todos neste repositório?</span><span class="path-who">commite em <code>.claude/</code>: skills, agentes, hooks, <code>.mcp.json</code></span></div>
+  <div class="path-step"><span class="path-n">2</span><span class="path-name">É para todos neste repositório?</span><span class="path-who">commite <code>.claude/</code> (skills, agentes, hooks) e o <code>.mcp.json</code></span></div>
   <div class="path-step path-step-human"><span class="path-n">3</span><span class="path-name">Precisa ir além deste repositório?</span><span class="path-who">um plugin: uma unidade, uma versão, atualizações por marketplace</span></div>
 </div>
 
 A escolha, portanto, se resume a uma pergunta feita de três jeitos, e ela nunca é
 "qual é mais poderoso?", e sim "até onde isto precisa ir?". Quando o conhecimento é
-só seu, como o formato de notas de versão que você prefere ou uma rotina de
-depuração que ninguém mais usa, é uma skill pessoal, e você deveria escrevê-la
-hoje. Quando ele pertence a um projeto e todos que trabalham ali devem
-compartilhá-lo, como o checklist de revisão daquele repositório, o subagente
-revisor e o hook que formata cada edição, commite em `.claude/`, porque o
-repositório já é o melhor canal de distribuição que aquele time tem. E quando a
+só seu, como uma rotina de depuração que ninguém mais usa, é uma skill pessoal, e
+você deveria escrevê-la hoje. Quando ele pertence a um projeto e todos que
+trabalham ali devem compartilhá-lo, como acabou sendo o caso das minhas notas de
+versão, junto com o checklist de revisão daquele repositório, o subagente revisor
+e o hook que formata cada edição, commite em `.claude/` (com o `.mcp.json` na raiz
+para servidores MCP compartilhados), porque o repositório já é o melhor canal de
+distribuição que aquele time tem; as instruções de notas de versão que eu vivia
+redigitando viraram `.claude/skills/release-notes/`, e ninguém naquele projeto as
+digitou de novo. E quando a
 mesma configuração precisa chegar a muitos repositórios ou a muitas pessoas,
 continuar idêntica em todos eles e mudar só quando você decidir, esse é o momento,
 e o único momento, de construir um plugin.

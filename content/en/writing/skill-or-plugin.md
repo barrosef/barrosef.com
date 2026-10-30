@@ -76,7 +76,7 @@ through `git pull`. When two skills share a name, the personal one wins over the
 project's, which is worth remembering when a teammate says your `/deploy` behaves
 differently from theirs.
 
-A plugin lives somewhere else entirely. It is fetched from a marketplace (a
+A plugin lives somewhere else entirely. Normally it is fetched from a marketplace (a
 repository or folder with a `marketplace.json` that lists plugins) into Claude
 Code's own plugin storage, and you choose a scope when you install it: for
 yourself in every project, or for one repository, where the committed settings
@@ -87,20 +87,24 @@ plugins can each ship a `review` skill without stepping on each other.
 ## What only a plugin can do
 
 It is tempting to answer "hooks" or "agents", but that would be wrong, since every
-one of those components also works on its own. What a plugin adds is not a new
-capability but a new kind of reach. It lets one setup travel as a single unit
+one of those components also works on its own. Apart from a few pieces that only
+exist inside a plugin, the most useful being a language server that gives Claude
+your editor's diagnostics, what a plugin adds is not a new capability but a new
+kind of reach. It lets one setup travel as a single unit
 into many repositories at once, where committing `.claude/` would mean copying the
 same files into each of them and hoping the copies never drift. It gives that setup
 a version, so that people stay on a known release until you publish the next one,
-and it gives them a way to receive the next one, because whoever adds your
-marketplace gets your updates instead of a diff to apply by hand. It also keeps
+and it gives them a way to receive the next one, through a single update command,
+or automatically once they turn on auto-update for your marketplace (it starts off
+for any marketplace that isn't Anthropic's), instead of a diff to apply by hand. It also keeps
 your names out of everyone else's way through the plugin prefix, which matters as
 soon as your setup meets other people's.
 
 ## What a plugin costs you
 
-None of that is free, and when I packaged my own team's working rules as a plugin
-I paid each of these costs in turn. The names change first: a skill that was
+None of that is free, and when I packaged my own team's working rules as a plugin,
+because they had to reach every repository we own, I paid each of these costs in
+turn. The names change first: a skill that was
 `/deploy` becomes `/my-plugin:deploy`, and the people who had the habit of typing
 the short one need telling. The footprint changes next, because an enabled plugin
 is part of every session, not only the ones where you use it: the descriptions of
@@ -122,18 +126,20 @@ the folder you saved it in.
 
 <div class="path" role="img" aria-label="Three questions in order: is it only for me, then a personal skill in ~/.claude/skills; is it for everyone in this one repository, then commit it under .claude in the repo; must it reach other repositories or people as one versioned unit, then a plugin.">
   <div class="path-step"><span class="path-n">1</span><span class="path-name">Only for me?</span><span class="path-who">a personal skill in <code>~/.claude/skills/</code></span></div>
-  <div class="path-step"><span class="path-n">2</span><span class="path-name">For everyone in this one repo?</span><span class="path-who">commit it under <code>.claude/</code>: skills, agents, hooks, <code>.mcp.json</code></span></div>
+  <div class="path-step"><span class="path-n">2</span><span class="path-name">For everyone in this one repo?</span><span class="path-who">commit <code>.claude/</code> (skills, agents, hooks) and <code>.mcp.json</code></span></div>
   <div class="path-step path-step-human"><span class="path-n">3</span><span class="path-name">Must it travel beyond this repo?</span><span class="path-who">a plugin: one unit, one version, updates from a marketplace</span></div>
 </div>
 
 So the choice comes down to one question asked three ways, and it is never "which
 is more powerful?" but "how far does this need to go?". When the know-how is yours
-alone, such as the release-notes format you prefer or a debugging routine nobody
-else uses, it is a personal skill, and you should write it today. When it belongs
-to a project and everyone working there should share it, as with that repository's
-review checklist, its reviewer subagent and the hook that formats every edit,
-commit it under `.claude/`, because the repository is already the best
-distribution channel that team has. And when the same setup has to reach many
+alone, such as a debugging routine nobody else uses, it is a personal skill, and
+you should write it today. When it belongs to a project and everyone working there
+should share it, as my release notes did in the end, together with that
+repository's review checklist, its reviewer subagent and the hook that formats
+every edit, commit it under `.claude/` (with `.mcp.json` at the root for shared
+MCP servers), because the repository is already the best distribution channel that
+team has; the release-notes instructions I kept retyping became
+`.claude/skills/release-notes/`, and nobody on that project has typed them since. And when the same setup has to reach many
 repositories or many people, stay identical across all of them and change only
 when you decide it should, that is the moment, and the only moment, to build a
 plugin.
