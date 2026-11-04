@@ -11,6 +11,7 @@
 agentes-de-ia: Agentes de IA
 ai-agents: AI agents
 ai-assisted-development: AI-assisted development
+ai-fluency: AI Fluency
 architecture-decisions: Architecture decisions
 arquitetura-hexagonal: Arquitetura hexagonal
 claude-code: Claude Code
@@ -51,3 +52,5 @@ taxes: Taxes
 tooling: Tooling
 management: Management
 gestão: Gestão
+generative-ai: Generative AI
+ia-generativa: IA generativa

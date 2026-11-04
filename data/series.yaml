@@ -58,3 +58,52 @@ spending-less-on-ai:
       summary:
         en: Which model, at what effort, for which request — and how a lead and its subagents make that choice for you.
         pt-br: Qual modelo, com qual esforço, para qual pedido — e como um líder e seus subagentes fazem essa escolha por você.
+
+ai-fluency:
+  order: 2
+  title:
+    en: AI Fluency
+    pt-br: Fluência em IA
+  blurb:
+    en: >-
+      Anthropic's AI Fluency Framework, explained for anyone who uses generative
+      AI: the four Ds of working with it well, one competency per episode.
+    pt-br: >-
+      O AI Fluency Framework da Anthropic, explicado para quem usa IA generativa:
+      os quatro Ds para trabalhar bem com ela, uma competência por episódio.
+  episodes:
+    - number: 1
+      key: ai-fluency-intro
+      date: 2026-11-04
+      linkedin: null          # fill in when the post goes up
+      summary:
+        en: The whole map — the four Ds, their twelve skills and the two loops that join them.
+        pt-br: O mapa inteiro — os quatro Ds, suas doze habilidades e os dois laços que os unem.
+    - number: 2
+      key: null               # planned
+      date: null
+      linkedin: null
+      summary:
+        en: "Delegation: deciding what to hand over to AI, and what to keep."
+        pt-br: "Delegação: decidir o que entregar à IA, e o que manter."
+    - number: 3
+      key: null               # planned
+      date: null
+      linkedin: null
+      summary:
+        en: "Description: saying what you need — the product, the process and the performance."
+        pt-br: "Descrição: dizer o que você precisa — o produto, o processo e o desempenho."
+    - number: 4
+      key: null               # planned
+      date: null
+      linkedin: null
+      summary:
+        en: "Discernment: judging what comes back, and how it got there."
+        pt-br: "Discernimento: julgar o que volta, e como chegou lá."
+    - number: 5
+      key: null               # planned
+      date: null
+      linkedin: null
+      summary:
+        en: "Diligence: owning the result — creation, transparency and deployment."
+        pt-br: "Diligência: responder pelo resultado — criação, transparência e implantação."
