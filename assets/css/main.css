@@ -1017,6 +1017,12 @@ p { margin: 0 0 18px 0; }
   .diagram svg.narrow { display: block; }
 }
 
+/* Mind maps drawn as standalone SVG files (AI Fluency series): an <img>, linked to
+   its full-size file, with a <picture> source swapping in the phone layout. */
+.fluency-map a { display: block; }
+.fluency-map img { display: block; width: 100%; height: auto; }
+.fluency-map--modes img { max-width: 400px; margin: 0 auto; }
+
 /* ---- Code blocks: copy button and file-backed snippets ---- */
 .post-content pre.has-copy { position: relative; }
 .copy-btn {

@@ -37,10 +37,10 @@ at once before we walk through it piece by piece.
 
 ## The map
 
-<figure class="fluency-map">
+<figure class="diagram fluency-map">
   <a href="/img/ai-fluency/fluency-map.en.svg">
     <picture>
-      <source media="(max-width: 600px)" srcset="/img/ai-fluency/fluency-map-narrow.en.svg">
+      <source media="(max-width: 560px)" srcset="/img/ai-fluency/fluency-map-narrow.en.svg">
       <img src="/img/ai-fluency/fluency-map.en.svg" width="1200" height="860" loading="lazy"
         alt="Mind map of the AI Fluency Framework. In the centre, AI Fluency. Four branches: Delegation, with problem awareness, platform awareness and task delegation; Description, with product, process and performance description; Discernment, with product, process and performance discernment; Diligence, with creation, transparency and deployment diligence. A dashed loop joins Delegation and Diligence, labelled: decide what to hand over, and own the result. A second dashed loop joins Description and Discernment, labelled: describe, judge the answer, describe better.">
     </picture>
@@ -115,7 +115,7 @@ where most of the later episodes will spend their time.
 
 ## Three ways of working with AI
 
-<figure class="fluency-map fluency-map--modes">
+<figure class="diagram fluency-map fluency-map--modes">
   <a href="/img/ai-fluency/modes-map.en.svg">
     <img src="/img/ai-fluency/modes-map.en.svg" width="400" height="464" loading="lazy"
       alt="Three ways of working with AI. Automation: AI carries out a specific task you defined. Augmentation: you and AI think together, back and forth. Agency: you set AI up to work on its own, on your behalf.">
