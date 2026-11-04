@@ -24,7 +24,7 @@ usar isso? Está certo, é o que eu realmente precisava, eu devia mesmo ter pedi
 isso, e se eu repassar, de quem é esse trabalho?
 
 A maioria de nós aprendeu a usar essas ferramentas na tentativa e erro, então
-responde a essa pergunta no instinto, um pouco diferente a cada vez. Só que as
+responde a essa pergunta no instinto, de um jeito um pouco diferente a cada vez. Só que as
 pessoas que usam bem a IA, sejam desenvolvedores, advogados, contadores, gestores
 ou estudantes, costumam fazer as mesmas poucas coisas, mesmo que poucas delas
 saibam pôr essas coisas em palavras. É essa lacuna que o **AI Fluency Framework**
@@ -39,7 +39,7 @@ para que você veja todas as partes de uma vez antes de percorrermos cada uma.
 <figure class="diagram fluency-map fluency-map--main">
   <a href="/img/ai-fluency/fluency-map.pt-br.svg">
     <picture>
-      <source media="(max-width: 899px)" srcset="/img/ai-fluency/fluency-map-narrow.pt-br.svg">
+      <source media="(max-width: 1099px)" srcset="/img/ai-fluency/fluency-map-narrow.pt-br.svg">
       <img src="/img/ai-fluency/fluency-map.pt-br.svg" width="1200" height="860" loading="lazy"
         alt="Mapa mental do AI Fluency Framework. No centro, Fluência em IA. Quatro ramos: Delegação, com consciência do problema, consciência da plataforma e delegação de tarefas; Descrição, com descrição do produto, do processo e do desempenho; Discernimento, com discernimento do produto, do processo e do desempenho; Diligência, com diligência na criação, na transparência e na implantação. Um laço tracejado liga Delegação e Diligência: decidir o que entregar e responder pelo resultado. Um segundo laço liga Descrição e Discernimento: descrever, julgar a resposta, descrever melhor.">
     </picture>
@@ -48,8 +48,9 @@ para que você veja todas as partes de uma vez antes de percorrermos cada uma.
 </figure>
 
 O mapa se lê do centro para fora. Cada um dos quatro Ds é um ramo, e cada ramo
-traz três habilidades mais específicas, doze no total, que o framework trata como
-conjuntos de conhecimento, julgamento e valores, e não como truques para decorar.
+traz três habilidades mais específicas, doze no total. O framework descreve as
+próprias quatro competências como conjuntos interligados de habilidades,
+conhecimentos, percepções e valores, e não como truques para decorar.
 As linhas tracejadas importam tanto quanto os ramos, porque mostram que as quatro
 competências não são uma lista para cumprir em ordem, e sim dois pares que se
 alimentam o tempo todo. Volto a elas depois de apresentar cada ramo.
@@ -73,9 +74,9 @@ produto** define o que você quer receber: o resultado, o formato, o público e 
 estilo. A **descrição do processo** define como a IA deve abordar a tarefa, por
 exemplo os passos que deve seguir. A **descrição do desempenho** define como ela
 deve se comportar enquanto trabalha com você, mais concisa ou mais detalhada, mais
-questionadora ou mais acolhedora. A maioria das pessoas só descreve a primeira das
-três, e é por isso que a mesma ferramenta parece brilhante para uma pessoa e
-inútil para a próxima.
+questionadora ou mais acolhedora. Pela minha experiência, a maioria das pessoas só
+descreve a primeira das três, e só isso já pode fazer a mesma ferramenta parecer
+brilhante para uma pessoa e inútil para a próxima.
 
 ## Discernimento: julgar o que volta
 
@@ -92,12 +93,13 @@ um texto fluente e confiante torna mais fácil de pular.
 ## Diligência: responder pelo resultado
 
 A **Diligência** é assumir a responsabilidade pelo que fazemos com a IA e pela
-forma como fazemos. A **diligência na criação** é ser criterioso sobre quais
-sistemas de IA você usa e como interage com eles. A **diligência na transparência**
-é ser honesto sobre o papel da IA no seu trabalho com todos que precisam saber. A
-**diligência na implantação** é assumir a responsabilidade de conferir e garantir
-tudo o que você usa ou compartilha, porque, depois que sai das suas mãos, aquilo
-leva o seu nome, e não o da ferramenta.
+forma como fazemos. Começa pela **diligência na criação**, ser criterioso sobre
+quais sistemas de IA você usa e como interage com eles. Segue pela **diligência na
+transparência**, ser honesto sobre o papel da IA no seu trabalho com todos que
+precisam saber. E termina na **diligência na implantação**, assumir a
+responsabilidade de conferir e garantir tudo o que você usa ou compartilha,
+porque, depois que sai das suas mãos, aquilo leva o seu nome, e não o da
+ferramenta.
 
 ## Dois laços, não uma linha reta
 
@@ -107,17 +109,17 @@ primeiro liga **Delegação e Diligência**: cobre as decisões estratégicas e 
 sobre o uso da IA, o que entregar e como responder pelo resultado, e, na minha
 leitura, ele se fecha porque o que você aprende ao assumir o resultado muda o que
 você vai delegar da próxima vez. O segundo liga **Descrição e Discernimento**: é o
-ofício de momento a momento de uma conversa com a IA, em que você descreve o que
+ofício de cada instante de uma conversa com a IA, em que você descreve o que
 precisa, julga o que volta e usa esse julgamento para descrever melhor. O curso
-também ensina como os dois laços interagem na colaboração real, e é aí que a
-maior parte dos próximos episódios vai passar seu tempo.
+também ensina como os dois laços interagem na colaboração real, um fio ao qual os
+próximos episódios vão voltar sempre.
 
 ## Três formas de trabalhar com IA
 
 <figure class="diagram fluency-map fluency-map--modes">
   <a href="/img/ai-fluency/modes-map.pt-br.svg">
     <img src="/img/ai-fluency/modes-map.pt-br.svg" width="400" height="464" loading="lazy"
-      alt="Três formas de trabalhar com IA. Automação: a IA executa uma tarefa específica que você definiu. Aumento: você e a IA pensam juntos, num vai e vem. Agência: você prepara a IA para trabalhar sozinha, em seu nome.">
+      alt="Três formas de trabalhar com IA. Automação: a IA executa uma tarefa específica que você definiu. Ampliação: você e a IA pensam juntos, num vai e vem. Agência: você prepara a IA para trabalhar sozinha, em seu nome.">
   </a>
   <figcaption>Baseado no AI Fluency Framework © 2025 Rick Dakan, Joseph Feller e Anthropic, CC BY-NC-SA 4.0. Este mapa é compartilhado sob a mesma licença.</figcaption>
 </figure>
@@ -125,7 +127,7 @@ maior parte dos próximos episódios vai passar seu tempo.
 O framework acrescenta mais uma ideia que ajuda a entender o mapa: há três formas
 de pessoas e IA trabalharem juntas. Na **automação** (*automation*), a IA executa
 uma tarefa específica a partir das suas instruções específicas, então você define
-o que precisa ser feito e ela faz. No **aumento** (*augmentation*), você e a IA
+o que precisa ser feito e ela faz. Na **ampliação** (*augmentation*), você e a IA
 trabalham como parceiros de raciocínio, num vai e vem iterativo em que os dois
 contribuem. Na **agência** (*agency*), você configura a IA para trabalhar sozinha
 em seu nome, às vezes com outras pessoas ou outros sistemas de IA, e, em vez de
@@ -148,14 +150,15 @@ bem para um advogado quanto para um desenvolvedor, e por isso eu quis um mapa qu
 qualquer pessoa conseguisse ler.
 
 Esse também é o caminho desta série. Cada um dos próximos quatro episódios pega um
-ramo do mapa e o percorre em profundidade, na ordem em que um trabalho os
-encontra: primeiro a Delegação, depois a Descrição, o Discernimento e, por fim, a
+ramo do mapa e o percorre em profundidade, na ordem que me parece mais natural
+seguir: primeiro a Delegação, depois a Descrição, o Discernimento e, por fim, a
 Diligência. Ao final, os doze nomes nos ramos devem parecer menos vocabulário e
 mais hábito, e o momento depois que a resposta aparece deve parecer o começo da
 sua parte do trabalho, e não o fim da parte da IA.
 
 *Fontes: o [AI Fluency Framework](https://www-cdn.anthropic.com/b383cf6baddbfc72fdf8b0ed533a518e2872d531.pdf)
 e o [Key Terminology Cheat Sheet](https://www-cdn.anthropic.com/4396730ed190e691a3712cf2fd6bfe35509deca2.pdf)
-da Anthropic, © 2025 Rick Dakan, Joseph Feller e Anthropic, CC BY-NC-SA 4.0, e o
-curso [Teaching AI Fluency](https://www.coursera.org/learn/teaching-ai-fluency).
+da Anthropic, © 2025 Rick Dakan, Joseph Feller e Anthropic, CC BY-NC-SA 4.0, e os
+cursos [Teaching AI Fluency](https://www.coursera.org/learn/teaching-ai-fluency) e
+[AI Fluency: Framework & Foundations](https://www.coursera.org/learn/ai-fluency-framework-foundations).
 Este artigo é uma introdução independente, não uma publicação da Anthropic.*

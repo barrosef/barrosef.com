@@ -40,7 +40,7 @@ at once before we walk through it piece by piece.
 <figure class="diagram fluency-map fluency-map--main">
   <a href="/img/ai-fluency/fluency-map.en.svg">
     <picture>
-      <source media="(max-width: 899px)" srcset="/img/ai-fluency/fluency-map-narrow.en.svg">
+      <source media="(max-width: 1099px)" srcset="/img/ai-fluency/fluency-map-narrow.en.svg">
       <img src="/img/ai-fluency/fluency-map.en.svg" width="1200" height="860" loading="lazy"
         alt="Mind map of the AI Fluency Framework. In the centre, AI Fluency. Four branches: Delegation, with problem awareness, platform awareness and task delegation; Description, with product, process and performance description; Discernment, with product, process and performance discernment; Diligence, with creation, transparency and deployment diligence. A dashed loop joins Delegation and Diligence, labelled: decide what to hand over, and own the result. A second dashed loop joins Description and Discernment, labelled: describe, judge the answer, describe better.">
     </picture>
@@ -49,9 +49,9 @@ at once before we walk through it piece by piece.
 </figure>
 
 The map reads from the centre outwards. Each of the four Ds is a branch, and each
-branch carries three more specific skills, twelve in all, which the framework
-treats as collections of knowledge, judgement and values rather than tricks to
-memorise. The dashed lines matter as much as the branches, because they show that
+branch carries three more specific skills, twelve in all. The framework describes
+the four competencies themselves as interconnected collections of skills,
+knowledge, insights and values, rather than tricks to memorise. The dashed lines matter as much as the branches, because they show that
 the four competencies are not a checklist to tick in order but two pairs that keep
 feeding each other. I will come back to them once each branch has been introduced.
 
@@ -74,9 +74,9 @@ description** defines what you want to receive: the output, its format, its
 audience and its style. **Process description** defines how the AI should approach
 the task, for example the steps it should follow. **Performance description**
 defines how it should behave while working with you, more concise or more
-detailed, more challenging or more supportive. Most people only ever describe the
-first of the three, which is why the same tool can feel brilliant to one person and
-useless to the next.
+detailed, more challenging or more supportive. In my experience most people only
+ever describe the first of the three, and that alone can make the same tool feel
+brilliant to one person and useless to the next.
 
 ## Discernment: judging what comes back
 
@@ -93,12 +93,12 @@ the one that fluent, confident prose makes easiest to skip.
 ## Diligence: owning the result
 
 **Diligence** is taking responsibility for what we do with AI and how we do it.
-**Creation diligence** means being thoughtful about which AI systems you use and
-how you interact with them. **Transparency diligence** means being honest about
-the role AI played in your work with everyone who needs to know. **Deployment
-diligence** means taking responsibility for checking and vouching for anything you
-use or share, because once it leaves your hands, it carries your name and not the
-tool's.
+It begins with **creation diligence**, being thoughtful about which AI systems you
+use and how you interact with them. It carries on into **transparency diligence**,
+being honest about the role AI played in your work with everyone who needs to
+know. And it ends in **deployment diligence**, taking responsibility for checking
+and vouching for anything you use or share, because once it leaves your hands it
+carries your name and not the tool's.
 
 ## Two loops, not a straight line
 
@@ -110,8 +110,8 @@ it closes because what you learn by owning the outcome changes what you will
 delegate the next time. The second joins **Description and Discernment**: it is the
 moment-to-moment craft of a conversation with AI, in which you describe what you
 need, judge what comes back and use that judgement to describe it better. The
-course also teaches how the two loops interact in real collaboration, which is
-where most of the later episodes will spend their time.
+course also teaches how the two loops interact in real collaboration, a thread the
+later episodes will keep returning to.
 
 ## Three ways of working with AI
 
@@ -147,14 +147,15 @@ needs technical knowledge, which is why the framework works as well for a lawyer
 as for a developer, and why I wanted a map that anyone can read.
 
 That is also the route this series will take. Each of the next four episodes takes
-one branch of the map and walks it in depth, in the order a piece of work meets
-them: Delegation first, then Description, Discernment and finally Diligence. By the
+one branch of the map and walks it in depth, in the order I find most natural to
+follow: Delegation first, then Description, Discernment and finally Diligence. By the
 end, the twelve names on the branches should feel less like vocabulary and more
 like habits, and the moment after the answer appears should feel like the start
 of your part of the work rather than the end of the AI's.
 
 *Sources: Anthropic's [AI Fluency Framework](https://www-cdn.anthropic.com/b383cf6baddbfc72fdf8b0ed533a518e2872d531.pdf)
 and [Key Terminology Cheat Sheet](https://www-cdn.anthropic.com/4396730ed190e691a3712cf2fd6bfe35509deca2.pdf),
-© 2025 Rick Dakan, Joseph Feller and Anthropic, CC BY-NC-SA 4.0, and the course
-[Teaching AI Fluency](https://www.coursera.org/learn/teaching-ai-fluency). This
+© 2025 Rick Dakan, Joseph Feller and Anthropic, CC BY-NC-SA 4.0, and the courses
+[Teaching AI Fluency](https://www.coursera.org/learn/teaching-ai-fluency) and
+[AI Fluency: Framework & Foundations](https://www.coursera.org/learn/ai-fluency-framework-foundations). This
 article is an independent introduction, not an Anthropic publication.*

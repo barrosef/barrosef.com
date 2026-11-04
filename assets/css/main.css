@@ -1022,13 +1022,13 @@ p { margin: 0 0 18px 0; }
 .fluency-map a { display: block; }
 .fluency-map img { display: block; width: 100%; height: auto; }
 .fluency-map--modes img { max-width: 400px; margin: 0 auto; }
-/* The radial map needs more than the reading column to stay legible: below 900px the
+/* The radial map needs more than the reading column to stay legible: below 1100px the
    <picture> serves the vertical layout, kept at phone width; above, the figure breaks
    out of the column to the page width. */
-@media (max-width: 899px) {
+@media (max-width: 1099px) {
   .fluency-map--main img { max-width: 440px; margin: 0 auto; }
 }
-@media (min-width: 900px) {
+@media (min-width: 1100px) {
   .fluency-map--main { width: min(1120px, calc(100vw - 48px)); position: relative; left: 50%; transform: translateX(-50%); }
   .fluency-map--main figcaption { max-width: var(--reading); margin-left: auto; margin-right: auto; }
 }
