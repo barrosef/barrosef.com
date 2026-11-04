@@ -36,10 +36,10 @@ para que você veja todas as partes de uma vez antes de percorrermos cada uma.
 
 ## O mapa
 
-<figure class="diagram fluency-map">
+<figure class="diagram fluency-map fluency-map--main">
   <a href="/img/ai-fluency/fluency-map.pt-br.svg">
     <picture>
-      <source media="(max-width: 560px)" srcset="/img/ai-fluency/fluency-map-narrow.pt-br.svg">
+      <source media="(max-width: 899px)" srcset="/img/ai-fluency/fluency-map-narrow.pt-br.svg">
       <img src="/img/ai-fluency/fluency-map.pt-br.svg" width="1200" height="860" loading="lazy"
         alt="Mapa mental do AI Fluency Framework. No centro, Fluência em IA. Quatro ramos: Delegação, com consciência do problema, consciência da plataforma e delegação de tarefas; Descrição, com descrição do produto, do processo e do desempenho; Discernimento, com discernimento do produto, do processo e do desempenho; Diligência, com diligência na criação, na transparência e na implantação. Um laço tracejado liga Delegação e Diligência: decidir o que entregar e responder pelo resultado. Um segundo laço liga Descrição e Discernimento: descrever, julgar a resposta, descrever melhor.">
     </picture>

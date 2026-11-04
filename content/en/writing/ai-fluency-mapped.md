@@ -37,10 +37,10 @@ at once before we walk through it piece by piece.
 
 ## The map
 
-<figure class="diagram fluency-map">
+<figure class="diagram fluency-map fluency-map--main">
   <a href="/img/ai-fluency/fluency-map.en.svg">
     <picture>
-      <source media="(max-width: 560px)" srcset="/img/ai-fluency/fluency-map-narrow.en.svg">
+      <source media="(max-width: 899px)" srcset="/img/ai-fluency/fluency-map-narrow.en.svg">
       <img src="/img/ai-fluency/fluency-map.en.svg" width="1200" height="860" loading="lazy"
         alt="Mind map of the AI Fluency Framework. In the centre, AI Fluency. Four branches: Delegation, with problem awareness, platform awareness and task delegation; Description, with product, process and performance description; Discernment, with product, process and performance discernment; Diligence, with creation, transparency and deployment diligence. A dashed loop joins Delegation and Diligence, labelled: decide what to hand over, and own the result. A second dashed loop joins Description and Discernment, labelled: describe, judge the answer, describe better.">
     </picture>
