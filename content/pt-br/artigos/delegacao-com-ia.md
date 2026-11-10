@@ -1,7 +1,7 @@
 ---
 title: "Antes de digitar: Delegação, o primeiro D da Fluência em IA"
 seoTitle: "Delegação com IA: o que entregar à IA, e o que manter"
-date: 2026-11-09T17:00:00-04:00
+date: 2026-11-10T11:00:00-04:00
 draft: false
 translationKey: "ai-fluency-delegation"
 categories: ["Tecnologia"]

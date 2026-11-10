@@ -1,7 +1,7 @@
 ---
 title: "Before you type: Delegation, the first D of AI Fluency"
 seoTitle: "AI delegation: what to hand over to AI, and what to keep"
-date: 2026-11-09T17:00:00-04:00
+date: 2026-11-10T11:00:00-04:00
 draft: false
 translationKey: "ai-fluency-delegation"
 categories: ["Technology"]
