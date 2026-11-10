@@ -80,9 +80,9 @@ ai-fluency:
         en: The whole map — the four Ds, their twelve skills and the two loops that join them.
         pt-br: O mapa inteiro — os quatro Ds, suas doze habilidades e os dois laços que os unem.
     - number: 2
-      key: null               # planned
-      date: null
-      linkedin: null
+      key: ai-fluency-delegation
+      date: 2026-11-09
+      linkedin: null          # fill in when the post goes up
       summary:
         en: "Delegation: deciding what to hand over to AI, and what to keep."
         pt-br: "Delegação: decidir o que entregar à IA, e o que manter."
