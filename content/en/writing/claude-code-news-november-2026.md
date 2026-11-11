@@ -20,6 +20,14 @@ all of it, in the order I think it matters to someone who uses Claude Code every
 day, with my own reading marked as mine and everything else taken from the
 newsletter and the [official changelog](https://code.claude.com/docs/en/changelog).
 
+<figure class="diagram news-fig">
+  <a href="/img/claude-code-news/news-map.en.svg">
+    <img src="/img/claude-code-news/news-map.en.svg" width="400" height="680" loading="lazy"
+      alt="Mind map of the release: Claude Code, November 2026, in the centre, with five branches. Fable 5.2, faster, for big open-ended tasks. Cloud setup, Claude prepares the environment for you. /usage then f, see what uses your plan and fix it. /storage, clear the worktrees old sessions leave. Ultrathink and auto mode, think hard for one turn and trust the right places.">
+  </a>
+  <figcaption>The five changes around the release, one branch each; the rest of the article follows them in this order.</figcaption>
+</figure>
+
 ## Fable 5.2, and why the team still points you to Opus
 
 Fable 5.2 generates its output up to 30% faster than Fable 5.1, and the team
@@ -41,6 +49,14 @@ Ultra and Team Premium. If you are on Pro, my suggestion is to save a genuinely
 large, open-ended task for this week, because that is where the model is meant to
 shine and where the trial tells you the most.
 
+<figure class="diagram news-fig">
+  <a href="/img/claude-code-news/news-fable.en.svg">
+    <img src="/img/claude-code-news/news-fable.en.svg" width="400" height="666" loading="lazy"
+      alt="Which model to start with: from your task, most coding goes to Opus 5.5, the team's advice, and big open-ended tasks go to Fable 5.2, up to 30% faster than 5.1. Below, the Fable dates: 9 November at 10:00 PT, if you paid before this, look for a Fable reset; 16 November, the trial on Pro and Team Standard (up to 50% of the weekly limit) and the reset end; 8 March 2027, reset deadline on Max, Ultra and Team Premium. To switch, /model claude-fable-5-2, which needs v2.1.321 or later.">
+  </a>
+  <figcaption>The model choice is the team's advice; the dates are from the newsletter of 10 November 2026.</figcaption>
+</figure>
+
 ## Cloud sessions now set up their own environment
 
 Cloud sessions run a task on Anthropic's infrastructure, so you can start it from
@@ -52,6 +68,14 @@ tells you and shows the changes for you to approve; an API key goes into a form,
 Claude never sees the key itself; and the setup is saved, so the next session starts
 from the same environment. The details are in the
 [cloud environments documentation](https://code.claude.com/docs/en/cloud-environments).
+
+<figure class="diagram news-fig">
+  <a href="/img/claude-code-news/news-cloud.en.svg">
+    <img src="/img/claude-code-news/news-cloud.en.svg" width="400" height="490" loading="lazy"
+      alt="The cloud setup loop in four steps. One, you start a task from any device and it keeps going in the background. Two, Claude checks for a missing dependency, network access or an API key. Three, you approve the changes it shows, and keys go in a form Claude never sees. Four, the setup is saved, so the next session starts in the same environment, and the loop starts again. Available on Pro, Max and Ultra.">
+  </a>
+  <figcaption>Each saved setup feeds the next session, which is why the second run starts ready.</figcaption>
+</figure>
 
 Three smaller changes in the changelog point in the same direction. Since 2.1.318,
 a cloud session on an Anthropic-hosted environment can start with a **No
@@ -86,6 +110,14 @@ the terminal used to re-read a background subagent's whole conversation, and it 
 works from short notes instead, which in their own test on Pro and Max made sessions
 with background subagents use about 5% less of the limit.
 
+<figure class="diagram news-fig">
+  <a href="/img/claude-code-news/news-usage.en.svg">
+    <img src="/img/claude-code-news/news-usage.en.svg" width="400" height="608" loading="lazy"
+      alt="What each request sends. Before, the first request sent message 1, the second sent messages 1 and 2, the third sent 1, 2 and 3: the whole conversation every time. Now each request sends only the new message. Below, when a long chat sits idle for about an hour, the cache expires: without compaction the next message reprocesses everything, with idle compaction it reprocesses only a summary. At the bottom: run /usage, press f, and Claude fixes what it can.">
+  </a>
+  <figcaption>Before and now, per request; the bar lengths are illustrative, not measured.</figcaption>
+</figure>
+
 ## Freeing the disk that old sessions leave behind
 
 Every session that works in its own git worktree leaves a copy of the repository on
@@ -96,6 +128,14 @@ and clear the worktrees you have not used in a while, together with inactive tas
 Your sessions, conversations and branches all stay, but uncommitted changes leave
 with the worktree, so commit them before you clean up.
 
+<figure class="diagram news-fig">
+  <a href="/img/claude-code-news/news-storage.en.svg">
+    <img src="/img/claude-code-news/news-storage.en.svg" width="400" height="500" loading="lazy"
+      alt="What /storage in the desktop app does. It clears worktrees not used in a while, inactive tasks, and with them any uncommitted changes, so commit first. Sessions, conversations and branches stay.">
+  </a>
+  <figcaption>Uncommitted changes leave with the worktree, so commit before you clean up.</figcaption>
+</figure>
+
 ## Thinking harder for one turn, and trusting the right places
 
 **Ultrathink** is back. Writing it in a prompt asks for the `xhigh` effort level on
@@ -103,6 +143,14 @@ that turn alone, without changing the effort of the whole session; the team is
 candid that most tasks do not need it, and that it earns its place when Claude is
 genuinely stuck. The [model configuration page](https://code.claude.com/docs/en/model-config)
 covers effort levels.
+
+<figure class="diagram news-fig">
+  <a href="/img/claude-code-news/news-effort.en.svg">
+    <img src="/img/claude-code-news/news-effort.en.svg" width="400" height="290" loading="lazy"
+      alt="Effort per turn: seven turns at the session's effort level, shown by a dashed line, and one turn much taller, marked ultrathink, xhigh for this turn only. The session effort does not change.">
+  </a>
+  <figcaption>Ultrathink raises one turn, not the session.</figcaption>
+</figure>
 
 Auto mode, by default, trusts only your current working directory and the
 repository's own remotes, which is a sensible start that becomes friction the
@@ -118,6 +166,14 @@ Edit and NotebookEdit tools refuse any path outside your working directories in
 every permission mode, apart from some of Claude Code's own files. Read the limit
 as carefully as the promise, though, because it does not restrict shell commands,
 MCP tools or hooks.
+
+<figure class="diagram news-fig">
+  <a href="/img/claude-code-news/news-trust.en.svg">
+    <img src="/img/claude-code-news/news-trust.en.svg" width="400" height="425" loading="lazy"
+      alt="What auto mode trusts, as nested rings. The inner ring, trusted by default: your working directory and this repository's remotes. The middle ring, added by /auto-mode-setup: the repositories, domains and cloud storage you trust, saved in ~/.claude/settings.json. Outside, everything else, where auto mode is blocked. Below, the blockWritesOutsideWorkingDirectories setting: Write, Edit and NotebookEdit stay inside your working directories; shell, MCP and hooks are not limited.">
+  </a>
+  <figcaption>The middle ring is what /auto-mode-setup drafts for you to accept.</figcaption>
+</figure>
 
 ## The smaller changes
 
