@@ -1,7 +1,7 @@
 ---
 title: "Novidades do Claude Code: Fable 5.2, sessões na nuvem que se configuram sozinhas e um plano que rende mais"
 seoTitle: "Novidades do Claude Code: novembro de 2026"
-date: 2026-11-11T07:00:00-04:00
+date: 2026-11-11T08:45:00-04:00
 draft: false
 translationKey: "claude-code-news-2026-11"
 categories: ["Tecnologia"]

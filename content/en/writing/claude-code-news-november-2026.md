@@ -1,7 +1,7 @@
 ---
 title: "What's new in Claude Code: Fable 5.2, cloud sessions that set themselves up, and a plan that lasts longer"
 seoTitle: "What's new in Claude Code: November 2026"
-date: 2026-11-11T07:00:00-04:00
+date: 2026-11-11T08:45:00-04:00
 draft: false
 translationKey: "claude-code-news-2026-11"
 categories: ["Technology"]
