@@ -516,6 +516,8 @@ p { margin: 0 0 18px 0; }
   background: #eef2f7;
   padding: 2px 5px;
   font-size: 0.88em;
+  /* a long setting name in a sentence must not push a phone page sideways */
+  overflow-wrap: anywhere;
 }
 .reading-surface .post-content pre code { background: none; padding: 0; font-size: 100%; }
 .chroma { color: var(--text-dark); }
@@ -1019,7 +1021,8 @@ p { margin: 0 0 18px 0; }
 
 /* Mind maps drawn as standalone SVG files (AI Fluency series): an <img>, linked to
    its full-size file, with a <picture> source swapping in the phone layout. */
-.fluency-map a { display: block; }
+.fluency-map a, .news-fig a { display: block; }
+.news-fig img { display: block; width: 100%; height: auto; max-width: 440px; margin: 0 auto; }
 .fluency-map img { display: block; width: 100%; height: auto; }
 .fluency-map--modes img { max-width: 400px; margin: 0 auto; }
 .fluency-map--split img { max-width: 480px; margin: 0 auto; }
