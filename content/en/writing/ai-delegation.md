@@ -202,7 +202,7 @@ good one, and that decision works the same way for a database migration, a bug
 fix, a code review or a technical spec, and just as well outside code.
 
 What it does not tell you is how to say what you need once you have decided to
-ask, and that is the subject of the next episode, on Description: how to describe
+ask, and that is the subject of the [next episode, on Description](/writing/ai-description/): how to describe
 the product you want, the process the AI should follow and the way it should
 work with you.
 

@@ -203,7 +203,7 @@ funciona do mesmo jeito para uma migração de banco, uma correção de bug, uma
 revisão de código ou uma especificação técnica, e também fora do código.
 
 O que ela não diz é como falar o que você precisa depois de decidir pedir, e
-esse é o assunto do próximo episódio, sobre a Descrição: como descrever o
+esse é o assunto do [próximo episódio, sobre a Descrição](/pt-br/artigos/descricao-com-ia/): como descrever o
 produto que você quer, o processo que a IA deve seguir e o jeito como ela deve
 trabalhar com você.
 
