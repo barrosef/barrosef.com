@@ -87,8 +87,8 @@ ai-fluency:
         en: "Delegation: deciding what to hand over to AI, and what to keep."
         pt-br: "Delegação: decidir o que entregar à IA, e o que manter."
     - number: 3
-      key: null               # planned
-      date: null
+      key: ai-fluency-description
+      date: 2026-11-18
       linkedin: null
       summary:
         en: "Description: saying what you need — the product, the process and the performance."
