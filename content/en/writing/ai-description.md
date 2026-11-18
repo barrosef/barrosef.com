@@ -1,7 +1,7 @@
 ---
 title: "Say what you mean: Description, the second D of AI Fluency"
 seoTitle: "Describing to AI: product, process and performance"
-date: 2026-11-17T12:00:00-04:00
+date: 2026-11-18T09:00:00-04:00
 draft: false
 translationKey: "ai-fluency-description"
 categories: ["Technology"]

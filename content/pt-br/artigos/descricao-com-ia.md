@@ -1,7 +1,7 @@
 ---
 title: "Diga o que você quer: Descrição, o segundo D da Fluência em IA"
 seoTitle: "Como descrever para a IA: produto, processo e desempenho"
-date: 2026-11-17T12:00:00-04:00
+date: 2026-11-18T09:00:00-04:00
 draft: false
 translationKey: "ai-fluency-description"
 categories: ["Tecnologia"]
