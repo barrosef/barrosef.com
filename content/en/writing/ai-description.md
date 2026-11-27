@@ -241,7 +241,7 @@ spec, and just as well outside code.
 
 What Description cannot do on its own is tell you whether the answer is any good,
 and the Index suggests that a well-described request makes that question easier
-to forget. That is the subject of the next episode, on Discernment: how to judge
+to forget. That is the subject of the [next episode, on Discernment](/writing/ai-discernment/): how to judge
 the product, the process and the performance that come back.
 
 *Sources: Anthropic's [AI Fluency Framework](https://www-cdn.anthropic.com/b383cf6baddbfc72fdf8b0ed533a518e2872d531.pdf)

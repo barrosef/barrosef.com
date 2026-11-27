@@ -94,8 +94,8 @@ ai-fluency:
         en: "Description: saying what you need — the product, the process and the performance."
         pt-br: "Descrição: dizer o que você precisa — o produto, o processo e o desempenho."
     - number: 4
-      key: null               # planned
-      date: null
+      key: ai-fluency-discernment
+      date: 2026-11-27
       linkedin: null
       summary:
         en: "Discernment: judging what comes back, and how it got there."
