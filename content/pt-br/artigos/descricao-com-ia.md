@@ -239,7 +239,7 @@ código.
 
 O que a Descrição não consegue fazer sozinha é dizer se a resposta presta, e o
 Index sugere que um pedido bem descrito torna essa pergunta mais fácil de
-esquecer. Esse é o assunto do próximo episódio, sobre o Discernimento: como
+esquecer. Esse é o assunto do [próximo episódio, sobre o Discernimento](/pt-br/artigos/discernimento-com-ia/): como
 julgar o produto, o processo e o desempenho que voltam da IA.
 
 *Fontes: o [AI Fluency Framework](https://www-cdn.anthropic.com/b383cf6baddbfc72fdf8b0ed533a518e2872d531.pdf)
